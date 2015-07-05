@@ -8,6 +8,9 @@ colorscheme peaksea
 highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
 
+" Vim yank to clipboard
+set clipboard=unnamedplus
+
 " Systastic python3 syntax support
 let g:syntastic_python_python_exec = '/usr/bin/python3'
 
