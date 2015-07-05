@@ -26,5 +26,6 @@
 [include]
   path = ~/.gitconfig.local
 [user]
-	email = winterjd@uwec.edu
-	name = Jeremy Winterberg
+  email = winterjd@uwec.edu
+  name = Jeremy Winterberg
+  username = jeremydwayne
