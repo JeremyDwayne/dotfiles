@@ -8,8 +8,8 @@ alias v="$VISUAL"
 alias open='xdg-open'
 
 # top
-alias cpu='top -o cpu'
-alias mem='top -o rsize'
+alias cpu='top -o %CPU'
+alias mem='top -o %MEM'
 
 # copy the working directory path
 alias cpwd='pwd|tr -d "\n"|pbcopy'
