@@ -29,6 +29,7 @@ if [ -d "$HOME/.oh-my-zsh/" ]; then
 else
     echo >&2 "oh-my-zsh is not installed, installing...";
     curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+    ln -sv ~/dotfiles/aliases.zsh  ~/.oh-my-zsh/custom/aliases.zsh
 fi
 
 # Check if the Ultimate VimRC is installed
@@ -38,6 +39,7 @@ else
     echo >&2 "Ultimate Vim RC not found. installing...";
     git clone git://github.com/amix/vimrc.git ~/.vim_runtime
     sh ~/.vim_runtime/install_awesome_vimrc.sh
+    ln -sv ~/dotfiles/my_configs.vim ~/.vim_runtime/
 fi
 
 # Make symlinks to home directory for common files
