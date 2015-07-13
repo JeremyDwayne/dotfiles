@@ -3,6 +3,7 @@
 " ln -s ~/dotfiles/my_configs.vim ~./vim_runtime/my_configs.vim
 
 colorscheme peaksea
+set number
 
 " Highlights if you go past 80 columns for code legibility, this comment is an example
 highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
