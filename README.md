@@ -9,5 +9,7 @@ And the ultimate vimrc from this repository:
 ### OSX Stuff
 Seil: Remap Capslock to esc  
 - https://pqrs.org/osx/karabiner/seil.html.en  
+
 Karabiner: Key repeat 400ms 25ms  
 - https://pqrs.org/osx/karabiner/seil.html.en  
+![Karabiner Settings 400ms Delay 25ms Repeat](/img/karabinersettings.png)
