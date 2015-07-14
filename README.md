@@ -1,9 +1,12 @@
 ## Dotfiles
 Here's my collection of dotfiles I use on linux/osx environments.
+I continuosly add to this repo over time, as I customise my dev environment.
+Feel free to fork this and modify the scripts/dotfiles to suit your own needs!
 
-In addition to these there is a dependency on Oh-My-Zsh being installed:  
-- http://ohmyz.sh/  
-And the ultimate vimrc from this repository:  
+ZSH and Oh-My-Zsh must be installed:  
+- http://ohmyz.sh/   
+
+And the ultimate vimrc is recommended from this repository:  
 - https://github.com/amix/vimrc  
 
 ### OSX Stuff
