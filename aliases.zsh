@@ -7,16 +7,14 @@ alias e="$EDITOR"
 alias v="$VISUAL"
 
 # checks if on linux or OSX for open command
-function open () {
-    case $(uname) in
-        Linux)
-            command xdg-open $*
-            ;;
-        Darwin)
-            command open $*
-            ;;
-    esac
-}
+case $(uname) in
+    Linux)
+        alias open="xdg-open"
+        ;;
+    Darwin)
+        alias open="open"
+        ;;
+esac
 
 # top
 alias cpu='top -o %CPU'
