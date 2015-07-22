@@ -9,11 +9,13 @@ alias open='xdg-open'
 
 # checks if on linux for open command
 function open () {
-if uname | grep -i 'Linux')
+distro = uname
+if distro | grep -i 'Linux'
     then
         alias open='xdg-open'
-    else
-        command $0 "$@"
+    elif distro | grep -i 'Darwin'
+    then
+        command open
     fi
 }
 
