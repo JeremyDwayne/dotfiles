@@ -7,14 +7,9 @@ alias e="$EDITOR"
 alias v="$VISUAL"
 
 # checks if on linux or OSX for open command
-case $(uname) in
-    Linux)
-        alias open="xdg-open"
-        ;;
-    Darwin)
-        alias open="open"
-        ;;
-esac
+if [ "$(uname)" = "Linux" ]; then
+    alias open="xdg-open"
+fi
 
 # top
 alias cpu='top -o %CPU'
