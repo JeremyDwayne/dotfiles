@@ -7,6 +7,16 @@ alias e="$EDITOR"
 alias v="$VISUAL"
 alias open='xdg-open'
 
+# checks if on linux for open command
+function open () {
+if (head -n10 /etc/*-release | grep -i -E '(ubuntu|arch)')
+    then
+        alias open='xdg-open'
+    else
+        command $0 "$@"
+    fi
+}
+
 # top
 alias cpu='top -o %CPU'
 alias mem='top -o %MEM'
