@@ -9,7 +9,7 @@ alias open='xdg-open'
 
 # checks if on linux for open command
 function open () {
-if (head -n10 /etc/*-release | grep -i -E '(ubuntu|arch)')
+if uname | grep -i 'Linux')
     then
         alias open='xdg-open'
     else
