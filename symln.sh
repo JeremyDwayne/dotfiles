@@ -10,17 +10,43 @@ hash zsh 2>/dev/null || {
 # Check if Git is installed
 hash git 2>/dev/null || {
     echo >&2 "git not installed. Please install then re-run this script!";
-    if [ head -n10 /etc/*-release | grep -i "ubuntu" ]
-    then
-        sudo apt-get install git
-    elif [ head -n10 /etc/*-release | grep -i "arch" ]
-    then
-        sudo pacman -S git
-    else
-        echo >&2 "I'm not smart enough to detect your OS. Install git manually";
-        echo >&2 "If you're on OSX, I recommend Homebrew";
-    fi
-    exit 1;
+    case $(uname) in
+        OpenBSD)
+            sudo pkg_add git
+            ;;
+        FreeBSD)
+            cd /usr/ports/devel/git
+            sudo make install
+            ;;
+        Linux)
+            if [ head -n10 /etc/*-release | grep -i "ubuntu" ]
+            then
+                sudo apt-get install git
+            elif [ head -n10 /etc/*-release | grep -i "arch" ]
+            then
+                sudo pacman -S git
+            elif [ head -n10 /etc/*-release | grep -i "fedora" ]
+            then
+                sudo yum install git
+            elif [ head -n10 /etc/*-release | grep -i "gentoo" ]
+            then
+                emerge --ask --verbose dev-vcs/git
+            elif [ head -n10 /etc/*-release | grep -i "openSUSE" ]
+            then
+                sudo zypper install git
+            fi
+            ;;
+        Darwin)
+            hash brew 2>/dev/null || {
+                echo "You do not have homebrew installed, taking care of that!"
+                ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+                brew update
+                brew doctor
+                brew install git
+            }
+            brew install git
+            ;;
+    esac
 }
 
 # Check if Oh My ZSH is installed
