@@ -6,14 +6,14 @@ alias mkdir="mkdir -p"
 alias e="$EDITOR"
 alias v="$VISUAL"
 
-# checks if on linux for open command
+# checks if on linux or OSX for open command
 function open () {
     case $(uname) in
         Linux)
-            xdg-open "$@"
+            command xdg-open $*
             ;;
         Darwin)
-            open "$@"
+            command open $*
             ;;
     esac
 }
