@@ -5,18 +5,17 @@ alias ln="ln -v"
 alias mkdir="mkdir -p"
 alias e="$EDITOR"
 alias v="$VISUAL"
-alias open='xdg-open'
 
 # checks if on linux for open command
 function open () {
-distro = uname
-if distro | grep -i 'Linux'
-    then
-        alias open='xdg-open'
-    elif distro | grep -i 'Darwin'
-    then
-        command open
-    fi
+    case $(uname) in
+        Linux)
+            xdg-open "$@"
+            ;;
+        Darwin)
+            open "$@"
+            ;;
+    esac
 }
 
 # top
