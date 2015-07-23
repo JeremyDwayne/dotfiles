@@ -1,5 +1,9 @@
 #!/bin/bash
 # A script for installing dependencies and setting up needed Symbolic Links
+# Created by Jeremy Winterberg
+# Updated 07/23/2015
+# NOTICE: Modify script to your own preferences! This mostly uses default
+#         locations, but can be changed to whatever you need.
 
 # Check if ZSH is installed
 hash zsh 2>/dev/null || { 
