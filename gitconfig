@@ -13,6 +13,7 @@
   co = checkout
   st = status
   rh = fetch --all; reset --head origin/master
+  rh = !git fetch --all && git reset --hard origin/master
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input
