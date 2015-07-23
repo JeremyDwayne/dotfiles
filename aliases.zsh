@@ -9,6 +9,7 @@ alias v="$VISUAL"
 # checks if on linux or OSX for open command
 if [ "$(uname)" = "Linux" ]; then
     alias open="xdg-open"
+    alias say='echo "$*" | espeak -s 120 2>/dev/null'
 fi
 
 # top
