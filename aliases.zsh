@@ -44,3 +44,9 @@ alias gi="gem install"
 
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
+
+# Scripts Aliases
+alias tmpc='source ~/.scripts/CTemplate.sh'
+alias tdev='source ~/.scripts/tmux-dev.sh'
+alias project='source ~/.scripts/ProjectLayout.sh'
+alias mdtopdf='source ~/.scripts/MDtoPDF.sh'

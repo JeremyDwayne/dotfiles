@@ -6,8 +6,8 @@ colorscheme peaksea
 set number
 
 " Highlights if you go past 80 columns for code legibility, this comment is an example
-highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+" highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
+" match OverLength /\%81v.\+/
 
 " Vim yank to clipboard
 set clipboard=unnamedplus

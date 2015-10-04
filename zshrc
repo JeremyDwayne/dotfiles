@@ -54,7 +54,7 @@ plugins=(git)
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/nwjs:$PATH
+export PATH=$HOME/.rvm/bin:$HOME/bin:/usr/local/bin:/usr/local/nwjs:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
