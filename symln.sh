@@ -81,3 +81,6 @@ ln -sv ~/dotfiles/gemrc ~/.gemrc
 ln -sv ~/dotfiles/rspec ~/.rspec
 ln -sv ~/dotfiles/zshrc ~/.zshrc
 ln -sv ~/dotfiles/tmux.conf ~/.tmux.conf
+if [ "$(uname)" = "Darwin" ]; then
+    ln -sv ~/dotfiles/tmux-osx.conf ~/.tmux-osx
+fi
