@@ -54,8 +54,9 @@ plugins=(git)
 
 # User configuration
 
-export PATH=$HOME/.rvm/bin:$HOME/bin:/usr/local/bin:/usr/local/nwjs:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$PATH
+export PATH=$HOME/.rvm/bin:$HOME/bin:/usr/local/bin:/usr/local/nwjs:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
 
 source $ZSH/oh-my-zsh.sh
 

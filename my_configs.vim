@@ -12,6 +12,9 @@ set number
 " Vim yank to clipboard
 set clipboard=unnamedplus
 
+" Fixes airline fonts from not displaying correctly
+let g:airline_powerline_fonts = 1
+
 " Systastic python3 syntax support
 let g:syntastic_python_python_exec = '/usr/bin/python3'
 
