@@ -17,6 +17,21 @@ call vundle#begin('~/.vim_runtime/sources_non_forked')
     " Multiple Cursors for VIM Editing
     Plugin 'terryma/vim-multiple-cursors'
 
+    " Vimple
+    Plugin 'dahu/vimple'
+
+    " Asif
+    Plugin 'dahu/Asif'
+
+    " Syntax Range
+    Plugin 'vim-scripts/SyntaxRange'
+
+    " Asciidoc
+    Plugin 'dahu/vim-asciidoc'
+
+    " All the color schemes
+    Plugin 'flazz/vim-colorschemes'
+
 call vundle#end()
 " These are custom vimrc additions
 " Sym Link this to ~./vim_runtime/ for the ultimate vimrc repo
@@ -25,7 +40,8 @@ call vundle#end()
 " CTags
 set tags=./tags;
 
-colorscheme peaksea
+"colorscheme peaksea 
+colorscheme campfire
 set number
 
 " Highlights if you go past 80 columns for code legibility, this comment is an example
@@ -34,6 +50,7 @@ set number
 
 " Vim yank to clipboard
 set clipboard=unnamedplus
+autocmd BufRead,BufNewFile *.md setlocal spell
 
 " Fixes airline fonts from not displaying correctly
 let g:airline_powerline_fonts = 1
@@ -55,3 +72,9 @@ let g:UltiSnipsEditSplit="vertical"
 
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
+
+" For tab completion YouCompleteMe
+imap <Tab> <C-N>
+
+" Syntax Hilighting for ANTLR
+au BufRead,BufNewFile *.g set syntax=antlr3
