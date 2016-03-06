@@ -45,8 +45,21 @@ alias gi="gem install"
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
 
+# CD Aliases
+alias cdcs='cd ~/Documents/school/'
+
 # Scripts Aliases
 alias tmpc='source ~/.scripts/CTemplate.sh'
 alias tdev='source ~/.scripts/tmux-dev.sh'
 alias project='source ~/.scripts/ProjectLayout.sh'
 alias mdtopdf='source ~/.scripts/MDtoPDF.sh'
+
+# Configuration Reloads
+alias zshreload='source ~/.zshrc'
+
+# SSH
+alias sshwork='ssh winterjd@10.34.3.227'
+
+# ANTLR
+alias antlr4='java -Xmx500M -cp "/usr/local/lib/antlr-4.5-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
+alias grun='java org.antlr.v4.runtime.misc.TestRig'

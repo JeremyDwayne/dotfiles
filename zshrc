@@ -54,7 +54,8 @@ plugins=(git)
 
 # User configuration
 
-export PATH=$HOME/.rvm/bin:$HOME/bin:/usr/local/bin:/usr/local/nwjs:$PATH
+export PATH=$HOME/.rvm/gems:$HOME/.rvm/bin:$HOME/bin:/usr/local/bin:/usr/local/nwjs:$PATH
+export CLASSPATH=".:/usr/local/lib/antlr-4.5-complete.jar:$CLASSPATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
 
@@ -64,11 +65,11 @@ source $ZSH/oh-my-zsh.sh
 export LANG="en_US"
 export LC_ALL=$LANG.UTF-8
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='vim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
