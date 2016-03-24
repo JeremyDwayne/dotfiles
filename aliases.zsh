@@ -47,6 +47,7 @@ alias path='echo $PATH | tr -s ":" "\n"'
 
 # CD Aliases
 alias cdcs='cd ~/Documents/school/'
+alias cdrmi='cd ~/Documents/school/cs355/rmi/'
 
 # Scripts Aliases
 alias tmpc='source ~/.scripts/CTemplate.sh'
