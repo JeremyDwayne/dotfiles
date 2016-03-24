@@ -41,7 +41,7 @@ call vundle#end()
 set tags=./tags;
 
 "colorscheme peaksea 
-colorscheme campfire
+colorscheme dark-ruby 
 set number
 
 " Highlights if you go past 80 columns for code legibility, this comment is an example
