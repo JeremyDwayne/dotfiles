@@ -49,8 +49,19 @@ set number
 " match OverLength /\%81v.\+/
 
 " Vim yank to clipboard
+<<<<<<< HEAD
 set clipboard=unnamedplus
 autocmd BufRead,BufNewFile *.md setlocal spell
+=======
+if has("unix")
+  let s:uname = system("uname")
+  if s:uname == "Darwin\n"
+    set clipboard=unamed
+  else
+    set clipboard=unnamedplus
+  endif
+endif
+>>>>>>> 52d8565... osx support updated
 
 " Fixes airline fonts from not displaying correctly
 let g:airline_powerline_fonts = 1
