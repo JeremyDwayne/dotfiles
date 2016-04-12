@@ -5,18 +5,22 @@ alias ln="ln -v"
 alias mkdir="mkdir -p"
 alias e="$EDITOR"
 alias v="$VISUAL"
+alias tmux='tmux -u'
 
 # checks if on linux or OSX for open command
 if [ "$(uname)" = "Linux" ]; then
-    alias open="xdg-open"
-    alias say='echo "$*" | espeak -s 120 2>/dev/null'
+  alias open="xdg-open"
+  alias say='echo "$*" | espeak -s 120 2>/dev/null'
+  alias cpwd='pwd|tr -d "\n"|xclip'
+else
+  alias cpwd='pwd|tr -d "\n"|pbcopy'
 fi
 
 # top
 alias cpu='top -o %CPU'
 alias mem='top -o %MEM'
 
-# copy the working directory path
+# copy the working directory path osx
 alias cpwd='pwd|tr -d "\n"|pbcopy'
 
 # Get your current public IP
