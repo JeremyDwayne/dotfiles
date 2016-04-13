@@ -55,7 +55,7 @@ plugins=(git)
 
 # User configuration
 
-export PATH=$HOME/.rvm/gems:$HOME/.rvm/bin:$HOME/bin:/usr/local/bin:/usr/local/nwjs:$PATH
+export PATH=$HOME/.cabal/bin:/opt/cabal/1.22/bin:/opt/ghc/7.10.3/bin:$HOME/.rvm/gems:$HOME/.rvm/bin:$HOME/bin:/usr/local/bin:/usr/local/nwjs:$PATH
 export CLASSPATH=".:/usr/local/lib/antlr-4.5-complete.jar:$CLASSPATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
@@ -63,8 +63,8 @@ export CLASSPATH=".:/usr/local/lib/antlr-4.5-complete.jar:$CLASSPATH"
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
-export LANG="en_US"
-export LC_ALL=$LANG.UTF-8
+export LANG="en_US.UTF-8"
+export LC_ALL=$LANG
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
