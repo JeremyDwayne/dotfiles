@@ -40,8 +40,8 @@ call vundle#end()
 " CTags
 set tags=./tags;
 
-"colorscheme peaksea 
-colorscheme dark-ruby 
+colorscheme peaksea 
+"colorscheme dark-ruby 
 set number
 
 " Highlights if you go past 80 columns for code legibility, this comment is an example
