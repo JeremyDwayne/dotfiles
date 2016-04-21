@@ -18,8 +18,8 @@ else
 fi
 
 # top
-alias cpu='top -o %CPU'
-alias mem='top -o %MEM'
+alias cpu='top -o CPU'
+alias mem='top -o MEM'
 
 # Get your current public IP
 alias ip="curl icanhazip.com"
