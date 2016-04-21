@@ -53,12 +53,13 @@ alias cdrmi='cd ~/Documents/school/cs355/rmi/'
 
 # Scripts Aliases
 alias tmpc='source ~/.scripts/CTemplate.sh'
-alias tdev='source ~/.tmux-dev.sh'
+alias tdev='source ~/dotfiles/tmux-dev.sh'
 alias project='source ~/.scripts/ProjectLayout.sh'
 alias mdtopdf='source ~/.scripts/MDtoPDF.sh'
 
 # Configuration Reloads
 alias zshreload='source ~/.zshrc'
+alias tmuxreload='source ~/.tmux.conf'
 
 # SSH
 alias sshwork='ssh winterjd@10.34.3.227'
