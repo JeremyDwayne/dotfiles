@@ -45,6 +45,7 @@ colorscheme peaksea
 set shiftwidth=2
 set tabstop=2
 set number
+set mouse=a
 
 " Highlights if you go past 80 columns for code legibility, this comment is an example
 " highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
