@@ -33,6 +33,7 @@ call vundle#begin('~/.vim_runtime/sources_non_forked')
     Plugin 'flazz/vim-colorschemes'
 
 call vundle#end()
+
 " These are custom vimrc additions
 " Sym Link this to ~./vim_runtime/ for the ultimate vimrc repo
 " ln -s ~/dotfiles/my_configs.vim ~./vim_runtime/my_configs.vim
@@ -40,8 +41,9 @@ call vundle#end()
 " CTags
 set tags=./tags;
 
-colorscheme peaksea 
-"colorscheme dark-ruby 
+colorscheme peaksea
+set shiftwidth=2
+set tabstop=2
 set number
 
 " Highlights if you go past 80 columns for code legibility, this comment is an example
