@@ -13,15 +13,13 @@ if [ "$(uname)" = "Linux" ]; then
   alias say='echo "$*" | espeak -s 120 2>/dev/null'
   alias cpwd='pwd|tr -d "\n"|xclip'
 else
+  # OSX
   alias cpwd='pwd|tr -d "\n"|pbcopy'
 fi
 
 # top
 alias cpu='top -o %CPU'
 alias mem='top -o %MEM'
-
-# copy the working directory path osx
-alias cpwd='pwd|tr -d "\n"|pbcopy'
 
 # Get your current public IP
 alias ip="curl icanhazip.com"
