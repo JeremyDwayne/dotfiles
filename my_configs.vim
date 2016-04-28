@@ -49,6 +49,8 @@ set mouse=a
 
 " write quit map
 nmap <leader>wq :wq<cr>
+set term=screen-256color
+set t_Co=256
 
 " Highlights if you go past 80 columns for code legibility, this comment is an example
 " highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929

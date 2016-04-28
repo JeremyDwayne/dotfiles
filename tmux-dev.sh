@@ -1,6 +1,6 @@
 #! /bin/bash
 
-tmux new-session -d -s dev -n ide
+tmux -u new-session -d -s dev -n ide
 tmux split-window -v -p 10 -t dev
 tmux select-pane -t 1
 tmux split-window -h -p 30 -t dev
