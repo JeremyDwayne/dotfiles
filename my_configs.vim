@@ -5,32 +5,8 @@ call vundle#begin('~/.vim_runtime/sources_non_forked')
     " let Vundle manage Vundle, required
     Plugin 'VundleVim/Vundle.vim'
 
-    " Track the engine.
-    Plugin 'SirVer/ultisnips'
-
-    " Snippets are separated from the engine. Add this if you want them:
-    Plugin 'honza/vim-snippets'
-
-    " Auto Complete
-    Plugin 'Valloric/YouCompleteMe'
-
-    " Multiple Cursors for VIM Editing
-    Plugin 'terryma/vim-multiple-cursors'
-
-    " Vimple
-    Plugin 'dahu/vimple'
-
-    " Asif
-    Plugin 'dahu/Asif'
-
-    " Syntax Range
-    Plugin 'vim-scripts/SyntaxRange'
-
-    " Asciidoc
-    Plugin 'dahu/vim-asciidoc'
-
-    " All the color schemes
-    Plugin 'flazz/vim-colorschemes'
+    "Dark/Purple Vim Colorscheme
+    Plugin 'dracula/vim'
 
 call vundle#end()
 
@@ -41,7 +17,8 @@ call vundle#end()
 " CTags
 set tags=./tags;
 
-colorscheme peaksea
+" colorscheme peaksea
+colorscheme dracula
 set shiftwidth=2
 set tabstop=2
 set number
@@ -75,15 +52,6 @@ let g:syntastic_python_python_exec = '/usr/bin/python3'
 
 " NERDTree Close on file open
 let NERDTreeQuitOnOpen=1
-
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
 
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
