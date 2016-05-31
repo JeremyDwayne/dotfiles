@@ -70,6 +70,8 @@ else
     git clone git://github.com/amix/vimrc.git ~/.vim_runtime
     sh ~/.vim_runtime/install_awesome_vimrc.sh
     ln -sv ~/dotfiles/my_configs.vim ~/.vim_runtime/
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim_runtime/sources-non-forked/vundle
+    vim +PluginInstall +qall
 fi
 
 # Make symlinks to home directory for common files
