@@ -13,6 +13,7 @@
   cm = commit -m
   ci = commit -v
   co = checkout
+  cundo = reset --soft HEAD
   st = status
   softreset = reset --soft HEAD~
   softcommit = commit -C ORIG_HEAD
@@ -35,3 +36,5 @@
 [user]
   email = winterjd@uwec.edu
   name = Jeremy Winterberg
+[diff]
+  compactionHeuristic = true

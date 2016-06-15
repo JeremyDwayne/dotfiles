@@ -17,7 +17,7 @@ call vundle#end()
 " CTags
 set tags=./tags;
 
-" colorscheme peaksea
+"colorscheme peaksea
 colorscheme dracula
 set shiftwidth=2
 set tabstop=2
@@ -35,6 +35,10 @@ set t_Co=256
 
 " Vim yank to clipboard
 autocmd BufRead,BufNewFile *.md setlocal spell
+
+if $TMUX == ''
+  set clipboard+=unnamed
+endif
 if has("unix")
   let s:uname = system("uname")
   if s:uname == "Darwin\n"
@@ -55,9 +59,20 @@ let NERDTreeQuitOnOpen=1
 
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
+let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+let g:ycm_server_use_vim_stdout = 0
 
 " For tab completion YouCompleteMe
 imap <Tab> <C-N>
 
 " Syntax Hilighting for ANTLR
 au BufRead,BufNewFile *.g set syntax=antlr3
+
+" New File Skeletons
+autocmd BufNewFile *
+\ let templatefile = expand("~/dotfiles/templates/") . expand("%:e")|
+\ if filereadable(templatefile)|
+\   execute "silent! 0r " . templatefile|
+\   execute "normal Gdd/CURSOR\<CR>dw"|
+\ endif|
+\ startinsert!
