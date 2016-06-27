@@ -9,11 +9,14 @@
 hash zsh 2>/dev/null || { 
     echo >&2 "ZSH Not installed. Installing oh-my-zsh while we're at it!"; 
     curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+    chmod -s /bin/zsh
+    echo >&2 "ZSH is now installed and set as your default shell!"; 
+    zsh
 }
 
 # Check if Git is installed
 hash git 2>/dev/null || {
-    echo >&2 "git not installed. Please install then re-run this script!";
+    echo >&2 "git not installed. Taking care of that for you!";
     case $(uname) in
         OpenBSD)
             sudo pkg_add git
@@ -47,6 +50,9 @@ hash git 2>/dev/null || {
                 brew update
                 brew doctor
                 brew install git
+                brew install vim
+                brew install tmux
+                brew install reattach-to-user-namespace
             }
             brew install git
             ;;
