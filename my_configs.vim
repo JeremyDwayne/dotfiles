@@ -8,6 +8,9 @@ call vundle#begin('~/.vim_runtime/sources_non_forked')
     "Dark/Purple Vim Colorscheme
     Plugin 'dracula/vim'
 
+    "Filetype Icons to plugins
+    Plugin 'ryanoasis/vim-devicons'
+
 call vundle#end()
 
 " These are custom vimrc additions

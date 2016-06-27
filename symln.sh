@@ -29,6 +29,7 @@ hash git 2>/dev/null || {
             if [ head -n10 /etc/*-release | grep -i "ubuntu" ]
             then
                 sudo apt-get install git
+                sudo apt-get install silversearcher-ag
             elif [ head -n10 /etc/*-release | grep -i "arch" ]
             then
                 sudo pacman -S git
@@ -53,6 +54,7 @@ hash git 2>/dev/null || {
                 brew install vim
                 brew install tmux
                 brew install reattach-to-user-namespace
+                brew install the_silver_searcher
             }
             brew install git
             ;;
