@@ -5,11 +5,18 @@ call vundle#begin('~/.vim_runtime/sources_non_forked')
     " let Vundle manage Vundle, required
     Plugin 'VundleVim/Vundle.vim'
 
-    "Dark/Purple Vim Colorscheme
-    Plugin 'dracula/vim'
+    "vim Colorscheme
+    Plugin 'chriskempson/vim-tomorrow-theme'
 
-    "Filetype Icons to plugins
-    Plugin 'ryanoasis/vim-devicons'
+    " tab autocomplete
+    Plugin 'ervandew/supertab'
+
+    Plugin 'airblade/vim-gitgutter'
+
+    " Ruby Stuff
+    Plugin 'tpope/vim-endwise'
+    Plugin 'vim-ruby/vim-ruby'
+    Plugin 'tpope/vim-rails'
 
 call vundle#end()
 
@@ -21,16 +28,34 @@ call vundle#end()
 set tags=./tags;
 
 "colorscheme peaksea
-colorscheme dracula
+colorscheme Tomorrow-Night-Bright
+set guifont=Menlo\ Regular:h12
+let mapleader=","
+set hidden
+set history=100
+filetype indent on
+set nowrap
 set shiftwidth=2
 set tabstop=2
+set expandtab
+set smartindent
+set autoindent
 set number
 set mouse=a
+
+
+" NerdTree Stuff
+" Close NerdTree and vim
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
 
 " write quit map
 nmap <leader>wq :wq<cr>
 set term=screen-256color
 set t_Co=256
+
+" Vim-Rails Mappings
+nmap <leader>ec :Econtroller %<cr>
 
 " Highlights if you go past 80 columns for code legibility, this comment is an example
 " highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
@@ -56,6 +81,8 @@ let g:airline_powerline_fonts = 1
 
 " Systastic python3 syntax support
 let g:syntastic_python_python_exec = '/usr/bin/python3'
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
 
 " NERDTree Close on file open
 let NERDTreeQuitOnOpen=1
