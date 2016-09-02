@@ -29,7 +29,7 @@ set tags=./tags;
 
 "colorscheme peaksea
 colorscheme Tomorrow-Night-Bright
-set guifont=Menlo\ Regular:h12
+set guifont=Menlo\ for\ Powerline
 let mapleader=","
 set hidden
 set history=100
