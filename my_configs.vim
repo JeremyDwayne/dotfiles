@@ -6,7 +6,8 @@ call vundle#begin('~/.vim_runtime/sources_non_forked')
     Plugin 'VundleVim/Vundle.vim'
 
     "vim Colorscheme
-    Plugin 'chriskempson/vim-tomorrow-theme'
+    Plugin 'dracula/vim'
+    " Plugin 'chriskempson/vim-tomorrow-theme'
 
     " tab autocomplete
     Plugin 'ervandew/supertab'
@@ -28,7 +29,8 @@ call vundle#end()
 set tags=./tags;
 
 "colorscheme peaksea
-colorscheme Tomorrow-Night-Bright
+" colorscheme Tomorrow-Night-Bright
+colorscheme dracula
 set guifont=Menlo\ for\ Powerline
 let mapleader=","
 set hidden
