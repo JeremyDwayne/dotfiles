@@ -53,6 +53,8 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " write quit map
 nmap <leader>wq :wq<cr>
+nmap <leader>lc :lclose<cr>
+nmap <leader>lo :lopen<cr>
 set term=screen-256color
 set t_Co=256
 
