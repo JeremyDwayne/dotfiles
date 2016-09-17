@@ -67,3 +67,22 @@ alias sshwork='ssh winterjd@10.34.3.227'
 # ANTLR
 alias antlr4='java -Xmx500M -cp "/usr/local/lib/antlr-4.5-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
 alias grun='java org.antlr.v4.runtime.misc.TestRig'
+
+# Opens a note
+ne() {
+  vim -c ":Note $*" 
+}
+
+## New Note: calls vim notes plugin
+n() { 
+  vim -c :Note
+}
+
+# Searches Notes
+nls() {
+  ls -c ~/Documents/Notes/ | egrep -i "$*"
+}
+
+ycmcomp() {
+  cp ~/dotfiles/templates/_ycm_extra_conf.py ./.ycm_extra_conf.py
+}

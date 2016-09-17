@@ -7,7 +7,6 @@ call vundle#begin('~/.vim_runtime/sources_non_forked')
 
     "vim Colorscheme
     Plugin 'dracula/vim'
-    " Plugin 'chriskempson/vim-tomorrow-theme'
 
     " tab autocomplete
     Plugin 'ervandew/supertab'
@@ -19,6 +18,14 @@ call vundle#begin('~/.vim_runtime/sources_non_forked')
     Plugin 'vim-ruby/vim-ruby'
     Plugin 'tpope/vim-rails'
 
+    " Markdown Support
+    Plugin 'godlygeek/tabular'
+    Plugin 'plasticboy/vim-markdown'
+
+    " C# Support
+    Plugin 'OmniSharp/omnisharp-vim'
+    Plugin 'tpope/vim-dispatch'
+
 call vundle#end()
 
 " These are custom vimrc additions
@@ -28,8 +35,8 @@ call vundle#end()
 " CTags
 set tags=./tags;
 
-"colorscheme peaksea
-" colorscheme Tomorrow-Night-Bright
+" colorscheme peaksea
+set background=dark
 colorscheme dracula
 set guifont=Menlo\ for\ Powerline
 let mapleader=","
@@ -67,6 +74,7 @@ nmap <leader>ec :Econtroller %<cr>
 
 " Vim yank to clipboard
 autocmd BufRead,BufNewFile *.md setlocal spell
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
 if $TMUX == ''
   set clipboard+=unnamed
@@ -95,6 +103,8 @@ let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
 let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 let g:ycm_server_use_vim_stdout = 0
+let g:ycm_global_ycm_extra_conf = '~/dotfiles/ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
 
 " For tab completion YouCompleteMe
 imap <Tab> <C-N>
@@ -109,4 +119,11 @@ autocmd BufNewFile *
 \   execute "silent! 0r " . templatefile|
 \   execute "normal Gdd/CURSOR\<CR>dw"|
 \ endif|
-\ startinsert!
+
+
+" vim-markdown
+set nofoldenable
+let g:vim_markdown_new_list_item_indent = 2
+
+" vim-notes
+:let g:notes_directories = ['~/Documents/Notes', '~/Dropbox/Shared Notes']
