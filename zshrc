@@ -10,6 +10,14 @@ ZSH_THEME="nicoulaj"
 DEFAULT_USER="winterjd"
 
 export KEYTIMEOUT=1
+#Bracketed past mode
+if [[ $TERM == dumb ]]; then
+    unset zle_bracketed_paste
+else
+    autoload -Uz bracketed-paste-magic
+    zle -N bracketed-paste bracketed-paste-magic
+fi
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -61,11 +69,13 @@ export CLASSPATH=".:/usr/local/lib/antlr-4.5-complete.jar:$CLASSPATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
 
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
+
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
-export LANG="en_US.UTF-8"
-export LC_ALL=$LANG
+#export LANG="en_US"
+#export LC_ALL=$LANG.UTF-8
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
