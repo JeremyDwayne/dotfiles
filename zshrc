@@ -9,14 +9,14 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="nicoulaj"
 DEFAULT_USER="winterjd"
 
-export KEYTIMEOUT=1
-#Bracketed past mode
-if [[ $TERM == dumb ]]; then
-    unset zle_bracketed_paste
-else
-    autoload -Uz bracketed-paste-magic
-    zle -N bracketed-paste bracketed-paste-magic
-fi
+# export KEYTIMEOUT=1
+# #Bracketed past mode
+# if [[ $TERM == dumb ]]; then
+#     unset zle_bracketed_paste
+# else
+#     autoload -Uz bracketed-paste-magic
+#     zle -N bracketed-paste bracketed-paste-magic
+# fi
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
