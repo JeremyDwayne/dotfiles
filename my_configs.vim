@@ -22,11 +22,8 @@ call vundle#begin('~/.vim_runtime/sources_non_forked')
     Plugin 'godlygeek/tabular'
     Plugin 'plasticboy/vim-markdown'
 
-    " C# Support
-    Plugin 'OmniSharp/omnisharp-vim'
-    Plugin 'tpope/vim-dispatch'
-
 call vundle#end()
+
 
 " These are custom vimrc additions
 " Sym Link this to ~./vim_runtime/ for the ultimate vimrc repo
@@ -74,6 +71,7 @@ nmap <leader>ec :Econtroller %<cr>
 
 " Vim yank to clipboard
 autocmd BufRead,BufNewFile *.md setlocal spell
+au BufRead,BufNewFile *.md setlocal textwidth=90
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
 if $TMUX == ''
@@ -88,7 +86,12 @@ if has("unix")
   endif
 endif
 
-" Fixes airline fonts from not displaying correctly
+let g:remoteSession = ($STY == "")
+if g:remoteSession
+  vmap "+y :!xclip -f -sel clip
+  map "+p :r!xclip -o -sel clip
+endif
+" Fixee airline fonts from not displaying correctly
 let g:airline_powerline_fonts = 1
 
 " Systastic python3 syntax support
