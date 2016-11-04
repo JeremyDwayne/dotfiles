@@ -86,11 +86,6 @@ if has("unix")
   endif
 endif
 
-let g:remoteSession = ($STY == "")
-if g:remoteSession
-  vmap "+y :!xclip -f -sel clip
-  map "+p :r!xclip -o -sel clip
-endif
 " Fixee airline fonts from not displaying correctly
 let g:airline_powerline_fonts = 1
 
@@ -130,3 +125,4 @@ let g:vim_markdown_new_list_item_indent = 2
 
 " vim-notes
 :let g:notes_directories = ['~/Documents/Notes', '~/Dropbox/Shared Notes']
+:let g:notes_suffix = '.md'

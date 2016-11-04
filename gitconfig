@@ -20,6 +20,8 @@
   rh = fetch --all; reset --head origin/master
   rh = !git fetch --all && git reset --hard origin/master
   update-from = "!f() { git fetch $1 --prune; git merge --ff-only $1/$2 || git rebase --preserve-merges $1/$2; }; f"
+  commend = commit --amend --no-edit'
+	shorty = status --short --branch
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input
