@@ -48,25 +48,46 @@ alias gi="gem install"
 alias path='echo $PATH | tr -s ":" "\n"'
 
 # CD Aliases
-alias cdcs='cd ~/Documents/school/'
-alias cdrmi='cd ~/Documents/school/cs355/rmi/'
+alias cds='cd ~/Documents/school/'
 
 # Scripts Aliases
 alias tmpc='source ~/.scripts/CTemplate.sh'
-alias tdev='source ~/dotfiles/tmux-dev.sh'
 alias project='source ~/.scripts/ProjectLayout.sh'
 alias mdtopdf='source ~/.scripts/MDtoPDF.sh'
 
+# Tmux Aliases
+alias tdev='source ~/.dotfiles/scripts/tmux-dev.sh'
+alias tls='tmux ls'
+
+tnew() {
+    if [ "$1" != "" ]
+    then
+			tmux new -s $1
+		else
+			tmux
+    fi
+}
+
+tatt() {
+    if [ "$1" != "" ]
+    then
+			tmux attach -t $1
+		else
+			tmux attach
+    fi
+}
+
 # Configuration Reloads
-alias zshreload='source ~/.zshrc'
 alias tmuxreload='source ~/.tmux.conf'
+alias zshreload='source ~/.zshrc'
 
 # SSH
-alias sshwork='ssh winterjd@10.34.3.227'
+alias sshwork='ssh winterjd@10.35.72.137'
 
 # ANTLR
 alias antlr4='java -Xmx500M -cp "/usr/local/lib/antlr-4.5-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
 alias grun='java org.antlr.v4.runtime.misc.TestRig'
+
 
 # Opens a note
 ne() {
@@ -84,5 +105,5 @@ nls() {
 }
 
 ycmcomp() {
-  cp ~/dotfiles/templates/_ycm_extra_conf.py ./.ycm_extra_conf.py
+  cp ~/.dotfiles/templates/_ycm_extra_conf.py ./.ycm_extra_conf.py
 }
