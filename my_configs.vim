@@ -5,6 +5,8 @@ call vundle#begin('~/.vim_runtime/sources_non_forked')
     " let Vundle manage Vundle, required
     Plugin 'VundleVim/Vundle.vim'
 
+    Plugin 'vim-syntastic/syntastic'
+
     "vim Colorscheme
     " Plugin 'dracula/vim'
     Plugin 'tomasr/molokai'
@@ -18,7 +20,7 @@ call vundle#begin('~/.vim_runtime/sources_non_forked')
     Plugin 'tpope/vim-endwise'
     Plugin 'vim-ruby/vim-ruby'
     Plugin 'tpope/vim-rails'
-    Plugin 'tpop/vim-ragtag'
+    Plugin 'tpope/vim-ragtag'
 
     " Markdown Support
     Plugin 'godlygeek/tabular'
@@ -80,7 +82,7 @@ au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
 autocmd BufRead,BufNewFile *.wiki setlocal spell
 au BufRead,BufNewFile *.wiki setlocal textwidth=90
-au BufNewFile,BufFilePre,BufRead *.wiki set filetype=markdown
+au BufNewFile,BufFilePre,BufRead *.wiki set filetype=wiki
 
 if $TMUX == ''
   set clipboard+=unnamed
@@ -136,3 +138,11 @@ let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'yaml', 'haml', 'ba
 
 " vim-wiki
 nmap <leader>whtml :VimwikiAll2HTML<cr>
+
+let g:syntastic_html_tidy_ignore_errors = [
+    \  'plain text isn''t allowed in <head> elements',
+    \  '<base> escaping malformed URI reference',
+    \  'discarding unexpected <body>',
+    \  '<script> escaping malformed URI reference',
+    \  '</head> isn''t allowed in <body> elements'
+    \ ]
