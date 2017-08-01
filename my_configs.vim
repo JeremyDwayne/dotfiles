@@ -16,6 +16,9 @@ call vundle#begin('~/.vim_runtime/sources_non_forked')
 
     Plugin 'airblade/vim-gitgutter'
 
+    Plugin 'vim-scripts/closetag.vim'
+    Plugin 'Townk/vim-autoclose'
+
     " Ruby Stuff
     Plugin 'tpope/vim-endwise'
     Plugin 'vim-ruby/vim-ruby'
