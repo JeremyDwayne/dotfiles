@@ -27,6 +27,7 @@
   autocrlf = input
 [merge]
   ff = only
+	tool = diffmerge
 [commit]
   template = ~/.gitmessage
 [fetch]
@@ -41,3 +42,9 @@
   name = Jeremy Winterberg
 [diff]
   compactionHeuristic = true
+	tool = diffmerge
+[difftool "diffmerge"]
+	cmd = diffmerge \"$LOCAL\" \"$REMOTE\"
+[mergetool "diffmerge"]
+	cmd = "diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
+	trustExitCode = true
