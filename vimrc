@@ -6,7 +6,7 @@
 filetype plugin on
 filetype indent on
 
-execute plug#begin()
+call plug#begin('~/.vim/plugged/')
 
     "vim Colorscheme
     Plug 'dracula/vim'
@@ -26,6 +26,7 @@ execute plug#begin()
     Plug 'tpope/vim-rails'
     Plug 'tpope/vim-ragtag'
     Plug 'tpope/vim-sensible'
+    Plug 'tpope/vim-commentary'
 
     " Markdown Support
     Plug 'godlygeek/tabular'
@@ -34,7 +35,8 @@ execute plug#begin()
     Plug 'xolox/vim-misc'
 
     " Autocomplete
-    Plug 'BrandonRoehl/auto-omni'
+    " Doesn't play nicely with ruby
+    " Plug 'BrandonRoehl/auto-omni'
 
     " HTML shortcuts  ,y,
     Plug 'mattn/emmet-vim'
@@ -48,7 +50,7 @@ execute plug#begin()
     Plug 'mileszs/ack.vim'
     Plug 'scrooloose/nerdtree'
   
-execute plug#end()
+call plug#end()
 
 let mapleader=","
 

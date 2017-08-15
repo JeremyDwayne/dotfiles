@@ -5,8 +5,9 @@
 # NOTICE: Modify script to your own preferences! This mostly uses default
 #         locations, but can be changed to whatever you need.
 
+git submodule init
+git submodule update --recursive
 
-# Fancy ls script taken from github.com/brandonroehl/dotfiles
 if [ hash brew >/dev/null 2>&1 ]
 then
   echo 'Attempting to install brew'
@@ -33,9 +34,7 @@ then
   rvm cleanup all
 fi
 
-git submodule init
-git submodule update --recursive
-
+# Fancy ls script taken from github.com/brandonroehl/dotfiles
 files=( 'vimrc' 'vim' 'zshrc' 'zsh' 'tmux.conf' 'tmux-dev.sh' 'tmux-osx' 'agignore' 'gitconfig' 'gitignore' 'gitmessage' 'gemrc' 'rspec' )
 for file in $files
 do
