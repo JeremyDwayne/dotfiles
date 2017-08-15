@@ -72,16 +72,21 @@ export CLASSPATH=".:/usr/local/lib/antlr-4.5-complete.jar:$CLASSPATH"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
 
 source $ZSH/oh-my-zsh.sh
+source $HOME/.dotfiles/aliases.zsh
 
 # You may need to manually set your language environment
 #export LANG="en_US"
 #export LC_ALL=$LANG.UTF-8
+
+# Set preferred editor
+export EDITOR='vim'
+
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='vim'
-fi
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='vim'
+# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"

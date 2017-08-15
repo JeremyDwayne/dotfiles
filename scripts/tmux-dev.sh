@@ -13,9 +13,7 @@ fi
 # Creates session, and names window DEV
 tmux new-session -d -s $1 -c $2
 tmux rename-window 'DEV'
-tmux split-window -v -p 10 -c $2
-tmux select-pane -t 1
-tmux split-window -h -p 30 -c $2
+tmux split-window -h -p 50 -c $2
 
 # Creates second window named SERVER
 tmux new-window -a -d -n 'SERVER' -c $2
