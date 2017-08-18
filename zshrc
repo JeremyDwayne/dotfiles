@@ -74,6 +74,9 @@ export CLASSPATH=".:/usr/local/lib/antlr-4.5-complete.jar:$CLASSPATH"
 source $ZSH/oh-my-zsh.sh
 source $HOME/.dotfiles/aliases.zsh
 
+# Force macOS to add ssh keys on terminal startup
+ssh-add -A 2>/dev/null;
+
 # You may need to manually set your language environment
 #export LANG="en_US"
 #export LC_ALL=$LANG.UTF-8
