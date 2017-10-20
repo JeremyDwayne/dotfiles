@@ -109,7 +109,7 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
-set guifont=Menlo\ for\ Powerline
+set guifont=InputMono:h14
 set hidden
 set history=500
 set nowrap
