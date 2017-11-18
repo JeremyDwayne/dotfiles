@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 # A script for installing dependencies and setting up needed Symbolic Links
-# Created by Jeremy Winterberg
+# Created by Jeremy Winterberg, Brandon Roehl
 # Updated 08/14/2017
 # NOTICE: Modify script to your own preferences! This mostly uses default
 #         locations, but can be changed to whatever you need.

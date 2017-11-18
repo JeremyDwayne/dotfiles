@@ -107,4 +107,8 @@ export EDITOR='vim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export CPLUS_INCLUDE_PATH=/usr/local/include
-export LIBRARY_PATH=/usr/local/lib
+
+source ~/.dotfiles/z/z.sh
+
+# brew install zsh-syntax-highlighting
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
