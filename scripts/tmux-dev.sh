@@ -10,6 +10,9 @@ then
   set -- "$1" "$PWD"
 fi
 
+# sets current directory as default path
+tmux set-option default-path "$PWD"
+
 # Creates session, and names window DEV
 tmux new-session -d -s $1 -c $2
 tmux rename-window 'DEV'
