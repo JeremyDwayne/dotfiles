@@ -88,20 +88,25 @@ alias sshwork='ssh winterjd@10.35.72.137'
 alias antlr4='java -Xmx500M -cp "/usr/local/lib/antlr-4.5-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
 alias grun='java org.antlr.v4.runtime.misc.TestRig'
 
-
-# Opens a note
-ne() {
-  vim -c ":Note $*" 
+# Logbook
+lbt() {
+  vim -c ":VimwikiMakeDiaryNote" 
 }
 
-## New Note: calls vim notes plugin
-n() { 
-  vim -c :Note
+lby() {
+  vim -c ":VimwikiMakeYesterdayDiaryNote" 
 }
 
-# Searches Notes
-nls() {
-  ls -c ~/Documents/Notes/ | egrep -i "$*"
+lbi() {
+  vim -c ":VimwikiDiaryIndex"
+}
+
+wiki() {
+  vim -c ":VimwikiIndex"
+}
+
+swiki() {
+  vim -c ":VimwikiSearch $*"
 }
 
 ycmcomp() {
