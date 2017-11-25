@@ -261,6 +261,8 @@ let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'yaml', 'haml', 'ba
 
 " vim-wiki
 nmap <leader>whtml :VimwikiAll2HTML<cr>
+nmap <leader>wt :VimwikiTable
+
 
 let g:syntastic_html_tidy_ignore_errors = [
     \  'plain text isn''t allowed in <head> elements',
