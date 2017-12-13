@@ -1,16 +1,13 @@
 " Created By Jeremy Winterberg (github.com/jeremydwayne 2017)
 " A LOT of config pulled from the Ultimate VimRC (github.com/amix/vimrc)
-" I pasted it into my vimrc because I don't use all of the plugins and
-" wanted an easier way to install dotfiles
 
-filetype plugin on
-filetype indent on
+set nocompatible
+filetype plugin indent on
 
 call plug#begin('~/.vim/plugged/')
 
-    "vim Colorscheme
+    "vim colorscheme
     Plug 'dracula/vim'
-    " Plug 'tomasr/molokai'
 
     " tab autocomplete
     Plug 'ervandew/supertab'
@@ -30,17 +27,16 @@ call plug#begin('~/.vim/plugged/')
 
     " Markdown Support
     Plug 'godlygeek/tabular'
-    Plug 'xolox/vim-notes'
     Plug 'vimwiki/vimwiki'
     Plug 'xolox/vim-misc'
 
     " Autocomplete
-    " Doesn't play nicely with ruby
     " Plug 'BrandonRoehl/auto-omni'
 
     " HTML shortcuts  ,y,
     Plug 'mattn/emmet-vim'
 
+    " Various Vim Plugins
     Plug 'vim-scripts/mru.vim'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'terryma/vim-multiple-cursors'
@@ -48,7 +44,16 @@ call plug#begin('~/.vim/plugged/')
     Plug 'itchyny/lightline.vim'
     Plug 'rking/ag.vim'
     Plug 'mileszs/ack.vim'
-    Plug 'scrooloose/nerdtree'
+    Plug 'scrooloose/nerdtree', { 'on': [ 'NERDTreeToggle', 'NERDTree' ] }
+    Plug 'airblade/vim-rooter'
+
+    " Stuff for java development
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
+    Plug 'Yggdroot/indentLine' 
+    Plug 'artur-shaik/vim-javacomplete2'
+    Plug 'vim-syntastic/syntastic'
+    Plug 'neomake/neomake'
   
 call plug#end()
 
@@ -63,8 +68,8 @@ set tags=./tags;
 " Enable syntax highlighting
 syntax enable 
 
-set background=dark
 colorscheme dracula
+set background=dark
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -91,7 +96,6 @@ set nobackup
 set nowb
 set noswapfile
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -112,12 +116,8 @@ set wrap "Wrap lines
 set guifont=InputMono:h14
 set hidden
 set history=500
-set nowrap
 set shiftwidth=2
 set tabstop=2
-set expandtab
-set smartindent
-set autoindent
 set number
 set mouse=a
 
@@ -170,14 +170,11 @@ set tm=500
 " Add a bit extra margin to the left
 set foldcolumn=1
 
-
-
 " write quit map
 nmap <leader>wq :wq<cr>
+nmap <leader>w :w<cr>
 nmap <leader>lc :lclose<cr>
 nmap <leader>lo :lopen<cr>
-set term=screen-256color
-set t_Co=256
 
 
 " Vim-Rails Mappings
@@ -211,10 +208,17 @@ endif
 " Fixee airline fonts from not displaying correctly
 let g:airline_powerline_fonts = 1
 
-" Systastic python3 syntax support
+" Systastic 
 let g:syntastic_python_python_exec = '/usr/bin/python3'
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Nerd Tree
@@ -225,11 +229,10 @@ let g:NERDTreeWinPos = "right"
 let NERDTreeShowHidden=0
 let g:NERDTreeWinSize=35
 map <leader>nn :NERDTreeToggle<cr>
-map <leader>nb :NERDTreeFromBookmark
-map <leader>nf :NERDTreeFind<cr>"
+
+
 " Close NerdTree when vim exits
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
 
 
 let g:ycm_key_list_select_completion=[]
@@ -295,7 +298,7 @@ let g:ctrlp_working_path_mode = 0
 
 let g:ctrlp_map = '<c-f>'
 map <leader>j :CtrlP<cr>
-map <c-b> :CtrlPBuffer<cr>
+map <leader>b :CtrlPBuffer<cr>
 
 let g:ctrlp_max_height = 20
 let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
@@ -309,7 +312,7 @@ let g:multi_cursor_next_key="\<C-s>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Git gutter (Git diff)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:gitgutter_enabled=0
+let g:gitgutter_enabled=1
 nnoremap <silent> <leader>d :GitGutterToggle<cr>
 
 """"""""""""""""""""""""""""""
@@ -452,6 +455,26 @@ map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
 map <leader>n :cn<cr>
 map <leader>p :cp<cr>
 
+" The Silver Searcher
+
+" bind \ (backward slash) to grep shortcut
+command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+
+nnoremap \ :Ag<SPACE>
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
@@ -480,15 +503,13 @@ map <leader>x :e ~/buffer.md<cr>
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
+:nnoremap <C-v> "+P=']
+:inoremap <C-v> <C-o>"+P<C-o>=']
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! CmdLine(str)
-    exe "menu Foo.Bar :" . a:str
-    emenu Foo.Bar
-    unmenu Foo
-endfunction 
 
 function! VisualSelection(direction, extra_filter) range
     let l:saved_reg = @"
@@ -538,9 +559,9 @@ function! <SID>BufcloseCloseIt()
 endfunction
 
 " Make VIM remember position in file after reopen
-" if has("autocmd")
-"   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-"endif
+ if has("autocmd")
+   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 
 " Disable scrollbars (real hackers don't use scrollbars for navigation!)
 set guioptions-=r
@@ -593,7 +614,7 @@ au FileType python map <buffer> <leader>D ?def
 """"""""""""""""""""""""""""""
 " => JavaScript section
 """""""""""""""""""""""""""""""
-au FileType javascript call JavaScriptFold()
+" au FileType javascript call JavaScriptFold()
 au FileType javascript setl fen
 au FileType javascript setl nocindent
 
@@ -622,7 +643,7 @@ function! CoffeeScriptFold()
     setl foldmethod=indent
     setl foldlevelstart=1
 endfunction
-au FileType coffee call CoffeeScriptFold()
+" au FileType coffee call CoffeeScriptFold()
 
 au FileType gitcommit call setpos('.', [0, 1, 1, 0])
 
@@ -653,3 +674,26 @@ let g:lightline = {
       \ 'separator': { 'left': ' ', 'right': ' ' },
       \ 'subseparator': { 'left': ' ', 'right': ' ' }
       \ }
+
+" vertical line indentation
+let g:indentLine_color_term = 239
+let g:indentLine_color_gui = '#09AA08'
+let g:indentLine_char = '│'
+
+" Brandon's OmniComplete
+" set omnifunc=syntaxcomplete#Complete
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+set completeopt=noinsert,menuone
+let g:rubycomplete_buffer_loading=1
+let g:rubycomplete_classes_in_global=1
+let g:rubycomplete_rails=0
+let g:loaded_sql_completion=0
+let g:omni_sql_no_default_maps=1
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" When reading a buffer (after 1s), and when writing.
+call neomake#configure#automake('rw', 1000)
