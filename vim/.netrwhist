@@ -1,9 +1,4 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_cnt =2
 let g:netrw_dirhist_1='/Users/winterjd/.dotfiles/vim'
-let g:netrw_dirhist_2='/Users/winterjd/apps/app114'
-let g:netrw_dirhist_3='/Users/winterjd/apps/app114/app'
-let g:netrw_dirhist_4='/Users/winterjd/apps/app114/app/views'
-let g:netrw_dirhist_5='/Users/winterjd/apps/app114/app/views/layouts'
-let g:netrw_dirhist_6='/Users/winterjd/.dotfiles/colors/dracula/iterm/.github'
-let g:netrw_dirhist_7='/Users/winterjd/.dotfiles/colors/dracula/iterm'
+let g:netrw_dirhist_2='/Users/winterjd/.dotfiles'
