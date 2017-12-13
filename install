@@ -19,7 +19,7 @@ then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
   fi
 fi
-brew install zsh git coreutils vim tmux wget bash the_silver_searcher reattach-to-user-namespace
+brew install zsh git coreutils vim tmux wget bash the_silver_searcher reattach-to-user-namespace zsh-syntax-highlighting
 
 # Check if Oh My ZSH is installed
 if ! [ -d "$HOME/.oh-my-zsh/" ]; then
