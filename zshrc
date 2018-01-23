@@ -111,6 +111,10 @@ export EDITOR='vim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export CPLUS_INCLUDE_PATH=/usr/local/include
 
+# Python Variables
+VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh
+
 source ~/.dotfiles/z/z.sh
 
 # brew install zsh-syntax-highlighting

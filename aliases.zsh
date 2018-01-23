@@ -109,6 +109,9 @@ swiki() {
   vim -c ":VimwikiSearch $*"
 }
 
+alias vimrc='vim ~/.vimrc'
+alias zshrc='vim ~/.zshrc'
+
 ycmcomp() {
   cp ~/.dotfiles/templates/_ycm_extra_conf.py ./.ycm_extra_conf.py
 }
