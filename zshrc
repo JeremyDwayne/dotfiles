@@ -89,6 +89,8 @@ ssh-add -A 2>/dev/null;
 # Set preferred editor
 export EDITOR='vim'
 
+KEYTIMEOUT=1
+
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
