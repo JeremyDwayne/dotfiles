@@ -121,3 +121,5 @@ source ~/.dotfiles/z/z.sh
 # brew install zsh-syntax-highlighting
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
