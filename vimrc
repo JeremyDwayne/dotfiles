@@ -6,6 +6,8 @@ filetype plugin indent on
 call plug#begin('~/.vim/plugged/')
   " Sensible Default Vim Config
   Plug 'tpope/vim-sensible'
+  Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
   " vim colorscheme
   Plug 'dracula/vim'
@@ -46,8 +48,6 @@ call plug#begin('~/.vim/plugged/')
   Plug 'leafgarland/typescript-vim'
   Plug 'vim-ruby/vim-ruby'
   Plug 'tpope/vim-rails'
-  " Trying to stop using syntastic as it yells at everything
-  " Plug 'vim-syntastic/syntastic'
 
   " Typescript 
   Plug 'Quramy/tsuquyomi'
@@ -522,3 +522,5 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 call neomake#configure#automake('rw', 1000)
 
 let g:deoplete#enable_at_startup = 1
+
+nnoremap <C-p> :<C-u>FZF<CR>
