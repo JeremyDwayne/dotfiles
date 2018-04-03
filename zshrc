@@ -6,7 +6,8 @@ export ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="agnoster"
-ZSH_THEME="nicoulaj"
+# ZSH_THEME="nicoulaj"
+ZSH_THEME="dracula"
 DEFAULT_USER="winterjd"
 
 # [ -n "$PS1" ] && sh ~/.nightshell/carbonized-dark ]
@@ -119,3 +120,4 @@ source ~/.dotfiles/z/z.sh
 
 # brew install zsh-syntax-highlighting
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"

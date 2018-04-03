@@ -46,6 +46,8 @@ call plug#begin('~/.vim/plugged/')
     Plug 'mileszs/ack.vim'
     Plug 'scrooloose/nerdtree', { 'on': [ 'NERDTreeToggle', 'NERDTree' ] }
     Plug 'airblade/vim-rooter'
+    Plug 'leafgarland/typescript-vim'
+    Plug 'Quramy/tsuquyomi'
 
     " Stuff for java development
     Plug 'SirVer/ultisnips'
@@ -54,6 +56,13 @@ call plug#begin('~/.vim/plugged/')
     Plug 'artur-shaik/vim-javacomplete2'
     Plug 'vim-syntastic/syntastic'
     Plug 'neomake/neomake'
+
+    " Javascript Plugins
+    Plug 'matthewsimo/angular-vim-snippets'
+    Plug 'burnettk/vim-angular'
+    Plug 'pangloss/vim-javascript'
+    Plug 'othree/javascript-libraries-syntax.vim'
+    Plug 'claco/jasmine.vim'
   
 call plug#end()
 
@@ -181,29 +190,19 @@ nmap <leader>lo :lopen<cr>
 nmap <leader>ec :Econtroller %<cr>
 
 " Highlights if you go past 80 columns for code legibility, this comment is an example
-" highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
-" match OverLength /\%81v.\+/
+highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
+match OverLength /\%101v.\+/
 
 " Vim yank to clipboard
 autocmd BufRead,BufNewFile *.md setlocal spell
-au BufRead,BufNewFile *.md setlocal textwidth=90
+au BufRead,BufNewFile *.md setlocal textwidth=100
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
 autocmd BufRead,BufNewFile *.wiki setlocal spell
-au BufRead,BufNewFile *.wiki setlocal textwidth=90
+au BufRead,BufNewFile *.wiki setlocal textwidth=100
 au BufNewFile,BufFilePre,BufRead *.wiki set filetype=wiki
 
-if $TMUX == ''
-  set clipboard+=unnamed
-endif
-if has("unix")
-  let s:uname = system("uname")
-  if s:uname == "Darwin\n"
-    set clipboard=unnamed
-  else
-    set clipboard=unnamedplus
-  endif
-endif
+set clipboard=unnamed
 
 " Fixee airline fonts from not displaying correctly
 let g:airline_powerline_fonts = 1
@@ -217,8 +216,8 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
@@ -230,8 +229,8 @@ let NERDTreeIgnore=['\~$', '.o$', 'bower_components', 'node_modules', '\.pyc$', 
 let g:NERDTreeWinPos = "right"
 let NERDTreeShowHidden=0
 let g:NERDTreeWinSize=35
-map <leader>nn :NERDTreeToggle<cr>
-
+nmap <leader>nn :NERDTreeToggle<cr>
+nmap <leader>nb :NERDTreeFind<cr>
 
 " Close NerdTree when vim exits
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -272,9 +271,19 @@ nmap <leader>wit :VimwikiTable
 let g:syntastic_html_tidy_ignore_errors = [
     \  'plain text isn''t allowed in <head> elements',
     \  '<base> escaping malformed URI reference',
-    \  'discarding unexpected <body>',
     \  '<script> escaping malformed URI reference',
-    \  '</head> isn''t allowed in <body> elements'
+    \  '</head> isn''t allowed in <body> elements',
+    \  'Warning: missing <!DOCTYPE> declaration',
+    \  " proprietary attribute ",
+    \  "trimming empty \<", 
+    \  "inserting implicit ",
+    \  "unescaped \&", 
+    \  "lacks \"action",
+    \  "lacks value", 
+    \  "lacks \"src", 
+    \  "is not recognized!", 
+    \  "discarding unexpected", 
+    \  "replacing obsolete "
     \ ]
 
 let g:user_emmet_leader_key='<Leader>y'
