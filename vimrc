@@ -75,6 +75,14 @@ call plug#end()
 
 let mapleader=","
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Fast editing and reloading of vimrc configs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>e :e! ~/.vimrc<cr>
+autocmd! bufwritepost vimrc source ~/.vimrc
+
+set timeoutlen=1000 ttimeoutlen=0
+
 " CTags
 set tags=./tags;
 
@@ -186,9 +194,9 @@ nmap <leader>w :w<cr>
 nmap <leader>lc :lclose<cr>
 nmap <leader>lo :lopen<cr>
 
-" Highlights if you go past 100 columns for code legibility, this comment is an example
+" Highlights single column if you go past 100 columns for code legibility, this comment is an example
 highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
-match OverLength /\%101v.\+/
+match OverLength /\%101v./
 
 
 " Markdown and VimWiki Filetypes
@@ -456,11 +464,6 @@ set guioptions-=R
 set guioptions-=l
 set guioptions-=L
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Fast editing and reloading of vimrc configs
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>e :e! ~/.vimrc<cr>
-autocmd! bufwritepost vimrc source ~/.vimrc
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Turn persistent undo on 
@@ -521,21 +524,6 @@ let g:lightline = {
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui = '#09AA08'
 let g:indentLine_char = '│'
-
-" Brandon's OmniComplete
-" set omnifunc=syntaxcomplete#Complete
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-set completeopt=noinsert,menuone
-let g:rubycomplete_buffer_loading=1
-let g:rubycomplete_classes_in_global=1
-let g:rubycomplete_rails=0
-let g:loaded_sql_completion=0
-let g:omni_sql_no_default_maps=1
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " When reading a buffer (after 1s), and when writing.
 call neomake#configure#automake('rw', 1000)
