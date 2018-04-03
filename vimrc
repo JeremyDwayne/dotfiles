@@ -221,35 +221,18 @@ set statusline+=%*
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Nerd Tree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let NERDTreeQuitOnOpen=1
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * NERDTree | wincmd p
+
 let NERDTreeIgnore=['\~$', '.o$', 'bower_components', 'node_modules', '\.pyc$', '__pycache__']
 let g:NERDTreeWinPos = "right"
-let NERDTreeShowHidden=1
+let NERDTreeShowHidden=0
 let g:NERDTreeWinSize=35
 nmap <leader>nn :NERDTreeToggle<cr>
-nmap <leader>nb :NERDTreeFind<cr>
+nnoremap <silent> <leader>nb :NERDTreeFind<cr>
 
 " Close NerdTree when vim exits
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-
-" Check if NERDTree is open or active
-function! IsNERDTreeOpen()        
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
-
-" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-" file, and we're not in vimdiff
-function! SyncTree()
-  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-    wincmd p
-  endif
-endfunction
-
-" Highlight currently open buffer in NERDTree
-autocmd BufEnter * call SyncTree()
-
 
 " Syntax Hilighting for ANTLR
 au BufRead,BufNewFile *.g set syntax=antlr3
