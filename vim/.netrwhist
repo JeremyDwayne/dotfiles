@@ -1,5 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/Users/winterjd/.dotfiles/vim'
-let g:netrw_dirhist_2='/Users/winterjd/.dotfiles'
-let g:netrw_dirhist_3='/Users/winterjd/apps/jeremydwayne/config/initializers'
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/winterjd/apps/OTN/Frontend/src'
+let g:netrw_dirhist_2='/Users/winterjd/apps/OTN/Backend/lib'
+let g:netrw_dirhist_3='/Users/winterjd/apps/OTN/Backend/config'
+let g:netrw_dirhist_4='/Users/winterjd/apps/OTN/Backend/config/environments'
+let g:netrw_dirhist_5='/Users/winterjd/apps/OTN/Backend/config'
+let g:netrw_dirhist_6='/Users/winterjd/apps/OTN/Backend/config/initializers'
