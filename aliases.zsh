@@ -119,3 +119,5 @@ alias zshrc='vim ~/.zshrc'
 ycmcomp() {
   cp ~/.dotfiles/templates/_ycm_extra_conf.py ./.ycm_extra_conf.py
 }
+
+alias fzfv='vim $(fzf --height 40%)'

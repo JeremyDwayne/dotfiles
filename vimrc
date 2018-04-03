@@ -224,6 +224,25 @@ nmap <leader>nb :NERDTreeFind<cr>
 " Close NerdTree when vim exits
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+
+" Check if NERDTree is open or active
+function! IsNERDTreeOpen()        
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
+" file, and we're not in vimdiff
+function! SyncTree()
+  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+    wincmd p
+  endif
+endfunction
+
+" Highlight currently open buffer in NERDTree
+autocmd BufEnter * call SyncTree()
+
+
 " Syntax Hilighting for ANTLR
 au BufRead,BufNewFile *.g set syntax=antlr3
 
@@ -522,5 +541,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 call neomake#configure#automake('rw', 1000)
 
 let g:deoplete#enable_at_startup = 1
+let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}
 
 nnoremap <C-p> :<C-u>FZF<CR>
