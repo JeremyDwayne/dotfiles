@@ -1,68 +1,75 @@
 " Created By Jeremy Winterberg (github.com/jeremydwayne 2017)
 " A LOT of config pulled from the Ultimate VimRC (github.com/amix/vimrc)
 
-set nocompatible
 filetype plugin indent on
 
 call plug#begin('~/.vim/plugged/')
+  " Sensible Default Vim Config
+  Plug 'tpope/vim-sensible'
 
-    "vim colorscheme
-    Plug 'dracula/vim'
+  " vim colorscheme
+  Plug 'dracula/vim'
 
-    " tab autocomplete
-    Plug 'ervandew/supertab'
+  " tab autocomplete
+  Plug 'ervandew/supertab'
+  Plug 'alvan/vim-closetag'
 
-    Plug 'airblade/vim-gitgutter'
+  Plug 'airblade/vim-gitgutter'
 
-    Plug 'vim-scripts/closetag.vim'
-    Plug 'Townk/vim-autoclose'
+  Plug 'Townk/vim-autoclose'
 
-    " Ruby Stuff
-    Plug 'tpope/vim-endwise'
-    Plug 'vim-ruby/vim-ruby'
-    Plug 'tpope/vim-rails'
-    Plug 'tpope/vim-ragtag'
-    Plug 'tpope/vim-sensible'
-    Plug 'tpope/vim-commentary'
+  " Auto end statements
+  Plug 'tpope/vim-endwise'
 
-    " Markdown Support
-    Plug 'godlygeek/tabular'
-    Plug 'vimwiki/vimwiki'
-    Plug 'xolox/vim-misc'
+  " gcc commenting
+  Plug 'tpope/vim-commentary'
 
-    " Autocomplete
-    " Plug 'BrandonRoehl/auto-omni'
+  " Markdown Support
+  Plug 'godlygeek/tabular'
+  Plug 'vimwiki/vimwiki'
 
-    " HTML shortcuts  ,y,
-    Plug 'mattn/emmet-vim'
+  " HTML shortcuts  ,y,
+  Plug 'mattn/emmet-vim'
 
-    " Various Vim Plugins
-    Plug 'vim-scripts/mru.vim'
-    Plug 'ctrlpvim/ctrlp.vim'
-    Plug 'terryma/vim-multiple-cursors'
-    Plug 'vim-scripts/bufexplorer.zip'
-    Plug 'itchyny/lightline.vim'
-    Plug 'rking/ag.vim'
-    Plug 'mileszs/ack.vim'
-    Plug 'scrooloose/nerdtree', { 'on': [ 'NERDTreeToggle', 'NERDTree' ] }
-    Plug 'airblade/vim-rooter'
-    Plug 'leafgarland/typescript-vim'
-    Plug 'Quramy/tsuquyomi'
+  " Most Recently Used files ,f
+  Plug 'vim-scripts/mru.vim'
 
-    " Stuff for java development
-    Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets'
-    Plug 'Yggdroot/indentLine' 
-    Plug 'artur-shaik/vim-javacomplete2'
-    Plug 'vim-syntastic/syntastic'
-    Plug 'neomake/neomake'
+  " <C-s>
+  Plug 'terryma/vim-multiple-cursors'
 
-    " Javascript Plugins
-    Plug 'matthewsimo/angular-vim-snippets'
-    Plug 'burnettk/vim-angular'
-    Plug 'pangloss/vim-javascript'
-    Plug 'othree/javascript-libraries-syntax.vim'
-    Plug 'claco/jasmine.vim'
+  Plug 'itchyny/lightline.vim'
+
+  Plug 'mileszs/ack.vim'
+  Plug 'scrooloose/nerdtree', { 'on': [ 'NERDTreeToggle', 'NERDTree' ] }
+
+  " Syntax
+  Plug 'leafgarland/typescript-vim'
+  Plug 'vim-ruby/vim-ruby'
+  Plug 'tpope/vim-rails'
+  " Trying to stop using syntastic as it yells at everything
+  " Plug 'vim-syntastic/syntastic'
+
+  " Typescript 
+  Plug 'Quramy/tsuquyomi'
+
+  Plug 'Yggdroot/indentLine' 
+
+  " Autonomous make integration (Compile)
+  Plug 'neomake/neomake'
+
+  if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+  endif
+  Plug 'Shougo/neosnippet'
+  Plug 'Shougo/neosnippet-snippets'
+
+  " Javascript Plugins
+  Plug 'othree/javascript-libraries-syntax.vim'
+  Plug 'claco/jasmine.vim'
   
 call plug#end()
 
@@ -79,14 +86,6 @@ syntax enable
 
 colorscheme dracula
 set background=dark
-
-" Set extra options when running in GUI mode
-if has("gui_running")
-    set guioptions-=T
-    set guioptions-=e
-    set t_Co=256
-    set guitablabel=%M\ %t
-endif
 
 set noshowmode
 
@@ -182,18 +181,17 @@ set foldcolumn=1
 " write quit map
 nmap <leader>wq :wq<cr>
 nmap <leader>w :w<cr>
+
+" Open and Close Location List (Error Messages)
 nmap <leader>lc :lclose<cr>
 nmap <leader>lo :lopen<cr>
 
-
-" Vim-Rails Mappings
-nmap <leader>ec :Econtroller %<cr>
-
-" Highlights if you go past 80 columns for code legibility, this comment is an example
+" Highlights if you go past 100 columns for code legibility, this comment is an example
 highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
 match OverLength /\%101v.\+/
 
-" Vim yank to clipboard
+
+" Markdown and VimWiki Filetypes
 autocmd BufRead,BufNewFile *.md setlocal spell
 au BufRead,BufNewFile *.md setlocal textwidth=100
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
@@ -202,24 +200,15 @@ autocmd BufRead,BufNewFile *.wiki setlocal spell
 au BufRead,BufNewFile *.wiki setlocal textwidth=100
 au BufNewFile,BufFilePre,BufRead *.wiki set filetype=wiki
 
+" Vim yank to clipboard
 set clipboard=unnamed
 
-" Fixee airline fonts from not displaying correctly
+" Fix airline fonts from not displaying correctly
 let g:airline_powerline_fonts = 1
-
-" Systastic 
-let g:syntastic_python_python_exec = '/usr/bin/python3'
-let g:syntastic_eruby_ruby_quiet_messages =
-    \ {'regex': 'possibly useless use of a variable in void context'}
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Nerd Tree
@@ -227,24 +216,13 @@ let g:syntastic_check_on_wq = 0
 let NERDTreeQuitOnOpen=1
 let NERDTreeIgnore=['\~$', '.o$', 'bower_components', 'node_modules', '\.pyc$', '__pycache__']
 let g:NERDTreeWinPos = "right"
-let NERDTreeShowHidden=0
+let NERDTreeShowHidden=1
 let g:NERDTreeWinSize=35
 nmap <leader>nn :NERDTreeToggle<cr>
 nmap <leader>nb :NERDTreeFind<cr>
 
 " Close NerdTree when vim exits
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
-let g:ycm_path_to_python_interpreter = '/usr/bin/python'
-let g:ycm_server_use_vim_stdout = 0
-let g:ycm_global_ycm_extra_conf = '~/.dotfiles/ycm_extra_conf.py'
-let g:ycm_confirm_extra_conf = 0
-
-" For tab completion YouCompleteMe
-imap <Tab> <C-N>
 
 " Syntax Hilighting for ANTLR
 au BufRead,BufNewFile *.g set syntax=antlr3
@@ -262,58 +240,17 @@ set nofoldenable
 let g:vim_markdown_new_list_item_indent = 2
 let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'yaml', 'haml', 'bash=sh']
 
-
 " vim-wiki
 nmap <leader>whtml :VimwikiAll2HTML<cr>
 nmap <leader>wit :VimwikiTable
 
-
-let g:syntastic_html_tidy_ignore_errors = [
-    \  'plain text isn''t allowed in <head> elements',
-    \  '<base> escaping malformed URI reference',
-    \  '<script> escaping malformed URI reference',
-    \  '</head> isn''t allowed in <body> elements',
-    \  'Warning: missing <!DOCTYPE> declaration',
-    \  " proprietary attribute ",
-    \  "trimming empty \<", 
-    \  "inserting implicit ",
-    \  "unescaped \&", 
-    \  "lacks \"action",
-    \  "lacks value", 
-    \  "lacks \"src", 
-    \  "is not recognized!", 
-    \  "discarding unexpected", 
-    \  "replacing obsolete "
-    \ ]
-
 let g:user_emmet_leader_key='<Leader>y'
-
-" Auto-Omni Settings
-set omnifunc=syntaxcomplete#Complete
-let g:rubycomplete_buffer_loading=0
-let g:rubycomplete_classes_in_global=0
-let g:rubycomplete_rails=0
-let g:loaded_sql_completion=0
-let g:omni_sql_no_default_maps=1
 
 """"""""""""""""""""""""""""""
 " => MRU plugin
 """"""""""""""""""""""""""""""
 let MRU_Max_Entries = 400
 map <leader>f :MRU<CR>
-
-""""""""""""""""""""""""""""""
-" => CTRL-P
-""""""""""""""""""""""""""""""
-let g:ctrlp_working_path_mode = 0
-
-let g:ctrlp_map = '<c-f>'
-map <leader>j :CtrlP<cr>
-map <leader>b :CtrlPBuffer<cr>
-
-let g:ctrlp_max_height = 20
-let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-multiple-cursors
@@ -325,15 +262,6 @@ let g:multi_cursor_next_key="\<C-s>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:gitgutter_enabled=1
 nnoremap <silent> <leader>d :GitGutterToggle<cr>
-
-""""""""""""""""""""""""""""""
-" => bufExplorer plugin
-""""""""""""""""""""""""""""""
-let g:bufExplorerDefaultHelp=0
-let g:bufExplorerShowRelativePath=1
-let g:bufExplorerFindActive=1
-let g:bufExplorerSortBy='name'
-map <leader>o :BufExplorer<cr>
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
@@ -359,15 +287,6 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-" Close the current buffer
-map <leader>bd :Bclose<cr>:tabclose<cr>gT
-
-" Close all the buffers
-map <leader>ba :bufdo bd<cr>
-
-map <leader>l :bnext<cr>
-map <leader>h :bprevious<cr>
-
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
@@ -379,7 +298,6 @@ map <leader>t<leader> :tabnext
 let g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
-
 
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
@@ -407,7 +325,6 @@ set laststatus=2
 " Format the status line
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -417,19 +334,6 @@ map 0 ^
 " Remaps jk to ignore wrapped lines
 nmap j gj
 nmap k gk
-
-" Move a line of text using ALT+[jk] or Command+[jk] on mac
-nmap <M-j> mz:m+<cr>`z
-nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
-
-if has("mac") || has("macunix")
-  nmap <D-j> <M-j>
-  nmap <D-k> <M-k>
-  vmap <D-j> <M-j>
-  vmap <D-k> <M-k>
-endif
 
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
@@ -442,6 +346,7 @@ autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" The Silver Searcher
 " => Ag searching and cope displaying
 "    requires ag.vim - it's much better than vimgrep/grep
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -451,44 +356,23 @@ vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
 " Open Ag and put the cursor in the right position
 map <leader>g :Ag 
 
-" When you press <leader>r you can search and replace the selected text
-vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
-
-" Do :help cope if you are unsure what cope is. It's super useful!
-"
-" When you search with Ag, display your results in cope by doing:
-"   <leader>cc
-"
-" To go to the next search result do:
-"   <leader>n
-"
-" To go to the previous search results do:
-"   <leader>p
-"
-map <leader>cc :botright cope<cr>
-map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
-map <leader>n :cn<cr>
-map <leader>p :cp<cr>
-
-" The Silver Searcher
-
 " bind \ (backward slash) to grep shortcut
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+
+cnoreabbrev ag Ack                                                                           
+cnoreabbrev aG Ack                                                                           
+cnoreabbrev Ag Ack                                                                           
+cnoreabbrev AG Ack  
 
 nnoremap \ :Ag<SPACE>
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
+  let g:ackprg = 'ag --vimgrep --smart-case'
 endif
 
 " bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR><CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -509,12 +393,6 @@ map <leader>s? z=
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-
-" Quickly open a buffer for scribble
-map <leader>q :e ~/buffer<cr>
-
-" Quickly open a markdown buffer for scribble
-map <leader>x :e ~/buffer.md<cr>
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
@@ -540,34 +418,12 @@ function! VisualSelection(direction, extra_filter) range
     let @" = l:saved_reg
 endfunction
 
-
 " Returns true if paste mode is enabled
 function! HasPaste()
     if &paste
         return 'PASTE MODE  '
     endif
     return ''
-endfunction
-
-" Don't close window, when deleting a buffer
-command! Bclose call <SID>BufcloseCloseIt()
-function! <SID>BufcloseCloseIt()
-   let l:currentBufNum = bufnr("%")
-   let l:alternateBufNum = bufnr("#")
-
-   if buflisted(l:alternateBufNum)
-     buffer #
-   else
-     bnext
-   endif
-
-   if bufnr("%") == l:currentBufNum
-     new
-   endif
-
-   if buflisted(l:currentBufNum)
-     execute("bdelete! ".l:currentBufNum)
-   endif
 endfunction
 
 " Make VIM remember position in file after reopen
@@ -611,51 +467,6 @@ au FileType python syn keyword pythonDecorator True None False self
 au BufNewFile,BufRead *.jinja set syntax=htmljinja
 au BufNewFile,BufRead *.mako set ft=mako
 
-au FileType python map <buffer> F :set foldmethod=indent<cr>
-
-au FileType python inoremap <buffer> $r return 
-au FileType python inoremap <buffer> $i import 
-au FileType python inoremap <buffer> $p print 
-au FileType python inoremap <buffer> $f #--- <esc>a
-au FileType python map <buffer> <leader>1 /class 
-au FileType python map <buffer> <leader>2 /def 
-au FileType python map <buffer> <leader>C ?class 
-au FileType python map <buffer> <leader>D ?def 
-
-
-""""""""""""""""""""""""""""""
-" => JavaScript section
-"""""""""""""""""""""""""""""""
-" au FileType javascript call JavaScriptFold()
-au FileType javascript setl fen
-au FileType javascript setl nocindent
-
-au FileType javascript imap <c-t> $log();<esc>hi
-au FileType javascript imap <c-a> alert();<esc>hi
-
-au FileType javascript inoremap <buffer> $r return 
-au FileType javascript inoremap <buffer> $f //--- PH<esc>FP2xi
-
-function! JavaScriptFold() 
-    setl foldmethod=syntax
-    setl foldlevelstart=1
-    syn region foldBraces start=/{/ end=/}/ transparent fold keepend extend
-
-    function! FoldText()
-        return substitute(getline(v:foldstart), '{.*', '{...}', '')
-    endfunction
-    setl foldtext=FoldText()
-endfunction
-
-
-""""""""""""""""""""""""""""""
-" => CoffeeScript section
-"""""""""""""""""""""""""""""""
-function! CoffeeScriptFold()
-    setl foldmethod=indent
-    setl foldlevelstart=1
-endfunction
-" au FileType coffee call CoffeeScriptFold()
 
 au FileType gitcommit call setpos('.', [0, 1, 1, 0])
 
@@ -709,3 +520,5 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " When reading a buffer (after 1s), and when writing.
 call neomake#configure#automake('rw', 1000)
+
+let g:deoplete#enable_at_startup = 1

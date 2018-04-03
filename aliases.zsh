@@ -109,6 +109,10 @@ swiki() {
   vim -c ":VimwikiSearch $*"
 }
 
+# nvim
+alias vim=nvim
+alias vi=nvim
+
 alias vimrc='vim ~/.vimrc'
 alias zshrc='vim ~/.zshrc'
 
