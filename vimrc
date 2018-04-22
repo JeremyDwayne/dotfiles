@@ -49,6 +49,9 @@ call plug#begin('~/.vim/plugged/')
   Plug 'vim-ruby/vim-ruby'
   Plug 'tpope/vim-rails'
 
+  Plug 'pangloss/vim-javascript'
+  Plug 'mxw/vim-jsx'
+
   " Typescript 
   Plug 'Quramy/tsuquyomi'
 
@@ -74,6 +77,7 @@ call plug#begin('~/.vim/plugged/')
 call plug#end()
 
 let mapleader=","
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fast editing and reloading of vimrc configs
@@ -221,7 +225,7 @@ set statusline+=%*
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Nerd Tree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd VimEnter * NERDTree | wincmd p
+" autocmd VimEnter * NERDTree | wincmd p
 
 let NERDTreeIgnore=['\~$', '.o$', 'bower_components', 'node_modules', '\.pyc$', '__pycache__']
 let g:NERDTreeWinPos = "right"
@@ -290,7 +294,8 @@ let g:multi_cursor_next_key="\<C-s>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Git gutter (Git diff)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:gitgutter_enabled=1
+let g:gitgutter_enabled=0
+let g:gitgutter_highlight_lines=1
 nnoremap <silent> <leader>d :GitGutterToggle<cr>
 
 """"""""""""""""""""""""""""""
@@ -490,7 +495,7 @@ endtry
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General abbreviations
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
+iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")
 
 """"""""""""""""""""""""""""""
 " => Python section
@@ -544,3 +549,5 @@ let g:deoplete#enable_at_startup = 1
 let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}
 
 nnoremap <C-p> :<C-u>FZF<CR>
+
+let g:jsx_ext_required = 0
