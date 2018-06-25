@@ -3,6 +3,12 @@
 
 filetype plugin indent on
 
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged/')
   " Sensible Default Vim Config
   Plug 'tpope/vim-sensible'
@@ -51,6 +57,15 @@ call plug#begin('~/.vim/plugged/')
 
   Plug 'pangloss/vim-javascript'
   Plug 'mxw/vim-jsx'
+  " Plug 'w0rp/ale'
+
+  Plug 'sbdchd/neoformat'
+  Plug 'flowtype/vim-flow'
+
+  " Python
+  Plug 'python-mode/python-mode', { 'branch': 'develop' }
+  " Plug 'heavenshell/vim-pydocstring'
+  " Plug 'davidhalter/jedi-vim'
 
   " Typescript 
   Plug 'Quramy/tsuquyomi'
@@ -137,9 +152,19 @@ set guifont=InputMono:h14
 set hidden
 set history=500
 set shiftwidth=2
+set softtabstop=2
 set tabstop=2
 set number
 set mouse=a
+
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
 
 set so=7
 let $LANG='en'
@@ -192,24 +217,25 @@ set foldcolumn=1
 
 " write quit map
 nmap <leader>wq :wq<cr>
+nmap <leader>q :q!<cr>
 nmap <leader>w :w<cr>
 
 " Open and Close Location List (Error Messages)
 nmap <leader>lc :lclose<cr>
 nmap <leader>lo :lopen<cr>
 
-" Highlights single column if you go past 100 columns for code legibility, this comment is an example
+" Highlights single column if you go past 80 columns for code legibility, this comment is an example
 highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
-match OverLength /\%101v./
+match OverLength /\%81v./
 
 
 " Markdown and VimWiki Filetypes
 autocmd BufRead,BufNewFile *.md setlocal spell
-au BufRead,BufNewFile *.md setlocal textwidth=100
+au BufRead,BufNewFile *.md setlocal textwidth=80
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
 autocmd BufRead,BufNewFile *.wiki setlocal spell
-au BufRead,BufNewFile *.wiki setlocal textwidth=100
+au BufRead,BufNewFile *.wiki setlocal textwidth=80
 au BufNewFile,BufFilePre,BufRead *.wiki set filetype=wiki
 
 " Vim yank to clipboard
@@ -279,6 +305,11 @@ nmap <leader>whtml :VimwikiAll2HTML<cr>
 nmap <leader>wit :VimwikiTable
 
 let g:user_emmet_leader_key='<Leader>y'
+let g:user_emmet_settings = {
+  \  'javascript.jsx' : {
+    \      'extends' : 'jsx',
+    \  },
+  \}
 
 """"""""""""""""""""""""""""""
 " => MRU plugin
@@ -500,8 +531,8 @@ iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")
 """"""""""""""""""""""""""""""
 " => Python section
 """"""""""""""""""""""""""""""
-let python_highlight_all = 1
-au FileType python syn keyword pythonDecorator True None False self
+" let python_highlight_all = 1
+" au FileType python syn keyword pythonDecorator True None False self
 
 au BufNewFile,BufRead *.jinja set syntax=htmljinja
 au BufNewFile,BufRead *.mako set ft=mako
@@ -551,3 +582,16 @@ let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}
 nnoremap <C-p> :<C-u>FZF<CR>
 
 let g:jsx_ext_required = 0
+
+" w0rp/ale
+let g:ale_emit_conflict_warnings = 0
+let g:ale_sign_error = '?' " Less aggressive than the default '>>'
+let g:ale_sign_warning = '.'
+let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+
+" Neoformat / Prettier
+autocmd BufWritePre *.js Neoformat
+autocmd BufWritePre *.jsx Neoformat
+
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1

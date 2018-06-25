@@ -29,6 +29,7 @@ alias todos="ag --nogroup '(TODO|FIX(ME)?):'"
 
 # Python
 alias py='python'
+alias py3='python3'
 
 # Bundler
 alias b="bundle"
