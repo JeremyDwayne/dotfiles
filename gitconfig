@@ -38,7 +38,7 @@
   path = ~/.gitconfig.local
 [user]
   username = jeremydwayne
-  email = winterjd@uwec.edu
+  email = jeremy@jeremydwayne.com
   name = Jeremy Winterberg
 [diff]
   compactionHeuristic = true
@@ -48,3 +48,8 @@
 [mergetool "diffmerge"]
 	cmd = "diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
 	trustExitCode = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

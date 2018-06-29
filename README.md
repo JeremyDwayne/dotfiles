@@ -15,6 +15,13 @@ ZSH and Oh-My-Zsh must be installed:
 And the ultimate vimrc is recommended from this repository:
 - https://github.com/amix/vimrc
 
+
+**VIM Installation Tips**
+I use neovim and vim-plug. So if you're using regular vim you might want to
+remove the neovim specific plugins from my vimrc. Also, you might need to run
+:PlugClean to remove the plugin directories then run :PlugInstall to reinstall
+them.
+
 ### OSX Stuff
 Seil: Remap Capslock to esc
 - https://pqrs.org/osx/karabiner/seil.html.en
