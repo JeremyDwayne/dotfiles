@@ -12,9 +12,8 @@ Feel free to fork this and modify the scripts/dotfiles to suit your own needs!
 ZSH and Oh-My-Zsh must be installed:
 - http://ohmyz.sh/
 
-And the ultimate vimrc is recommended from this repository:
-- https://github.com/amix/vimrc
-
+**Git**
+Make sure to edit the gitconfig and add your credentials instead of mine
 
 **VIM Installation Tips**
 I use neovim and vim-plug. So if you're using regular vim you might want to
