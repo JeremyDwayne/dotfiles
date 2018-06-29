@@ -123,6 +123,7 @@ set encoding=utf8
 set ffs=unix,dos,mac
 
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -501,17 +502,11 @@ function! HasPaste()
     return ''
 endfunction
 
-" Make VIM remember position in file after reopen
- if has("autocmd")
-   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
-
 " Disable scrollbars (real hackers don't use scrollbars for navigation!)
 set guioptions-=r
 set guioptions-=R
 set guioptions-=l
 set guioptions-=L
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Turn persistent undo on 
@@ -595,3 +590,9 @@ autocmd BufWritePre *.jsx Neoformat
 
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
+
+" Conceal Level is dumb
+autocmd InsertEnter *.json setlocal conceallevel=0 concealcursor=
+autocmd InsertLeave *.json setlocal conceallevel=2 concealcursor=inc
+autocmd InsertEnter *.md setlocal conceallevel=0 concealcursor=
+autocmd InsertLeave *.md setlocal conceallevel=2 concealcursor=inc
