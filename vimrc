@@ -55,12 +55,9 @@ call plug#begin('~/.vim/plugged/')
   Plug 'vim-ruby/vim-ruby'
   Plug 'tpope/vim-rails'
 
-  Plug 'pangloss/vim-javascript'
-  Plug 'mxw/vim-jsx'
-  " Plug 'w0rp/ale'
 
+  Plug 'w0rp/ale'
   Plug 'sbdchd/neoformat'
-  Plug 'flowtype/vim-flow'
 
   " Python
   Plug 'python-mode/python-mode', { 'branch': 'develop' }
@@ -88,6 +85,8 @@ call plug#begin('~/.vim/plugged/')
   " Javascript Plugins
   Plug 'othree/javascript-libraries-syntax.vim'
   Plug 'claco/jasmine.vim'
+  Plug 'pangloss/vim-javascript'
+  Plug 'mxw/vim-jsx'
   
 call plug#end()
 
@@ -221,6 +220,12 @@ nmap <leader>wq :wq<cr>
 nmap <leader>q :q!<cr>
 nmap <leader>w :w<cr>
 
+" NO MORE FAILED FILE SAVES BECAUSE MY FINGERS ARE TOO FAT TO LET UP ON SHIFT
+command W w
+command WQ wq
+command Wq wq
+command Q q
+
 " Open and Close Location List (Error Messages)
 nmap <leader>lc :lclose<cr>
 nmap <leader>lo :lopen<cr>
@@ -305,7 +310,7 @@ let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'yaml', 'haml', 'ba
 nmap <leader>whtml :VimwikiAll2HTML<cr>
 nmap <leader>wit :VimwikiTable
 
-let g:user_emmet_leader_key='<Leader>y'
+let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_settings = {
   \  'javascript.jsx' : {
     \      'extends' : 'jsx',
@@ -577,10 +582,11 @@ let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}
 nnoremap <C-p> :<C-u>FZF<CR>
 
 let g:jsx_ext_required = 0
+let g:syntastic_javascript_checkers = ['eslint']
 
 " w0rp/ale
 let g:ale_emit_conflict_warnings = 0
-let g:ale_sign_error = '?' " Less aggressive than the default '>>'
+let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '.'
 let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 
