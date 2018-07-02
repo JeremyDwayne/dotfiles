@@ -35,7 +35,7 @@ then
 fi
 
 # Fancy ls script taken from github.com/brandonroehl/dotfiles
-files=( 'vimrc' 'vim' 'zshrc' 'zsh' 'tmux.conf' 'tmux-dev.sh' 'tmux-osx' 'agignore' 'gitconfig' 'gitignore' 'gitmessage' 'gemrc' 'rspec' )
+files=( 'vimrc' 'vim' 'zshrc' 'zsh' 'tmux.conf' 'tmux-dev.sh' 'tmux-osx' 'agignore' 'gitconfig' 'gitignore' 'gitmessage' 'gemrc' 'rspec' 'eslintrc' )
 for file in $files
 do
   echo ""
