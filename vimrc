@@ -51,21 +51,21 @@ call plug#begin('~/.vim/plugged/')
   Plug 'scrooloose/nerdtree', { 'on': [ 'NERDTreeToggle', 'NERDTree' ] }
 
   " Syntax
-  Plug 'leafgarland/typescript-vim'
-  Plug 'vim-ruby/vim-ruby'
-  Plug 'tpope/vim-rails'
+  Plug 'leafgarland/typescript-vim', { 'for': ['javascript', 'typescript'] }
+  Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+  Plug 'tpope/vim-rails', { 'for': 'ruby' }
 
 
   Plug 'w0rp/ale'
   Plug 'sbdchd/neoformat'
 
   " Python
-  Plug 'python-mode/python-mode', { 'branch': 'develop' }
-  " Plug 'heavenshell/vim-pydocstring'
-  " Plug 'davidhalter/jedi-vim'
+  Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+  " Plug 'heavenshell/vim-pydocstring', { 'for': 'python' }
+  " Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 
   " Typescript 
-  Plug 'Quramy/tsuquyomi'
+  Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
 
   Plug 'Yggdroot/indentLine' 
 
@@ -83,10 +83,10 @@ call plug#begin('~/.vim/plugged/')
   Plug 'Shougo/neosnippet-snippets'
 
   " Javascript Plugins
-  Plug 'othree/javascript-libraries-syntax.vim'
-  Plug 'claco/jasmine.vim'
-  Plug 'pangloss/vim-javascript'
-  Plug 'mxw/vim-jsx'
+  Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'typescript'] }
+  Plug 'claco/jasmine.vim', { 'for': ['javascript', 'typescript'] }
+  Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+  Plug 'mxw/vim-jsx', { 'for': 'javascript' }
   
 call plug#end()
 
@@ -108,7 +108,7 @@ set tags=./tags;
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
-syntax enable 
+syntax enable C0004.MP4C0005.MP4C0006.MP4
 
 colorscheme dracula
 set background=dark
@@ -151,20 +151,17 @@ set wrap "Wrap lines
 set guifont=InputMono:h14
 set hidden
 set history=500
-set shiftwidth=2
-set softtabstop=2
+
 set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set textwidth=79
+set expandtab
+set autoindent
+set fileformat=unix
+
 set number
 set mouse=a
-
-au BufNewFile,BufRead *.py
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set fileformat=unix
 
 set so=7
 let $LANG='en'
@@ -237,11 +234,9 @@ match OverLength /\%81v./
 
 " Markdown and VimWiki Filetypes
 autocmd BufRead,BufNewFile *.md setlocal spell
-au BufRead,BufNewFile *.md setlocal textwidth=80
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
 autocmd BufRead,BufNewFile *.wiki setlocal spell
-au BufRead,BufNewFile *.wiki setlocal textwidth=80
 au BufNewFile,BufFilePre,BufRead *.wiki set filetype=wiki
 
 " Vim yank to clipboard
