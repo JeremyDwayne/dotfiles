@@ -13,6 +13,7 @@ call plug#begin('~/.vim/plugged/')
   " Sensible Default Vim Config
   Plug 'tpope/vim-sensible'
   Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+  Plug 'thinca/vim-quickrun'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
   " vim colorscheme
@@ -71,6 +72,8 @@ call plug#begin('~/.vim/plugged/')
 
   " Autonomous make integration (Compile)
   Plug 'neomake/neomake'
+
+  Plug 'artur-shaik/vim-javacomplete2'
 
   if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -597,3 +600,17 @@ autocmd InsertEnter *.json setlocal conceallevel=0 concealcursor=
 autocmd InsertLeave *.json setlocal conceallevel=2 concealcursor=inc
 autocmd InsertEnter *.md setlocal conceallevel=0 concealcursor=
 autocmd InsertLeave *.md setlocal conceallevel=2 concealcursor=inc
+
+" javacomplete config
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+nmap <F4> <Plug>(JavaComplete-Imports-AddSmart)
+imap <F4> <Plug>(JavaComplete-Imports-AddSmart)
+
+nmap <F5> <Plug>(JavaComplete-Imports-Add)
+imap <F5> <Plug>(JavaComplete-Imports-Add)
+
+nmap <F6> <Plug>(JavaComplete-Imports-AddMissing)
+imap <F6> <Plug>(JavaComplete-Imports-AddMissing)
+
+nmap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
+imap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
