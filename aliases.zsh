@@ -122,3 +122,5 @@ ycmcomp() {
 }
 
 alias fv='vim $(fzf --height 40%)'
+
+alias eclim='/Applications/Eclipse.app/Contents/Eclipse/eclimd  > /dev/null 2>&1 &'
