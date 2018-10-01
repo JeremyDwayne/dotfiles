@@ -20,7 +20,7 @@ call plug#begin('~/.vim/plugged/')
   Plug 'dracula/vim'
 
   " tab autocomplete
-  Plug 'ervandew/supertab'
+  " Plug 'ervandew/supertab'
   Plug 'alvan/vim-closetag'
 
   Plug 'airblade/vim-gitgutter'
@@ -74,6 +74,7 @@ call plug#begin('~/.vim/plugged/')
   Plug 'neomake/neomake'
 
   Plug 'artur-shaik/vim-javacomplete2'
+  Plug 'dansomething/vim-eclim' 
 
   if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -111,7 +112,7 @@ set tags=./tags;
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
-syntax enable C0004.MP4C0005.MP4C0006.MP4
+syntax enable
 
 colorscheme dracula
 set background=dark
@@ -572,9 +573,16 @@ let g:indentLine_color_gui = '#09AA08'
 let g:indentLine_char = '│'
 
 " When reading a buffer (after 1s), and when writing.
-call neomake#configure#automake('rw', 1000)
+" call neomake#configure#automake('rw', 1000)
+autocmd! BufWritePost,BufEnter * Neomake
 
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
+let g:deoplete#sources = {}
+let g:deoplete#sources._ = []
+let g:deoplete#file#enable_buffer_path = 1
+
 let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}
 
 nnoremap <C-p> :<C-u>FZF<CR>
@@ -614,3 +622,8 @@ imap <F6> <Plug>(JavaComplete-Imports-AddMissing)
 
 nmap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
 imap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
+
+" Run current file tests
+map <leader>ju :JUnit %<cr>
+" Run all tests
+map <leader>ja :JUnit *<cr>
