@@ -28,8 +28,10 @@ alias ip="curl icanhazip.com"
 alias todos="ag --nogroup '(TODO|FIX(ME)?):'"
 
 # Python
-alias py='python'
+alias py='python3'
 alias py3='python3'
+alias python='python3'
+alias pip='pip3'
 
 # Bundler
 alias b="bundle"
@@ -115,6 +117,7 @@ alias vim=nvim
 alias vi=nvim
 
 alias vimrc='nvim ~/.vimrc'
+alias ealias='nvim ~/.dotfiles/aliases.zsh'
 alias zshrc='nvim ~/.zshrc'
 
 ycmcomp() {
@@ -124,3 +127,7 @@ ycmcomp() {
 alias fv='vim $(fzf --height 40%)'
 
 alias eclim='/Applications/Eclipse.app/Contents/Eclipse/eclimd  > /dev/null 2>&1 &'
+
+# Docker-Compose Commands
+alias dce='docker-compose exec --user $(id -u):$(id -g)'
+alias dc='docker-compose'
