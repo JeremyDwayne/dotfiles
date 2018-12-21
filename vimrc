@@ -15,12 +15,13 @@ call plug#begin('~/.vim/plugged/')
   Plug 'Shougo/vimproc.vim', {'do' : 'make'}
   Plug 'thinca/vim-quickrun'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  " ctrl+p :FZF
 
   " vim colorscheme
-  Plug 'dracula/vim'
+  Plug 'dracula/vim', { 'as': 'dracula' }
 
   " tab autocomplete
-  " Plug 'ervandew/supertab'
+  Plug 'ervandew/supertab'
   Plug 'alvan/vim-closetag'
 
   Plug 'airblade/vim-gitgutter'
@@ -112,8 +113,25 @@ set tags=./tags;
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
+" For Neovim 0.1.3 and 0.1.4
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+" Or if you have Neovim >= 0.1.5
+if (has("termguicolors"))
+ set termguicolors
+endif
+
+" for vim 7
+set t_Co=256
+
+" for vim 8
+if (has("termguicolors"))
+  set termguicolors
+endif
+
 syntax enable
 
+let g:dracula_italic = 1
 colorscheme dracula
 set background=dark
 
@@ -587,7 +605,6 @@ let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}
 
 nnoremap <C-p> :<C-u>FZF<CR>
 
-let g:jsx_ext_required = 0
 let g:syntastic_javascript_checkers = ['eslint']
 
 " w0rp/ale
