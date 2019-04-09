@@ -7,7 +7,8 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="agnoster"
 # ZSH_THEME="nicoulaj"
-ZSH_THEME="dracula"
+# ZSH_THEME="dracula"
+ZSH_THEME="powerlevel9k/powerlevel9k"
 DEFAULT_USER="winterjd"
 
 # [ -n "$PS1" ] && sh ~/.nightshell/carbonized-dark ]
