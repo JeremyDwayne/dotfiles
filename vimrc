@@ -9,6 +9,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+
 call plug#begin('~/.vim/plugged/')
   " Sensible Default Vim Config
   Plug 'tpope/vim-sensible'
@@ -25,6 +26,7 @@ call plug#begin('~/.vim/plugged/')
   Plug 'alvan/vim-closetag'
 
   Plug 'airblade/vim-gitgutter'
+
 
   Plug 'Townk/vim-autoclose'
 
@@ -84,8 +86,8 @@ call plug#begin('~/.vim/plugged/')
     Plug 'roxma/nvim-yarp'
     Plug 'roxma/vim-hug-neovim-rpc'
   endif
-  Plug 'Shougo/neosnippet'
-  Plug 'Shougo/neosnippet-snippets'
+  " Plug 'Shougo/neosnippet'
+  " Plug 'Shougo/neosnippet-snippets'
 
   " Javascript Plugins
   Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'typescript'] }
@@ -132,7 +134,7 @@ endif
 syntax enable
 
 let g:dracula_italic = 1
-colorscheme dracula
+"colorscheme dracula
 set background=dark
 
 set noshowmode
@@ -561,11 +563,7 @@ au FileType gitcommit call setpos('.', [0, 1, 1, 0])
 " => lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:lightline = {
-      \ 'colorscheme': 'Dracula',
-      \ }
-
-let g:lightline = {
-      \ 'colorscheme': 'Dracula',
+      \ 'colorscheme': 'darcula',
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
       \             ['fugitive', 'readonly', 'filename', 'modified'] ],
