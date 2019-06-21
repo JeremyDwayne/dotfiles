@@ -65,7 +65,7 @@ DEFAULT_USER="winterjd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-syntax-highlighting)
 
 # User configuration
 
@@ -122,7 +122,7 @@ export CPLUS_INCLUDE_PATH=/usr/local/include
 source ~/.dotfiles/z/z.sh
 
 # brew install zsh-syntax-highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -139,3 +139,5 @@ function code {
         open -a "Visual Studio Code" "$argPath"
     fi
   }
+
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
