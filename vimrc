@@ -11,6 +11,10 @@ endif
 
 
 call plug#begin('~/.vim/plugged/')
+  " FTP Stuff
+  Plug 'skywind3000/asyncrun.vim'
+  Plug 'eshion/vim-sync'
+
   " Sensible Default Vim Config
   Plug 'tpope/vim-sensible'
   Plug 'Shougo/vimproc.vim', {'do' : 'make'}
@@ -94,11 +98,19 @@ call plug#begin('~/.vim/plugged/')
   Plug 'claco/jasmine.vim', { 'for': ['javascript', 'typescript'] }
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
   Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+
+  " PHP Plugins
+  Plug 'StanAngeloff/php.vim'
+  Plug 'stephpy/vim-php-cs-fixer'
+  Plug 'ncm2/ncm2'
+  Plug 'phpactor/phpactor'
+  Plug 'phpactor/ncm2-phpactor'
   
 call plug#end()
 
 let mapleader=","
 
+let g:sync_async_upload = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fast editing and reloading of vimrc configs
@@ -134,7 +146,7 @@ endif
 syntax enable
 
 let g:dracula_italic = 1
-"colorscheme dracula
+colorscheme dracula
 set background=dark
 
 set noshowmode
@@ -176,9 +188,9 @@ set guifont=InputMono:h14
 set hidden
 set history=500
 
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 set textwidth=79
 set expandtab
 set autoindent
@@ -459,10 +471,10 @@ map <leader>g :Ag
 " bind \ (backward slash) to grep shortcut
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
-cnoreabbrev ag Ack                                                                           
-cnoreabbrev aG Ack                                                                           
-cnoreabbrev Ag Ack                                                                           
-cnoreabbrev AG Ack  
+cnoreabbrev ag Ack
+cnoreabbrev aG Ack
+cnoreabbrev Ag Ack
+cnoreabbrev AG Ack
 
 nnoremap \ :Ag<SPACE>
 if executable('ag')
@@ -642,3 +654,6 @@ imap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
 map <leader>ju :JUnit %<cr>
 " Run all tests
 map <leader>ja :JUnit *<cr>
+
+" Generate CTags for PHP
+au BufWritePost *.php silent! !eval '[ -f ".git/hooks/ctags" ] && .git/hooks/ctags' &
