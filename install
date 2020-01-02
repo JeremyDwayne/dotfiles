@@ -43,6 +43,12 @@ if ! [ -d "$HOME/.dotfiles/z/z.sh" ]; then
   git clone https://raw.github.com/rupa/z.git $HOME/.dotfiles/z
 fi
 
+# Check if tmux plugin manager is installed
+if ~ [ -d "$HOME/.tmux/plugins/tpm" ];then
+  echo >&2 "tmux plugin manager is not installed, fixing that..."
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+
 # Fancy ls script taken from github.com/brandonroehl/dotfiles
 files=( 'vimrc' 'vim' 'zshrc' 'zsh' 'tmux.conf' 'tmux-osx.conf' 'agignore' 'gitconfig' 'gitignore' 'gitmessage' 'gemrc' 'rspec' 'eslintrc' )
 for file in $files

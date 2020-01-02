@@ -65,6 +65,7 @@ DEFAULT_USER="winterjd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+ZSH_DISABLE_COMPFIX=true
 plugins=(git zsh-syntax-highlighting)
 
 # User configuration
@@ -141,3 +142,4 @@ function code {
   }
 
 eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+cd ~

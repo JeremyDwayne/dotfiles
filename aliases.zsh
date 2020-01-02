@@ -9,13 +9,16 @@ alias tmux='tmux -u'
 
 # checks if on linux or OSX for open command
 if [ "$(uname)" = "Linux" ]; then
-  alias open="xdg-open"
+  # alias open="xdg-open"
+# WSL alias
+  alias open="explorer.exe"
   alias say='echo "$*" | espeak -s 120 2>/dev/null'
   alias cpwd='pwd|tr -d "\n"|xclip'
 else
   # OSX
   alias cpwd='pwd|tr -d "\n"|pbcopy'
 fi
+
 
 # top
 alias cpu='top -o CPU'
