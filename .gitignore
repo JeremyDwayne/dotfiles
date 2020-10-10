@@ -1,4 +1,4 @@
 !bin
-vim/bundle/
-vim/plugged/
-vim/autoload/
+vim/bundle/*
+vim/plugged/*
+vim/autoload/*
