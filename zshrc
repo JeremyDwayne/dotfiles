@@ -125,6 +125,7 @@ source ~/.dotfiles/z/z.sh
 # brew install zsh-syntax-highlighting
 # source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+export PATH="/home/winterjd/.local/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -142,4 +143,4 @@ function code {
   }
 
 eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-cd ~
+source /home/winterjd/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
