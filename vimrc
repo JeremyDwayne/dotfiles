@@ -76,16 +76,16 @@ call plug#begin('~/.vim/plugged/')
   " Plug 'heavenshell/vim-pydocstring', { 'for': 'python' }
   " Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 
-  " Typescript 
+  " Typescript
   Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
 
-  Plug 'Yggdroot/indentLine' 
+  Plug 'Yggdroot/indentLine'
 
   " Autonomous make integration (Compile)
   Plug 'neomake/neomake'
 
   Plug 'artur-shaik/vim-javacomplete2'
-  Plug 'dansomething/vim-eclim' 
+  Plug 'dansomething/vim-eclim'
 
   if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -109,7 +109,7 @@ call plug#begin('~/.vim/plugged/')
   Plug 'ncm2/ncm2'
   Plug 'phpactor/phpactor'
   Plug 'phpactor/ncm2-phpactor'
-  
+
 call plug#end()
 
 let mapleader=","
@@ -226,23 +226,23 @@ set whichwrap+=<,>,h,l
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
 set hlsearch
 
 " Makes search act like search in modern browsers
-set incsearch 
+set incsearch
 
 " Don't redraw while executing macros (good performance config)
-set lazyredraw 
+set lazyredraw
 
 " For regular expressions turn magic on
 set magic
 
 " Show matching brackets when text indicator is over them
-set showmatch 
+set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
@@ -283,7 +283,8 @@ autocmd BufRead,BufNewFile *.wiki setlocal spell
 au BufNewFile,BufFilePre,BufRead *.wiki set filetype=wiki
 
 " Vim yank to clipboard
-set clipboard=unnamed
+set clipboard=unnamedplus
+vnoremap <LeftRelease> "*ygv"
 
 " Fix airline fonts from not displaying correctly
 let g:airline_powerline_fonts = 1
@@ -401,8 +402,8 @@ map <C-l> <C-W>l
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
-map <leader>t<leader> :tabnext 
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext
 
 
 " Move lines of code around
@@ -425,7 +426,7 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" Specify the behavior when switching between buffers 
+" Specify the behavior when switching between buffers
 try
   set switchbuf=useopen,usetab,newtab
   set stal=2
@@ -473,7 +474,7 @@ autocmd BufWrite *.coffee :call DeleteTrailingWS()
 vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
 
 " Open Ag and put the cursor in the right position
-map <leader>g :Ag 
+map <leader>g :Ag
 
 " bind \ (backward slash) to grep shortcut
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
@@ -552,7 +553,7 @@ set guioptions-=l
 set guioptions-=L
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Turn persistent undo on 
+" => Turn persistent undo on
 "    means that you can undo even when you close a buffer/VIM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 try
@@ -667,4 +668,9 @@ au BufWritePost *.php silent! !eval '[ -f ".git/hooks/ctags" ] && .git/hooks/cta
 
 " PHP CS FIXER
 let g:php_cs_fixer_path = "~/tools/composer/vendor/bin/php-cs-fixer"
-
+let g:php_cs_fixer_config_file = "~/.dotfiles/php_cs"
+let g:php_cs_fixer_php_path = "php"               " Path to PHP
+let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
+nnoremap <silent><leader>pcd :call PhpCsFixerFixDirectory()<CR>
+nnoremap <silent><leader>pcf :call PhpCsFixerFixFile()<CR>
+autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()

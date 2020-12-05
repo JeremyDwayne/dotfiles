@@ -81,14 +81,14 @@ export PATH="$PATH:$HOME/.cabal/bin:/opt/cabal/1.22/bin:/opt/ghc/7.10.3/bin:$HOM
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.dotfiles/aliases.zsh
 
 # Force add ssh keys on terminal startup, and turn on ssh-agent
-eval "$(ssh-agent -s)"
-ssh-add -A 2>/dev/null;
+# eval "$(ssh-agent -s)"
+# ssh-add -A 2>/dev/null;
 
 # You may need to manually set your language environment
 #export LANG="en_US"

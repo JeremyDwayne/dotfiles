@@ -116,7 +116,7 @@ swiki() {
 }
 
 # nvim
-# alias vim=nvim
+alias vim=nvim
 # alias vi=nvim
 
 alias vimrc='vim ~/.vimrc'
