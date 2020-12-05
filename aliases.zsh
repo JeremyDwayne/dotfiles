@@ -96,32 +96,32 @@ alias grun='java org.antlr.v4.runtime.misc.TestRig'
 
 # Logbook
 lbt() {
-  nvim -c ":VimwikiMakeDiaryNote" 
+  vim -c ":VimwikiMakeDiaryNote"
 }
 
 lby() {
-  nvim -c ":VimwikiMakeYesterdayDiaryNote" 
+  vim -c ":VimwikiMakeYesterdayDiaryNote"
 }
 
 lbi() {
-  nvim -c ":VimwikiDiaryIndex"
+  vim -c ":VimwikiDiaryIndex"
 }
 
 wiki() {
-  nvim -c ":VimwikiIndex"
+  vim -c ":VimwikiIndex"
 }
 
 swiki() {
-  nvim -c ":VimwikiSearch $*"
+  vim -c ":VimwikiSearch $*"
 }
 
 # nvim
-alias vim=nvim
-alias vi=nvim
+# alias vim=nvim
+# alias vi=nvim
 
-alias vimrc='nvim ~/.vimrc'
-alias ealias='nvim ~/.dotfiles/aliases.zsh'
-alias zshrc='nvim ~/.zshrc'
+alias vimrc='vim ~/.vimrc'
+alias ealias='vim ~/.dotfiles/aliases.zsh'
+alias zshrc='vim ~/.zshrc'
 
 ycmcomp() {
   cp ~/.dotfiles/templates/_ycm_extra_conf.py ./.ycm_extra_conf.py

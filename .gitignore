@@ -2,3 +2,4 @@
 vim/bundle/*
 vim/plugged/*
 vim/autoload/*
+vim/pack/*
