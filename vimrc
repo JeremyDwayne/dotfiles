@@ -68,6 +68,10 @@ call plug#begin('~/.vim/plugged/')
   Plug 'sbdchd/neoformat'
 
   " Python
+  Plug 'reconquest/vim-pythonx'
+  if !has('nvim') " Vim 8 only
+    pythonx import neovim
+  endif "
   Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
   " Plug 'heavenshell/vim-pydocstring', { 'for': 'python' }
   " Plug 'davidhalter/jedi-vim', { 'for': 'python' }
@@ -128,7 +132,7 @@ set tags=./tags;
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
 " For Neovim 0.1.3 and 0.1.4
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 " Or if you have Neovim >= 0.1.5
 if (has("termguicolors"))
@@ -143,10 +147,13 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
+packadd! dracula_pro
+
 syntax enable
 
 let g:dracula_italic = 1
-colorscheme dracula
+let g:dracula_colorterm = 0
+colorscheme dracula_pro
 set background=dark
 
 set noshowmode
@@ -657,3 +664,7 @@ map <leader>ja :JUnit *<cr>
 
 " Generate CTags for PHP
 au BufWritePost *.php silent! !eval '[ -f ".git/hooks/ctags" ] && .git/hooks/ctags' &
+
+" PHP CS FIXER
+let g:php_cs_fixer_path = "~/tools/composer/vendor/bin/php-cs-fixer"
+
