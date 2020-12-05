@@ -11,9 +11,13 @@ endif
 
 
 call plug#begin('~/.vim/plugged/')
+  "CoC Conquer of Completion -- Intellisense
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " FTP Stuff
   Plug 'skywind3000/asyncrun.vim'
   Plug 'eshion/vim-sync'
+
+  Plug 'dominikduda/vim_current_word'
 
   " Sensible Default Vim Config
   Plug 'tpope/vim-sensible'
@@ -22,6 +26,8 @@ call plug#begin('~/.vim/plugged/')
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   " ctrl+p :FZF
 
+  Plug 'tpope/vim-surround'
+
   " vim colorscheme
   Plug 'dracula/vim', { 'as': 'dracula' }
 
@@ -29,13 +35,24 @@ call plug#begin('~/.vim/plugged/')
   Plug 'ervandew/supertab'
   Plug 'alvan/vim-closetag'
 
-  Plug 'airblade/vim-gitgutter'
+  " Plug 'airblade/vim-gitgutter'
 
+  if has('nvim') || has('patch-8.0.902')
+      Plug 'mhinz/vim-signify'
+  else
+      Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+  endif
 
-  Plug 'Townk/vim-autoclose'
+  " Plug 'Townk/vim-autoclose'
+  
+  " Multiple Language Packs -- basically all of them
+  Plug 'sheerun/vim-polyglot'
 
   " Auto end statements
   Plug 'tpope/vim-endwise'
+
+  " Colored Parentheses
+  Plug 'luochen1990/rainbow'
 
   " gcc commenting
   Plug 'tpope/vim-commentary'
@@ -51,7 +68,13 @@ call plug#begin('~/.vim/plugged/')
   Plug 'vim-scripts/mru.vim'
 
   " <C-s>
-  Plug 'terryma/vim-multiple-cursors'
+  Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
+  " <Leader><Leader>
+  " w: word
+  " f: find
+  " L: line
+  Plug 'easymotion/vim-easymotion'
 
   Plug 'itchyny/lightline.vim'
 
@@ -59,8 +82,8 @@ call plug#begin('~/.vim/plugged/')
   Plug 'scrooloose/nerdtree', { 'on': [ 'NERDTreeToggle', 'NERDTree' ] }
 
   " Syntax
-  Plug 'leafgarland/typescript-vim', { 'for': ['javascript', 'typescript'] }
-  Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+  " Plug 'leafgarland/typescript-vim', { 'for': ['javascript', 'typescript'] }
+  " Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
   Plug 'tpope/vim-rails', { 'for': 'ruby' }
 
 
@@ -77,7 +100,7 @@ call plug#begin('~/.vim/plugged/')
   " Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 
   " Typescript
-  Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
+  " Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
 
   Plug 'Yggdroot/indentLine'
 
@@ -87,13 +110,13 @@ call plug#begin('~/.vim/plugged/')
   Plug 'artur-shaik/vim-javacomplete2'
   Plug 'dansomething/vim-eclim'
 
-  if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-  endif
+  " if has('nvim')
+  "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " else
+  "   Plug 'Shougo/deoplete.nvim'
+  "   Plug 'roxma/nvim-yarp'
+  "   Plug 'roxma/vim-hug-neovim-rpc'
+  " endif
   " Plug 'Shougo/neosnippet'
   " Plug 'Shougo/neosnippet-snippets'
 
@@ -110,11 +133,22 @@ call plug#begin('~/.vim/plugged/')
   Plug 'phpactor/phpactor'
   Plug 'phpactor/ncm2-phpactor'
 
+  " Tags
+  Plug 'ludovicchabant/vim-gutentags'
+
+  " File Icons
+  Plug 'ryanoasis/vim-devicons'
+
 call plug#end()
 
 let mapleader=","
 
+set encoding=UTF-8
+
 let g:sync_async_upload = 1
+
+" signify async update
+set updatetime=100
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fast editing and reloading of vimrc configs
@@ -125,7 +159,9 @@ autocmd! bufwritepost vimrc source ~/.vimrc
 set timeoutlen=1000 ttimeoutlen=0
 
 " CTags
-set tags=./tags;
+set tags=./tags,tags;$HOME
+let g:gutentags_ctags_extra_args = ['--fields=+ainKz']
+nmap <C-]> g<C-]>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -674,3 +710,5 @@ let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by defaul
 nnoremap <silent><leader>pcd :call PhpCsFixerFixDirectory()<CR>
 nnoremap <silent><leader>pcf :call PhpCsFixerFixFile()<CR>
 autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
+
+autocmd FileType vim let b:coc_pairs_disabled = '"'
