@@ -117,9 +117,9 @@ swiki() {
 
 # nvim
 alias vim=nvim
-# alias vi=nvim
+alias vi=nvim
 
-alias vimrc='vim ~/.vimrc'
+alias vimrc='vim ~/.config/nvim/init.vim'
 alias ealias='vim ~/.dotfiles/aliases.zsh'
 alias zshrc='vim ~/.zshrc'
 

@@ -9,13 +9,13 @@ git submodule update --recursive
 if [ hash brew >/dev/null 2>&1 ]
 then
   echo 'Attempting to install brew'
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
   if [ uname = "Darwin" ]
   then
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew install reattach-to-user-namespace 
+    brew install reattach-to-user-namespace
   else
     sudo apt-get install build-essential curl git python-setuptools ruby
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
   fi
 fi
 brew install zsh git coreutils python tmux wget bash the_silver_searcher zsh-syntax-highlighting
@@ -27,15 +27,19 @@ if ! [ -d "$HOME/.oh-my-zsh/" ]; then
   curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 fi
 
+# Install ZSH Packages
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+echo >&2 "Setting ZSH as default shell"
+chsh -s /bin/zsh
+
 echo 'install rvm or upgrade rvm'
 curl -sSL https://get.rvm.io | bash -s stable
 if [ hash rvm >/dev/null 2>&1 ]
 then
   rvm cleanup all
 fi
-
-echo >&2 "Setting ZSH as default shell"
-chsh -s /bin/zsh
 
 # Check if z tool is installed
 if ! [ -d "$HOME/.dotfiles/z/z.sh" ]; then

@@ -77,7 +77,10 @@ plugins=(git zsh-syntax-highlighting)
 
 # User configuration
 
-export PATH="$PATH:$HOME/.cabal/bin:/opt/cabal/1.22/bin:/opt/ghc/7.10.3/bin:$HOME/.rvm/gems:$HOME/.rvm/bin:$HOME/bin:/usr/local/bin:/usr/local/nwjs:/usr/local/var/postgres"
+export PATH="$PATH:$HOME/.cabal/bin:/opt/cabal/1.22/bin:/opt/ghc/7.10.3/bin:$HOME/.rvm/gems:$HOME/.rvm/bin"
+export PATH="$PATH:$HOME/.local/bin:$HOME/bin:/usr/local/bin:/usr/local/nwjs:/usr/local/var/postgres"
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+export PATH="/home/winterjd/.local/bin:$PATH"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -131,8 +134,6 @@ source ~/.dotfiles/z/z.sh
 
 # brew install zsh-syntax-highlighting
 # source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
-export PATH="/home/winterjd/.local/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
