@@ -37,7 +37,7 @@
 [include]
   path = ~/.gitconfig.local
 [user]
-  username = jeremydwayne
+  username = JeremyDwayne
   email = jeremy@jeremydwayne.com
   name = Jeremy Winterberg
 [diff]

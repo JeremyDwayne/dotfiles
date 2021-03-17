@@ -18,7 +18,6 @@ set ffs=unix,dos,mac
 
 set exrc
 
-set cursorline
 highlight Cursor guifg=white guibg=#bd93f9
 set guicursor=n-v-c:block-Cursor
 
@@ -54,7 +53,6 @@ set tw=500
 set ai "Auto indent
 set wrap "Wrap lines
 
-set guifont=InputMono:h14
 set hidden
 set history=500
 set textwidth=120
