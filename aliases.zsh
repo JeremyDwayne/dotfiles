@@ -87,9 +87,6 @@ tatt() {
 alias tmuxreload='source ~/.tmux.conf'
 alias zshreload='source ~/.zshrc'
 
-# SSH
-alias sshwork='ssh winterjd@10.35.72.137'
-
 # ANTLR
 alias antlr4='java -Xmx500M -cp "/usr/local/lib/antlr-4.5-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
 alias grun='java org.antlr.v4.runtime.misc.TestRig'

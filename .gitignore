@@ -4,3 +4,5 @@ vim/plugged/*
 vim/autoload/*
 vim/pack/*
 env_vars.zsh
+tags
+tags.*

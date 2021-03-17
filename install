@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 # A script for installing dependencies and setting up needed Symbolic Links
 # Created by Jeremy Winterberg
-# Updated 12/12/2019
+# Updated 03/16/2021
 
 git submodule init
 git submodule update --recursive
@@ -10,63 +10,63 @@ if [ hash brew >/dev/null 2>&1 ]
 then
   echo 'Attempting to install brew'
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-  if [ uname = "Darwin" ]
-  then
-    brew install reattach-to-user-namespace
-  else
-    sudo apt-get install build-essential curl git python-setuptools ruby
-  fi
 fi
-brew install zsh git coreutils python tmux wget bash the_silver_searcher zsh-syntax-highlighting
-pip3 install neovim
+brew bundle
+
+if [ uname = "Linux" ]; then
+	sudo apt-get install software-properties-common build-essential curl git python-setuptools ruby
+	sudo add-apt-repository ppa:neovim-ppa/unstable
+	sudo apt-get update
+	sudo apt-get install neovim
+	sudo apt-get install gnupg2 -y
+fi
 
 # Check if Oh My ZSH is installed
 if ! [ -d "$HOME/.oh-my-zsh/" ]; then
-  echo >&2 "oh-my-zsh is not installed, fixing that..."
-  curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+	echo >&2 "oh-my-zsh is not installed, fixing that..."
+	curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+
+	# Install ZSH Packages
+	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+	echo >&2 "Setting ZSH as default shell"
+	chsh -s /bin/zsh
 fi
 
-# Install ZSH Packages
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
-echo >&2 "Setting ZSH as default shell"
-chsh -s /bin/zsh
-
-echo 'install rvm or upgrade rvm'
-curl -sSL https://get.rvm.io | bash -s stable
-if [ hash rvm >/dev/null 2>&1 ]
-then
-  rvm cleanup all
+# Install RVM
+if ! [ -d "$HOME/.rvm" ]; then
+	echo 'install rvm or upgrade rvm'
+	gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+	curl -sSL https://get.rvm.io | bash -s stable --rails
+	if [ hash rvm >/dev/null 2>&1 ]
+	then
+	  rvm cleanup all
+	fi
 fi
 
 # Check if z tool is installed
-if ! [ -d "$HOME/.dotfiles/z/z.sh" ]; then
+if ! [ -d "$HOME/.dotfiles/z" ]; then
   echo >&2 "z is not installed, fixing that..."
   git clone https://raw.github.com/rupa/z.git $HOME/.dotfiles/z
 fi
 
-# Check if tmux plugin manager is installed
-if ~ [ -d "$HOME/.tmux/plugins/tpm" ];then
-  echo >&2 "tmux plugin manager is not installed, fixing that..."
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-fi
-
-# Fancy ls script taken from github.com/brandonroehl/dotfiles
-files=( 'vimrc' 'vim' 'zshrc' 'zsh' 'tmux.conf' 'tmux-osx.conf' 'agignore' 'gitconfig' 'gitignore' 'gitmessage' 'gemrc' 'rspec' 'eslintrc' )
-for file in $files
-do
-  echo ""
-  echo "Simlinking $file to $HOME"
-  ln -sf "$PWD/$file" "$HOME/.$file"
-  if [ $? -eq 0 ]
-  then
-    echo "$PWD/$file ~> $HOME/.$file"
-  else
-    echo 'Install failed to symlink.'
-    exit 1
-  fi
+# Symlink configs
+echo >&2 "Symlinking Configs"
+for f in `find ~/.dotfiles/configs -type f`; do
+	# echo "${f##*/}"
+    rm -f ~/."${f##*/}"
+    ln -s ~/.dotfiles/configs/"${f##*/}" ~/."${f##*/}"
 done
 
-echo >&2 "Remember to set vimrc to work with neovim!"
+
+# neovim symlinks
+echo >&2 "Symlinking Neovim Configs"
+mkdir -p ~/.config/nvim/plugin
+mkdir -p ~/.config/nvim/after/plugin
+mkdir -p ~/.config/nvim/lua/configs
+
+for f in `find . -regex ".*\.vim$\|.*\.lua$"`; do
+    rm -rf ~/.config/nvim/$f
+    ln -s ~/.dotfiles/$f ~/.config/nvim/$f
+done
