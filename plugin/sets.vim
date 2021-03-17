@@ -17,7 +17,11 @@ set background=dark
 set ffs=unix,dos,mac
 
 set exrc
-set guicursor=
+
+set cursorline
+highlight Cursor guifg=white guibg=#bd93f9
+set guicursor=n-v-c:block-Cursor
+
 set relativenumber
 set nohlsearch
 set completeopt=menuone,noinsert,noselect

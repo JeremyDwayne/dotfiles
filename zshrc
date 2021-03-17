@@ -81,6 +81,7 @@ export PATH="$PATH:$HOME/.cabal/bin:/opt/cabal/1.22/bin:/opt/ghc/7.10.3/bin:$HOM
 export PATH="$PATH:$HOME/.local/bin:$HOME/bin:/usr/local/bin:/usr/local/nwjs:/usr/local/var/postgres"
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 export PATH="/home/winterjd/.local/bin:$PATH"
+export PATH="/home/winterjd/.dotfiles/scripts:$PATH"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -88,6 +89,7 @@ export PATH="/home/winterjd/.local/bin:$PATH"
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.dotfiles/aliases.zsh
+source $HOME/.dotfiles/env_vars.zsh
 
 # Force add ssh keys on terminal startup, and turn on ssh-agent
 # eval "$(ssh-agent -s)"

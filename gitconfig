@@ -43,6 +43,7 @@
 [diff]
   compactionHeuristic = true
 	tool = diffmerge
+	colorMoved = zebra
 [difftool "diffmerge"]
 	cmd = diffmerge \"$LOCAL\" \"$REMOTE\"
 [mergetool "diffmerge"]
@@ -53,3 +54,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[pull]
+	rebase = true

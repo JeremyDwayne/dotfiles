@@ -3,3 +3,4 @@ vim/bundle/*
 vim/plugged/*
 vim/autoload/*
 vim/pack/*
+env_vars.zsh
