@@ -54,7 +54,6 @@ fi
 # Symlink configs
 echo >&2 "Symlinking Configs"
 for f in `find ~/.dotfiles/configs -type f`; do
-	# echo "${f##*/}"
     rm -f ~/."${f##*/}"
     ln -s ~/.dotfiles/configs/"${f##*/}" ~/."${f##*/}"
 done
