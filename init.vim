@@ -11,7 +11,8 @@ endif
 
 call plug#begin('~/.config/nvim/plugged/')
   "CoC Conquer of Completion -- Intellisense
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'nvim-lua/completion-nvim'
 
   " Sensible Default Vim Config
   Plug 'tpope/vim-sensible'
@@ -25,16 +26,14 @@ call plug#begin('~/.config/nvim/plugged/')
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
-  Plug 'tpope/vim-surround'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-  " vim colorscheme
-  " Plug 'dracula/vim', { 'as': 'dracula' }
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-fugitive'
 
   " tab autocomplete
   Plug 'ervandew/supertab'
   Plug 'alvan/vim-closetag'
-
-  " Plug 'airblade/vim-gitgutter'
 
   if has('nvim') || has('patch-8.0.902')
       Plug 'mhinz/vim-signify'
@@ -69,43 +68,18 @@ call plug#begin('~/.config/nvim/plugged/')
   " <C-s>
   Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
-  " <Leader><Leader>
-  " w: word
-  " f: find
-  " L: line
-  Plug 'easymotion/vim-easymotion'
-
   Plug 'itchyny/lightline.vim'
 
   Plug 'mileszs/ack.vim'
-  Plug 'scrooloose/nerdtree', { 'on': [ 'NERDTreeToggle', 'NERDTree' ] }
 
-  " Syntax
-  " Plug 'leafgarland/typescript-vim', { 'for': ['javascript', 'typescript'] }
-  " Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
   Plug 'tpope/vim-rails', { 'for': 'ruby' }
-
 
   Plug 'w0rp/ale'
   Plug 'sbdchd/neoformat'
 
-  " Plug 'heavenshell/vim-pydocstring', { 'for': 'python' }
-  " Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-
-  " Typescript
-  " Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
-
   Plug 'Yggdroot/indentLine'
 
-  " if has('nvim')
-  "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  " else
-  "   Plug 'Shougo/deoplete.nvim'
-  "   Plug 'roxma/nvim-yarp'
-  "   Plug 'roxma/vim-hug-neovim-rpc'
-  " endif
-  " Plug 'Shougo/neosnippet'
-  " Plug 'Shougo/neosnippet-snippets'
+  Plug 'Shougo/deoppet.nvim', { 'do': ':UpdateRemotePlugins' }
 
   " Javascript Plugins
   Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'typescript'] }
@@ -174,38 +148,6 @@ vnoremap <LeftRelease> "*ygv"
 let g:airline_powerline_fonts = 1
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Nerd Tree
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" autocmd VimEnter * NERDTree | wincmd p
-
-let NERDTreeIgnore=['\~$', '.o$', 'bower_components', 'node_modules', '\.pyc$', '__pycache__']
-let g:NERDTreeWinPos = "right"
-let NERDTreeShowHidden=0
-let g:NERDTreeWinSize=35
-nmap <leader>nn :NERDTreeToggle<cr>
-nnoremap <silent> <leader>nb :NERDTreeFind<cr>
-
-
-" NERDTress File highlighting
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
- exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
- exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-endfunction
-
-call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('css', 'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('sass', 'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('ts', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('js', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('rb', 'Magenta', 'none', '#ff00ff', '#151515')
-
 " vim-markdown
 let g:vim_markdown_new_list_item_indent = 2
 let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'yaml', 'haml', 'bash=sh']
@@ -231,13 +173,6 @@ let g:user_emmet_settings = {
 " => vim-multiple-cursors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:multi_cursor_next_key="\<C-s>"
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Git gutter (Git diff)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:gitgutter_enabled=0
-let g:gitgutter_highlight_lines=1
-nnoremap <silent> <leader>d :GitGutterToggle<cr>
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
@@ -507,6 +442,10 @@ augroup jeremydwayne
 	" Neoformat / Prettier
 	autocmd BufWritePre *.js Neoformat
 	autocmd BufWritePre *.jsx Neoformat
+	autocmd BufWritePre *.php Neoformat
+	autocmd BufWritePre *.ruby Neoformat
+	autocmd BufWritePre *.css Neoformat
+	autocmd BufWritePre *.html Neoformat
 
 	" Generate CTags for PHP
 	au BufWritePost *.php silent! !eval '[ -f ".git/hooks/ctags" ] && .git/hooks/ctags' &
