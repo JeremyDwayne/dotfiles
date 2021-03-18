@@ -13,18 +13,17 @@ call plug#begin('~/.config/nvim/plugged/')
   "CoC Conquer of Completion -- Intellisense
   " Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'nvim-lua/completion-nvim'
+  Plug 'neovim/nvim-lspconfig'
 
   " Sensible Default Vim Config
-  Plug 'tpope/vim-sensible'
-  Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-  Plug 'thinca/vim-quickrun'
-  " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  " ctrl+p :FZF
+  " Plug 'tpope/vim-sensible'
 
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
+  Plug 'nvim-telescope/telescope-frecency.nvim'
+  Plug 'tami5/sql.nvim'
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
@@ -32,16 +31,12 @@ call plug#begin('~/.config/nvim/plugged/')
   Plug 'tpope/vim-fugitive'
 
   " tab autocomplete
-  Plug 'ervandew/supertab'
+  " Plug 'ervandew/supertab'
   Plug 'alvan/vim-closetag'
 
-  if has('nvim') || has('patch-8.0.902')
-      Plug 'mhinz/vim-signify'
-  else
-      Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
-  endif
+  Plug 'mhinz/vim-signify'
 
-  " Plug 'Townk/vim-autoclose'
+  Plug 'Townk/vim-autoclose'
 
   " Multiple Language Packs -- basically all of them
   Plug 'sheerun/vim-polyglot'
@@ -50,7 +45,8 @@ call plug#begin('~/.config/nvim/plugged/')
   Plug 'tpope/vim-endwise'
 
   " Colored Parentheses
-  Plug 'luochen1990/rainbow'
+  " Plug 'luochen1990/rainbow'
+  Plug 'p00f/nvim-ts-rainbow'
 
   " gcc commenting
   Plug 'tpope/vim-commentary'
@@ -62,9 +58,6 @@ call plug#begin('~/.config/nvim/plugged/')
   " HTML shortcuts  ,y,
   Plug 'mattn/emmet-vim'
 
-  " Most Recently Used files ,f
-  " Plug 'vim-scripts/mru.vim'
-
   " <C-s>
   Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
@@ -74,7 +67,6 @@ call plug#begin('~/.config/nvim/plugged/')
 
   Plug 'tpope/vim-rails', { 'for': 'ruby' }
 
-  Plug 'w0rp/ale'
   Plug 'sbdchd/neoformat'
 
   Plug 'Yggdroot/indentLine'
@@ -87,18 +79,8 @@ call plug#begin('~/.config/nvim/plugged/')
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
   Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 
-  " PHP Plugins
-  Plug 'StanAngeloff/php.vim'
-  Plug 'stephpy/vim-php-cs-fixer'
-  Plug 'ncm2/ncm2'
-  Plug 'phpactor/phpactor'
-  Plug 'phpactor/ncm2-phpactor'
-
   " Tags
   Plug 'ludovicchabant/vim-gutentags'
-
-  " File Icons
-  Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -232,6 +214,8 @@ map 0 ^
 " Remaps jk to ignore wrapped lines
 nmap j gj
 nmap k gk
+nnoremap L $
+nnoremap H ^
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " The Silver Searcher
@@ -360,41 +344,35 @@ let g:indentLine_char = '│'
 " call neomake#configure#automake('rw', 1000)
 " autocmd! BufWritePost,BufEnter * Neomake
 
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#omni_patterns = {}
-let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
-"let g:deoplete#sources = {}
-"let g:deoplete#sources._ = []
-" let g:deoplete#file#enable_buffer_path = 1
-
 let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}
-
-nnoremap <C-p> :<C-u>FZF<CR>
 
 let g:syntastic_javascript_checkers = ['eslint']
 
-" w0rp/ale
-let g:ale_emit_conflict_warnings = 0
-let g:ale_sign_error = '●' " Less aggressive than the default '>>'
-let g:ale_sign_warning = '.'
-let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
-
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
-
-
 " PHP CS FIXER
-let g:php_cs_fixer_path = "~/tools/composer/vendor/bin/php-cs-fixer"
-let g:php_cs_fixer_config_file = "~/.dotfiles/php_cs"
-let g:php_cs_fixer_php_path = "php"               " Path to PHP
-let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
-nnoremap <silent><leader>pcd :call PhpCsFixerFixDirectory()<CR>
-nnoremap <silent><leader>pcf :call PhpCsFixerFixFile()<CR>
+" let g:php_cs_fixer_path = "/home/linuxbrew/.linuxbrew/bin/php-cs-fixer"
+" let g:php_cs_fixer_config_file = "~/.dotfiles/php_cs"
+" nnoremap <silent><A-D> :call PhpCsFixerFixDirectory()<CR>
+" nnoremap <silent><A-F> :call PhpCsFixerFixFile()<CR>
+
+" Neoformat
+" let g:neoformat_basic_format_retab = 1
+" let g:neoformat_only_msg_on_error = 1
+" let g:neoformat_enabled_php = ['phpcbf']
 
 xmap <C-_> <Plug>Commentary
 nmap <C-_> <Plug>Commentary
 omap <C-_> <Plug>Commentary
 nmap <C-_> <Plug>CommentaryLine
+
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Set completeopt to have a better completion experience
+set completeopt=menuone,noinsert,noselect
+
+" Avoid showing message extra message when using completion
+set shortmess+=c
 
 fun! TrimWhitespace()
 	let l:save = winsaveview()
@@ -405,7 +383,7 @@ endfun
 augroup jeremydwayne
 	autocmd!
 	autocmd BufWritePre * :call TrimWhitespace()
-	autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
+	" autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
 	autocmd FileType vim let b:coc_pairs_disabled = '"'
 	" Conceal Level is dumb
 	autocmd InsertEnter *.json setlocal conceallevel=0 concealcursor=
@@ -442,11 +420,13 @@ augroup jeremydwayne
 	" Neoformat / Prettier
 	autocmd BufWritePre *.js Neoformat
 	autocmd BufWritePre *.jsx Neoformat
-	autocmd BufWritePre *.php Neoformat
+	" autocmd BufWritePre *.php Neoformat
 	autocmd BufWritePre *.ruby Neoformat
 	autocmd BufWritePre *.css Neoformat
 	autocmd BufWritePre *.html Neoformat
 
 	" Generate CTags for PHP
 	au BufWritePost *.php silent! !eval '[ -f ".git/hooks/ctags" ] && .git/hooks/ctags' &
+
+	autocmd BufEnter * lua require'completion'.on_attach()
 augroup END

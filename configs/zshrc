@@ -82,6 +82,7 @@ export PATH="$PATH:$HOME/.local/bin:$HOME/bin:/usr/local/bin:/usr/local/nwjs:/us
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.dotfiles/scripts:$PATH"
+export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
