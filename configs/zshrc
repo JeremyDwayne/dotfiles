@@ -16,7 +16,7 @@ export ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="nicoulaj"
 # ZSH_THEME="dracula"
 ZSH_THEME="powerlevel10k/powerlevel10k"
-DEFAULT_USER="winterjd"
+DEFAULT_USER=$USER
 
 # [ -n "$PS1" ] && sh ~/.nightshell/carbonized-dark ]
 # eval `dircolors ~/.nightshell/dircolors`
@@ -80,8 +80,8 @@ plugins=(git zsh-syntax-highlighting)
 export PATH="$PATH:$HOME/.cabal/bin:/opt/cabal/1.22/bin:/opt/ghc/7.10.3/bin:$HOME/.rvm/gems:$HOME/.rvm/bin"
 export PATH="$PATH:$HOME/.local/bin:$HOME/bin:/usr/local/bin:/usr/local/nwjs:/usr/local/var/postgres"
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
-export PATH="/home/winterjd/.local/bin:$PATH"
-export PATH="/home/winterjd/.dotfiles/scripts:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.dotfiles/scripts:$PATH"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
