@@ -6,20 +6,26 @@
 git submodule init
 git submodule update --recursive
 
+
+if [ uname = "Linux" ]; then
+	if [ -f "/etc/arch-release" ]; then
+		echo 'just install stuff dude'
+		sudo pacman -S gnupg ruby
+	else
+		sudo apt-get install software-properties-common build-essential curl git python-setuptools ruby
+		sudo add-apt-repository ppa:neovim-ppa/unstable
+		sudo apt-get update
+		sudo apt-get install neovim
+		sudo apt-get install gnupg2 -y
+	fi
+fi
+
 if [ hash brew >/dev/null 2>&1 ]
 then
   echo 'Attempting to install brew'
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 brew bundle
-
-if [ uname = "Linux" ]; then
-	sudo apt-get install software-properties-common build-essential curl git python-setuptools ruby
-	sudo add-apt-repository ppa:neovim-ppa/unstable
-	sudo apt-get update
-	sudo apt-get install neovim
-	sudo apt-get install gnupg2 -y
-fi
 
 # Check if Oh My ZSH is installed
 if ! [ -d "$HOME/.oh-my-zsh/" ]; then
