@@ -33,17 +33,17 @@ Plug 'vim-airline/vim-airline'
 
 " tab autocomplete
 " Plug 'ervandew/supertab'
-" Plug 'alvan/vim-closetag'
+Plug 'alvan/vim-closetag'
 
 Plug 'mhinz/vim-signify'
 
-" Plug 'Townk/vim-autoclose'
+Plug 'Townk/vim-autoclose'
 
 " Multiple Language Packs -- basically all of them
 Plug 'sheerun/vim-polyglot'
 
 " Auto end statement
-" Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-endwise'
 
 " Colored Parentheses
 " Plug 'luochen1990/rainbow'
@@ -205,6 +205,7 @@ nnoremap <leader>bn :bnext<CR>
 nnoremap <leader>bp :bprevious<CR>
 nnoremap <leader>bf :bfirst<CR>
 nnoremap <leader>bl :blast<CR>
+nnoremap <leader>bd :bd<CR>
 
 
 " Useful mappings for managing tabs
@@ -389,10 +390,12 @@ let g:syntastic_javascript_checkers = ['eslint']
 " let g:neoformat_only_msg_on_error = 1
 " let g:neoformat_enabled_php = ['phpcbf']
 
-xmap <C-_> <Plug>CommentaryLine
+xmap <C-_> <Plug>Commentary
+nmap <C-_> <Plug>Commentary
+omap <C-_> <Plug>Commentary
 nmap <C-_> <Plug>CommentaryLine
-omap <C-_> <Plug>CommentaryLine
-nmap <C-_> <Plug>CommentaryLine
+nmap <C-_>a gcgc
+
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -459,4 +462,5 @@ augroup jeremydwayne
 	au BufWritePost *.php silent! !eval '[ -f ".git/hooks/ctags" ] && .git/hooks/ctags' &
 
 	" autocmd BufEnter * lua require'completion'.on_attach()
+	autocmd FileType php setlocal commentstring=//\ %s
 augroup END

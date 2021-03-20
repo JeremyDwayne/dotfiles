@@ -14,9 +14,9 @@ fi
 tmux set-option default-path "$PWD"
 
 # Creates session, and names window DEV
-tmux new-session -d -s $1 -c $2
+tmux new-session -d -x "$(tput cols)" -y "$(tput lines)" -s $1 -c $2
 tmux rename-window 'DEV'
-tmux split-window -v -p 50 -c $2
+tmux split-window -v -p 20 -c $2
 
 # Creates second window named SERVER
 tmux new-window -a -d -n 'SERVER' -c $2
