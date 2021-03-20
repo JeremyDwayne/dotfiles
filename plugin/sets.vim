@@ -41,8 +41,11 @@ set noswapfile
 " Use spaces instead of tabs
 set tabstop=4 softtabstop=4
 set shiftwidth=4
+set expandtab
 set smartindent
 set autoindent
+
+set showtabline=2
 
 " Be smart when using tabs ;)
 set smarttab
@@ -55,9 +58,9 @@ set ai "Auto indent
 set wrap "Wrap lines
 
 
-set path+=**
-set wildmenu
-set wildignore+=**/node_modules/**
+" set path+=**
+" set wildmenu
+" set wildignore+=**/node_modules/**
 set hidden
 
 set history=500

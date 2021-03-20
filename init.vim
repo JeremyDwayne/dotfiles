@@ -3,10 +3,12 @@
 filetype plugin indent on
 
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
-	silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+
+" nnoremap <Leader>tf :lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({}))<cr>
 
 call plug#begin('~/.config/nvim/plugged/')
 "CoC Conquer of Completion -- Intellisense
@@ -23,6 +25,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-telescope/telescope-frecency.nvim'
 Plug 'tami5/sql.nvim'
+Plug 'ThePrimeagen/harpoon'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
@@ -163,10 +166,10 @@ nmap <leader>wit :VimwikiTable
 
 let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_settings = {
-			\  'javascript.jsx' : {
-			\      'extends' : 'jsx',
-			\  },
-			\}
+            \  'javascript.jsx' : {
+            \      'extends' : 'jsx',
+            \  },
+            \}
 
 """""""""""""""""""""""""""""""
 "" => MRU plugin
@@ -200,9 +203,17 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-"Navigate buffers
-nnoremap <leader>bn :bnext<CR>
-nnoremap <leader>bp :bprevious<CR>
+"Harpoon Remaps
+set exrc
+" set secure
+nmap <leader>th :call GotoBuffer(0)<CR>
+nmap <leader>tj :call GotoBuffer(1)<CR>
+nmap <leader>tk :call GotoBuffer(2)<CR>
+nmap <leader>tl :call GotoBuffer(3)<CR>
+
+
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
 nnoremap <leader>bf :bfirst<CR>
 nnoremap <leader>bl :blast<CR>
 nnoremap <leader>bd :bd<CR>
@@ -270,8 +281,8 @@ cnoreabbrev AG Ack
 nnoremap \ :Ag<SPACE>
 " Use ag over grep
 if executable('ag')
-	set grepprg=ag\ --nogroup\ --nocolor
-	let g:ackprg = 'ag --vimgrep --smart-case'
+    set grepprg=ag\ --nogroup\ --nocolor
+    let g:ackprg = 'ag --vimgrep --smart-case'
 endif
 
 " bind K to grep word under cursor
@@ -306,28 +317,28 @@ map <leader>pp :setlocal paste!<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! VisualSelection(direction, extra_filter) range
-	let l:saved_reg = @"
-	execute "normal! vgvy"
+    let l:saved_reg = @"
+    execute "normal! vgvy"
 
-	let l:pattern = escape(@", '\\/.*$^~[]')
-	let l:pattern = substitute(l:pattern, "\n$", "", "")
+    let l:pattern = escape(@", '\\/.*$^~[]')
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
 
-	if a:direction == 'gv'
-		call CmdLine("Ag \"" . l:pattern . "\" " )
-	elseif a:direction == 'replace'
-		call CmdLine("%s" . '/'. l:pattern . '/')
-	endif
+    if a:direction == 'gv'
+        call CmdLine("Ag \"" . l:pattern . "\" " )
+    elseif a:direction == 'replace'
+        call CmdLine("%s" . '/'. l:pattern . '/')
+    endif
 
-	let @/ = l:pattern
-	let @" = l:saved_reg
+    let @/ = l:pattern
+    let @" = l:saved_reg
 endfunction
 
 " Returns true if paste mode is enabled
 function! HasPaste()
-	if &paste
-		return 'PASTE MODE  '
-	endif
-	return ''
+    if &paste
+        return 'PASTE MODE  '
+    endif
+    return ''
 endfunction
 
 
@@ -408,59 +419,59 @@ set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 
 fun! TrimWhitespace()
-	let l:save = winsaveview()
-	keeppatterns %s/\s\+$//e
-	call winrestview(l:save)
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
 endfun
 
 augroup jeremydwayne
-	autocmd!
-	autocmd BufWritePre * :call TrimWhitespace()
-	" autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
-	autocmd FileType vim let b:coc_pairs_disabled = '"'
-	" Conceal Level is dumb
-	autocmd InsertEnter *.json setlocal conceallevel=0 concealcursor=
-	autocmd InsertLeave *.json setlocal conceallevel=2 concealcursor=inc
-	autocmd InsertEnter *.md setlocal conceallevel=0 concealcursor=
-	autocmd InsertLeave *.md setlocal conceallevel=2 concealcursor=inc
-	au BufNewFile,BufRead *.jinja set syntax=htmljinja
-	au BufNewFile,BufRead *.mako set ft=mako
+    autocmd!
+    autocmd BufWritePre * :call TrimWhitespace()
+    " autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
+    autocmd FileType vim let b:coc_pairs_disabled = '"'
+    " Conceal Level is dumb
+    autocmd InsertEnter *.json setlocal conceallevel=0 concealcursor=
+    autocmd InsertLeave *.json setlocal conceallevel=2 concealcursor=inc
+    autocmd InsertEnter *.md setlocal conceallevel=0 concealcursor=
+    autocmd InsertLeave *.md setlocal conceallevel=2 concealcursor=inc
+    au BufNewFile,BufRead *.jinja set syntax=htmljinja
+    au BufNewFile,BufRead *.mako set ft=mako
 
-	au FileType gitcommit call setpos('.', [0, 1, 1, 0])
+    au FileType gitcommit call setpos('.', [0, 1, 1, 0])
 
-	autocmd! bufwritepost vimrc source ~/.vimrc
-	" Markdown and VimWiki Filetypes
-	autocmd BufRead,BufNewFile *.md setlocal spell
-	au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+    autocmd! bufwritepost vimrc source ~/.vimrc
+    " Markdown and VimWiki Filetypes
+    autocmd BufRead,BufNewFile *.md setlocal spell
+    au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
-	autocmd BufRead,BufNewFile *.wiki setlocal spell
-	au BufNewFile,BufFilePre,BufRead *.wiki set filetype=wiki
-	" Close NerdTree when vim exits
-	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-	" Syntax Hilighting for ANTLR
-	au BufRead,BufNewFile *.g set syntax=antlr3
-	" New File Skeletons
-	autocmd BufNewFile *
-				\ let templatefile = expand("~/.dotfiles/templates/") . expand("%:e")|
-				\ if filereadable(templatefile)|
-				\   execute "silent! 0r " . templatefile|
-				\   execute "normal Gdd/CURSOR\<CR>dw"|
-				\ endif|
-	au TabLeave * let g:lasttab = tabpagenr()
-	" Return to last edit position when opening files (You want this!)
-	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    autocmd BufRead,BufNewFile *.wiki setlocal spell
+    au BufNewFile,BufFilePre,BufRead *.wiki set filetype=wiki
+    " Close NerdTree when vim exits
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    " Syntax Hilighting for ANTLR
+    au BufRead,BufNewFile *.g set syntax=antlr3
+    " New File Skeletons
+    autocmd BufNewFile *
+                \ let templatefile = expand("~/.dotfiles/templates/") . expand("%:e")|
+                \ if filereadable(templatefile)|
+                \   execute "silent! 0r " . templatefile|
+                \   execute "normal Gdd/CURSOR\<CR>dw"|
+                \ endif|
+    au TabLeave * let g:lasttab = tabpagenr()
+    " Return to last edit position when opening files (You want this!)
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-	" Neoformat / Prettier
-	autocmd BufWritePre *.js Neoformat
-	autocmd BufWritePre *.jsx Neoformat
-	" autocmd BufWritePre *.php Neoformat
-	autocmd BufWritePre *.ruby Neoformat
-	autocmd BufWritePre *.css Neoformat
-	autocmd BufWritePre *.html Neoformat
+    " Neoformat / Prettier
+    autocmd BufWritePre *.js Neoformat
+    autocmd BufWritePre *.jsx Neoformat
+    " autocmd BufWritePre *.php Neoformat
+    autocmd BufWritePre *.ruby Neoformat
+    autocmd BufWritePre *.css Neoformat
+    autocmd BufWritePre *.html Neoformat
 
-	" Generate CTags for PHP
-	au BufWritePost *.php silent! !eval '[ -f ".git/hooks/ctags" ] && .git/hooks/ctags' &
+    " Generate CTags for PHP
+    au BufWritePost *.php silent! !eval '[ -f ".git/hooks/ctags" ] && .git/hooks/ctags' &
 
-	" autocmd BufEnter * lua require'completion'.on_attach()
-	autocmd FileType php setlocal commentstring=//\ %s
+    " autocmd BufEnter * lua require'completion'.on_attach()
+    autocmd FileType php setlocal commentstring=//\ %s
 augroup END
