@@ -42,6 +42,7 @@ set noswapfile
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set smartindent
+set autoindent
 
 " Be smart when using tabs ;)
 set smarttab
@@ -53,10 +54,13 @@ set tw=500
 set ai "Auto indent
 set wrap "Wrap lines
 
+
+set path+=**
+set wildmenu
+set wildignore+=**/node_modules/**
 set hidden
+
 set history=500
-set textwidth=120
-set autoindent
 set fileformat=unix
 
 set number
@@ -69,9 +73,6 @@ set ruler
 
 " Height of the command bar
 set cmdheight=1
-
-" A buffer becomes hidden when it is abandoned
-set hid
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent

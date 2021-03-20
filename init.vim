@@ -3,84 +3,86 @@
 filetype plugin indent on
 
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+	silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-
 call plug#begin('~/.config/nvim/plugged/')
-  "CoC Conquer of Completion -- Intellisense
-  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'nvim-lua/completion-nvim'
-  Plug 'neovim/nvim-lspconfig'
+"CoC Conquer of Completion -- Intellisense
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'nvim-lua/completion-nvim'
+" Plug 'neovim/nvim-lspconfig'
 
-  " Sensible Default Vim Config
-  " Plug 'tpope/vim-sensible'
+" Sensible Default Vim Config
+Plug 'tpope/vim-sensible'
 
-  Plug 'nvim-lua/popup.nvim'
-  Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim'
-  Plug 'nvim-telescope/telescope-fzy-native.nvim'
-  Plug 'nvim-telescope/telescope-frecency.nvim'
-  Plug 'tami5/sql.nvim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'nvim-telescope/telescope-frecency.nvim'
+Plug 'tami5/sql.nvim'
 
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-  Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
 
-  " tab autocomplete
-  " Plug 'ervandew/supertab'
-  Plug 'alvan/vim-closetag'
+Plug 'vim-airline/vim-airline'
 
-  Plug 'mhinz/vim-signify'
+" tab autocomplete
+" Plug 'ervandew/supertab'
+" Plug 'alvan/vim-closetag'
 
-  Plug 'Townk/vim-autoclose'
+Plug 'mhinz/vim-signify'
 
-  " Multiple Language Packs -- basically all of them
-  Plug 'sheerun/vim-polyglot'
+" Plug 'Townk/vim-autoclose'
 
-  " Auto end statement
-  Plug 'tpope/vim-endwise'
+" Multiple Language Packs -- basically all of them
+Plug 'sheerun/vim-polyglot'
 
-  " Colored Parentheses
-  " Plug 'luochen1990/rainbow'
-  Plug 'p00f/nvim-ts-rainbow'
+" Auto end statement
+" Plug 'tpope/vim-endwise'
 
-  " gcc commenting
-  Plug 'tpope/vim-commentary'
+" Colored Parentheses
+" Plug 'luochen1990/rainbow'
+Plug 'p00f/nvim-ts-rainbow'
 
-  " Markdown Support
-  Plug 'godlygeek/tabular'
-  Plug 'vimwiki/vimwiki'
+" gcc commenting
+Plug 'tpope/vim-commentary'
 
-  " HTML shortcuts  ,y,
-  Plug 'mattn/emmet-vim'
+" Markdown Support
+Plug 'godlygeek/tabular'
+Plug 'vimwiki/vimwiki'
 
-  " <C-s>
-  Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+" HTML shortcuts  ,y,
+Plug 'mattn/emmet-vim'
 
-  Plug 'itchyny/lightline.vim'
+" <C-s>
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
-  Plug 'mileszs/ack.vim'
+" Plug 'itchyny/lightline.vim'
 
-  Plug 'tpope/vim-rails', { 'for': 'ruby' }
+Plug 'mileszs/ack.vim'
 
-  Plug 'sbdchd/neoformat'
+Plug 'tpope/vim-rails', { 'for': 'ruby' }
 
-  Plug 'Yggdroot/indentLine'
+Plug 'sbdchd/neoformat'
+Plug 'rhysd/vim-clang-format'
 
-  Plug 'Shougo/deoppet.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Yggdroot/indentLine'
 
-  " Javascript Plugins
-  Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'typescript'] }
-  Plug 'claco/jasmine.vim', { 'for': ['javascript', 'typescript'] }
-  Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-  Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+Plug 'Shougo/deoppet.nvim', { 'do': ':UpdateRemotePlugins' }
 
-  " Tags
-  Plug 'ludovicchabant/vim-gutentags'
+" Javascript Plugins
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'typescript'] }
+Plug 'claco/jasmine.vim', { 'for': ['javascript', 'typescript'] }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+
+" Tags
+Plug 'ludovicchabant/vim-gutentags'
 
 call plug#end()
 
@@ -94,6 +96,7 @@ let g:sync_async_upload = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 map <leader>e :e! ~/.config/nvim/init.vim<cr>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -123,11 +126,31 @@ highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
 match OverLength /\%81v./
 
 
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
 vnoremap <LeftRelease> "*ygv"
 
 " Fix airline fonts from not displaying correctly
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+"Enable smarter tab line
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 
 
 " vim-markdown
@@ -140,10 +163,10 @@ nmap <leader>wit :VimwikiTable
 
 let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_settings = {
-  \  'javascript.jsx' : {
-    \      'extends' : 'jsx',
-    \  },
-  \}
+			\  'javascript.jsx' : {
+			\      'extends' : 'jsx',
+			\  },
+			\}
 
 """""""""""""""""""""""""""""""
 "" => MRU plugin
@@ -176,6 +199,13 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+"Navigate buffers
+nnoremap <leader>bn :bnext<CR>
+nnoremap <leader>bp :bprevious<CR>
+nnoremap <leader>bf :bfirst<CR>
+nnoremap <leader>bl :blast<CR>
+
 
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
@@ -237,10 +267,10 @@ cnoreabbrev Ag Ack
 cnoreabbrev AG Ack
 
 nnoremap \ :Ag<SPACE>
+" Use ag over grep
 if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ackprg = 'ag --vimgrep --smart-case'
+	set grepprg=ag\ --nogroup\ --nocolor
+	let g:ackprg = 'ag --vimgrep --smart-case'
 endif
 
 " bind K to grep word under cursor
@@ -275,28 +305,28 @@ map <leader>pp :setlocal paste!<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! VisualSelection(direction, extra_filter) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
+	let l:saved_reg = @"
+	execute "normal! vgvy"
 
-    let l:pattern = escape(@", '\\/.*$^~[]')
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
+	let l:pattern = escape(@", '\\/.*$^~[]')
+	let l:pattern = substitute(l:pattern, "\n$", "", "")
 
-    if a:direction == 'gv'
-        call CmdLine("Ag \"" . l:pattern . "\" " )
-    elseif a:direction == 'replace'
-        call CmdLine("%s" . '/'. l:pattern . '/')
-    endif
+	if a:direction == 'gv'
+		call CmdLine("Ag \"" . l:pattern . "\" " )
+	elseif a:direction == 'replace'
+		call CmdLine("%s" . '/'. l:pattern . '/')
+	endif
 
-    let @/ = l:pattern
-    let @" = l:saved_reg
+	let @/ = l:pattern
+	let @" = l:saved_reg
 endfunction
 
 " Returns true if paste mode is enabled
 function! HasPaste()
-    if &paste
-        return 'PASTE MODE  '
-    endif
-    return ''
+	if &paste
+		return 'PASTE MODE  '
+	endif
+	return ''
 endfunction
 
 
@@ -314,26 +344,26 @@ iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:lightline = {
-      \ 'colorscheme': 'darcula',
-      \ 'active': {
-      \   'left': [ ['mode', 'paste'],
-      \             ['fugitive', 'readonly', 'filename', 'modified'] ],
-      \   'right': [ [ 'lineinfo' ], ['percent'] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ },
-      \ 'separator': { 'left': ' ', 'right': ' ' },
-      \ 'subseparator': { 'left': ' ', 'right': ' ' }
-      \ }
+" let g:lightline = ne{
+"       \ 'colorscheme': 'darcula',
+"       \ 'active': {
+"       \   'left': [ ['mode', 'paste'],
+"       \             ['fugitive', 'readonly', 'filename', 'modified'] ],
+"       \   'right': [ [ 'lineinfo' ], ['percent'] ]
+"       \ },
+"       \ 'component': {
+"       \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
+"       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+"       \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+"       \ },
+"       \ 'component_visible_condition': {
+"       \   'readonly': '(&filetype!="help"&& &readonly)',
+"       \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+"       \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+"       \ },
+"       \ 'separator': { 'left': ' ', 'right': ' ' },
+"       \ 'subseparator': { 'left': ' ', 'right': ' ' }
+"       \ }
 
 " vertical line indentation
 let g:indentLine_color_term = 239
@@ -359,9 +389,9 @@ let g:syntastic_javascript_checkers = ['eslint']
 " let g:neoformat_only_msg_on_error = 1
 " let g:neoformat_enabled_php = ['phpcbf']
 
-xmap <C-_> <Plug>Commentary
-nmap <C-_> <Plug>Commentary
-omap <C-_> <Plug>Commentary
+xmap <C-_> <Plug>CommentaryLine
+nmap <C-_> <Plug>CommentaryLine
+omap <C-_> <Plug>CommentaryLine
 nmap <C-_> <Plug>CommentaryLine
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
@@ -408,11 +438,11 @@ augroup jeremydwayne
 	au BufRead,BufNewFile *.g set syntax=antlr3
 	" New File Skeletons
 	autocmd BufNewFile *
-	\ let templatefile = expand("~/.dotfiles/templates/") . expand("%:e")|
-	\ if filereadable(templatefile)|
-	\   execute "silent! 0r " . templatefile|
-	\   execute "normal Gdd/CURSOR\<CR>dw"|
-	\ endif|
+				\ let templatefile = expand("~/.dotfiles/templates/") . expand("%:e")|
+				\ if filereadable(templatefile)|
+				\   execute "silent! 0r " . templatefile|
+				\   execute "normal Gdd/CURSOR\<CR>dw"|
+				\ endif|
 	au TabLeave * let g:lasttab = tabpagenr()
 	" Return to last edit position when opening files (You want this!)
 	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -428,5 +458,5 @@ augroup jeremydwayne
 	" Generate CTags for PHP
 	au BufWritePost *.php silent! !eval '[ -f ".git/hooks/ctags" ] && .git/hooks/ctags' &
 
-	autocmd BufEnter * lua require'completion'.on_attach()
+	" autocmd BufEnter * lua require'completion'.on_attach()
 augroup END
