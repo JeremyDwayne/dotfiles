@@ -9,14 +9,18 @@ alias tmux='tmux -u'
 
 # checks if on linux or OSX for open command
 if [ "$(uname)" = "Linux" ]; then
-  # alias open="xdg-open"
-# WSL alias
-  alias open="explorer.exe"
-  alias say='echo "$*" | espeak -s 120 2>/dev/null'
-  alias cpwd='pwd|tr -d "\n"|xclip'
+    if grep -q microsoft /proc/version; then
+        # WSL alias
+        alias open="explorer.exe"
+    else
+        alias open="xdg-open"
+    fi
+
+    alias say='echo "$*" | espeak -s 120 2>/dev/null'
+    alias cpwd='pwd|tr -d "\n"|xclip'
 else
-  # OSX
-  alias cpwd='pwd|tr -d "\n"|pbcopy'
+    # OSX
+    alias cpwd='pwd|tr -d "\n"|pbcopy'
 fi
 
 
@@ -67,18 +71,18 @@ alias tls='tmux ls'
 tnew() {
     if [ "$1" != "" ]
     then
-			tmux new -s $1
-		else
-			tmux
+        tmux new -s $1
+    else
+        tmux
     fi
 }
 
 tatt() {
     if [ "$1" != "" ]
     then
-			tmux attach -t $1
-		else
-			tmux attach
+        tmux attach -t $1
+    else
+        tmux attach
     fi
 }
 
@@ -92,23 +96,23 @@ alias grun='java org.antlr.v4.runtime.misc.TestRig'
 
 # Logbook
 lbt() {
-  vim -c ":VimwikiMakeDiaryNote"
+    vim -c ":VimwikiMakeDiaryNote"
 }
 
 lby() {
-  vim -c ":VimwikiMakeYesterdayDiaryNote"
+    vim -c ":VimwikiMakeYesterdayDiaryNote"
 }
 
 lbi() {
-  vim -c ":VimwikiDiaryIndex"
+    vim -c ":VimwikiDiaryIndex"
 }
 
 wiki() {
-  vim -c ":VimwikiIndex"
+    vim -c ":VimwikiIndex"
 }
 
 swiki() {
-  vim -c ":VimwikiSearch $*"
+    vim -c ":VimwikiSearch $*"
 }
 
 # nvim
@@ -120,7 +124,7 @@ alias ealias='vim ~/.dotfiles/aliases.zsh'
 alias zshrc='vim ~/.zshrc'
 
 ycmcomp() {
-  cp ~/.dotfiles/templates/_ycm_extra_conf.py ./.ycm_extra_conf.py
+    cp ~/.dotfiles/templates/_ycm_extra_conf.py ./.ycm_extra_conf.py
 }
 
 alias fv='vim $(fzf --height 40%)'
