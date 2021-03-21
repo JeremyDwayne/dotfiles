@@ -75,3 +75,7 @@ for f in `find . -regex ".*\.vim$\|.*\.lua$"`; do
     rm -rf ~/.config/nvim/$f
     ln -s ~/.dotfiles/$f ~/.config/nvim/$f
 done
+
+echo >&2 "Symlinking Snippets"
+rm -rf ~/.config/coc/ultisnips/vim.snippets
+ln -s ~/.dotfiles/vim.snippets ~/.config/coc/ultisnips/vim.snippets

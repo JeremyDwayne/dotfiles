@@ -11,36 +11,44 @@ endif
 " nnoremap <Leader>tf :lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({}))<cr>
 
 call plug#begin('~/.config/nvim/plugged/')
-"CoC Conquer of Completion -- Intellisense
+
+" Intellisense
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'nvim-lua/completion-nvim'
 " Plug 'neovim/nvim-lspconfig'
+Plug 'preservim/tagbar'
 
 " Sensible Default Vim Config
 Plug 'tpope/vim-sensible'
 
+Plug 'vim-airline/vim-airline'
+
+" File Switch Plugins
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
-Plug 'nvim-telescope/telescope-frecency.nvim'
-Plug 'tami5/sql.nvim'
 Plug 'ThePrimeagen/harpoon'
 
+" Formatting / Syntax
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
-
-Plug 'vim-airline/vim-airline'
-
-" tab autocomplete
-" Plug 'ervandew/supertab'
+Plug 'sbdchd/neoformat'
+Plug 'rhysd/vim-clang-format'
+Plug 'Yggdroot/indentLine'
 Plug 'alvan/vim-closetag'
+Plug 'tpope/vim-surround'
 
-Plug 'mhinz/vim-signify'
+Plug 'matze/vim-move'
 
-Plug 'Townk/vim-autoclose'
+" HTML shortcuts  ,y,
+Plug 'mattn/emmet-vim'
+
+" Snippets "
+Plug 'Shougo/deoppet.nvim', { 'do': ':UpdateRemotePlugins' }
+
+" Git
+Plug 'tpope/vim-fugitive'
+" Plug 'mhinz/vim-signify'
+
 
 " Multiple Language Packs -- basically all of them
 Plug 'sheerun/vim-polyglot'
@@ -49,7 +57,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-endwise'
 
 " Colored Parentheses
-" Plug 'luochen1990/rainbow'
 Plug 'p00f/nvim-ts-rainbow'
 
 " gcc commenting
@@ -59,24 +66,17 @@ Plug 'tpope/vim-commentary'
 Plug 'godlygeek/tabular'
 Plug 'vimwiki/vimwiki'
 
-" HTML shortcuts  ,y,
-Plug 'mattn/emmet-vim'
-
-" <C-s>
+" <C-n>
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
-" Plug 'itchyny/lightline.vim'
-
+" Silver Searcher
 Plug 'mileszs/ack.vim'
 
+" GoLang
+Plug 'fatih/vim-go'
+
+" Rails
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
-
-Plug 'sbdchd/neoformat'
-Plug 'rhysd/vim-clang-format'
-
-Plug 'Yggdroot/indentLine'
-
-Plug 'Shougo/deoppet.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Javascript Plugins
 Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'typescript'] }
@@ -90,7 +90,7 @@ Plug 'ludovicchabant/vim-gutentags'
 call plug#end()
 
 let mapleader=" "
-
+inoremap jk <ESC>
 
 let g:sync_async_upload = 1
 
@@ -128,6 +128,9 @@ nmap <leader>lo :lopen<cr>
 highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
 match OverLength /\%81v./
 
+" Coc Extensions "
+let g:coc_global_extensions = [ 'coc-snippets', 'coc-pairs', 'coc-json', ]
+inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -164,12 +167,12 @@ let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'yaml', 'haml', 'ba
 nmap <leader>whtml :VimwikiAll2HTML<cr>
 nmap <leader>wit :VimwikiTable
 
-let g:user_emmet_leader_key='<Tab>'
-let g:user_emmet_settings = {
-            \  'javascript.jsx' : {
-            \      'extends' : 'jsx',
-            \  },
-            \}
+" let g:user_emmet_leader_key='<Tab>'
+" let g:user_emmet_settings = {
+"             \  'javascript.jsx' : {
+"             \      'extends' : 'jsx',
+"             \  },
+"             \}
 
 """""""""""""""""""""""""""""""
 "" => MRU plugin
@@ -198,10 +201,10 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 map <silent> <leader><cr> :noh<cr>
 
 " Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+" map <C-j> <C-W>j
+" map <C-k> <C-W>k
+" map <C-h> <C-W>h
+" map <C-l> <C-W>l
 
 "Harpoon Remaps
 set exrc
@@ -210,30 +213,29 @@ nmap <leader>th :call GotoBuffer(0)<CR>
 nmap <leader>tj :call GotoBuffer(1)<CR>
 nmap <leader>tk :call GotoBuffer(2)<CR>
 nmap <leader>tl :call GotoBuffer(3)<CR>
+nnoremap <silent> <C-_> :bnext<CR>
+nnoremap <silent> <C-\> :bprevious<CR>
+nnoremap <silent> <leader>bf :bfirst<CR>
+nnoremap <silent> <leader>bl :blast<CR>
+nnoremap <silent> <leader>bd :bd<CR>
 
-
-nnoremap <Tab> :bnext<CR>
-nnoremap <S-Tab> :bprevious<CR>
-nnoremap <leader>bf :bfirst<CR>
-nnoremap <leader>bl :blast<CR>
-nnoremap <leader>bd :bd<CR>
 
 
 " Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
-map <leader>t<leader> :tabnext
+" map <leader>tn :tabnew<cr>
+" map <leader>to :tabonly<cr>
+" map <leader>tc :tabclose<cr>
+" map <leader>tm :tabmove
+" map <leader>t<leader> :tabnext
 
 
 " Move lines of code around
-nnoremap <C-j> :m .+1<CR>==
-nnoremap <C-k> :m .-2<CR>==
-inoremap <C-j> <Esc>:m .+1<CR>==gi
-inoremap <C-k> <Esc>:m .-2<CR>==gi
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
+" nnoremap <A-k> :m .-2<CR>==
+" nnoremap <A-j> :m .+1<CR>==
+" inoremap <A-j> <Esc>:m .+1<CR>==gi
+" inoremap <A-k> <Esc>:m .-2<CR>==gi
+" vnoremap <A-j> :m '>+1<CR>gv=gv
+" vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
@@ -394,23 +396,30 @@ let g:syntastic_javascript_checkers = ['eslint']
 " let g:php_cs_fixer_path = "/home/linuxbrew/.linuxbrew/bin/php-cs-fixer"
 " let g:php_cs_fixer_config_file = "~/.dotfiles/php_cs"
 " nnoremap <silent><A-D> :call PhpCsFixerFixDirectory()<CR>
-" nnoremap <silent><A-F> :call PhpCsFixerFixFile()<CR>
 
 " Neoformat
 " let g:neoformat_basic_format_retab = 1
 " let g:neoformat_only_msg_on_error = 1
-" let g:neoformat_enabled_php = ['phpcbf']
+nnoremap <silent><A-F> :Neoformat<CR>
+let g:neoformat_enabled_php = ['phpcsfixer']
+let g:neoformat_php_phpcsfixer = {
+    \ 'exe': 'php-cs-fixer',
+    \ 'args': ['fix', '-q', '--config', '~/.dotfiles/php_cs'],
+    \ 'replace': 1,
+    \ }
 
-xmap <C-_> <Plug>Commentary
-nmap <C-_> <Plug>Commentary
-omap <C-_> <Plug>Commentary
-nmap <C-_> <Plug>CommentaryLine
-nmap <C-_>a gcgc
+" xmap <C-_> <Plug>Commentary
+" nmap <C-_> <Plug>Commentary
+" omap <C-_> <Plug>Commentary
+" nmap <C-_> <Plug>CommentaryLine
+" nmap <C-_>a gcgc
 
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+nmap <A-8> :TagbarToggle<CR>
 
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
@@ -427,8 +436,8 @@ endfun
 augroup jeremydwayne
     autocmd!
     autocmd BufWritePre * :call TrimWhitespace()
-    " autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
     autocmd FileType vim let b:coc_pairs_disabled = '"'
+
     " Conceal Level is dumb
     autocmd InsertEnter *.json setlocal conceallevel=0 concealcursor=
     autocmd InsertLeave *.json setlocal conceallevel=2 concealcursor=inc
@@ -461,10 +470,11 @@ augroup jeremydwayne
     " Return to last edit position when opening files (You want this!)
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-    " Neoformat / Prettier
+    " Neoformat
     autocmd BufWritePre *.js Neoformat
     autocmd BufWritePre *.jsx Neoformat
-    " autocmd BufWritePre *.php Neoformat
+    autocmd BufWritePre *.php Neoformat
+    autocmd BufWritePre *.go Neoformat
     autocmd BufWritePre *.ruby Neoformat
     autocmd BufWritePre *.css Neoformat
     autocmd BufWritePre *.html Neoformat

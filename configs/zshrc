@@ -77,12 +77,12 @@ plugins=(git zsh-syntax-highlighting)
 
 # User configuration
 
-export PATH="$PATH:$HOME/.cabal/bin:/opt/cabal/1.22/bin:/opt/ghc/7.10.3/bin:$HOME/.rvm/gems:$HOME/.rvm/bin"
-export PATH="$PATH:$HOME/.local/bin:$HOME/bin:/usr/local/bin:/usr/local/nwjs:/usr/local/var/postgres"
-export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.dotfiles/scripts:$PATH"
-export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+export PATH=$PATH:$HOME/.cabal/bin:/opt/cabal/1.22/bin:/opt/ghc/7.10.3/bin:$HOME/.rvm/gems:$HOME/.rvm/bin
+export PATH=$PATH:$HOME/.local/bin:$HOME/bin:/usr/local/bin:/usr/local/nwjs:/usr/local/var/postgres
+export PATH=$PATH:$HOME/.dotfiles/scripts
+export PATH=$PATH:$HOME/.config/composer/vendor/bin
+export PATH=$PATH:/usr/local/opt/mysql@5.6/bin
+export PATH=$PATH:/usr/local/go/bin
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
