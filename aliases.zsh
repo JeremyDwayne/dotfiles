@@ -123,6 +123,8 @@ alias vimrc='vim ~/.config/nvim/init.vim'
 alias ealias='vim ~/.dotfiles/aliases.zsh'
 alias zshrc='vim ~/.zshrc'
 
+alias gs='git status'
+
 ycmcomp() {
     cp ~/.dotfiles/templates/_ycm_extra_conf.py ./.ycm_extra_conf.py
 }
