@@ -65,7 +65,7 @@ for f in `find ~/.dotfiles/configs -type f`; do
 done
 
 
-# neovim symlinks
+# Neovim symlinks
 echo >&2 "Symlinking Neovim Configs"
 mkdir -p ~/.config/nvim/plugin
 mkdir -p ~/.config/nvim/after/plugin
@@ -75,6 +75,9 @@ for f in `find . -regex ".*\.vim$\|.*\.lua$"`; do
     rm -rf ~/.config/nvim/$f
     ln -s ~/.dotfiles/$f ~/.config/nvim/$f
 done
+# CoC Configs
+rm -rf ~/.config/nvim/coc-settings.json
+ln -s ~/.dotfiles/coc-settings.json ~/.config/nvim/coc-settings.json
 
 # Symlink Snippets
 echo >&2 "Symlinking Snippets"
