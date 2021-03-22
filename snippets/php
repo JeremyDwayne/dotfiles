@@ -30,5 +30,5 @@ sc_utl::dev_log($1);
 endsnippet
 
 snippet wl "sc_utl::write_log()" b
-sc_utl::dev_log($1);
+sc_utl::write_log($1);
 endsnippet
