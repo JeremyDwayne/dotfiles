@@ -122,6 +122,7 @@ alias vi=nvim
 alias vimrc='vim ~/.config/nvim/init.vim'
 alias ealias='vim ~/.dotfiles/aliases.zsh'
 alias zshrc='vim ~/.zshrc'
+alias ealacritty='vim /mnt/c/Users/winterjd/appdata/Roaming/alacrity/alacritty.yml'
 
 alias gs='git status'
 

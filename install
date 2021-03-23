@@ -85,3 +85,10 @@ for f in `find ~/.dotfiles/snippets -type f`; do
     rm -f ~/.config/coc/ultisnips/"${f##*/}".snippets
     ln -s ~/.dotfiles/snippets/"${f##*/}" ~/.config/coc/ultisnips/"${f##*/}".snippets
 done
+
+if [ "$(uname)" = "Linux" ]; then
+    if grep -q microsoft /proc/version; then
+        echo >&2 "Remember to copy alacritty.yml to appdata if using that terminal on WSL"
+    fi
+fi
+
