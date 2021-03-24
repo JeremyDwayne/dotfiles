@@ -32,13 +32,16 @@ if ! [ -d "$HOME/.oh-my-zsh/" ]; then
 	echo >&2 "oh-my-zsh is not installed, fixing that..."
 	curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 
-	# Install ZSH Packages
 	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
+	# Install ZSH Packages
 	echo >&2 "Setting ZSH as default shell"
 	chsh -s /bin/zsh
+else
+	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 fi
+
 
 # Install RVM
 if ! [ -d "$HOME/.rvm" ]; then
@@ -82,6 +85,7 @@ ln -s ~/.dotfiles/coc-settings.json ~/.config/nvim/coc-settings.json
 # Symlink Snippets
 echo >&2 "Symlinking Snippets"
 for f in `find ~/.dotfiles/snippets -type f`; do
+    mkdir -p ~/.config/coc/ultisnips
     rm -f ~/.config/coc/ultisnips/"${f##*/}".snippets
     ln -s ~/.dotfiles/snippets/"${f##*/}" ~/.config/coc/ultisnips/"${f##*/}".snippets
 done
