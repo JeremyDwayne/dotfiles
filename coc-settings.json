@@ -8,7 +8,6 @@
         "rootPatterns": ["go.mod", ".vim/", ".git", ".hg"],
         "filetypes": ["go"]
     },
-    "intelephense.licenseKey": '"$INTELEPHENSE_KEY"',
     "intelephense": {
         "command": "intelephense",
         "args": ["--stdio"],

@@ -129,7 +129,7 @@ highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
 match OverLength /\%81v./
 
 " Coc Extensions "
-let g:coc_global_extensions = [ 'coc-snippets', 'coc-pairs', 'coc-json', ]
+let g:coc_global_extensions = [ 'coc-snippets', 'coc-pairs', 'coc-json' ]
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use `[g` and `]g` to navigate diagnostics
