@@ -8,8 +8,6 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" nnoremap <Leader>tf :lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({}))<cr>
-
 call plug#begin('~/.config/nvim/plugged/')
 
 " Intellisense
@@ -114,19 +112,18 @@ let g:dracula_italic = 1
 let g:dracula_colorterm = 0
 colorscheme dracula_pro
 
+lua require("configs")
 
-" write quit map
-nmap <leader>wq :wq<cr>
-nmap <leader>q :q!<cr>
-nmap <leader>w :w<cr>
-
-" Open and Close Location List (Error Messages)
-nmap <leader>lc :lclose<cr>
-nmap <leader>lo :lopen<cr>
-
-" Highlights single column if you go past 80 columns for code legibility, this comment is an example
-highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
-match OverLength /\%81v./
+" Open and Close QuickFix List
+nnoremap <C-q> :copen<CR>
+nnoremap <C-c> :cclose<CR>
+nnoremap <C-j> :cnext<CR>
+nnoremap <C-k> :cprev<CR>
+" Open and Close Location List
+nnoremap <leader>q :lopen<CR>
+nnoremap <leader>c :lclose<CR>
+nnoremap <leader>j :lnext<CR>
+nnoremap <leader>k :lprev<CR>
 
 " Coc Extensions "
 let g:coc_global_extensions = [ 'coc-snippets', 'coc-pairs', 'coc-json' ]
@@ -144,8 +141,8 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
 
 vnoremap <LeftRelease> "*ygv"
 
@@ -221,7 +218,7 @@ nnoremap <silent> <leader>bd :bd<CR>
 
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
-"
+
 " Use <C-j> for select text for visual placeholder of snippet.
 vmap <C-j> <Plug>(coc-snippets-select)
 
@@ -239,11 +236,11 @@ xmap <leader>x  <Plug>(coc-convert-snippet)
 
 
 " Useful mappings for managing tabs
-" map <leader>tn :tabnew<cr>
-" map <leader>to :tabonly<cr>
-" map <leader>tc :tabclose<cr>
-" map <leader>tm :tabmove
-" map <leader>t<leader> :tabnext
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext
 
 
 " Move lines of code around
@@ -278,35 +275,6 @@ nmap k gk
 nnoremap L $
 nnoremap H ^
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" The Silver Searcher
-" => Ag searching and cope displaying
-"    requires ag.vim - it's much better than vimgrep/grep
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" When you press gv you Ag after the selected text
-vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
-
-" Open Ag and put the cursor in the right position
-map <leader>g :Ag
-
-" bind \ (backward slash) to grep shortcut
-command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-
-cnoreabbrev ag Ack
-cnoreabbrev aG Ack
-cnoreabbrev Ag Ack
-cnoreabbrev AG Ack
-
-nnoremap \ :Ag<SPACE>
-" Use ag over grep
-if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
-    let g:ackprg = 'ag --vimgrep --smart-case'
-endif
-
-" bind K to grep word under cursor
-" nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR><CR>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
@@ -319,8 +287,6 @@ map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
-
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
@@ -342,12 +308,6 @@ function! VisualSelection(direction, extra_filter) range
     let l:pattern = escape(@", '\\/.*$^~[]')
     let l:pattern = substitute(l:pattern, "\n$", "", "")
 
-    if a:direction == 'gv'
-        call CmdLine("Ag \"" . l:pattern . "\" " )
-    elseif a:direction == 'replace'
-        call CmdLine("%s" . '/'. l:pattern . '/')
-    endif
-
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
@@ -365,36 +325,6 @@ endfunction
 " => General abbreviations
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")
-
-""""""""""""""""""""""""""""""
-" => Python section
-""""""""""""""""""""""""""""""
-" let python_highlight_all = 1
-" au FileType python syn keyword pythonDecorator True None False self
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => lightline
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" let g:lightline = ne{
-"       \ 'colorscheme': 'darcula',
-"       \ 'active': {
-"       \   'left': [ ['mode', 'paste'],
-"       \             ['fugitive', 'readonly', 'filename', 'modified'] ],
-"       \   'right': [ [ 'lineinfo' ], ['percent'] ]
-"       \ },
-"       \ 'component': {
-"       \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
-"       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-"       \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-"       \ },
-"       \ 'component_visible_condition': {
-"       \   'readonly': '(&filetype!="help"&& &readonly)',
-"       \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-"       \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-"       \ },
-"       \ 'separator': { 'left': ' ', 'right': ' ' },
-"       \ 'subseparator': { 'left': ' ', 'right': ' ' }
-"       \ }
 
 " vertical line indentation
 let g:indentLine_color_term = 239
@@ -420,10 +350,10 @@ let g:syntastic_javascript_checkers = ['eslint']
 nnoremap <silent><A-F> :Neoformat<CR>
 let g:neoformat_enabled_php = ['phpcsfixer']
 let g:neoformat_php_phpcsfixer = {
-    \ 'exe': 'php-cs-fixer',
-    \ 'args': ['fix', '-q', '--config', '~/.dotfiles/php_cs'],
-    \ 'replace': 1,
-    \ }
+            \ 'exe': 'php-cs-fixer',
+            \ 'args': ['fix', '-q', '--config', '~/.dotfiles/php_cs'],
+            \ 'replace': 1,
+            \ }
 
 " xmap <C-_> <Plug>Commentary
 " nmap <C-_> <Plug>Commentary

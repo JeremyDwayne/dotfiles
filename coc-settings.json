@@ -3,6 +3,7 @@
     "diagnostic.errorSign": "✘",
     "diagnostic.warningSign": "",
     "diagnostic.infoSign": "",
+    "diagnostic.hintSign": "",
     "golang": {
         "command": "gopls",
         "rootPatterns": ["go.mod", ".vim/", ".git", ".hg"],
@@ -12,10 +13,16 @@
         "command": "intelephense",
         "args": ["--stdio"],
         "filetypes": ["php"],
+        "rootPatterns": [".git", "package.json", "composer.json"],
         "initializationOptions": {
             "storagePath": "/tmp/intelephense"
         }
     },
+    "intelephense.telemetry.enabled": false,
+    "intelephense.completion.triggerParameterHints": true,
+    "intelephense.completion.insertUseDeclaration": true,
+    "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": true,
+    "intelephense.trace.server": "messages",
     "intelephense.stubs": [
         "apache",
         "bcmath",
