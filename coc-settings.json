@@ -22,6 +22,11 @@
     "intelephense.completion.insertUseDeclaration": true,
     "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": true,
     "intelephense.trace.server": "messages",
+    "intelephense.diagnostics.undefinedTypes": false,
+    "intelephense.diagnostics.typeErrors": false,
+    "intelephense.environment.includePaths": [
+        "/var/www/vhosts/smartcaresoftware.com/httpdocs/app/res/utilities"
+    ],
     "intelephense.stubs": [
         "apache",
         "bcmath",
