@@ -270,8 +270,8 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 map 0 ^
 
 " Remaps jk to ignore wrapped lines
-nmap j gj
-nmap k gk
+" nmap j gj
+" nmap k gk
 nnoremap L $
 nnoremap H ^
 
