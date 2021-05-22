@@ -14,6 +14,7 @@ call plug#begin('~/.config/nvim/plugged/')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'neovim/nvim-lspconfig'
 Plug 'preservim/tagbar'
+Plug 'preservim/nerdtree'
 
 " Sensible Default Vim Config
 Plug 'tpope/vim-sensible'
@@ -53,6 +54,7 @@ Plug 'sheerun/vim-polyglot'
 
 " Auto end statement
 Plug 'tpope/vim-endwise'
+Plug 'jiangmiao/auto-pairs'
 
 " Colored Parentheses
 Plug 'p00f/nvim-ts-rainbow'
@@ -108,6 +110,8 @@ packadd! dracula_pro
 
 syntax enable
 
+set background=dark
+let base16colorspace=256
 let g:dracula_italic = 1
 let g:dracula_colorterm = 0
 colorscheme dracula_pro
@@ -154,6 +158,53 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 "Enable smarter tab line
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
+
+
+" alvan/vim-closetag settings
+"
+" filenames like *.xml, *.html, *.xhtml, ...
+" These are the file extensions where this plugin is enabled.
+"
+let g:closetag_filenames = "*.html.erb,*.html,*.xhtml,*.phtml"
+
+" filenames like *.xml, *.xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+
+" filetypes like xml, html, xhtml, ...
+" These are the file types where this plugin is enabled.
+"
+let g:closetag_filetypes = 'html,xhtml,phtml'
+
+" filetypes like xml, xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filetypes = 'xhtml,jsx'
+
+" integer value [0|1]
+" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+"
+let g:closetag_emptyTags_caseSensitive = 1
+
+" dict
+" Disables auto-close if not in a "valid" region (based on filetype)
+"
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ 'typescriptreact': 'jsxRegion,tsxRegion',
+    \ 'javascriptreact': 'jsxRegion',
+    \ }
+
+" Shortcut for closing tags, default is '>'
+"
+let g:closetag_shortcut = '>'
+
+" Add > at current position without closing the current tag, default is ''
+"
+let g:closetag_close_shortcut = '<leader>>'
+
 
 
 " vim-markdown
@@ -327,8 +378,8 @@ endfunction
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")
 
 " vertical line indentation
-let g:indentLine_color_term = 239
-let g:indentLine_color_gui = '#09AA08'
+" let g:indentLine_color_term = 239
+" let g:indentLine_color_gui = '#09AA08'
 let g:indentLine_char = '│'
 
 " When reading a buffer (after 1s), and when writing.
@@ -374,6 +425,12 @@ set completeopt=menuone,noinsert,noselect
 " Avoid showing message extra message when using completion
 set shortmess+=c
 
+" NerdTree
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <leader>nt :NERDTree<CR>
+nnoremap <leader>nn :NERDTreeToggle<CR>
+nnoremap <leader>nf :NERDTreeFind<CR>
+
 fun! TrimWhitespace()
     let l:save = winsaveview()
     keeppatterns %s/\s\+$//e
@@ -418,17 +475,21 @@ augroup jeremydwayne
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
     " Neoformat
-    autocmd BufWritePre *.js Neoformat
-    autocmd BufWritePre *.jsx Neoformat
+    " autocmd BufWritePre *.js Neoformat
+    " autocmd BufWritePre *.jsx Neoformat
     autocmd BufWritePre *.php Neoformat
     autocmd BufWritePre *.go Neoformat
     autocmd BufWritePre *.ruby Neoformat
     autocmd BufWritePre *.css Neoformat
     autocmd BufWritePre *.html Neoformat
 
+    " set tab size on filetype
+    autocmd FileType php setlocal shiftwidth=4 softtabstop=4 expandtab
+
     " Generate CTags for PHP
     au BufWritePost *.php silent! !eval '[ -f ".git/hooks/ctags" ] && .git/hooks/ctags' &
 
     " autocmd BufEnter * lua require'completion'.on_attach()
     autocmd FileType php setlocal commentstring=//\ %s
+    autocmd InsertEnter,InsertLeave * set cul!
 augroup END

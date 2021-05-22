@@ -18,8 +18,8 @@ set ffs=unix,dos,mac
 
 set exrc
 
-highlight Cursor guifg=white guibg=#bd93f9
-set guicursor=n-v-c:block-Cursor
+" highlight Cursor guifg=white guibg=#bd93f9
+" set guicursor=n-v-c:block-Cursor
 
 set relativenumber
 set nohlsearch
@@ -39,8 +39,8 @@ set noswapfile
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use spaces instead of tabs
-set tabstop=4 softtabstop=4
-set shiftwidth=4
+set tabstop=2 softtabstop=2
+set shiftwidth=2
 set expandtab
 set smartindent
 set autoindent
