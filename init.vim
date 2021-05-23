@@ -107,14 +107,18 @@ map <leader>e :e! ~/.config/nvim/init.vim<cr>
 " Or if you have Neovim >= 0.1.5
 
 packadd! dracula_pro
+packadd! onedark
 
 syntax enable
 
 set background=dark
-let base16colorspace=256
-let g:dracula_italic = 1
-let g:dracula_colorterm = 0
-colorscheme dracula_pro
+" let base16colorspace=256
+" let g:dracula_italic = 1
+" let g:dracula_colorterm = 0
+" colorscheme dracula_pro
+colorscheme onedark
+let g:onedark_italics = 1
+let g:onedark_termcolors = 256
 
 lua require("configs")
 
@@ -128,6 +132,11 @@ nnoremap <leader>q :lopen<CR>
 nnoremap <leader>c :lclose<CR>
 nnoremap <leader>j :lnext<CR>
 nnoremap <leader>k :lprev<CR>
+
+" Save File Remaps
+nnoremap <silent><leader>w <ESC>:w<CR>
+vnoremap <silent><leader>w <ESC>:w<CR>gv
+inoremap <silent><leader>w <ESC>:w<CR>i
 
 " Coc Extensions "
 let g:coc_global_extensions = [ 'coc-snippets', 'coc-pairs', 'coc-json', 'coc-solargraph' ]
@@ -151,6 +160,7 @@ nmap <silent> gr <Plug>(coc-references)
 vnoremap <LeftRelease> "*ygv"
 
 " Fix airline fonts from not displaying correctly
+let g:airline_theme='onedark'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#formatter = 'unique_tail'
@@ -215,7 +225,7 @@ let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'yaml', 'haml', 'ba
 nmap <leader>whtml :VimwikiAll2HTML<cr>
 nmap <leader>wit :VimwikiTable
 
-" let g:user_emmet_leader_key='<Tab>'
+" let g:user_emmet_leader_key=','
 " let g:user_emmet_settings = {
 "             \  'javascript.jsx' : {
 "             \      'extends' : 'jsx',
@@ -475,11 +485,11 @@ augroup jeremydwayne
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
     " Neoformat
-    " autocmd BufWritePre *.js Neoformat
-    " autocmd BufWritePre *.jsx Neoformat
+    autocmd BufWritePre *.js Neoformat
+    autocmd BufWritePre *.jsx Neoformat
     autocmd BufWritePre *.php Neoformat
     autocmd BufWritePre *.go Neoformat
-    autocmd BufWritePre *.ruby Neoformat
+    autocmd BufWritePre *.rb Neoformat
     autocmd BufWritePre *.css Neoformat
     autocmd BufWritePre *.html Neoformat
 
