@@ -7,10 +7,10 @@
 " These functions are stored in harpoon.  A plugn that I am developing
 nnoremap <C-m> :lua require("harpoon.mark").add_file()<CR>
 nnoremap <C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
-nnoremap <C-y> :lua require("harpoon.ui").nav_file(1)<CR>
-nnoremap <C-u> :lua require("harpoon.ui").nav_file(2)<CR>
-nnoremap <C-i> :lua require("harpoon.ui").nav_file(3)<CR>
-nnoremap <C-o> :lua require("harpoon.ui").nav_file(4)<CR>
+nnoremap <C-Left> :lua require("harpoon.ui").nav_file(1)<CR>
+nnoremap <C-Down> :lua require("harpoon.ui").nav_file(2)<CR>
+nnoremap <C-Up> :lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <C-Right> :lua require("harpoon.ui").nav_file(4)<CR>
 nnoremap <C-g> :lua require("harpoon.mark").rm_file()<CR>
 nnoremap <leader><C-r> :lua require("harpoon.mark").shorten_list()<CR>
 nnoremap <leader><C-d> :lua require("harpoon.mark").clear_all()<CR>

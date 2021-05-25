@@ -20,6 +20,7 @@ Plug 'preservim/nerdtree'
 Plug 'tpope/vim-sensible'
 
 Plug 'vim-airline/vim-airline'
+Plug 'dracula/vim'
 
 " If you want to display icons, then use one of these plugins:
 Plug 'kyazdani42/nvim-web-devicons' " lua
@@ -115,13 +116,12 @@ packadd! onedark
 syntax enable
 
 set background=dark
-" let base16colorspace=256
-" let g:dracula_italic = 1
-" let g:dracula_colorterm = 0
-" colorscheme dracula_pro
-colorscheme onedark
-let g:onedark_italics = 1
-let g:onedark_termcolors = 256
+let g:dracula_italic = 1
+let g:dracula_colorterm = 0
+colorscheme dracula_pro
+" colorscheme onedark
+" let g:onedark_italics = 1
+" let g:onedark_termcolors = 256
 
 lua require("configs")
 
@@ -163,7 +163,7 @@ nmap <silent> gr <Plug>(coc-references)
 vnoremap <LeftRelease> "*ygv"
 
 " Fix airline fonts from not displaying correctly
-let g:airline_theme='onedark'
+let g:airline_theme='dracula'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#formatter = 'unique_tail'
