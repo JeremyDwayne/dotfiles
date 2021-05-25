@@ -58,6 +58,7 @@ alias path='echo $PATH | tr -s ":" "\n"'
 
 # CD Aliases
 alias cds='cd ~/Documents/school/'
+alias omega='cd /var/www/vhosts/smartcaresoftware.com/httpdocs/app/dev/_omegadev/sc/'
 
 # Scripts Aliases
 alias tmpc='source ~/.scripts/CTemplate.sh'

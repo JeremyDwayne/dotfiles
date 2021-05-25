@@ -12,6 +12,7 @@ call plug#begin('~/.config/nvim/plugged/')
 
 " Intellisense
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'yaegassy/coc-intelephense', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'neovim/nvim-lspconfig'
 Plug 'preservim/tagbar'
 Plug 'preservim/nerdtree'
@@ -82,6 +83,9 @@ Plug 'fatih/vim-go'
 " Rails
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 
+" PHP
+Plug 'stephpy/vim-php-cs-fixer'
+
 " Javascript Plugins
 Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'typescript'] }
 Plug 'claco/jasmine.vim', { 'for': ['javascript', 'typescript'] }
@@ -111,7 +115,7 @@ map <leader>e :e! ~/.config/nvim/init.vim<cr>
 " Or if you have Neovim >= 0.1.5
 
 packadd! dracula_pro
-packadd! onedark
+" packadd! onedark
 
 syntax enable
 
@@ -142,7 +146,7 @@ vnoremap <silent><leader>w <ESC>:w<CR>gv
 inoremap <silent><leader>w <ESC>:w<CR>i
 
 " Coc Extensions "
-let g:coc_global_extensions = [ 'coc-snippets', 'coc-pairs', 'coc-json', 'coc-solargraph' ]
+let g:coc_global_extensions = ['coc-snippets', 'coc-pairs', 'coc-json', 'coc-solargraph' ]
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -404,8 +408,8 @@ let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}
 let g:syntastic_javascript_checkers = ['eslint']
 
 " PHP CS FIXER
-" let g:php_cs_fixer_path = "/home/linuxbrew/.linuxbrew/bin/php-cs-fixer"
-" let g:php_cs_fixer_config_file = "~/.dotfiles/php_cs"
+" let g:php_cs_fixer_path = "/home/omegasupport/.config/composer/vendor/bin/php-cs-fixer"
+" let g:php_cs_fixer_config_file = "/sc/config/.php_cs"
 " nnoremap <silent><A-D> :call PhpCsFixerFixDirectory()<CR>
 
 " Neoformat
@@ -417,8 +421,8 @@ nnoremap <silent><A-F> :Neoformat<CR>
 let g:neoformat_enabled_ruby = ['rubocop']
 let g:neoformat_enabled_php = ['phpcsfixer']
 let g:neoformat_php_phpcsfixer = {
-            \ 'exe': 'php-cs-fixer',
-            \ 'args': ['fix', '-q', '--config', '~/.dotfiles/php_cs'],
+            \ 'exe': '/home/omegasupport/.config/composer/vendor/bin/php-cs-fixer',
+            \ 'args': ['fix', '-q', '--config', '/sc/config/.php_cs'],
             \ 'replace': 1,
             \ }
 
