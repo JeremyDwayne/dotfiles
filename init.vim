@@ -21,12 +21,15 @@ Plug 'tpope/vim-sensible'
 
 Plug 'vim-airline/vim-airline'
 
+" If you want to display icons, then use one of these plugins:
+Plug 'kyazdani42/nvim-web-devicons' " lua
+
 " File Switch Plugins
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'ThePrimeagen/harpoon'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
-" Plug 'ThePrimeagen/harpoon'
 
 " Formatting / Syntax
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}

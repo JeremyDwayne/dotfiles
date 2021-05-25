@@ -8,6 +8,4 @@ nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim
 nnoremap <leader>pb :lua require('telescope.builtin').buffers()<CR>
 nnoremap <leader>vh :lua require('telescope.builtin').help_tags()<CR>
 nnoremap <leader>dot :lua require('configs.telescope').search_dotfiles()<CR>
-nnoremap <leader>va :lua require('configs.telescope').anime_selector()<CR>
-nnoremap <leader>vc :lua require('configs.telescope').chat_selector()<CR>
 nnoremap <leader>gc :lua require('configs.telescope').git_branches()<CR>
