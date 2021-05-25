@@ -408,7 +408,10 @@ let g:syntastic_javascript_checkers = ['eslint']
 " Neoformat
 " let g:neoformat_basic_format_retab = 1
 " let g:neoformat_only_msg_on_error = 1
+" let g:neoformat_basic_format_align = 1
+let g:neoformat_basic_format_trim = 1
 nnoremap <silent><A-F> :Neoformat<CR>
+let g:neoformat_enabled_ruby = ['rubocop']
 let g:neoformat_enabled_php = ['phpcsfixer']
 let g:neoformat_php_phpcsfixer = {
             \ 'exe': 'php-cs-fixer',

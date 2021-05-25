@@ -11,13 +11,7 @@
 # style     code that is related to styling
 # test      a new test or modified existing test
 ######## Body 72 characters ############################################
-# Problem
-# Problem, Task, Reason for Commit
 
-
-# Solution
-# Solution or List of Changes
-
-
-# Note
-# Special instructions, testing steps, rake, etc
+# * Why was this change necessary?
+# * How does it address the problem?
+# * Are there any side effects?
