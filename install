@@ -67,29 +67,13 @@ for f in `find ~/.dotfiles/configs -type f`; do
     ln -s ~/.dotfiles/configs/"${f##*/}" ~/."${f##*/}"
 done
 
-
 # Neovim symlinks
 echo >&2 "Symlinking Neovim Configs"
-mkdir -p ~/.config/nvim/plugin
-mkdir -p ~/.config/nvim/after/plugin
-mkdir -p ~/.config/nvim/lua/configs
+mkdir -p ~/.config
+rm -rf ~/.config/nvim
+ln -s ~/.dotfiles/nvim ~/.config/nvim
 
-for f in `find . -regex ".*\.vim$\|.*\.lua$"`; do
-    rm -rf ~/.config/nvim/$f
-    ln -s ~/.dotfiles/$f ~/.config/nvim/$f
-done
-# CoC Configs
-rm -rf ~/.config/nvim/coc-settings.json
-ln -s ~/.dotfiles/coc-settings.json ~/.config/nvim/coc-settings.json
-
-# Symlink Snippets
-echo >&2 "Symlinking Snippets"
-for f in `find ~/.dotfiles/snippets -type f`; do
-    mkdir -p ~/.config/coc/ultisnips
-    rm -f ~/.config/coc/ultisnips/"${f##*/}".snippets
-    ln -s ~/.dotfiles/snippets/"${f##*/}" ~/.config/coc/ultisnips/"${f##*/}".snippets
-done
-
+# Alacritty
 if [ "$(uname)" = "Linux" ]; then
     if grep -q microsoft /proc/version; then
         echo >&2 "Remember to copy alacritty.yml to appdata if using that terminal on WSL"
