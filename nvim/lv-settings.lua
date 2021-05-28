@@ -11,9 +11,11 @@ an executable
 O.auto_complete = true
 O.colorscheme = 'lunar'
 O.auto_close_tree = 0
-O.wrap_lines = false
+O.wrap_lines = true
 O.timeoutlen = 100
+O.history = 500
 
+-- This is a change
 -- dashboard
 -- O.dashboard.custom_header = {""}
 -- O.dashboard.footer = {""}
