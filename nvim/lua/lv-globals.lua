@@ -3,11 +3,11 @@ O = {
     auto_complete = true,
     colorscheme = 'lunar',
     hidden_files = true,
-    wrap_lines = false,
+    wrap_lines = true,
     number = true,
     relative_number = true,
     shell = 'bash',
-	timeoutlen = 100,
+    timeoutlen = 100,
     nvim_tree_disable_netrw = 0, -- "1 by default, disables netrw (must be set before plugin's packadd)
 
     -- @usage pass a table with your desired languages
