@@ -8,7 +8,7 @@ vim.cmd('set incsearch')
 vim.cmd('set magic')
 vim.cmd('set undodir=~/.vim/undodir')
 vim.cmd('set undofile')
-vim.cmd('set textwidth=140')
+vim.cmd('set textwidth=120')
 vim.o.hidden = O.hidden_files -- Required to keep multiple buffers open multiple buffers
 vim.o.title = true
 TERMINAL = vim.fn.expand('$TERMINAL')

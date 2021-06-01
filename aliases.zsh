@@ -49,9 +49,8 @@ alias bu="bundle update"
 alias migrate="rake db:migrate db:rollback && rake db:migrate"
 alias s="rspec"
 alias rk="rake"
-alias rc="rails c"
+# alias rc="rails c"
 # alias rs="rails s"
-alias gi="gem install"
 
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'

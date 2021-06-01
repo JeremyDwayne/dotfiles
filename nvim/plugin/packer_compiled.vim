@@ -175,6 +175,11 @@ _G.packer_plugins = {
     needs_bufread = false,
     path = "/home/winterjd/.local/share/nvim/site/pack/packer/opt/popup.nvim"
   },
+  ["tagalong.vim"] = {
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/winterjd/.local/share/nvim/site/pack/packer/opt/tagalong.vim"
+  },
   ["telescope-fzy-native.nvim"] = {
     loaded = false,
     needs_bufread = false,
