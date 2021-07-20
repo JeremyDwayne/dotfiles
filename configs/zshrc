@@ -83,6 +83,8 @@ export PATH=$PATH:$HOME/.dotfiles/scripts
 export PATH=$PATH:$HOME/.config/composer/vendor/bin
 export PATH=$PATH:/usr/local/opt/mysql@5.6/bin
 export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -92,6 +94,7 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/.dotfiles/aliases.zsh
 source $HOME/.dotfiles/env_vars.zsh
 
+export TERM=xterm-256color
 # Force add ssh keys on terminal startup, and turn on ssh-agent
 # eval "$(ssh-agent -s)"
 # ssh-add -A 2>/dev/null;
@@ -134,6 +137,8 @@ export CPLUS_INCLUDE_PATH=/usr/local/include
 
 # Z Quick CD
 source ~/.dotfiles/z/z.sh
+# Dracula ZSH Syntax Highlighting Theme
+source ~/.dotfiles/zsh-syntax-highlighting.sh
 
 # brew install zsh-syntax-highlighting
 # source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

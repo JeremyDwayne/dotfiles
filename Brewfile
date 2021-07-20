@@ -1,4 +1,3 @@
-brew "reattach-to-user-namespace"
 brew "zsh"
 brew "git"
 brew "coreutils"

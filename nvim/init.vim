@@ -114,26 +114,25 @@ map <leader>e :e! ~/.config/nvim/init.vim<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Or if you have Neovim >= 0.1.5
 
-" packadd! dracula_pro
+packadd! dracula_pro
 " packadd! onedark
 
 syntax enable
 
 set background=dark
-" let g:dracula_italic = 1
-" let g:dracula_colorterm = 0
-" colorscheme dracula_pro
+let g:dracula_italic = 1
+let g:dracula_colorterm = 0
+colorscheme dracula_pro
 " colorscheme onedark
 " let g:onedark_italics = 1
 " let g:onedark_termcolors = 256
 
-lua require('init')
 
 " configure nvcode-color-schemes
 let g:nvcode_termcolors=256
 
 syntax on
-colorscheme lunar " Or whatever colorscheme you make
+" colorscheme lunar " Or whatever colorscheme you make
 
 " checks if your terminal has 24-bit color support
 if (has("termguicolors"))
@@ -141,6 +140,7 @@ if (has("termguicolors"))
     hi LineNr ctermbg=NONE guibg=NONE
 endif
 
+lua require('init')
 
 " lua require('plugins.statusline.init')
 

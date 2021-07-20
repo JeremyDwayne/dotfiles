@@ -31,6 +31,16 @@ for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup { on_attach = on_attach }
 end
 
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    --defines error in line via keybinding
+    virtual_text = true,
+    underline = { severity_limit = "Error" },
+    signs = true,
+    update_in_insert = false,
+  }
+)
+
 
 require'lspconfig'.intelephense.setup{
     on_attach=on_attach,

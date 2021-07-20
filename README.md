@@ -1,5 +1,5 @@
 ## Install
-`./install` will run a script that checks what OS you're on, and if you have 
+`./install` will run a script that checks what OS you're on, and if you have
 all the necessary programs installed. If you dont, it installs them for you!
 Once the dependencies are installed, it will run any third party installations,
 and create symlinks for the necessary config files in the correct locations.
@@ -44,7 +44,7 @@ alias mdtopdf='source ~/.dotfiles/scripts/MDtoPDF.sh'
 MDtoPDF Uses **Python Markdown** and **wkhtmltopdf** to convert a markdown file into a pdf
 file.
 
-Usage: `mdtopdf <filenamewithoutextension> <optionaldirectory>`  
+Usage: `mdtopdf <filenamewithoutextension> <optionaldirectory>`
 Example: `mdtopdf notes pdf` would convert notes.md to a pdf and save it to the /pdf
 directory
 
