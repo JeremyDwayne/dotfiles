@@ -155,11 +155,6 @@ nnoremap <leader>c :lclose<CR>
 nnoremap <leader>j :lnext<CR>
 nnoremap <leader>k :lprev<CR>
 
-" Save File Remaps
-nnoremap <silent><leader>w <ESC>:w<CR>
-vnoremap <silent><leader>w <ESC>:w<CR>gv
-inoremap <silent><leader>w <ESC>:w<CR>i
-
 " Coc Extensions "
 let g:coc_global_extensions = [ 'coc-snippets', 'coc-pairs', 'coc-json', 'coc-solargraph' ]
 inoremap <silent><expr> <c-space> coc#refresh()
