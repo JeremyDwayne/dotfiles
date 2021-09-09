@@ -11,8 +11,8 @@ endif
 call plug#begin('~/.config/nvim/plugged/')
 
 " Intellisense
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'neovim/nvim-lspconfig'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neovim/nvim-lspconfig'
 Plug 'preservim/tagbar'
 Plug 'preservim/nerdtree'
 
@@ -20,7 +20,6 @@ Plug 'preservim/nerdtree'
 Plug 'tpope/vim-sensible'
 
 " Plug 'vim-airline/vim-airline'
-" Plug 'dracula/vim'
 Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'romgrk/barbar.nvim'
 Plug 'ChristianChiarulli/nvcode-color-schemes.vim'
@@ -53,7 +52,7 @@ Plug 'mattn/emmet-vim'
 Plug 'Shougo/deoppet.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Git
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
 " Plug 'mhinz/vim-signify'
 
 
@@ -85,6 +84,7 @@ Plug 'fatih/vim-go'
 
 " Rails
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
+Plug 'thoughtbot/vim-rspec'
 
 " Javascript Plugins
 Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'typescript'] }
@@ -97,7 +97,7 @@ Plug 'ludovicchabant/vim-gutentags'
 
 call plug#end()
 
-let mapleader=" "
+let mapleader=","
 inoremap jk <ESC>
 
 let g:sync_async_upload = 1
@@ -140,6 +140,7 @@ if (has("termguicolors"))
     hi LineNr ctermbg=NONE guibg=NONE
 endif
 
+lua require"nvim-treesitter.install".compilers = {"gcc"}
 lua require('init')
 
 " lua require('plugins.statusline.init')
@@ -169,6 +170,11 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+map <C-s> <esc>:w<CR>
+imap <C-s> <esc>:w<CR>
+map <C-t> <esc>:tabnew<CR>
+map <C-x> <C-w>c
 
 " Formatting selected code.
 " xmap <leader>f  <Plug>(coc-format-selected)
