@@ -19,8 +19,9 @@ Plug 'preservim/nerdtree'
 " Sensible Default Vim Config
 Plug 'tpope/vim-sensible'
 
-" Plug 'vim-airline/vim-airline'
-Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+Plug 'vim-airline/vim-airline'
+Plug 'dracula/vim'
+" Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'romgrk/barbar.nvim'
 Plug 'ChristianChiarulli/nvcode-color-schemes.vim'
 

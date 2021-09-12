@@ -3,7 +3,7 @@ set encoding=UTF-8
 set updatetime=50
 
 set shortmess+=c
-
+set iskeyword+=-
 set timeoutlen=1000 ttimeoutlen=0
 
 set termguicolors

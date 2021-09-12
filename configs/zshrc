@@ -95,6 +95,7 @@ source $HOME/.dotfiles/aliases.zsh
 source $HOME/.dotfiles/env_vars.zsh
 
 export TERM=xterm-256color
+export LANG=UTF-8
 # Force add ssh keys on terminal startup, and turn on ssh-agent
 # eval "$(ssh-agent -s)"
 # ssh-add -A 2>/dev/null;
@@ -160,6 +161,7 @@ function code {
     fi
   }
 
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
