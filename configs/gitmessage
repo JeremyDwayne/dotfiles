@@ -1,0 +1,17 @@
+######## Subject 50 characters ###################
+#<type>(<scope>): <subject>
+
+# build     npm/composer related, adding external dependencies
+# chore     a code change that external user wont see
+# feat      a new feature
+# fix       a bug fix
+# docs      documentation related changes
+# refactor  code that neither fixes a bug nor adds a feature
+# perf      code that improves performance
+# style     code that is related to styling
+# test      a new test or modified existing test
+######## Body 72 characters ############################################
+
+# * Why was this change necessary?
+# * How does it address the problem?
+# * Are there any side effects?
