@@ -45,6 +45,12 @@ set wildignore+=*/node_modules/*
 
 autocmd InsertLeave * set nopaste
 
+" Remember where you were in vim
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+
 set formatoptions+=r
 
 set cursorline
