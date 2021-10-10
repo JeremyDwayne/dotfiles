@@ -88,12 +88,12 @@ if exists("&termguicolors") && exists("&winblend")
   set pumblend=5
   set background=dark
   
-  " packadd! dracula_pro
-  " let g:dracula_colorterm=0
-  " colorscheme dracula_pro
+  packadd! dracula_pro
+  let g:dracula_colorterm=0
+  let g:dracula_use_term_italics=1
+  colorscheme dracula_pro
 endif
 
 set t_ZH=[3m
 set t_ZR=[23m
-colorscheme codedark
 highlight Comment cterm=italic
