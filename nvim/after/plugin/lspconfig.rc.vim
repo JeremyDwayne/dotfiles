@@ -81,7 +81,7 @@ lua << EOF
     }
   end
 
-  local servers = {'pyright', 'gopls', 'flow', 'solargraph'}
+  local servers = {'pyright', 'gopls', 'solargraph'}
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
       on_attach = on_attach,
@@ -91,11 +91,11 @@ lua << EOF
   nvim_lsp.tsserver.setup {
     on_attach = on_attach,
     filetypes = { "typescript", "typescriptreact", "typescript.tsx" }
-    }
+  }
 
   nvim_lsp.diagnosticls.setup {
     on_attach = on_attach,
-    filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'pandoc' },
+    --filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'pandoc' },
     init_options = {
       linters = {
         eslint = {
