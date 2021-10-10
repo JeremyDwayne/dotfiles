@@ -2,6 +2,7 @@ autocmd!
 scriptencoding utf-8
 if !1 | finish | endif
 
+let mapleader=","
 set nocompatible
 set number
 syntax enable
@@ -51,7 +52,6 @@ highlight Visual cterm=NONE ctermbg=236 ctermfg=NONE guibg=Grey40
 highlight LineNr cterm=none ctermfg=240 guifg=#2b506e guibg=#000000
 
 " File types
-"
 " JavaScript
 au BufNewFile,BufRead *.es6 setf javascript
 " TypeScript
@@ -91,6 +91,3 @@ if exists("&termguicolors") && exists("&winblend")
   let g:dracula_colorterm=0
   colorscheme dracula_pro
 endif
-
-
-set exrc

@@ -49,3 +49,15 @@ nmap <C-w><left> <C-w><
 nmap <C-w><right> <C-w>>
 nmap <C-w><up> <C-w>+
 nmap <C-w><down> <C-w>-
+
+
+" Fugitive
+nmap <leader>gs :G<CR>
+" Choose right merge
+nmap <leader>gj :diffget //3<CR>
+" Choose left merge
+nmap <leader>gf :diffget //2<CR>
+nnoremap <leader>gc :GCheckout<CR
+
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
+let $FZF_DEFAULT_OPTS='--reverse'

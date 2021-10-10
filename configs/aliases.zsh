@@ -10,3 +10,5 @@ alias dc='docker-compose'
 
 # list TODO/FIX lines from the current project
 alias todos="ag --nogroup '(TODO|FIX(ME)?):'"
+
+alias ide="source ~/.dotfiles/scripts/ide.zsh"
