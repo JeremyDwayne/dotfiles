@@ -16,16 +16,17 @@ if has("nvim")
   Plug 'kristijanhusak/defx-icons'
   Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'neovim/nvim-lspconfig'
+  Plug 'tami5/lspsaga.nvim'
+  " Outdated non-functioning
   " Plug 'glepnir/lspsaga.nvim'
-  Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
-  Plug 'ray-x/navigator.lua'
   Plug 'folke/lsp-colors.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-lua/completion-nvim'
-  " Plug 'hrsh7th/nvim-compe'
+  Plug 'rafaelsq/completion-nvim'
+  " Outdated non-functioning
+  " Plug 'nvim-lua/completion-nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
   Plug 'windwp/nvim-autopairs'
