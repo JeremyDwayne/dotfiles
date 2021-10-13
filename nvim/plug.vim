@@ -9,7 +9,6 @@ Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
-Plug 'tomasiser/vim-code-dark'
 
 if has("nvim")
   Plug 'hoob3rt/lualine.nvim'
@@ -30,13 +29,12 @@ if has("nvim")
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/nvim-cmp'
-
-  " For vsnip user.
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-nvim-lua'
   Plug 'hrsh7th/cmp-vsnip'
   Plug 'hrsh7th/vim-vsnip'
-  " Plug 'rafaelsq/completion-nvim'
-  " Outdated non-functioning
-  " Plug 'nvim-lua/completion-nvim'
+  Plug 'rafamadriz/friendly-snippets'
+
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
   Plug 'windwp/nvim-autopairs'

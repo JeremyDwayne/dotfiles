@@ -29,6 +29,8 @@ lua <<EOF
     sources = {
       { name = 'nvim_lsp' },
       { name = 'vsnip' },
+      { name = 'path' },
+      { name = 'nvim_lua' },
       { name = 'buffer' },
     }
   })
