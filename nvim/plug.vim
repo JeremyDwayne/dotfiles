@@ -25,7 +25,16 @@ if has("nvim")
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
-  Plug 'rafaelsq/completion-nvim'
+
+  "Completion
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/nvim-cmp'
+
+  " For vsnip user.
+  Plug 'hrsh7th/cmp-vsnip'
+  Plug 'hrsh7th/vim-vsnip'
+  " Plug 'rafaelsq/completion-nvim'
   " Outdated non-functioning
   " Plug 'nvim-lua/completion-nvim'
   Plug 'nvim-telescope/telescope.nvim'
