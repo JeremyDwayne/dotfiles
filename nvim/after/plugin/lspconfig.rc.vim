@@ -49,8 +49,8 @@ lua << EOF
     vim.api.nvim_command [[augroup END]]
   end
 
-  require'completion'.on_attach(client, bufnr)
-
+  --require'completion'.on_attach(client, bufnr)
+ 
   --protocol.SymbolKind = { }
   protocol.CompletionItemKind = {
     '', -- Text
@@ -81,13 +81,30 @@ lua << EOF
     }
   end
 
-  local servers = {'pyright', 'gopls', 'solargraph'}
+  local servers = {'pyright', 'gopls'}
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
       on_attach = on_attach,
       capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
     }
   end
+
+  nvim_lsp.solargraph.setup {
+    on_attach = on_attach,
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    cmd = { "solargraph", "stdio" },
+    filetypes = { "ruby" },
+    flags = { debounce_text_changes = 150, },
+    handlers = {
+      ["textDocument/publishDiagnostics"] = vim.lsp.with(
+      vim.lsp.diagnostic.on_publish_diagnostics, {
+        -- Disable virtual_text on file load
+        -- Show with vim.lsp.diagnostic.show_line_diagnostics()
+        virtual_text = false
+        }
+      ),
+    },
+  }
 
   nvim_lsp.tsserver.setup {
     on_attach = on_attach,

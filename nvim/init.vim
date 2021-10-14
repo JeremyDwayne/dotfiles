@@ -57,6 +57,11 @@ set cursorline
 highlight Visual cterm=NONE ctermbg=236 ctermfg=NONE guibg=Grey40
 highlight LineNr cterm=none ctermfg=240 guifg=#2b506e guibg=#000000
 
+" block in normal mode, a vertical bar in insert mode, and a underscore in replace mode.
+let &t_EI = "\<Esc>[1 q"
+let &t_SR = "\<Esc>[3 q"
+let &t_SI = "\<Esc>[5 q"
+
 " File types
 " JavaScript
 au BufNewFile,BufRead *.es6 setf javascript
@@ -94,10 +99,11 @@ if exists("&termguicolors") && exists("&winblend")
   set pumblend=5
   set background=dark
   
-  packadd! dracula_pro
-  let g:dracula_colorterm=0
-  let g:dracula_use_term_italics=1
-  colorscheme dracula_pro
+  lua require('colorbuddy').colorscheme('gruvbuddy')
+  " packadd! dracula_pro
+  " let g:dracula_colorterm=0
+  " let g:dracula_use_term_italics=1
+  " colorscheme dracula_pro
 endif
 
 set t_ZH=[3m
