@@ -1,8 +1,3 @@
-if !exists('g:loaded_cmp') | finish | endif
-
-set completeopt=menu,menuone,noselect
-
-lua <<EOF
   -- Setup nvim-cmp.
   local cmp = require'cmp'
 
@@ -34,4 +29,3 @@ lua <<EOF
       { name = 'buffer' },
     }
   })
-EOF
