@@ -14,3 +14,29 @@ alias todos="ag --nogroup '(TODO|FIX(ME)?):'"
 alias ide="source ~/.dotfiles/scripts/ide.zsh"
 
 alias luamake=/usr/local/share/lua-language-server/3rd/luamake/luamake
+
+# Ruby App aliases
+alias startredis="brew services start redis"
+alias stopredis="brew services stop redis"
+
+alias startpg="brew services start postgresql"
+alias stoppg="brew services stop postgresql"
+
+alias startapi="bundle exec puma -v -C config/puma.rb config.ru -p 7777"
+alias startsidekiq="bundle exec sidekiq -r ./config/environment.rb -C ./config/sidekiq.yml"
+
+alias rubocop="bundle exec rubocop --parallel"
+
+alias resettestdb="RACK_ENV=test rake db:reset && RACK_ENV=test rake db:seed"
+alias runalltests="RACK_ENV=test rake db:prepare; rspec"
+
+# Docker Aliases
+alias dc-dev-b='docker-compose -f docker/dev/docker-compose.yml build api_dev'
+alias dc-dev-u='docker-compose -f docker/dev/docker-compose.yml up api_dev'
+alias dc-dev-r='docker-compose -f docker/dev/docker-compose.yml run api_dev'
+alias dc-dev-e='docker-compose -f docker/dev/docker-compose.yml exec api_dev'
+ 
+alias dc-test-b='docker-compose -f docker/test/docker-compose.yml build api_test'
+alias dc-test-u='docker-compose -f docker/test/docker-compose.yml up api_test'
+alias dc-test-r='docker-compose -f docker/test/docker-compose.yml run api_test'
+alias dc-test-e='docker-compose -f docker/test/docker-compose.yml exec api_test'
