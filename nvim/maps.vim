@@ -69,7 +69,8 @@ nnoremap <C-p> <cmd>Telescope git_files<cr>
 nnoremap <silent> ;r <cmd>Telescope live_grep<cr>
 nnoremap <silent> \\ <cmd>Telescope buffers<cr>
 nnoremap <silent> ;; <cmd>Telescope help_tags<cr>
-nnoremap <leader>ed :lua search_dotfiles()<cr>
+nnoremap <silent> ;d :lua search_dotfiles()<cr>
+nnoremap <silent> // <cmd>Telescope current_buffer_fuzzy_find<cr>
 
 " LSP config
 nnoremap <silent> gD <Cmd>lua vim.lsp.buf.declaration()<CR>
@@ -84,16 +85,21 @@ nnoremap <silent> <space>rn <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> <space>ca <cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> <space>e <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
-nnoremap <silent> <S-C-j> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <silent> <C-j> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <silent> <C-f> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent> <space>q <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
 nnoremap <silent> <space>f <cmd>lua vim.lsp.buf.formatting()<CR>
-
-" buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>
-" nnoremap  '<C-j>', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-
 
 " LSPSaga
 nnoremap <silent> <C-j> <Cmd>Lspsaga diagnostic_jump_next<CR>
 nnoremap <silent>K <Cmd>Lspsaga hover_doc<CR>
 inoremap <silent> <C-k> <Cmd>Lspsaga signature_help<CR>
 nnoremap <silent> gh <Cmd>Lspsaga lsp_finder<CR>
+
+" Move Lines
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
