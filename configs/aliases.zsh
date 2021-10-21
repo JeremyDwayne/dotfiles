@@ -40,3 +40,13 @@ alias dc-test-b='docker-compose -f docker/test/docker-compose.yml build api_test
 alias dc-test-u='docker-compose -f docker/test/docker-compose.yml up api_test'
 alias dc-test-r='docker-compose -f docker/test/docker-compose.yml run api_test'
 alias dc-test-e='docker-compose -f docker/test/docker-compose.yml exec api_test'
+
+# Wireguard
+
+alias wgu="wg-quick up wireguard"
+alias wgd="wg-quick down wireguard"
+
+alias cddev='cd ~/Development/'
+
+# Alias Directory loading
+# for f in ~/.aliases.d/*; do source $f; done
