@@ -26,7 +26,6 @@
 [core]
   excludesfile = ~/.gitignore
   autocrlf = true
-  text = auto
   eol = lf
 [merge]
   ff = only
