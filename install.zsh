@@ -27,27 +27,17 @@ if ! [ -d "$HOME/.oh-my-zsh/" ]; then
 	# Install ZSH Packages
 	echo >&2 "Setting ZSH as default shell"
 	chsh -s /bin/zsh
-else
-
-if ! [ -d "$HOME/.rvm" ]; then
-	echo 'installing rvm and stable ruby+rails...'
-	gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-	curl -sSL https://get.rvm.io | bash -s stable --rails
-	if [ hash rvm >/dev/null 2>&1 ]
-	then
-	  rvm cleanup all
-	fi
 fi
 
-# Symlink configs
-echo >&2 "Symlinking Configs"
-for f in `find ~/.dotfiles/configs -type f`; do
-    rm -f ~/."${f##*/}"
-    ln -s ~/.dotfiles/configs/"${f##*/}" ~/."${f##*/}"
-done
+# Using rbenv instead of rvm now
+# if ! [ -d "$HOME/.rvm" ]; then
+# 	echo >&2 'installing rvm and stable ruby+rails...'
+# 	gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+# 	curl -sSL https://get.rvm.io | bash -s stable --rails
+# 	if [ hash rvm >/dev/null 2>&1 ]
+# 	then
+# 	  rvm cleanup all
+# 	fi
+# fi
 
-# Neovim symlinks
-echo >&2 "Symlinking Neovim Configs"
-mkdir -p ~/.config
-rm -rf ~/.config/nvim
-ln -s ~/.dotfiles/nvim ~/.config/nvim
+source symlink.zsh
