@@ -1,6 +1,6 @@
 [init]
-	defaultBranch = main
-	templatedir = ~/.git_template/template
+  defaultBranch = main
+  templatedir = ~/.git_template/template
 [push]
   default = current
 [color]
@@ -26,7 +26,8 @@
 [core]
   excludesfile = ~/.gitignore
   autocrlf = true
-  eol=lf
+  text = auto
+  eol = lf
 [merge]
   ff = only
   tool = diffmerge
