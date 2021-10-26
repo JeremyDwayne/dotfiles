@@ -25,8 +25,8 @@
   shorty = status --short --branch
 [core]
   excludesfile = ~/.gitignore
-  autocrlf = true
-  eol = lf
+  autocrlf = false
+  eol=lf
 [merge]
   ff = only
   tool = diffmerge

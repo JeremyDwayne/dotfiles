@@ -99,11 +99,11 @@ if exists("&termguicolors") && exists("&winblend")
   set pumblend=5
   set background=dark
   
-  lua require('colorbuddy').colorscheme('gruvbuddy')
-  " packadd! dracula_pro
-  " let g:dracula_colorterm=0
-  " let g:dracula_use_term_italics=1
-  " colorscheme dracula_pro
+  " lua require('colorbuddy').colorscheme('gruvbuddy')
+  packadd! dracula_pro
+  let g:dracula_colorterm=0
+  let g:dracula_use_term_italics=1
+  colorscheme dracula_pro
 endif
 
 set t_ZH=[3m
