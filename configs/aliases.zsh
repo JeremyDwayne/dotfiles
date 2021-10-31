@@ -4,6 +4,7 @@ alias zshrc='vim ~/.zshrc'
 alias zshreload='source ~/.zshrc'
 alias ealias='vim ~/.aliases.zsh'
 alias fv='vim $(fzf --height 40%)'
+alias "sudoedit"='function _sudoedit(){sudo -e "$1";};_sudoedit'
 
 # Docker-Compose Commands
 alias dce='docker-compose exec --user $(id -u):$(id -g)'
@@ -44,8 +45,8 @@ alias dc-test-e='docker-compose -f docker/test/docker-compose.yml exec api_test'
 
 # Wireguard
 
-alias wgu="wg-quick up wireguard"
-alias wgd="wg-quick down wireguard"
+alias wgu="wg-quick up /usr/local/etc/wireguard/wireguard.conf"
+alias wgd="wg-quick down /usr/local/etc/wireguard/wireguard.conf"
 
 alias cddev='cd ~/Development/'
 

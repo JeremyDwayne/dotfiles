@@ -97,6 +97,22 @@ nnoremap <silent>K <Cmd>Lspsaga hover_doc<CR>
 inoremap <silent> <C-k> <Cmd>Lspsaga signature_help<CR>
 nnoremap <silent> gh <Cmd>Lspsaga lsp_finder<CR>
 
+" Harpoon
+nnoremap <silent> <C-m> :lua require("harpoon.mark").add_file()<CR>
+nnoremap <silent> <C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <silent> <C-h>1 :lua require("harpoon.ui").nav_file(1)<CR>
+nnoremap <silent> <C-h>2 :lua require("harpoon.ui").nav_file(2)<CR>
+nnoremap <silent> <C-h>3 :lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <silent> <C-h>4 :lua require("harpoon.ui").nav_file(4)<CR>
+nnoremap <silent> <C-g> :lua require("harpoon.mark").rm_file()<CR>
+nnoremap <silent> <leader><C-r> :lua require("harpoon.mark").shorten_list()<CR>
+nnoremap <silent> <leader><C-d> :lua require("harpoon.mark").clear_all()<CR>
+nnoremap <silent> <leader>r :lua require("harpoon.mark").promote()<CR>
+nnoremap <silent> <leader>tu :lua require("harpoon.term").gotoTerminal(1)<CR>
+nnoremap <silent> <leader>te :lua require("harpoon.term").gotoTerminal(2)<CR>
+nnoremap <silent> <leader>cu :lua require("harpoon.term").sendCommand(1, 1)<CR>
+nnoremap <silent> <leader>ce :lua require("harpoon.term").sendCommand(1, 2)<CR>
+
 " Move Lines
 nnoremap <A-j> :m .+1<CR>==
 nnoremap <A-k> :m .-2<CR>==
@@ -104,11 +120,3 @@ inoremap <A-j> <Esc>:m .+1<CR>==gi
 inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
-
-" Move Lines MacOS
-nnoremap ∆ :m .+1<CR>==
-nnoremap ˚ :m .-2<CR>==
-inoremap ∆ <Esc>:m .+1<CR>==gi
-inoremap ˚ <Esc>:m .-2<CR>==gi
-vnoremap ∆ :m '>+1<CR>gv=gv
-vnoremap ˚ :m '<-2<CR>gv=gv

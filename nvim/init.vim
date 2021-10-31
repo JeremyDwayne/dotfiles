@@ -84,6 +84,8 @@ if has("unix")
   let s:uname = system("uname -s")
   if s:uname == "Darwin\n"
     runtime ./macos.vim
+  else
+    runtime ./linux.vim
   endif
 endif
 

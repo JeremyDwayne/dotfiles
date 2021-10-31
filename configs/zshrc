@@ -78,7 +78,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions)
+plugins=(tmux git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -97,6 +97,7 @@ source $ZSH/oh-my-zsh.sh
 # fi
 
 export EDITOR='nvim'
+export SUDO_EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -110,6 +111,7 @@ export EDITOR='nvim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 source ~/.aliases.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source ~/.zdir/z.sh

@@ -26,6 +26,7 @@ if has("nvim")
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
+  Plug 'ThePrimeagen/harpoon'
 
   "Completion
   Plug 'hrsh7th/cmp-nvim-lsp'
@@ -41,6 +42,7 @@ if has("nvim")
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
   Plug 'windwp/nvim-autopairs'
   Plug 'numToStr/Comment.nvim'
+  Plug 'github/copilot.vim'
 endif
 
 call plug#end()
