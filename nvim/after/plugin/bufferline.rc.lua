@@ -13,7 +13,6 @@ require('bufferline').setup {
         end,
         show_buffer_close_icons = false,
         show_close_icon = false,
-        separator_style = "slant",
         name_formatter = function(buf) -- buf contains a "name", "path" and "bufnr"
             -- remove extension from markdown files for example
             if buf.name:match('%.md') then return vim.fn.fnamemodify(buf.name, ':t:r') end
