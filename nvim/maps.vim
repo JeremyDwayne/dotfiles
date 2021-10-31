@@ -1,3 +1,13 @@
+nmap <leader>ve :edit ~/.config/nvim/init.vim<cr>
+nmap <leader>vr :source ~/.config/nvim/init.vim<cr>
+nmap <leader>so :source %<cr>
+
+nmap <leader>k :nohlsearch<CR>
+nmap <leader>Q :bufdo bdelete<cr>
+
+" Allow gf to open non-existent files
+map gf :edit <cfile><cr>
+
 nnoremap <S-C-p> "0p
 
 " Delete without yank
@@ -33,23 +43,14 @@ nmap te :tabedit
 nmap <S-Tab> :tabprev<Return>
 nmap <Tab> :tabnext<Return>
 
-nmap ss :split<Return><C-w>w
-nmap sv :vsplit<Return><C-w>w
+nmap <leader>ss :split<Return><C-w>w
+nmap <leader>sv :vsplit<Return><C-w>w
+nmap <silent><leader>sq :q<cr>
 
-nmap <Space> <C-w>w
-map s<left> <C-w>h
-map s<up> <C-w>k
-map s<down> <C-w>j
-map s<right> <C-w>l
-map sh <C-w>h
-map sk <C-w>k
-map sj <C-w>j
-map sl <C-w>l
-nmap <C-w><left> <C-w><
-nmap <C-w><right> <C-w>>
-nmap <C-w><up> <C-w>+
-nmap <C-w><down> <C-w>-
-
+map <leader>sh <C-w>h
+map <leader>sk <C-w>k
+map <leader>sj <C-w>j
+map <leader>sl <C-w>l
 
 " Fugitive
 nmap <leader>gs :G<CR>
@@ -63,6 +64,43 @@ nnoremap <leader>gb :Git blame<CR>
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS='--reverse'
 
+" Move Lines
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+" Reselect visual selection after indenting
+vnoremap < <gv
+vnoremap > >gv
+
+" Maintain the cursor position when yanking a visual selection
+" http://ddrscott.github.io/blog/2016/yank-without-jank/
+vnoremap y myy`y
+vnoremap Y myY`y
+
+" When text is wrapped, move by terminal rows, not lines, unless a count is provided
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
+" Paste replace visual selection without copying it
+vnoremap <leader>p "_dP
+" Make Y behave like the other capitals
+nnoremap Y y$
+
+" Keep search results centered
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+" Quicky escape to normal mode
+imap jk <esc>
+
+" Easy insertion of a trailing ; or , from insert mode
+imap ;; <Esc>A;<Esc>
+imap ,, <Esc>A,<Esc>
 
 " Telescope
 nnoremap <silent> ;f <cmd>Telescope find_files<cr>
@@ -113,10 +151,13 @@ nnoremap <silent> <leader>te :lua require("harpoon.term").gotoTerminal(2)<CR>
 nnoremap <silent> <leader>cu :lua require("harpoon.term").sendCommand(1, 1)<CR>
 nnoremap <silent> <leader>ce :lua require("harpoon.term").sendCommand(1, 2)<CR>
 
-" Move Lines
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
+" Floaterm
+nnoremap <silent> <leader>ff :FloatermNew<CR>
+tnoremap <silent> <leader>ff <C-\><C-n>:FloatermNew<CR>
+nnoremap <silent> <leader>fp :FloatermPrev<CR>
+tnoremap <silent> <leader>fp <C-\><C-n>:FloatermPrev<CR>
+nnoremap <silent> <leader>fn :FloatermNext<CR>
+tnoremap <silent> <leader>fn <C-\><C-n>:FloatermNext<CR>
+nnoremap <silent> <leader>ft :FloatermToggle<CR>
+tnoremap <silent> <leader>ft <C-\><C-n>:FloatermToggle<CR>
+tnoremap <silent> <leader>fq <C-\><C-n>:FloatermKill<CR>

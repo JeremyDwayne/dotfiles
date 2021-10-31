@@ -12,3 +12,9 @@ echo >&2 "Symlinking Neovim Configs"
 mkdir -p ~/.config
 rm -rf ~/.config/nvim
 ln -s ~/.dotfiles/nvim ~/.config/nvim
+
+# Kitty symlinks
+echo >&2 "Symlinking Kitty Configs"
+mkdir -p ~/.config/kitty
+rm -rf ~/.config/kitty
+ln -s ~/.dotfiles/kitty ~/.config/kitty

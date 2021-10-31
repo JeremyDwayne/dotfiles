@@ -111,7 +111,10 @@ export SUDO_EDITOR='nvim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 source ~/.aliases.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source ~/.zdir/z.sh

@@ -29,15 +29,23 @@ if ! [ -d "$HOME/.oh-my-zsh/" ]; then
 	chsh -s /bin/zsh
 fi
 
-# Using rbenv instead of rvm now
-# if ! [ -d "$HOME/.rvm" ]; then
-# 	echo >&2 'installing rvm and stable ruby+rails...'
-# 	gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-# 	curl -sSL https://get.rvm.io | bash -s stable --rails
-# 	if [ hash rvm >/dev/null 2>&1 ]
-# 	then
-# 	  rvm cleanup all
-# 	fi
-# fi
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  if ! [ -f "$HOME/.local/kitty.app" ]; then
+    echo >&2 "Installing kitty terminal"
+    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+    # Create a symbolic link to add kitty to PATH (assuming ~/.local/bin is in
+    # your PATH)
+    ln -s ~/.local/kitty.app/bin/kitty ~/.local/bin/
+    # Place the kitty.desktop file somewhere it can be found by the OS
+    cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
+    # Update the path to the kitty icon in the kitty.desktop file
+    sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty.desktop
+  fi
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  if ! [ -d "/Applications/kitty.app" ]; then
+    echo >&2 "Installing kitty terminal"
+    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+  fi
+fi
 
 source symlink.zsh

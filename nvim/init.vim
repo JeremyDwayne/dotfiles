@@ -2,46 +2,60 @@ autocmd!
 scriptencoding utf-8
 if !1 | finish | endif
 
-let mapleader=","
+let mapleader="\<space>"
+syntax enable
 set nocompatible
 set number
-syntax enable
+set hidden
 set fileencodings=utf-8
 set encoding=utf-8
 set title
+set undofile
 set autoindent
-set nobackup
 set hlsearch
 set showcmd
 set cmdheight=1
 set laststatus=2
+set signcolumn=yes:2
 set scrolloff=10
 set expandtab
 set shell=zsh
-set backupskip=/tmp/*,/private/tmp/*
-
-if has('nvim')
-	set inccommand=split
-endif
-
+set ignorecase
+set smartcase
+set wildmode=longest:full,full
 set t_BE=
-
 set nosc noru nosm
 set lazyredraw
-
+set confirm
+set exrc
+set backup
+set backupskip=/tmp/*,/private/tmp/*
+set backupdir=~/.local/share/nvim/backup//
+set updatetime=300 " Reduce time for highlighting other references
+set redrawtime=10000 " Allow more time for loading syntax on large files
 set ignorecase
 set smarttab
-
-filetype plugin indent on
 set shiftwidth=2
 set tabstop=2
 set ai
 set si
 set nowrap
 set backspace=start,eol,indent
-
+set list
+set listchars=tab:▸\ ,trail:·
+set mouse=a
+set scrolloff=8
+set sidescrolloff=8
+set nojoinspaces
+set splitbelow
+set splitright
 set path+=**
 set wildignore+=*/node_modules/*
+
+filetype plugin indent on
+if has('nvim')
+	set inccommand=split
+endif
 
 autocmd InsertLeave * set nopaste
 
