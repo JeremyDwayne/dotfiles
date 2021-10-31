@@ -30,7 +30,7 @@ if ! [ -d "$HOME/.oh-my-zsh/" ]; then
 fi
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-  if ! [ -f "$HOME/.local/kitty.app" ]; then
+  if ! [ -d "$HOME/.local/kitty.app" ]; then
     echo >&2 "Installing kitty terminal"
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
     # Create a symbolic link to add kitty to PATH (assuming ~/.local/bin is in
