@@ -17,7 +17,6 @@ set showcmd
 set cmdheight=1
 set laststatus=2
 set signcolumn=yes:2
-set scrolloff=10
 set expandtab
 set shell=zsh
 set ignorecase
@@ -115,11 +114,11 @@ if exists("&termguicolors") && exists("&winblend")
   set pumblend=5
   set background=dark
   
-  " lua require('colorbuddy').colorscheme('gruvbuddy')
-  packadd! dracula_pro
-  let g:dracula_colorterm=0
-  let g:dracula_use_term_italics=1
-  colorscheme dracula_pro
+  lua require('colorbuddy').colorscheme('gruvbuddy')
+  " packadd! dracula_pro
+  " let g:dracula_colorterm=0
+  " let g:dracula_use_term_italics=1
+  " colorscheme dracula_pro
 endif
 
 set t_ZH=[3m

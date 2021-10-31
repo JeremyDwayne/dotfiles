@@ -15,6 +15,7 @@ Plug 'stsewd/fzf-checkout.vim'
 Plug 'tjdevries/colorbuddy.vim'
 Plug 'tjdevries/gruvbuddy.nvim'
 
+Plug 'akinsho/bufferline.nvim'
 Plug 'hoob3rt/lualine.nvim'
 Plug 'kristijanhusak/defx-git'
 Plug 'kristijanhusak/defx-icons'
@@ -24,6 +25,7 @@ Plug 'tami5/lspsaga.nvim'
 " Outdated non-functioning
 " Plug 'glepnir/lspsaga.nvim'
 Plug 'folke/lsp-colors.nvim'
+Plug 'onsails/lspkind-nvim'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-lua/popup.nvim'
