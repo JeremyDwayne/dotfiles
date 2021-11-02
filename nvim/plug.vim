@@ -9,6 +9,8 @@ call plug#begin(data_dir . '/plugins')
 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-surround'
+Plug 'p00f/nvim-ts-rainbow'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
