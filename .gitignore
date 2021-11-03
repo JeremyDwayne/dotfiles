@@ -1,8 +1,0 @@
-!bin
-nvim/bundle/*
-nvim/plugged/*
-nvim/autoload/*
-nvim/pack/*
-env_vars.zsh
-tags
-tags.*
