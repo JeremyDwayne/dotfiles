@@ -48,4 +48,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   fi
 fi
 
+
+echo >&2 "Installing nvim plugins"
+nvim +PlugInstall +qall > /dev/null
+
 source symlink.zsh
