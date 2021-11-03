@@ -23,6 +23,7 @@
   update-from = "!f() { git fetch $1 --prune; git merge --ff-only $1/$2 || git rebase --preserve-merges $1/$2; }; f"
   commend = commit --amend --no-edit'
   shorty = status --short --branch
+  mff = "!mff() { git merge --ff-only \"$1\" && git reset --hard HEAD@{1} && git merge --no-ff \"$1\"; }; mff"
 [core]
   excludesfile = ~/.gitignore
   autocrlf = false
