@@ -56,4 +56,8 @@ Plug 'kana/vim-textobj-user' | Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'tpope/vim-projectionist'
 Plug 'vim-test/vim-test'
 
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'norcalli/nvim-colorizer.lua'
+
+
 call plug#end()
