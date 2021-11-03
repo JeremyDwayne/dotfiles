@@ -1,5 +1,0 @@
-.text
-.global main
-
-main:
-  CURSOR
