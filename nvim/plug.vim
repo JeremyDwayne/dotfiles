@@ -26,6 +26,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'tami5/lspsaga.nvim'
 " Outdated non-functioning
 " Plug 'glepnir/lspsaga.nvim'
+Plug 'folke/trouble.nvim'
 Plug 'folke/lsp-colors.nvim'
 Plug 'onsails/lspkind-nvim'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }

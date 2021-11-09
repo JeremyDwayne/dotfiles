@@ -184,3 +184,11 @@ nmap <leader>tf :TestFile<CR>
 nmap <leader>ts :TestSuite<CR>
 nmap <leader>tl :TestLast<CR>
 nmap <leader>tv :TestVisit<CR>
+
+" Trouble
+nnoremap <leader>xx <cmd>TroubleToggle<cr>
+nnoremap <leader>xw <cmd>TroubleToggle lsp_workspace_diagnostics<cr>
+nnoremap <leader>xd <cmd>TroubleToggle lsp_document_diagnostics<cr>
+nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+nnoremap gR <cmd>TroubleToggle lsp_references<cr>
