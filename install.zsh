@@ -48,6 +48,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   fi
 fi
 
+npm install -g typescript typescript-language-server
+
 
 echo >&2 "Installing nvim plugins"
 nvim +PlugInstall +qall > /dev/null

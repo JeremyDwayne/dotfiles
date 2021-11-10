@@ -4,6 +4,7 @@ nmap <leader>so :source %<cr>
 
 nmap <leader>k :nohlsearch<CR>
 nmap <leader>Q :bufdo bdelete<cr>
+nmap <leader>W :bdelete<cr>
 
 " Allow gf to open non-existent files
 map gf :edit <cfile><cr>

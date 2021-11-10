@@ -170,11 +170,14 @@
         }
       ),
     },
+    workspace = {
+      primetrust = {[vim.fn.expand('$HOME/Development/prime_trust_api')] = true, [vim.fn.expand('$HOME/Development/prime_trust_front_end')] = true}
+    },
   }
 
   nvim_lsp.tsserver.setup {
     on_attach = on_attach,
-    filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+    filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript" },
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
   }
 
@@ -270,43 +273,39 @@
   sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-server"
 
   require'lspconfig'.sumneko_lua.setup {
-      cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
-      settings = {
-          Lua = {
-              runtime = {
-                  -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                  version = 'LuaJIT',
-                  -- Setup your lua path
-                  path = vim.split(package.path, ';')
-              },
-              diagnostics = {
-                  -- Get the language server to recognize the `vim` global
-                  globals = {'vim'}
-              },
-              workspace = {
-                  -- Make the server aware of Neovim runtime files
-                  library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
-              }
-          }
+    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+    settings = {
+      Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+          version = 'LuaJIT',
+          -- Setup your lua path
+          path = vim.split(package.path, ';')
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = {'vim'}
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
+        }
       }
+    }
   }
 
-  require"lspconfig".efm.setup {
-      init_options = {documentFormatting = true},
-      filetypes = {"lua"},
-      settings = {
-          rootMarkers = {".git/"},
-          languages = {
-              lua = {
-                  {
-                      formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=150 --break-after-table-lb",
-                      formatStdin = true
-                  }
-              }
-          }
-      }
 
-  }
+  require"lspconfig".efm.setup({
+    init_options = {documentFormatting = true},
+    settings = {
+      languages = {
+        lua = {
+          formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=150 --break-after-table-lb",
+          formatStdin = true
+        }
+      }
+    }
+  })
 
   require'lspconfig'.jsonls.setup {
     commands = {

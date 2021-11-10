@@ -119,6 +119,7 @@ source ~/.aliases.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source ~/.zdir/z.sh
 eval "$(rbenv init - zsh)"
+alias luamake=/home/jwinterberg/lua-language-server/3rd/luamake/luamake
 
 HEROKU_AC_ZSH_SETUP_PATH=/Users/winterjd/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
 
