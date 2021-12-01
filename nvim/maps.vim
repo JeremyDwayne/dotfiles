@@ -105,6 +105,10 @@ imap ,, <Esc>A,<Esc>
 nnoremap <leader>; A;<Esc>
 nnoremap <leader>, A,<Esc>
 
+" Formatting
+" Format JSON with JQ
+nnoremap <leader>jf :%!jq<CR>
+
 " Telescope
 nnoremap <silent> ;f <cmd>Telescope find_files<cr>
 nnoremap <C-p> <cmd>Telescope git_files<cr>
