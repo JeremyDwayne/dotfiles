@@ -33,7 +33,7 @@ Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'ThePrimeagen/harpoon'
+" Plug 'ThePrimeagen/harpoon'
 
 "Completion
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -41,6 +41,7 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'hrsh7th/vscode-langservers-extracted'
 Plug 'rafamadriz/friendly-snippets'
 
 Plug 'nvim-telescope/telescope.nvim'
@@ -57,6 +58,7 @@ Plug 'vim-test/vim-test'
 
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
-
+Plug '$HOME/apps/psql'
+Plug 'm-novikov/tree-sitter-sql'
 
 call plug#end()

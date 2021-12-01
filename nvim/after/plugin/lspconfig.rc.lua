@@ -229,12 +229,11 @@
         css = 'prettier',
         javascript = 'eslint_d',
         javascriptreact = 'eslint_d',
-        json = 'prettier',
+        json = 'jq',
         scss = 'prettier',
         less = 'prettier',
         typescript = 'eslint_d',
         typescriptreact = 'eslint_d',
-        json = 'prettier',
         markdown = 'prettier',
       }
     }
@@ -295,17 +294,17 @@
   }
 
 
-  require"lspconfig".efm.setup({
-    init_options = {documentFormatting = true},
-    settings = {
-      languages = {
-        lua = {
-          formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=150 --break-after-table-lb",
-          formatStdin = true
-        }
-      }
-    }
-  })
+  -- require"lspconfig".efm.setup({
+  --   init_options = {documentFormatting = true},
+  --   settings = {
+  --     languages = {
+  --       lua = {
+  --         formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=150 --break-after-table-lb",
+  --         formatStdin = true
+  --       }
+  --     }
+  --   }
+  -- })
 
   require'lspconfig'.jsonls.setup {
     commands = {

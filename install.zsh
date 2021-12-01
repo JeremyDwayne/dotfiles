@@ -4,6 +4,7 @@
 git submodule init
 git submodule update --recursive
 
+npm i -g typescript typescript-language-server prettier yarn
 if [ hash brew >/dev/null 2>&1 ]
 then
   echo 'installing brew...'
@@ -47,9 +48,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
   fi
 fi
-
-npm install -g typescript typescript-language-server
-
 
 echo >&2 "Installing nvim plugins"
 nvim +PlugInstall +qall > /dev/null

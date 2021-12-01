@@ -4,7 +4,7 @@ nmap <leader>so :source %<cr>
 
 nmap <leader>k :nohlsearch<CR>
 nmap <leader>Q :bufdo bdelete<cr>
-nmap <leader>W :bdelete<cr>
+nmap <leader>w :bdelete<cr>
 
 " Allow gf to open non-existent files
 map gf :edit <cfile><cr>
@@ -139,20 +139,22 @@ inoremap <silent> <C-k> <Cmd>Lspsaga signature_help<CR>
 nnoremap <silent> gh <Cmd>Lspsaga lsp_finder<CR>
 
 " Harpoon
-nnoremap <silent> <C-m> :lua require("harpoon.mark").add_file()<CR>
-nnoremap <silent> <C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
-nnoremap <silent> <C-h>1 :lua require("harpoon.ui").nav_file(1)<CR>
-nnoremap <silent> <C-h>2 :lua require("harpoon.ui").nav_file(2)<CR>
-nnoremap <silent> <C-h>3 :lua require("harpoon.ui").nav_file(3)<CR>
-nnoremap <silent> <C-h>4 :lua require("harpoon.ui").nav_file(4)<CR>
-nnoremap <silent> <C-g> :lua require("harpoon.mark").rm_file()<CR>
-nnoremap <silent> <leader><C-r> :lua require("harpoon.mark").shorten_list()<CR>
-nnoremap <silent> <leader><C-d> :lua require("harpoon.mark").clear_all()<CR>
-nnoremap <silent> <leader>r :lua require("harpoon.mark").promote()<CR>
-nnoremap <silent> <leader>tu :lua require("harpoon.term").gotoTerminal(1)<CR>
-nnoremap <silent> <leader>te :lua require("harpoon.term").gotoTerminal(2)<CR>
-nnoremap <silent> <leader>cu :lua require("harpoon.term").sendCommand(1, 1)<CR>
-nnoremap <silent> <leader>ce :lua require("harpoon.term").sendCommand(1, 2)<CR>
+" removing harpoon for now till I have time to figure out why its conflicting
+" with the LSP
+" nnoremap <silent> <C-m> :lua require("harpoon.mark").add_file()<CR>
+" nnoremap <silent> <C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
+" nnoremap <silent> <C-h>1 :lua require("harpoon.ui").nav_file(1)<CR>
+" nnoremap <silent> <C-h>2 :lua require("harpoon.ui").nav_file(2)<CR>
+" nnoremap <silent> <C-h>3 :lua require("harpoon.ui").nav_file(3)<CR>
+" nnoremap <silent> <C-h>4 :lua require("harpoon.ui").nav_file(4)<CR>
+" nnoremap <silent> <C-g> :lua require("harpoon.mark").rm_file()<CR>
+" nnoremap <silent> <leader><C-r> :lua require("harpoon.mark").shorten_list()<CR>
+" nnoremap <silent> <leader><C-d> :lua require("harpoon.mark").clear_all()<CR>
+" nnoremap <silent> <C-h>r :lua require("harpoon.mark").promote()<CR>
+" nnoremap <silent> <leader>tu :lua require("harpoon.term").gotoTerminal(1)<CR>
+" nnoremap <silent> <leader>te :lua require("harpoon.term").gotoTerminal(2)<CR>
+" nnoremap <silent> <leader>cu :lua require("harpoon.term").sendCommand(1, 1)<CR>
+" nnoremap <silent> <leader>ce :lua require("harpoon.term").sendCommand(1, 2)<CR>
 
 " Floaterm
 nnoremap <silent> <leader>ff :FloatermNew<CR>
