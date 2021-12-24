@@ -1,6 +1,7 @@
 ######## Subject 50 characters ###################
-#<type>(<scope>): <subject>
 
+#<type>(<scope>): <subject>
+# !         a breaking change is in this commit, list details in footer
 # build     npm/composer related, adding external dependencies
 # chore     a code change that external user wont see
 # feat      a new feature
@@ -15,3 +16,9 @@
 # * Why was this change necessary?
 # * How does it address the problem?
 # * Are there any side effects?
+######## Optional Footers 72 characters ################################
+
+# Key: Value
+# BREAKING CHANGE: use JavaScript features not available in Node 6.
+# Reviewed-by: Z
+# Refs: #123

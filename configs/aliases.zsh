@@ -13,8 +13,6 @@ alias dc='docker-compose'
 # list TODO/FIX lines from the current project
 alias todos="ag --nogroup '(TODO|FIX(ME)?):'"
 
-alias ide="source ~/.dotfiles/scripts/ide.zsh"
-
 alias luamake=/usr/local/share/lua-language-server/3rd/luamake/luamake
 
 # Ruby App aliases
