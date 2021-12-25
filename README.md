@@ -1,10 +1,12 @@
+# Dotfiles
+Here's my collection of dotfiles I use on linux/osx environments.
+
 ## Install
 `./install.zsh` will run a script that checks if all the necessary programs are 
-installed. Once the dependencies are installed, it will run any third party installations,
-and create symlinks for the necessary config files in the correct locations.
+installed. Once the dependencies are installed, it will run any third party installations
 
-## Dotfiles
-Here's my collection of dotfiles I use on linux/osx environments.
+I'm in the process of moving the `install.zsh` script to ansible. After installing dependencies
+you can symlink the configs using `./stow-run`.
 
 ZSH and Oh-My-Zsh must be installed:
 - http://ohmyz.sh/
