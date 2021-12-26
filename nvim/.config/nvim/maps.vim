@@ -205,4 +205,4 @@ nnoremap gR <cmd>TroubleToggle lsp_references<cr>
 
 " Execute It!
 nnoremap <leader>x :!chmod +x %<cr>
-nnoremap <C-S>F :silent !tmux neww tmux-sessionizer<cr>
+nnoremap <leader>F :silent !tmux neww tmux-sessionizer<cr>
