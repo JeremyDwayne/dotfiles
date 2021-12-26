@@ -4,7 +4,7 @@ nmap <leader>so :source %<cr>
 
 nmap <leader>k :nohlsearch<CR>
 nmap <leader>Q :bufdo bdelete<cr>
-nmap <leader>w :bdelete<cr>
+nn <leader>bd  :bd<cr>
 
 " Allow gf to open non-existent files
 map gf :edit <cfile><cr>
@@ -130,10 +130,10 @@ nnoremap <silent> <space>D <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> <space>rn <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> <space>ca <cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> <space>e <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
-nnoremap <silent> <C-j> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-nnoremap <silent> <C-f> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> <space>q <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+nnoremap <silent> <space>e <cmd>lua vim.diagnostic.show_line_diagnostics()<CR>
+nnoremap <silent> <C-j> <cmd>lua vim.diagnostic.goto_next()<CR>
+nnoremap <silent> <C-f> <cmd>lua vim.diagnostic.goto_prev()<CR>
+nnoremap <silent> <space>q <cmd>lua vim.diagnostic.set_loclist()<CR>
 nnoremap <silent> <space>f <cmd>lua vim.lsp.buf.formatting()<CR>
 
 " LSPSaga
@@ -202,3 +202,7 @@ nnoremap gR <cmd>TroubleToggle lsp_references<cr>
 
 " NETRW
 " noremap <silent> <C-E> :call ToggleNetrw()<CR>
+
+" Execute It!
+nnoremap <leader>x :!chmod +x %<cr>
+nnoremap <C-S>F :silent !tmux neww tmux-sessionizer<cr>

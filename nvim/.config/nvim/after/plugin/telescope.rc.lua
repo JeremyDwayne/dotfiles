@@ -17,5 +17,5 @@ require('telescope').setup {
 require('telescope').load_extension('fzy_native')
 
 function _G.search_dotfiles()
-    require("telescope.builtin").find_files({prompt_title = "~ Dotfiles ~", cwd = "~/.dotfiles"})
+    require("telescope.builtin").find_files({prompt_title = "~ Dotfiles ~", cwd = "~/.dotfiles", find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' }})
 end
