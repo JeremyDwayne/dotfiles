@@ -1,10 +1,43 @@
 #!/usr/bin/env zsh
+
 if [[ -z $STOW_FOLDERS ]]; then
-    STOW_FOLDERS="bin,configs,nvim,tmux,i3"
+  STOW_FOLDERS="bin,configs,nvim,tmux,i3"
 fi
 
 if [[ -z $DOTFILES ]]; then
-    DOTFILES=$HOME/.dotfiles
+  DOTFILES=$HOME/.dotfiles
 fi
 
-STOW_FOLDERS=$STOW_FOLDERS DOTFILES=$DOTFILES $DOTFILES/stow-install
+Help()
+{
+  # Display Help
+  echo "Quick script for stowing symlinks for configured dotfiles"
+  echo "If c is not passed, it will create symlinks."
+  echo
+  echo "Syntax: ./stow-run [-h,-c]"
+  echo "options:"
+  echo "h     Print this Help."
+  echo "c     Clean (remove) symlinks."
+}
+
+CLEAN=false
+while getopts "hc" option; do
+  case $option in
+    c)
+      CLEAN=true
+      ;;
+    h) Help
+      exit
+  esac
+done
+
+pushd $DOTFILES
+for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
+do
+  if [ "$CLEAN" = true ]; then
+    stow -D $folder
+  else
+    stow $folder
+  fi
+done
+popd
