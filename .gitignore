@@ -5,3 +5,5 @@ vim/plugged/*
 vim/autoload/*
 vim/pack/*
 env_vars.zsh
+bin/.local/nvim/*
+bin/.local/share/*

@@ -187,7 +187,7 @@ nvim_lsp.solargraph.setup {
     ),
   },
   workspace = {
-    primetrust = {[vim.fn.expand('$HOME/Development/prime_trust_api')] = true, [vim.fn.expand('$HOME/Development/prime_trust_front_end')] = true}
+    primetrust = {[vim.fn.expand('$HOME/work/prime_trust_api')] = true, [vim.fn.expand('$HOME/work/prime_trust_front_end')] = true}
   },
 }
 

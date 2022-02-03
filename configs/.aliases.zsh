@@ -16,11 +16,8 @@ alias todos="ag --nogroup '(TODO|FIX(ME)?):'"
 alias luamake=/usr/local/share/lua-language-server/3rd/luamake/luamake
 
 # Ruby App aliases
-alias startredis="brew services start redis"
-alias stopredis="brew services stop redis"
-
-alias startpg="brew services start postgresql"
-alias stoppg="brew services stop postgresql"
+alias pru="brew services start postgresql && brew services start redis"
+alias prd="brew services stop postgresql && brew services stop redis"
 
 alias startapi="bundle exec puma -v -C config/puma.rb config.ru -p 7777"
 alias startsidekiq="bundle exec sidekiq -r ./config/environment.rb -C ./config/sidekiq.yml"
@@ -46,7 +43,9 @@ alias dc-test-e='docker-compose -f docker/test/docker-compose.yml exec api_test'
 alias wgu="wg-quick up /usr/local/etc/wireguard/wireguard.conf"
 alias wgd="wg-quick down /usr/local/etc/wireguard/wireguard.conf"
 
-alias cddev='cd ~/Development/'
+alias work='cd ~/work/'
+alias api='cd ~/work/prime_trust_api'
+alias fe='cd ~/work/prime_trust_frontend'
 
 # Alias Directory loading
 # for f in ~/.aliases.d/*; do source $f; done
