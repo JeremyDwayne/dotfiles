@@ -44,8 +44,10 @@ alias wgu="wg-quick up /usr/local/etc/wireguard/wireguard.conf"
 alias wgd="wg-quick down /usr/local/etc/wireguard/wireguard.conf"
 
 alias work='cd ~/work/'
-alias api='cd ~/work/prime_trust_api'
+alias api='cd ~/work/prime_trust_api.git'
 alias fe='cd ~/work/prime_trust_frontend'
+
+alias fjson='pbpaste | python -m json.tool | pbcopy'
 
 # Alias Directory loading
 # for f in ~/.aliases.d/*; do source $f; done

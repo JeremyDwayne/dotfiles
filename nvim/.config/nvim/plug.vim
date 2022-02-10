@@ -35,6 +35,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'ThePrimeagen/harpoon'
+Plug 'ThePrimeagen/git-worktree.nvim'
 
 "Completion
 Plug 'hrsh7th/cmp-nvim-lsp'

@@ -206,3 +206,5 @@ nnoremap gR <cmd>TroubleToggle lsp_references<cr>
 " Execute It!
 nnoremap <leader>x :!chmod +x %<cr>
 nnoremap <leader>F :silent !tmux neww tmux-sessionizer<cr>
+
+nnoremap <leader>; :lua require("theprimeagen.git-worktree").execute(vim.loop.cwd(), "just-build")<CR>

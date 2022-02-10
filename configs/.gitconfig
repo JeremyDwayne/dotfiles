@@ -24,6 +24,7 @@
   commend = commit --amend --no-edit'
   shorty = status --short --branch
   mff = "!mff() { git merge --ff-only \"$1\" && git reset --hard HEAD@{1} && git merge --no-ff \"$1\"; }; mff"
+  conflicts = "!$EDITOR $(git diff --name-only --diff-filter=U)"
 [core]
   excludesfile = ~/.gitignore
   autocrlf = false
