@@ -4,6 +4,8 @@ local protocol = require'vim.lsp.protocol'
 -- Use an on_attach function to only map the following keys 
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+  -- require'completion'.on_attach(client, bufnr)
+
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -20,7 +22,6 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_command [[augroup END]]
   end
 
-  --require'completion'.on_attach(client, bufnr)
 
   --protocol.SymbolKind = { }
   protocol.CompletionItemKind = {
@@ -52,7 +53,7 @@ local on_attach = function(client, bufnr)
   }
 end
 
-local servers = {'pyright', 'gopls'}
+local servers = {'pyright', 'gopls', 'solargraph'}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -171,25 +172,34 @@ nvim_lsp.intelephense.setup{
   }
 }
 
-nvim_lsp.solargraph.setup {
-  on_attach = on_attach,
-  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-  cmd = { "solargraph", "stdio" },
-  filetypes = { "ruby", "rb" },
-  flags = { debounce_text_changes = 150, },
-  handlers = {
-    ["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-      -- Disable virtual_text on file load
-      -- Show with vim.lsp.diagnostic.show_line_diagnostics()
-      virtual_text = false
-    }
-    ),
-  },
-  workspace = {
-    primetrust = {[vim.fn.expand('$HOME/work/prime_trust_api')] = true, [vim.fn.expand('$HOME/work/prime_trust_front_end')] = true}
-  },
-}
+-- nvim_lsp.solargraph.setup {
+--   on_attach = on_attach,
+--   capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+--   cmd = { "solargraph", "stdio" },
+--   filetypes = { "ruby" },
+--   root_dir = util.root_pattern("Gemfile", ".git"),
+--   flags = { debounce_text_changes = 150, },
+--   init_options = {
+--     formatting = true
+--   },
+--   settings = {
+--     solargraph = {
+--       diagnostics = true,
+--     }
+--   },
+--   handlers = {
+--     ["textDocument/publishDiagnostics"] = vim.lsp.with(
+--     vim.lsp.diagnostic.on_publish_diagnostics, {
+--       -- Disable virtual_text on file load
+--       -- Show with vim.lsp.diagnostic.show_line_diagnostics()
+--       virtual_text = false
+--     }
+--     ),
+--   },
+--   workspace = {
+--     primetrust = {[vim.fn.expand('$HOME/work/prime_trust_api')] = true, [vim.fn.expand('$HOME/work/prime_trust_front_end')] = true}
+--   },
+-- }
 
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,

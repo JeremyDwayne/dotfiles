@@ -118,6 +118,7 @@ fi
 source ~/.aliases.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source ~/.zdir/z.sh
+export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - zsh)"
 alias luamake=/home/jwinterberg/lua-language-server/3rd/luamake/luamake
 
