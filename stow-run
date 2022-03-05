@@ -1,12 +1,8 @@
 #!/usr/bin/env zsh
 
-if [[ -z $STOW_FOLDERS ]]; then
-  STOW_FOLDERS="bin,configs,nvim,tmux,i3,kitty"
-fi
-
-if [[ -z $DOTFILES ]]; then
-  DOTFILES=$HOME/.dotfiles
-fi
+HOME_FOLDERS="bin,configs,tmux"
+CONFIG_FOLDERS="nvim,i3,kitty"
+DOTFILES=$HOME/.dotfiles
 
 Help()
 {
@@ -32,12 +28,20 @@ while getopts "hc" option; do
 done
 
 pushd $DOTFILES
-for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
+for folder in $(echo $HOME_FOLDERS | sed "s/,/ /g")
 do
   if [ "$CLEAN" = true ]; then
     stow -D $folder
   else
     stow $folder
+  fi
+done
+for folder in $(echo $CONFIG_FOLDERS | sed "s/,/ /g")
+do
+  if [ "$CLEAN" = true ]; then
+    stow -D $folder -t ~/.config
+  else
+    stow $folder -t ~/.config
   fi
 done
 popd

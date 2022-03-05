@@ -63,4 +63,9 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug '$HOME/apps/psql'
 Plug 'm-novikov/tree-sitter-sql'
 
+" Open current file in web browser
+Plug 'tyru/open-browser.vim'
+Plug 'tyru/open-browser-github.vim'
+
+
 call plug#end()
