@@ -61,6 +61,7 @@ Plug 'vim-test/vim-test'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug '$HOME/apps/psql'
+Plug 'christoomey/vim-tmux-runner'
 Plug 'm-novikov/tree-sitter-sql'
 
 " Open current file in web browser

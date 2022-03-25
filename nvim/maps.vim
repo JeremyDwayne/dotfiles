@@ -208,3 +208,7 @@ nnoremap <leader>x :!chmod +x %<cr>
 nnoremap <leader>F :silent !tmux neww tmux-sessionizer<cr>
 
 nnoremap <leader>; :lua require("theprimeagen.git-worktree").execute(vim.loop.cwd(), "just-build")<CR>
+
+" Vim Tmux Runner
+nnoremap <leader>vr :VtrOpenRunner<cr>replica<cr>
+nnoremap <leader>sl :VtrSendLinesToRunner<cr>

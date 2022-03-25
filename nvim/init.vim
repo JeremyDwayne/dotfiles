@@ -156,3 +156,8 @@ function! ToggleNetrw()
         silent Lexplore
     endif
 endfunction
+
+" Vim Tmux Runner
+let g:VtrUseVtrMaps = 1
+let g:VtrStripLeadingWhitespace = 1
+let g:VtrClearEmptyLines = 1
