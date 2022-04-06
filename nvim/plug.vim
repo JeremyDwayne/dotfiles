@@ -24,6 +24,7 @@ Plug 'kristijanhusak/defx-git'
 Plug 'kristijanhusak/defx-icons'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/nvim-lsp-installer'
 Plug 'tami5/lspsaga.nvim'
 " Outdated non-functioning
 " Plug 'glepnir/lspsaga.nvim'
@@ -63,10 +64,15 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug '$HOME/apps/psql'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'm-novikov/tree-sitter-sql'
+Plug 'nanotee/sqls.nvim'
 
 " Open current file in web browser
 Plug 'tyru/open-browser.vim'
 Plug 'tyru/open-browser-github.vim'
+" Plug 'autozimu/LanguageClient-neovim', {
+"     \ 'branch': 'next',
+"     \ 'do': 'bash install.sh',
+"     \ }
 
 
 call plug#end()

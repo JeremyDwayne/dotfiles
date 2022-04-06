@@ -158,6 +158,9 @@ function! ToggleNetrw()
 endfunction
 
 " Vim Tmux Runner
-let g:VtrUseVtrMaps = 1
+let g:VtrInitialCommand = "~/work/scripts/replica"
 let g:VtrStripLeadingWhitespace = 1
 let g:VtrClearEmptyLines = 1
+let g:VtrOrientation = "h"
+let g:VtrPercentage = 50
+let g:VtrUseVtrMaps = 1

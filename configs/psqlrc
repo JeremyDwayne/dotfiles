@@ -15,10 +15,10 @@
 
 -- colorize
 --\set PROMPT1 '%[%033[33;1m%]%x%[%033[0m%]%[%033[1m%]%/%[%033[0m%]%R%# '
-\set PROMPT1 '%[%033[1m%]%M %n@%/%R%[%033[0m%]%# '
+--\set PROMPT1 '%[%033[1m%]%M %n@%/%R%[%033[0m%]%# '
 --harolds
 --\set PROMPT1 '%[%033[1m%]%M/%/%R%[%033[0m%]%# '
-\set PROMPT2 '[more] %R > '
+--\set PROMPT2 '[more] %R > '
 
 
 
@@ -34,7 +34,7 @@
 \set COMP_KEYWORD_CASE upper
 
 -- greeting
-\echo '\nWelcome, my magistrate\n'
+--\echo '\nWelcome, my magistrate\n'
 
 \set clear '\\! clear;'
 

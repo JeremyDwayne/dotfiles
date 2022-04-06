@@ -1,18 +1,19 @@
 local nvim_lsp = require('lspconfig')
 local protocol = require'vim.lsp.protocol'
 
--- Use an on_attach function to only map the following keys 
+-- Mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local opts = { noremap=true, silent=true }
+-- vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+-- vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+-- vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+-- vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+
+-- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  -- require'completion'.on_attach(client, bufnr)
-
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-  --Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- formatting
   if client.resolved_capabilities.document_formatting then
@@ -21,7 +22,6 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
     vim.api.nvim_command [[augroup END]]
   end
-
 
   --protocol.SymbolKind = { }
   protocol.CompletionItemKind = {
@@ -51,13 +51,37 @@ local on_attach = function(client, bufnr)
     'ﬦ', -- Operator
     '', -- TypeParameter
   }
+
+  -- Mappings.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
-local servers = {'pyright', 'gopls', 'solargraph'}
-for _, lsp in ipairs(servers) do
+vim.lsp.set_log_level("debug")
+
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
+for _, lsp in pairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    flags = {
+      debounce_text_changes = 150,
+    }
   }
 end
 
@@ -172,39 +196,39 @@ nvim_lsp.intelephense.setup{
   }
 }
 
--- nvim_lsp.solargraph.setup {
---   on_attach = on_attach,
---   capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
---   cmd = { "solargraph", "stdio" },
---   filetypes = { "ruby" },
---   root_dir = util.root_pattern("Gemfile", ".git"),
---   flags = { debounce_text_changes = 150, },
---   init_options = {
---     formatting = true
---   },
---   settings = {
---     solargraph = {
---       diagnostics = true,
---     }
---   },
---   handlers = {
---     ["textDocument/publishDiagnostics"] = vim.lsp.with(
---     vim.lsp.diagnostic.on_publish_diagnostics, {
---       -- Disable virtual_text on file load
---       -- Show with vim.lsp.diagnostic.show_line_diagnostics()
---       virtual_text = false
---     }
---     ),
---   },
---   workspace = {
---     primetrust = {[vim.fn.expand('$HOME/work/prime_trust_api')] = true, [vim.fn.expand('$HOME/work/prime_trust_front_end')] = true}
---   },
--- }
+nvim_lsp.solargraph.setup {
+  on_attach = on_attach,
+  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+  cmd = { "solargraph", "stdio" },
+  filetypes = { "ruby" },
+  root_dir = util.root_pattern("Gemfile", ".git"),
+  flags = { debounce_text_changes = 150 },
+  init_options = {
+    formatting = true
+  },
+  settings = {
+    solargraph = {
+      diagnostics = true,
+    }
+  },
+  handlers = {
+    ["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+      -- Disable virtual_text on file load
+      -- Show with vim.lsp.diagnostic.show_line_diagnostics()
+      virtual_text = false
+    }
+    ),
+  },
+  workspace = {
+    primetrust = {[vim.fn.expand('$HOME/work/prime_trust_api')] = true, [vim.fn.expand('$HOME/work/prime_trust_front_end')] = true}
+  },
+}
 
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,
   filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript" },
-  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 }
 
 nvim_lsp.diagnosticls.setup {
@@ -298,6 +322,8 @@ vim.lsp.diagnostic.on_publish_diagnostics, {
 -- sumneko_binary = sumneko_root_path.."/bin/lua-language-server"
 --
 -- nvim_lsp.sumneko_lua.setup {
+--  on_attach = on_attach,
+--  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
 --   cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
 --   settings = {
 --     Lua = {
@@ -321,6 +347,8 @@ vim.lsp.diagnostic.on_publish_diagnostics, {
 
 
 -- require"lspconfig".efm.setup({
+--  on_attach = on_attach,
+--  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 --   init_options = {documentFormatting = true},
 --   settings = {
 --     languages = {
@@ -332,10 +360,11 @@ vim.lsp.diagnostic.on_publish_diagnostics, {
 --   }
 -- })
 
-require'lspconfig'.jsonls.setup {
-  init_options = {
-    provideFormatter = true,
-  },
-  formatCommand = "jq"
-}
-
+-- nvim_lsp.jsonls.setup {
+--   on_attach = on_attach,
+--   capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+--   init_options = {
+--     provideFormatter = true,
+--   },
+--   formatCommand = "jq"
+-- }
