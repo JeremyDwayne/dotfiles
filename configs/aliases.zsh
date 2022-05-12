@@ -44,10 +44,11 @@ alias wgu="wg-quick up /usr/local/etc/wireguard/wireguard.conf"
 alias wgd="wg-quick down /usr/local/etc/wireguard/wireguard.conf"
 
 alias work='cd ~/work/'
-alias api='cd ~/work/prime_trust_api.git'
+alias api='cd ~/work/prime_trust_api'
 alias fe='cd ~/work/prime_trust_frontend'
 alias support='cd ~/work/support_scripts'
-alias ops='cd ~/work/t3s-ops'
+alias sops='cd ~/work/t3s-ops'
+alias ops='cd ~/work/admin-ops'
 alias t3po='cd ~/work/t3po'
 
 alias fjson='pbpaste | python -m json.tool | pbcopy'
