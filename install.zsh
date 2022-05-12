@@ -53,3 +53,8 @@ echo >&2 "Installing nvim plugins"
 nvim +PlugInstall +qall > /dev/null
 
 source symlink.zsh
+
+if ! [ -d "$HOME/.tmux/plugins" ]; then
+  echo >&2 "Installing Tmux Plugin Manager"
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi

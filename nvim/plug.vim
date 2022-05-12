@@ -15,8 +15,7 @@ Plug 'p00f/nvim-ts-rainbow'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
-Plug 'tjdevries/colorbuddy.vim'
-Plug 'tjdevries/gruvbuddy.nvim'
+Plug 'Mofiqul/dracula.nvim'
 
 Plug 'akinsho/bufferline.nvim'
 Plug 'hoob3rt/lualine.nvim'

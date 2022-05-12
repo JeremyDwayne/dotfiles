@@ -9,9 +9,6 @@ done
 
 # Neovim symlinks
 echo >&2 "Symlinking Neovim Configs"
-if [ -z ~/.config ] then
-  mkdir -p ~/.config
-fi
 rm -rf ~/.config/nvim
 ln -s ~/.dotfiles/nvim ~/.config/nvim
 
