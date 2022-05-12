@@ -12,9 +12,18 @@ require('telescope').setup {
     mappings = { n = { ["q"] = actions.close } },
     layout_config = {
       width = 0.98,
+      height = 0.75,
       preview_cutoff = 120,
       preview_width = 0.6,
     },
+  },
+  pickers = {
+    find_files = {
+      theme = "ivy",
+      layout_config = {
+        height = 0.8,
+      },
+    }
   },
   extensions = { fzy_native = { override_generic_sorter = false, override_file_sorter = true } }
 }

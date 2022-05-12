@@ -14,6 +14,8 @@ lsp_installer.settings({
 -- or if the server is already installed).
 lsp_installer.on_server_ready(function(server)
     local opts = {}
+    opts.ensure_installed = { "solargraph", "sumneko_lua", "rome", "graphql", "grammarly" } -- ensure these servers are always installed
+    opts.automatic_installation = true
 
     -- (optional) Customize the options passed to the server
     if server.name == "sqls" then
