@@ -134,7 +134,7 @@ nnoremap <silent> <space>e <cmd>lua vim.diagnostic.show_line_diagnostics()<CR>
 nnoremap <silent> <C-j> <cmd>lua vim.diagnostic.goto_next()<CR>
 nnoremap <silent> <C-f> <cmd>lua vim.diagnostic.goto_prev()<CR>
 nnoremap <silent> <leader>q <cmd>lua vim.diagnostic.set_loclist()<CR>
-nnoremap <silent> <leader>f <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent> <leader>f <cmd>lua vim.lsp.buf.format({async = true})<CR>
 
 " LSPSaga
 nnoremap <silent> <C-j> <Cmd>Lspsaga diagnostic_jump_next<CR>
