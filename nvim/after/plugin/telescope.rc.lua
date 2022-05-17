@@ -23,6 +23,12 @@ require('telescope').setup {
       layout_config = {
         height = 0.8,
       },
+    },
+    live_grep = {
+      theme = "ivy",
+      layout_config = {
+        height = 0.8,
+      },
     }
   },
   extensions = { fzy_native = { override_generic_sorter = false, override_file_sorter = true } }
