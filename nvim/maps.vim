@@ -212,3 +212,9 @@ nnoremap <leader>; :lua require("theprimeagen.git-worktree").execute(vim.loop.cw
 " SQL
 " nnoremap <buffer> <leader>X :terminal; ~/work/scripts/replica < '%'<cr>
 nnoremap <leader>se :SqlsExecuteQueryVertical<cr>
+
+" NVIM Tree
+" See keybinds: https://github.com/kyazdani42/nvim-tree.lua#default-actions
+nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>

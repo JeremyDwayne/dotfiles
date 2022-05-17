@@ -19,9 +19,6 @@ Plug 'Mofiqul/dracula.nvim'
 
 Plug 'akinsho/bufferline.nvim'
 Plug 'hoob3rt/lualine.nvim'
-Plug 'kristijanhusak/defx-git'
-Plug 'kristijanhusak/defx-icons'
-Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'tami5/lspsaga.nvim'
@@ -36,6 +33,8 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'ThePrimeagen/harpoon'
 Plug 'ThePrimeagen/git-worktree.nvim'
+Plug 'kyazdani42/nvim-web-devicons' " for file icons
+Plug 'kyazdani42/nvim-tree.lua'
 
 "Completion
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -48,7 +47,8 @@ Plug 'rafamadriz/friendly-snippets'
 
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
-" Plug 'windwp/nvim-autopairs'
+Plug 'windwp/nvim-autopairs'
+Plug 'windwp/nvim-ts-autotag'
 Plug 'numToStr/Comment.nvim'
 "Not currently invited to copilot, don't load it
 "Plug 'github/copilot.vim'
