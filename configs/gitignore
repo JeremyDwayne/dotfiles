@@ -10,3 +10,6 @@ tags
 !tags/
 tmp/**/*
 !tmp/cache/.keep
+doc/openapi/**/*.yaml
+doc/openapi/**/*.json
+doc/openapi/**/*.md
