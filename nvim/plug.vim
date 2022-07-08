@@ -73,5 +73,6 @@ Plug 'tyru/open-browser-github.vim'
 "     \ 'do': 'bash install.sh',
 "     \ }
 
+Plug 'jose-elias-alvarez/null-ls.nvim'
 
 call plug#end()
