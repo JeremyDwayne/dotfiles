@@ -53,5 +53,7 @@ alias t3po='cd ~/work/t3po'
 
 alias fjson='pbpaste | python -m json.tool | pbcopy'
 
+# Hugo
+alias hnp='f(){ hugo new posts/"$1".md;  unset -f f; }; f'
 # Alias Directory loading
 # for f in ~/.aliases.d/*; do source $f; done

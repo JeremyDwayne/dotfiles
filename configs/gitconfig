@@ -25,6 +25,7 @@
   shorty = status --short --branch
   mff = "!mff() { git merge --ff-only \"$1\" && git reset --hard HEAD@{1} && git merge --no-ff \"$1\"; }; mff"
   conflicts = "!$EDITOR $(git diff --name-only --diff-filter=U)"
+  sync = git fetch && git merge main --ff
 [core]
   excludesfile = ~/.gitignore
   autocrlf = false

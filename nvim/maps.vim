@@ -111,7 +111,7 @@ nnoremap <leader>jf :%!jq<CR>
 
 " Telescope
 nnoremap <silent> ;f <cmd>Telescope find_files<cr>
-nnoremap <C-p> <cmd>Telescope git_files<cr>
+nnoremap <silent> ;p <cmd>Telescope git_files<cr>
 nnoremap <silent> ;r <cmd>Telescope live_grep<cr>
 nnoremap <silent> \\ <cmd>Telescope buffers<cr>
 nnoremap <silent> ;; <cmd>Telescope help_tags<cr>
@@ -119,22 +119,22 @@ nnoremap <silent> ;d :lua search_dotfiles()<cr>
 nnoremap <silent> // <cmd>Telescope current_buffer_fuzzy_find<cr>
 
 " LSP config
-" nnoremap <silent> gD <Cmd>lua vim.lsp.buf.declaration()<CR>
-" nnoremap <silent> gd <Cmd>lua vim.lsp.buf.definition()<CR>
-" nnoremap <silent> K  <Cmd>lua vim.lsp.buf.hover()<CR>
-" nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
-" nnoremap <silent> <space>wa <cmd>lua vim.lsp.buf.add_workspace_folder()<CR>
-" nnoremap <silent> <space>wr <cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>
-" nnoremap <silent> <space>wl <cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>
-" nnoremap <silent> <space>D <cmd>lua vim.lsp.buf.type_definition()<CR>
-" nnoremap <silent> <space>rn <cmd>lua vim.lsp.buf.rename()<CR>
-" nnoremap <silent> <space>ca <cmd>lua vim.lsp.buf.code_action()<CR>
-" nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gD <Cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> gd <Cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K  <Cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <space>wa <cmd>lua vim.lsp.buf.add_workspace_folder()<CR>
+nnoremap <silent> <space>wr <cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>
+nnoremap <silent> <space>wl <cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>
+nnoremap <silent> <space>D <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> <space>rn <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> <space>ca <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> <space>e <cmd>lua vim.diagnostic.show_line_diagnostics()<CR>
 nnoremap <silent> <C-j> <cmd>lua vim.diagnostic.goto_next()<CR>
 nnoremap <silent> <C-f> <cmd>lua vim.diagnostic.goto_prev()<CR>
 nnoremap <silent> <leader>q <cmd>lua vim.diagnostic.set_loclist()<CR>
-" nnoremap <silent> <leader>f <cmd>lua vim.lsp.buf.formating()<CR>
+nnoremap <silent> <leader>f <cmd>lua vim.lsp.buf.formatting()<CR>
 
 " LSPSaga
 nnoremap <silent> <C-j> <Cmd>Lspsaga diagnostic_jump_next<CR>
@@ -215,7 +215,7 @@ nnoremap <leader>se :SqlsExecuteQueryVertical<cr>
 
 " NVIM Tree
 " See keybinds: https://github.com/kyazdani42/nvim-tree.lua#default-actions
-nnoremap <leader>n :NvimTreeToggle<CR>
+nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>nn :NvimTreeFindFile<CR>
 
