@@ -215,8 +215,8 @@ nnoremap <leader>se :SqlsExecuteQueryVertical<cr>
 
 " NVIM Tree
 " See keybinds: https://github.com/kyazdani42/nvim-tree.lua#default-actions
-nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <leader>nt :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
-nnoremap <leader>nn :NvimTreeFindFile<CR>
+nnoremap <leader>nf :NvimTreeFindFile<CR>
 
-nnoremap <leader>ft :set filetype=
+nnoremap <leader>sft :set filetype=

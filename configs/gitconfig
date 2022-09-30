@@ -27,12 +27,14 @@
   conflicts = "!$EDITOR $(git diff --name-only --diff-filter=U)"
   sync = git fetch && git merge main --ff
 [core]
+  pager = delta
   excludesfile = ~/.gitignore
   autocrlf = false
   eol=lf
 [merge]
   ff = only
   tool = diffmerge
+  conflictstyle = diff3
 [commit]
   template = ~/.gitmessage
 [fetch]
@@ -40,7 +42,7 @@
 [rebase]
   autosquash = true
 [include]
-  path = ~/.gitconfig.local
+  path = ~/.gitconfig.local:~/.themes.gitconfig
 [user]
   username = JeremyDwayne
   email = jeremy@jeremydwayne.com
@@ -48,7 +50,7 @@
 [diff]
   compactionHeuristic = true
   tool = diffmerge
-  colorMoved = zebra
+  colorMoved = default
 [difftool "diffmerge"]
   cmd = diffmerge \"$LOCAL\" \"$REMOTE\"
 [mergetool "diffmerge"]
@@ -61,3 +63,11 @@
   required = true
 [pull]
   rebase = true
+[interactive]
+  diffFilter = delta --color-only
+[add.interactive]
+  useBuiltin = false # required for git 2.37.0
+[delta]
+  navigate = true    # use n and N to move between diff sections
+  light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+  features = dracula

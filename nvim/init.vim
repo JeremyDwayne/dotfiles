@@ -5,7 +5,7 @@ if !1 | finish | endif
 let mapleader="\<space>"
 syntax enable
 set nocompatible
-set number
+set relativenumber
 set hidden
 set fileencodings=utf-8
 set encoding=utf-8
