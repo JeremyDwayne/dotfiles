@@ -53,6 +53,9 @@ map <leader>sk <C-w>k
 map <leader>sj <C-w>j
 map <leader>sl <C-w>l
 
+" VimSurround
+nnoremap <leader>cs cs
+
 " Fugitive
 nmap <leader>gs :G<CR>
 " Choose right merge
@@ -220,3 +223,5 @@ nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>nf :NvimTreeFindFile<CR>
 
 nnoremap <leader>sft :set filetype=
+
+nnoremap <leader>ng :lua require('neogen').generate()<CR>

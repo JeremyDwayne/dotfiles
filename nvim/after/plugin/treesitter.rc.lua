@@ -25,6 +25,7 @@ require'nvim-treesitter.configs'.setup {
     "scss",
     "ruby"
   },
+  tree_docs = {enable = true}
 }
 
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()

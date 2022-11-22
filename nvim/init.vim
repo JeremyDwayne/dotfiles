@@ -5,7 +5,7 @@ if !1 | finish | endif
 let mapleader="\<space>"
 syntax enable
 set nocompatible
-set relativenumber
+set number relativenumber
 set hidden
 set fileencodings=utf-8
 set encoding=utf-8
@@ -162,3 +162,6 @@ let g:VtrStripLeadingWhitespace = 1
 let g:VtrClearEmptyLines = 1
 let g:VtrPercentage = 50
 let g:VtrUseVtrMaps = 1
+
+let g:blamer_enabled = 1
+let g:blamer_date_format = '%m/%d/%y'

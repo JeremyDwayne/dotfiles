@@ -78,7 +78,7 @@ local servers = { 'pyright', 'rust_analyzer' }
 for _, lsp in pairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
     flags = {
       debounce_text_changes = 150,
     }
@@ -198,7 +198,7 @@ nvim_lsp.intelephense.setup{
 
 -- nvim_lsp.solargraph.setup {
 --   on_attach = on_attach,
---   capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+--   capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
 --   cmd = { "solargraph", "stdio" },
 --   filetypes = { "ruby" },
 --   root_dir = util.root_pattern("Gemfile", ".git"),
@@ -228,12 +228,12 @@ nvim_lsp.intelephense.setup{
 -- nvim_lsp.tsserver.setup {
 --   on_attach = on_attach,
 --   filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript" },
---   capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+--   capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 -- }
 
 nvim_lsp.diagnosticls.setup {
   on_attach = on_attach,
-  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+  capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
   -- filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'pandoc' },
   init_options = {
     linters = {
@@ -323,7 +323,7 @@ vim.lsp.diagnostic.on_publish_diagnostics, {
 --
 -- nvim_lsp.sumneko_lua.setup {
 --  on_attach = on_attach,
---  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+--  capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
 --   cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
 --   settings = {
 --     Lua = {
@@ -348,7 +348,7 @@ vim.lsp.diagnostic.on_publish_diagnostics, {
 
 -- require"lspconfig".efm.setup({
 --  on_attach = on_attach,
---  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+--  capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 --   init_options = {documentFormatting = true},
 --   settings = {
 --     languages = {
@@ -362,7 +362,7 @@ vim.lsp.diagnostic.on_publish_diagnostics, {
 
 -- nvim_lsp.jsonls.setup {
 --   on_attach = on_attach,
---   capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+--   capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
 --   init_options = {
 --     provideFormatter = true,
 --   },

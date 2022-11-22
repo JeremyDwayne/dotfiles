@@ -8,6 +8,7 @@
 call plug#begin(data_dir . '/plugins')
 
 Plug 'tpope/vim-fugitive'
+Plug 'APZelos/blamer.nvim'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
@@ -74,5 +75,7 @@ Plug 'tyru/open-browser-github.vim'
 "     \ }
 
 Plug 'jose-elias-alvarez/null-ls.nvim'
+" Plug 'kkoomen/vim-doge', { 'do': 'npm i --no-save && npm run build:binary:unix' }
+Plug 'danymat/neogen'
 
 call plug#end()
