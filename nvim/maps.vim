@@ -94,7 +94,9 @@ vnoremap <leader>p "_dP
 " Make Y behave like the other capitals
 nnoremap Y y$
 
-" Keep search results centered
+" Keep thing centered
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
 nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap J mzJ`z
@@ -210,7 +212,9 @@ nnoremap gR <cmd>TroubleToggle lsp_references<cr>
 nnoremap <leader>x :!chmod +x %<cr>
 nnoremap <leader>F :silent !tmux neww tmux-sessionizer<cr>
 
-nnoremap <leader>; :lua require("theprimeagen.git-worktree").execute(vim.loop.cwd(), "just-build")<CR>
+nnoremap <leader>; :lua require('telescope').extensions.git_worktree.git_worktrees()<CR>
+nnoremap <leader>;a :lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>
+
 
 " SQL
 " nnoremap <buffer> <leader>X :terminal; ~/work/scripts/replica < '%'<cr>

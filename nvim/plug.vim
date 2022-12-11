@@ -21,8 +21,10 @@ Plug 'Mofiqul/dracula.nvim'
 Plug 'akinsho/bufferline.nvim'
 Plug 'hoob3rt/lualine.nvim'
 Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer'
-Plug 'tami5/lspsaga.nvim'
+" Plug 'williamboman/nvim-lsp-installer'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'williamboman/mason.nvim'
+Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
 " Outdated non-functioning
 " Plug 'glepnir/lspsaga.nvim'
 Plug 'folke/trouble.nvim'

@@ -1,7 +1,42 @@
+inherit_gem:
+  rubocop-shopify: rubocop.yml
+
+require:
+ - rubocop-sorbet
+ - rubocop-minitest
+ - rubocop-rake
+
+Naming/FileName:
+  Exclude:
+  - "lib/ruby-lsp.rb"
+
+Sorbet/FalseSigil:
+  Enabled: false
+
+Sorbet/TrueSigil:
+  Enabled: true
+  Include:
+    - "test/**/*.rb"
+  Exclude:
+    - "**/*.rake"
+    - "lib/**/*.rb"
+
+Sorbet/StrictSigil:
+  Enabled: true
+  Include:
+    - "lib/**/*.rb"
+  Exclude:
+    - "**/*.rake"
+    - "test/**/*.rb"
+    - "lib/ruby-lsp.rb"
+
 AllCops:
   NewCops: disable
-  TargetRubyVersion: 2.6.6
+  SuggestExtensions: false
+  TargetRubyVersion: 2.7
   Exclude:
+    - 'features/**/*'
+    - 'test/fixtures/**/*'
     - '**/*.ru'
     - 'bin/**'
     - 'db/migrations/*'
@@ -48,7 +83,7 @@ Layout/HashAlignment:
 Lint/IdentityComparison:
   Enabled: false
 Layout/LineLength:
-  Max: 100
+  Max: 120
   IgnoredPatterns: ['\A#']
 Lint/MissingSuper:
   Enabled: false
