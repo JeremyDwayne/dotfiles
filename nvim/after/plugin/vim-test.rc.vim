@@ -6,5 +6,10 @@ augroup AutoDeleteTestTermBuffers
     autocmd BufLeave term://*phpunit* bdelete!
 augroup END
 
-let test#strategy = 'harpoon'
-let g:test#harpoon_term = 2
+let test#strategy = 'neovim'
+let g:test#neovim#start_normal = 1
+let test#neovim#term_position = "vert"
+
+if has('nvim')
+  tmap <C-o> <C-\><C-n>
+endif

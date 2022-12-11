@@ -162,6 +162,7 @@ nnoremap <silent> <leader><C-r> :lua require("harpoon.mark").shorten_list()<CR>
 nnoremap <silent> <leader><C-d> :lua require("harpoon.mark").clear_all()<CR>
 nnoremap <silent> <C-h>r :lua require("harpoon.mark").promote()<CR>
 nnoremap <silent> <leader>tu :lua require("harpoon.term").gotoTerminal(1)<CR>
+nnoremap <silent> <leader>tq :lua require("harpoon.term").clear_all()<CR>
 nnoremap <silent> <leader>te :lua require("harpoon.term").gotoTerminal(2)<CR>
 nnoremap <silent> <leader>cu :lua require("harpoon.term").sendCommand(1, 1)<CR>
 nnoremap <silent> <leader>ce :lua require("harpoon.term").sendCommand(1, 2)<CR>
