@@ -194,6 +194,7 @@ nvim_lsp.intelephense.setup {
 
 nvim_lsp.solargraph.setup {
   on_attach = on_attach,
+  capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
   cmd = { "solargraph", "stdio" },
   filetypes = { "ruby" },
   root_dir = util.root_pattern("Gemfile", ".git"),

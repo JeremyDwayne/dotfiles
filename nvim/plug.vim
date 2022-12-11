@@ -62,9 +62,9 @@ Plug 'ThePrimeagen/harpoon'
 Plug 'ThePrimeagen/git-worktree.nvim'
 
 "Completion
+Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/vscode-langservers-extracted'
@@ -74,7 +74,10 @@ Plug 'ray-x/lsp_signature.nvim'
 " Testing
 Plug 'vim-test/vim-test'
 
-" PSQL
+" SQL
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-completion'
+Plug 'kristijanhusak/vim-dadbod-ui'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug '$HOME/apps/psql'
 Plug 'christoomey/vim-tmux-runner'
