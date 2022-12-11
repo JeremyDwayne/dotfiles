@@ -5,3 +5,6 @@ augroup AutoDeleteTestTermBuffers
     autocmd BufLeave term://*artisan\stest* bdelete!
     autocmd BufLeave term://*phpunit* bdelete!
 augroup END
+
+let test#strategy = 'harpoon'
+let g:test#harpoon_term = 2

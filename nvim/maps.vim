@@ -1,10 +1,11 @@
 nmap <leader>ve :edit ~/.config/nvim/init.vim<cr>
+nmap <leader>vm :edit ~/.config/nvim/maps.vim<cr>
+nmap <leader>vp :edit ~/.config/nvim/plug.vim<cr>
 nmap <leader>vr :source ~/.config/nvim/init.vim<cr>
 nmap <leader>so :source %<cr>
 
 nmap <leader>/ :nohlsearch<CR>
-nmap <leader>Q :bufdo bdelete<cr>
-nn <leader>bd  :bd<cr>
+nn <leader>w  :bd<cr>
 
 " Allow gf to open non-existent files
 map gf :edit <cfile><cr>
@@ -148,24 +149,25 @@ inoremap <silent> <C-k> <Cmd>Lspsaga signature_help<CR>
 nnoremap <silent> gh <Cmd>Lspsaga lsp_finder<CR>
 
 " Harpoon
-" removing harpoon for now till I have time to figure out why its conflicting
-" with the LSP
-" nnoremap <silent> <C-m> :lua require("harpoon.mark").add_file()<CR>
-" nnoremap <silent> <C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
-" nnoremap <silent> <C-h>1 :lua require("harpoon.ui").nav_file(1)<CR>
-" nnoremap <silent> <C-h>2 :lua require("harpoon.ui").nav_file(2)<CR>
-" nnoremap <silent> <C-h>3 :lua require("harpoon.ui").nav_file(3)<CR>
-" nnoremap <silent> <C-h>4 :lua require("harpoon.ui").nav_file(4)<CR>
-" nnoremap <silent> <C-g> :lua require("harpoon.mark").rm_file()<CR>
-" nnoremap <silent> <leader><C-r> :lua require("harpoon.mark").shorten_list()<CR>
-" nnoremap <silent> <leader><C-d> :lua require("harpoon.mark").clear_all()<CR>
-" nnoremap <silent> <C-h>r :lua require("harpoon.mark").promote()<CR>
-" nnoremap <silent> <leader>tu :lua require("harpoon.term").gotoTerminal(1)<CR>
-" nnoremap <silent> <leader>te :lua require("harpoon.term").gotoTerminal(2)<CR>
-" nnoremap <silent> <leader>cu :lua require("harpoon.term").sendCommand(1, 1)<CR>
-" nnoremap <silent> <leader>ce :lua require("harpoon.term").sendCommand(1, 2)<CR>
+nnoremap <silent> <C-m> :lua require("harpoon.mark").add_file()<CR>
+nnoremap <silent> <C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <silent> <leader>hn :lua require("harpoon.ui").nav_next()<CR>
+nnoremap <silent> <leader>hp :lua require("harpoon.ui").nav_prev()<CR>
+nnoremap <silent> <C-h>1 :lua require("harpoon.ui").nav_file(1)<CR>
+nnoremap <silent> <C-h>2 :lua require("harpoon.ui").nav_file(2)<CR>
+nnoremap <silent> <C-h>3 :lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <silent> <C-h>4 :lua require("harpoon.ui").nav_file(4)<CR>
+nnoremap <silent> <C-g> :lua require("harpoon.mark").rm_file()<CR>
+nnoremap <silent> <leader><C-r> :lua require("harpoon.mark").shorten_list()<CR>
+nnoremap <silent> <leader><C-d> :lua require("harpoon.mark").clear_all()<CR>
+nnoremap <silent> <C-h>r :lua require("harpoon.mark").promote()<CR>
+nnoremap <silent> <leader>tu :lua require("harpoon.term").gotoTerminal(1)<CR>
+nnoremap <silent> <leader>te :lua require("harpoon.term").gotoTerminal(2)<CR>
+nnoremap <silent> <leader>cu :lua require("harpoon.term").sendCommand(1, 1)<CR>
+nnoremap <silent> <leader>ce :lua require("harpoon.term").sendCommand(1, 2)<CR>
 
 " Floaterm
+
 nnoremap <silent> <leader>ff :FloatermNew<CR>
 tnoremap <silent> <leader>ff <C-\><C-n>:FloatermNew<CR>
 nnoremap <silent> <leader>fp :FloatermPrev<CR>
@@ -182,8 +184,8 @@ nnoremap <silent><Tab> :BufferLineCycleNext<CR>
 nnoremap <silent><S-Tab> :BufferLineCyclePrev<CR>
 
 " These commands will move the current buffer backwards or forwards in the bufferline
-" nnoremap <silent><mymap> :BufferLineMoveNext<CR>
-" nnoremap <silent><mymap> :BufferLineMovePrev<CR>
+nnoremap <silent><leader>bn :BufferLineMoveNext<CR>
+nnoremap <silent><leader>bp :BufferLineMovePrev<CR>
 
 " These commands will sort buffers by directory, language, or a custom criteria
 " nnoremap <silent>be :BufferLineSortByExtension<CR>

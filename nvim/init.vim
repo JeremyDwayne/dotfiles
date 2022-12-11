@@ -15,7 +15,7 @@ set autoindent
 set hlsearch
 set showcmd
 set cmdheight=1
-set laststatus=2
+set laststatus=3
 set signcolumn=yes:2
 set expandtab
 set shell=zsh
@@ -69,6 +69,7 @@ set formatoptions+=r
 set cursorline
 highlight Visual cterm=NONE ctermbg=236 ctermfg=NONE guibg=Grey40
 highlight LineNr cterm=none ctermfg=240 guifg=#2b506e guibg=#000000
+highlight WinSeparator guibg=NONE
 
 " block in normal mode, a vertical bar in insert mode, and a underscore in replace mode.
 let &t_EI = "\<Esc>[1 q"
@@ -165,3 +166,11 @@ let g:VtrUseVtrMaps = 1
 
 let g:blamer_enabled = 1
 let g:blamer_date_format = '%m/%d/%y'
+
+augroup presentation
+    autocmd!
+" Presentation mode
+    au Filetype markdown nnoremap <buffer> <F10> :PresentingStart<CR>
+" ASCII art
+    au Filetype markdown nnoremap <buffer> <F12> :.!toilet -w 200 -f term -F border<CR>
+augroup end

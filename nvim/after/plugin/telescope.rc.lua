@@ -35,6 +35,7 @@ require('telescope').setup {
 
 require('telescope').load_extension('fzy_native')
 require('telescope').load_extension('git_worktree')
+require("telescope").load_extension('harpoon')
 
 function _G.search_dotfiles()
   require("telescope.builtin").find_files({ prompt_title = "Dotfiles", cwd = "~/.dotfiles", find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' } })

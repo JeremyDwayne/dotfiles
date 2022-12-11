@@ -17,7 +17,6 @@ Plug 'windwp/nvim-ts-autotag'
 Plug 'numToStr/Comment.nvim'
 Plug 'voldikss/vim-floaterm'
 Plug 'danymat/neogen'
-Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'max397574/better-escape.nvim'
 
 " Telescope
@@ -28,17 +27,25 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 
 " LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'williamboman/mason.nvim'
+Plug 'mfussenegger/nvim-lint'
 
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'APZelos/blamer.nvim'
 Plug 'lewis6991/gitsigns.nvim'
+Plug 'rhysd/committia.vim'
+Plug 'sindrets/diffview.nvim'
+
+" Github
+Plug 'pwntester/octo.nvim'
 
 " Tpope
 Plug 'tpope/vim-rhubarb'
@@ -60,6 +67,7 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 " ThePrimeagen
 Plug 'ThePrimeagen/harpoon'
 Plug 'ThePrimeagen/git-worktree.nvim'
+Plug 'ThePrimeagen/refactoring.nvim'
 
 "Completion
 Plug 'hrsh7th/nvim-cmp'
