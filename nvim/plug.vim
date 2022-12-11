@@ -7,37 +7,59 @@
 
 call plug#begin(data_dir . '/plugins')
 
-Plug 'tpope/vim-fugitive'
-Plug 'APZelos/blamer.nvim'
-Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-vinegar'
-Plug 'p00f/nvim-ts-rainbow'
+" Utility
+Plug 'lewis6991/impatient.nvim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
-Plug 'Mofiqul/dracula.nvim'
+Plug 'windwp/nvim-autopairs'
+Plug 'windwp/nvim-ts-autotag'
+Plug 'numToStr/Comment.nvim'
+Plug 'voldikss/vim-floaterm'
+Plug 'danymat/neogen'
+Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'max397574/better-escape.nvim'
 
-Plug 'akinsho/bufferline.nvim'
-Plug 'hoob3rt/lualine.nvim'
+" Telescope
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+
+" Treesitter
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+
+" LSP
 Plug 'neovim/nvim-lspconfig'
-" Plug 'williamboman/nvim-lsp-installer'
+Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'williamboman/mason.nvim'
-Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
-" Outdated non-functioning
-" Plug 'glepnir/lspsaga.nvim'
+
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'APZelos/blamer.nvim'
+Plug 'lewis6991/gitsigns.nvim'
+
+" Tpope
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
+
+" Appearance
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'p00f/nvim-ts-rainbow'
+Plug 'Mofiqul/dracula.nvim'
+Plug 'akinsho/bufferline.nvim'
+Plug 'hoob3rt/lualine.nvim'
 Plug 'folke/trouble.nvim'
 Plug 'folke/lsp-colors.nvim'
 Plug 'onsails/lspkind-nvim'
-Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
+Plug 'lukas-reineke/indent-blankline.nvim'
+
+" ThePrimeagen
 Plug 'ThePrimeagen/harpoon'
 Plug 'ThePrimeagen/git-worktree.nvim'
-Plug 'kyazdani42/nvim-web-devicons' " for file icons
-Plug 'kyazdani42/nvim-tree.lua'
 
 "Completion
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -47,21 +69,12 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/vscode-langservers-extracted'
 Plug 'rafamadriz/friendly-snippets'
+Plug 'ray-x/lsp_signature.nvim'
 
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
-Plug 'windwp/nvim-autopairs'
-Plug 'windwp/nvim-ts-autotag'
-Plug 'numToStr/Comment.nvim'
-"Not currently invited to copilot, don't load it
-"Plug 'github/copilot.vim'
-
-Plug 'voldikss/vim-floaterm'
-Plug 'kana/vim-textobj-user' | Plug 'whatyouhide/vim-textobj-xmlattr'
-Plug 'tpope/vim-projectionist'
+" Testing
 Plug 'vim-test/vim-test'
 
-Plug 'lewis6991/gitsigns.nvim'
+" PSQL
 Plug 'norcalli/nvim-colorizer.lua'
 Plug '$HOME/apps/psql'
 Plug 'christoomey/vim-tmux-runner'
@@ -71,13 +84,5 @@ Plug 'nanotee/sqls.nvim'
 " Open current file in web browser
 Plug 'tyru/open-browser.vim'
 Plug 'tyru/open-browser-github.vim'
-" Plug 'autozimu/LanguageClient-neovim', {
-"     \ 'branch': 'next',
-"     \ 'do': 'bash install.sh',
-"     \ }
-
-Plug 'jose-elias-alvarez/null-ls.nvim'
-" Plug 'kkoomen/vim-doge', { 'do': 'npm i --no-save && npm run build:binary:unix' }
-Plug 'danymat/neogen'
 
 call plug#end()

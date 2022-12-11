@@ -1,9 +1,11 @@
 local nvim_lsp = require('lspconfig')
-local protocol = require'vim.lsp.protocol'
+local protocol = require 'vim.lsp.protocol'
+local lsp_configs = require('lspconfig.configs')
+local util = require 'lspconfig.util'
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
+local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', 'C-f', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', 'C-j', vim.diagnostic.goto_next, opts)
@@ -46,7 +48,7 @@ local on_attach = function(client, bufnr)
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -82,11 +84,8 @@ for _, lsp in pairs(servers) do
   }
 end
 
-local lsp_configs = require('lspconfig.configs')
-local util = require 'lspconfig.util'
 lsp_configs.prosemd = {
   default_config = {
-    -- Update the path to prosemd-lsp
     cmd = { "prosemd-lsp", "--stdio" },
     filetypes = { "markdown" },
     root_dir = function(fname)
@@ -96,10 +95,10 @@ lsp_configs.prosemd = {
   }
 }
 
-nvim_lsp.prosemd.setup{ on_attach = on_attach }
+nvim_lsp.prosemd.setup { on_attach = on_attach }
 
-nvim_lsp.intelephense.setup{
-  on_attach=on_attach,
+nvim_lsp.intelephense.setup {
+  on_attach = on_attach,
   settings = {
     diagnostic = {
       checkCurrentLine = true,
@@ -195,7 +194,6 @@ nvim_lsp.intelephense.setup{
 
 nvim_lsp.solargraph.setup {
   on_attach = on_attach,
-  capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
   cmd = { "solargraph", "stdio" },
   filetypes = { "ruby" },
   root_dir = util.root_pattern("Gemfile", ".git"),
@@ -210,7 +208,7 @@ nvim_lsp.solargraph.setup {
   },
   handlers = {
     ["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
+      vim.lsp.diagnostic.on_publish_diagnostics, {
       -- Disable virtual_text on file load
       -- Show with vim.lsp.diagnostic.show_line_diagnostics()
       virtual_text = false
@@ -218,46 +216,10 @@ nvim_lsp.solargraph.setup {
     ),
   },
   workspace = {
-    primetrust = {[vim.fn.expand('$HOME/work/prime_trust_api')] = true, [vim.fn.expand('$HOME/work/prime_trust_front_end')] = true}
+    primetrust = { [vim.fn.expand('$HOME/work/prime_trust_api')] = true,
+      [vim.fn.expand('$HOME/work/prime_trust_front_end')] = true }
   },
 }
-
--- if not lsp_configs.ruby_lsp then
---   local enabled_features = {
---     "documentHighlights",
---     "documentSymbols",
---     "foldingRanges",
---     "selectionRanges",
---     -- "semanticHighlighting",
---     "formatting",
---     "codeActions",
---   }
---
---   lsp_configs.ruby_lsp = {
---     default_config = {
---       cmd = { "bundle", "exec", "ruby-lsp" },
---       filetypes = { "ruby" },
---       root_dir = util.root_pattern("Gemfile", ".git"),
---       init_options = {
---         enabledFeatures = enabled_features,
---       },
---       settings = {},
---     },
---     commands = {
---       FormatRuby = {
---         function()
---           vim.lsp.buf.format({
---             name = "ruby_lsp",
---             async = true,
---           })
---         end,
---         description = "Format using ruby-lsp",
---       },
---     },
---   }
--- end
---
--- nvim_lsp.ruby_lsp.setup({ on_attach = on_attach, capabilities = capabilities })
 
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,
@@ -265,94 +227,94 @@ nvim_lsp.tsserver.setup {
   capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 }
 
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " } 
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl= hl, numhl = hl })
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-nvim_lsp.diagnosticls.setup {
-  on_attach = on_attach,
-  capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
-  init_options = {
-    linters = {
-      rubocop = {
-        command = "exec rubocop",
-        sourceName = "rubocop",
-        debounce = 100,
-        args = {
-          "--format",
-          "json",
-          "--force-exclusion",
-          "%filepath"
-        },
-        parseJson = {
-          errorsRoot = "files[0].offenses",
-          line = "location.line",
-          column = "location.column",
-          message = "[${cop_name}] ${message}",
-          security = "severity"
-        },
-        securities = {
-          [2] = "error",
-          [1] = "warning"
-        }
-      }
-    },
-    eslint = {
-      command = 'eslint_d',
-      rootPatterns = { '.git' },
-      debounce = 100,
-      args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json' },
-      sourceName = 'eslint_d',
-      parseJson = {
-        errorsRoot = '[0].messages',
-        line = 'line',
-        column = 'column',
-        endLine = 'endLine',
-        endColumn = 'endColumn',
-        message = '[eslint] ${message} [${ruleId}]',
-        security = 'severity'
-      },
-      securities = {
-        [2] = 'error',
-        [1] = 'warning'
-      }
-    },
-  },
-  filetypes = {
-    javascript = 'eslint',
-    javascriptreact = 'eslint',
-    typescript = 'eslint',
-    typescriptreact = 'eslint',
-  },
-  formatters = {
-    eslint_d = {
-      command = 'eslint_d',
-      args = { '--stdin', '--stdin-filename', '%filename', '--fix-to-stdout' },
-      rootPatterns = { '.git' },
-    },
-    prettier = {
-      command = 'prettier',
-      args = { '--stdin-filepath', '%filename' }
-    }
-  },
-  formatFiletypes = {
-    css = 'prettier',
-    javascript = 'eslint_d',
-    javascriptreact = 'eslint_d',
-    -- json = 'jq',
-    scss = 'prettier',
-    less = 'prettier',
-    typescript = 'eslint_d',
-    typescriptreact = 'eslint_d',
-    markdown = 'prettier',
-  }
-}
+-- nvim_lsp.diagnosticls.setup {
+--   on_attach = on_attach,
+--   capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+--   init_options = {
+--     linters = {
+--       rubocop = {
+--         command = "exec rubocop",
+--         sourceName = "rubocop",
+--         debounce = 100,
+--         args = {
+--           "--format",
+--           "json",
+--           "--force-exclusion",
+--           "%filepath"
+--         },
+--         parseJson = {
+--           errorsRoot = "files[0].offenses",
+--           line = "location.line",
+--           column = "location.column",
+--           message = "[${cop_name}] ${message}",
+--           security = "severity"
+--         },
+--         securities = {
+--           [2] = "error",
+--           [1] = "warning"
+--         }
+--       }
+--     },
+--     eslint = {
+--       command = 'eslint_d',
+--       rootPatterns = { '.git' },
+--       debounce = 100,
+--       args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json' },
+--       sourceName = 'eslint_d',
+--       parseJson = {
+--         errorsRoot = '[0].messages',
+--         line = 'line',
+--         column = 'column',
+--         endLine = 'endLine',
+--         endColumn = 'endColumn',
+--         message = '[eslint] ${message} [${ruleId}]',
+--         security = 'severity'
+--       },
+--       securities = {
+--         [2] = 'error',
+--         [1] = 'warning'
+--       }
+--     },
+--   },
+--   filetypes = {
+--     javascript = 'eslint',
+--     javascriptreact = 'eslint',
+--     typescript = 'eslint',
+--     typescriptreact = 'eslint',
+--   },
+--   formatters = {
+--     eslint_d = {
+--       command = 'eslint_d',
+--       args = { '--stdin', '--stdin-filename', '%filename', '--fix-to-stdout' },
+--       rootPatterns = { '.git' },
+--     },
+--     prettier = {
+--       command = 'prettier',
+--       args = { '--stdin-filepath', '%filename' }
+--     }
+--   },
+--   formatFiletypes = {
+--     css = 'prettier',
+--     javascript = 'eslint_d',
+--     javascriptreact = 'eslint_d',
+--     json = 'jq',
+--     scss = 'prettier',
+--     less = 'prettier',
+--     typescript = 'eslint_d',
+--     typescriptreact = 'eslint_d',
+--     markdown = 'prettier',
+--   }
+-- }
 
 -- icon
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-vim.lsp.diagnostic.on_publish_diagnostics, {
+  vim.lsp.diagnostic.on_publish_diagnostics, {
   underline = true,
   -- This sets the spacing and the prefix, obviously.
   virtual_text = {
@@ -362,32 +324,18 @@ vim.lsp.diagnostic.on_publish_diagnostics, {
 }
 )
 
-
--- For installation instructions: https://www.chrisatmachine.com/Neovim/28-neovim-lua-development/ 
--- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
-USER = vim.fn.expand('$USER')
-
-local sumneko_root_path = ""
-local sumneko_binary = ""
-
-local system_name
-if vim.fn.has("mac") == 1 then
-  system_name = "macOS"
-elseif vim.fn.has("unix") == 1 then
-  system_name = "Linux"
-else
-  print("Unsupported system for sumneko")
-end
-
-sumneko_root_path = "~/.local/bin/lua-language-server"
-sumneko_binary = sumneko_root_path.."/bin/lua-language-server"
-
 nvim_lsp.sumneko_lua.setup {
   on_attach = on_attach,
   capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
-  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
   settings = {
     Lua = {
+      format = {
+        enable = true,
+        defaultConfig = {
+          indent_style = "space",
+          indent_size = "2",
+        }
+      },
       runtime = {
         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         version = 'LuaJIT',
@@ -396,30 +344,15 @@ nvim_lsp.sumneko_lua.setup {
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = {'vim'}
+        globals = { 'vim' }
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
-        library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
+        library = { [vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true }
       }
     }
   }
 }
-
-
--- require"lspconfig".efm.setup({
-  --  on_attach = on_attach,
-  --  capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-  --   init_options = {documentFormatting = true},
-  --   settings = {
-    --     languages = {
-      --       lua = {
-        --         formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=150 --break-after-table-lb",
-        --         formatStdin = true
-        --       }
-        --     }
-        --   }
-        -- })
 
 nvim_lsp.jsonls.setup {
   on_attach = on_attach,
@@ -429,3 +362,7 @@ nvim_lsp.jsonls.setup {
   },
   formatCommand = "jq"
 }
+
+-- require("lspconfig").clangd.setup {
+--     on_attach = on_attach
+-- }
