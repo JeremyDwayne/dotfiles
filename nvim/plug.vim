@@ -63,6 +63,7 @@ Plug 'folke/lsp-colors.nvim'
 Plug 'onsails/lspkind-nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'marko-cerovac/material.nvim'
 
 " ThePrimeagen
 Plug 'ThePrimeagen/harpoon'
@@ -81,6 +82,11 @@ Plug 'ray-x/lsp_signature.nvim'
 
 " Testing
 Plug 'vim-test/vim-test'
+Plug 'antoinemadec/FixCursorHold.nvim'
+Plug 'nvim-neotest/neotest'
+Plug 'nvim-neotest/neotest-vim-test'
+Plug 'olimorris/neotest-rspec'
+Plug 'mfussenegger/nvim-dap'
 
 " SQL
 Plug 'tpope/vim-dadbod'

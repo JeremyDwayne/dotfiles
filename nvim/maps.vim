@@ -194,11 +194,11 @@ nnoremap <silent><leader>bp :BufferLineMovePrev<CR>
 " nnoremap <silent><mymap> :lua require'bufferline'.sort_buffers_by(function (buf_a, buf_b) return buf_a.id < buf_b.id end)<CR>
 
 " vim-test
-nmap <leader>tn :TestNearest<CR>
-nmap <leader>tf :TestFile<CR>
-nmap <leader>ts :TestSuite<CR>
-nmap <leader>tl :TestLast<CR>
-nmap <leader>tv :TestVisit<CR>
+" nmap <leader>tn :TestNearest<CR>
+" nmap <leader>tf :TestFile<CR>
+" nmap <leader>ts :TestSuite<CR>
+" nmap <leader>tl :TestLast<CR>
+" nmap <leader>tv :TestVisit<CR>
 
 " Trouble
 nnoremap <leader>xx <cmd>TroubleToggle<cr>
