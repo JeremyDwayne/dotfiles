@@ -1,5 +1,6 @@
-local saga = require 'lspsaga'
+local status, lspsaga = pcall(require, "lspsaga")
+if not status then return end
 
-saga.init_lsp_saga {
+lspsaga.init_lsp_saga {
     border_style = "round",
 }

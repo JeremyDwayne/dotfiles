@@ -1,6 +1,10 @@
-require 'nvim-treesitter.configs'.setup {
+local status, treesitter = pcall(require, "nvim-treesitter.configs")
+if (not status) then return end
+
+treesitter.setup {
     -- A list of parser names, or "all"
-    ensure_installed = { "help", "ruby", "javascript", "typescript", "c", "lua", "rust" },
+    ensure_installed = { "help", "ruby", "javascript", "typescript", "c", "lua", "rust", "json", "html", "css", "tsx",
+        "markdown", "markdown_inline", "bash" },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,
@@ -8,6 +12,7 @@ require 'nvim-treesitter.configs'.setup {
     -- Automatically install missing parsers when entering buffer
     -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
     auto_install = true,
+    ignore_install = { "phpdoc" }, -- List of parsers to ignore installing
 
     rainbow = {
         enable = true,
@@ -16,9 +21,12 @@ require 'nvim-treesitter.configs'.setup {
         -- colors = {}, -- table of hex strings
         -- termcolors = {} -- table of colour name strings
     },
+    autopairs = {
+        enable = true,
+    },
     indent = {
-        enable = false,
-        disable = {},
+        enable = true,
+        disable = {}
     },
     tree_docs = { enable = true },
     highlight = {

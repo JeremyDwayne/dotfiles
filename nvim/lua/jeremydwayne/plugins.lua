@@ -49,43 +49,7 @@ return require('packer').startup(function(use)
         end
     }
 
-    use 'lewis6991/impatient.nvim'
-    use {
-        'junegunn/fzf',
-        run = ":call fzf#install()<CR>"
-    }
-    use 'junegunn/fzf.vim'
-    use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.0',
-        -- or                          , branch = '0.1.x',
-        requires = { { 'nvim-lua/plenary.nvim' } }
-    }
-    use 'nvim-telescope/telescope-fzy-native.nvim'
-    use 'nvim-lua/popup.nvim'
-
-    use {
-        'nvim-treesitter/nvim-treesitter',
-        run = function()
-            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-            ts_update()
-        end,
-    }
-    use 'nvim-treesitter/playground'
-    use 'nvim-treesitter/nvim-treesitter-textobjects'
-    use 'JoosepAlviste/nvim-ts-context-commentstring'
-
-    use 'theprimeagen/harpoon'
-    use 'mbbill/undotree'
-
-    -- GIT
-    use 'APZelos/blamer.nvim'
-    use 'lewis6991/gitsigns.nvim'
-    use 'rhysd/committia.vim'
-    -- THE POPE
-    use 'tpope/vim-fugitive'
-    use 'tpope/vim-rhubarb'
-    use 'tpope/vim-surround'
-    use 'tpope/vim-vinegar'
+    -- LSP
     use {
         'VonHeikemen/lsp-zero.nvim',
         requires = {
@@ -110,9 +74,51 @@ return require('packer').startup(function(use)
             { 'rafamadriz/friendly-snippets' },
         }
     }
-
-
     use 'glepnir/lspsaga.nvim'
+
+    -- FZF
+    use {
+        'junegunn/fzf',
+        run = ":call fzf#install()<CR>"
+    }
+    use 'junegunn/fzf.vim'
+
+    -- Telescope
+    use {
+        'nvim-telescope/telescope.nvim', tag = '0.1.0',
+        -- or                          , branch = '0.1.x',
+        requires = { { 'nvim-lua/plenary.nvim' } }
+    }
+    use 'nvim-telescope/telescope-fzy-native.nvim'
+    use { 'axkirillov/easypick.nvim', requires = 'nvim-telescope/telescope.nvim' }
+    use 'nvim-lua/popup.nvim'
+
+    -- Treesitter
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = function()
+            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+            ts_update()
+        end,
+    }
+    use 'nvim-treesitter/playground'
+    use 'nvim-treesitter/nvim-treesitter-textobjects'
+    use 'JoosepAlviste/nvim-ts-context-commentstring'
+
+    use 'lewis6991/impatient.nvim'
+    use 'theprimeagen/harpoon'
+    use 'mbbill/undotree'
+
+    -- GIT
+    use 'APZelos/blamer.nvim'
+    use 'lewis6991/gitsigns.nvim'
+    use 'rhysd/committia.vim'
+
+    -- THE POPE
+    use 'tpope/vim-fugitive'
+    use 'tpope/vim-rhubarb'
+    use 'tpope/vim-surround'
+    use 'tpope/vim-vinegar'
 
     use 'windwp/nvim-autopairs'
     use 'windwp/nvim-ts-autotag'
@@ -124,7 +130,7 @@ return require('packer').startup(function(use)
     }
     use 'danymat/neogen'
     use 'max397574/better-escape.nvim'
-    use 'voldikss/vim-floaterm'
+    use 'akinsho/toggleterm.nvim'
     use 'mfussenegger/nvim-lint'
     use 'pwntester/octo.nvim'
     use {

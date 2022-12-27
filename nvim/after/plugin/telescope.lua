@@ -1,4 +1,8 @@
-local builtin = require('telescope.builtin')
+local bstatus, builtin = pcall(require, "telescope.builtin")
+if (not bstatus) then return end
+local astatus, actions = pcall(require, "telescope.actions")
+if (not astatus) then return end
+
 -- Maps
 vim.keymap.set('n', ';f', builtin.find_files)
 vim.keymap.set('n', ';p', builtin.git_files)
@@ -12,11 +16,12 @@ vim.keymap.set('n', '<leader>ps', function()
 end)
 vim.keymap.set('n', '<leader>km', builtin.keymaps)
 
-local actions = require('telescope.actions')
 -- Global remapping
-
 require('telescope').setup {
     defaults = {
+        prompt_prefix = " ",
+        selection_caret = " ",
+        path_display = { "smart" },
         file_sorter = require('telescope.sorters').get_fzy_sorter,
         color_devicons = true,
 
@@ -30,15 +35,81 @@ require('telescope').setup {
             preview_width = 0.65,
         },
     },
+    mappings = {
+        i = {
+            ["<C-n>"] = actions.cycle_history_next,
+            ["<C-p>"] = actions.cycle_history_prev,
+
+            ["<C-j>"] = actions.move_selection_next,
+            ["<C-k>"] = actions.move_selection_previous,
+
+            ["<C-c>"] = actions.close,
+
+            ["<Down>"] = actions.move_selection_next,
+            ["<Up>"] = actions.move_selection_previous,
+
+            ["<CR>"] = actions.select_default,
+            ["<C-x>"] = actions.select_horizontal,
+            ["<C-v>"] = actions.select_vertical,
+            ["<C-t>"] = actions.select_tab,
+
+            ["<C-u>"] = actions.preview_scrolling_up,
+            ["<C-d>"] = actions.preview_scrolling_down,
+
+            ["<PageUp>"] = actions.results_scrolling_up,
+            ["<PageDown>"] = actions.results_scrolling_down,
+
+            ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+            ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+            ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+            ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+            ["<C-l>"] = actions.complete_tag,
+            ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
+        },
+
+        n = {
+            ["<esc>"] = actions.close,
+            ["<CR>"] = actions.select_default,
+            ["<C-x>"] = actions.select_horizontal,
+            ["<C-v>"] = actions.select_vertical,
+            ["<C-t>"] = actions.select_tab,
+
+            ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+            ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+            ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+            ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+
+            ["j"] = actions.move_selection_next,
+            ["k"] = actions.move_selection_previous,
+            ["H"] = actions.move_to_top,
+            ["M"] = actions.move_to_middle,
+            ["L"] = actions.move_to_bottom,
+
+            ["<Down>"] = actions.move_selection_next,
+            ["<Up>"] = actions.move_selection_previous,
+            ["gg"] = actions.move_to_top,
+            ["G"] = actions.move_to_bottom,
+
+            ["<C-u>"] = actions.preview_scrolling_up,
+            ["<C-d>"] = actions.preview_scrolling_down,
+
+            ["<PageUp>"] = actions.results_scrolling_up,
+            ["<PageDown>"] = actions.results_scrolling_down,
+
+            ["?"] = actions.which_key,
+        },
+    },
     pickers = {
         find_files = {
+            theme = "ivy",
             layout_config = {
-                width = 80,
+                height = 0.8,
             },
         },
         live_grep = {
+            theme = "ivy",
             layout_config = {
-                width = 80,
+                height = 0.8,
             },
         }
     },

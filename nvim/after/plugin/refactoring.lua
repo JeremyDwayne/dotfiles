@@ -1,4 +1,7 @@
-require('refactoring').setup({
+local status, refactoring = pcall(require, "refactoring")
+if (not status) then return end
+
+refactoring.setup({
     -- prompt for return type
     prompt_func_return_type = {
         go = true,
