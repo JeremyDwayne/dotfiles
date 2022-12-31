@@ -24,6 +24,9 @@ vim.cmd [[
     autocmd!
     autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
   augroup end
+  augroup _eslint
+    autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
+  augroup end
 ]]
 
 -- Autoformat
