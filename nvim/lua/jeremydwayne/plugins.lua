@@ -37,6 +37,7 @@ packer.init({
 return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
+    use 'folke/neodev.nvim'
     use {
         'Mofiqul/dracula.nvim',
         as = 'dracula',
@@ -71,13 +72,6 @@ return require('packer').startup(function(use)
         }
     }
     use 'glepnir/lspsaga.nvim'
-
-    -- FZF
-    use {
-        'junegunn/fzf',
-        run = ":call fzf#install()<CR>"
-    }
-    use 'junegunn/fzf.vim'
 
     -- Telescope
     use {
