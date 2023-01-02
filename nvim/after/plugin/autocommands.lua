@@ -13,6 +13,7 @@ vim.cmd [[
   augroup end
   augroup _markdown
     autocmd!
+    autocmd BufRead,BufNewFile *.md setlocal textwidth=120
     autocmd FileType markdown setlocal wrap
     autocmd FileType markdown setlocal spell
   augroup end
@@ -25,6 +26,7 @@ vim.cmd [[
     autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
   augroup end
   augroup _eslint
+    autocmd!
     autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
   augroup end
 ]]

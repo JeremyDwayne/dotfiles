@@ -141,6 +141,11 @@ _G.packer_plugins = {
     path = "/Users/jwinterberg/.local/share/nvim/site/pack/packer/start/dracula",
     url = "https://github.com/Mofiqul/dracula.nvim"
   },
+  ["easypick.nvim"] = {
+    loaded = true,
+    path = "/Users/jwinterberg/.local/share/nvim/site/pack/packer/start/easypick.nvim",
+    url = "https://github.com/axkirillov/easypick.nvim"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/Users/jwinterberg/.local/share/nvim/site/pack/packer/start/friendly-snippets",
@@ -361,6 +366,11 @@ _G.packer_plugins = {
     path = "/Users/jwinterberg/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
+  ["toggleterm.nvim"] = {
+    loaded = true,
+    path = "/Users/jwinterberg/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
+    url = "https://github.com/akinsho/toggleterm.nvim"
+  },
   ["tree-sitter-sql"] = {
     loaded = true,
     path = "/Users/jwinterberg/.local/share/nvim/site/pack/packer/start/tree-sitter-sql",
@@ -390,11 +400,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/jwinterberg/.local/share/nvim/site/pack/packer/start/vim-dadbod-ui",
     url = "https://github.com/kristijanhusak/vim-dadbod-ui"
-  },
-  ["vim-floaterm"] = {
-    loaded = true,
-    path = "/Users/jwinterberg/.local/share/nvim/site/pack/packer/start/vim-floaterm",
-    url = "https://github.com/voldikss/vim-floaterm"
   },
   ["vim-fugitive"] = {
     loaded = true,
@@ -434,14 +439,14 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: Comment.nvim
-time([[Config for Comment.nvim]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
-time([[Config for Comment.nvim]], false)
 -- Config for: dracula
 time([[Config for dracula]], true)
 try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0\24colorscheme dracula\bcmd\bvim\0", "config", "dracula")
 time([[Config for dracula]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
+time([[Config for Comment.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
