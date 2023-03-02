@@ -6,7 +6,7 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>nt", vim.cmd.NvimTreeToggle)
 vim.keymap.set("n", "<leader>nf", vim.cmd.NvimTreeFindFile)
 
-vim.keymap.set("n", "<leader>bd", '<cmd>bd<cr>')
+vim.keymap.set("n", "<leader>bd", '<cmd>bd!<cr>')
 
 -- option key movement on macos
 vim.keymap.set("n", "∆", ":m .+1<CR>==")
@@ -56,8 +56,9 @@ vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- vim tabs
-vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>")
-vim.keymap.set("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>")
+vim.keymap.set("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>")
+vim.keymap.set("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>")
+
 vim.keymap.set("n", "<leader>bn", "<cmd>BufferLineMoveNext<CR>")
 vim.keymap.set("n", "<leader>bp", "<cmd>BufferLineMovePrev<CR>")
 

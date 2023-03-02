@@ -131,7 +131,7 @@ return require('packer').startup(function(use)
         tag = 'nightly'
     }
     use 'p00f/nvim-ts-rainbow'
-    use 'akinsho/bufferline.nvim'
+    use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
     use 'hoob3rt/lualine.nvim'
     use 'folke/trouble.nvim'
     use 'folke/lsp-colors.nvim'
@@ -160,6 +160,7 @@ return require('packer').startup(function(use)
     use 'nanotee/sqls.nvim'
     use 'tyru/open-browser.vim'
     use 'tyru/open-browser-github.vim'
+    use 'xiyaowong/nvim-transparent'
 
     -- Automatically set up your configuration
     if packer_bootstrap then
