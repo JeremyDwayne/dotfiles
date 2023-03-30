@@ -1,6 +1,7 @@
 vim.g.mapleader = " "
 vim.keymap.set("n", ":W", vim.cmd.w)
 vim.keymap.set("n", ":Wq", vim.cmd.wq)
+vim.keymap.set("n", ":Q", vim.cmd.q)
 vim.keymap.set("n", "<leader>so", vim.cmd.so)
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>nt", vim.cmd.NvimTreeToggle)

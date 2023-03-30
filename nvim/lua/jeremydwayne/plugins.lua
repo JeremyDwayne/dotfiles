@@ -39,10 +39,10 @@ return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use 'folke/neodev.nvim'
     use {
-        'Mofiqul/dracula.nvim',
-        as = 'dracula',
+        'Mofiqul/vscode.nvim',
+        as = 'vscode',
         config = function()
-            vim.cmd('colorscheme dracula')
+            vim.cmd('colorscheme vscode')
         end
     }
 

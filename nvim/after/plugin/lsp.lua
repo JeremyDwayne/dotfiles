@@ -6,12 +6,13 @@ lsp.preset('recommended')
 lsp.ensure_installed({
   'tsserver',
   'eslint',
-  'sumneko_lua',
+  'lua_ls',
   'solargraph'
 })
 
 lsp.set_preferences({})
 
+local util = require("lspconfig.util")
 local neogen = require('neogen')
 local lspkind = require('lspkind')
 local cmp = require('cmp')
@@ -89,7 +90,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   ["<C-leader>"] = cmp.mapping {
     i = cmp.mapping.complete(),
     c = function(
-          _ --[[fallback]]
+      _ --[[fallback]]
     )
       if cmp.visible() then
         if not cmp.confirm { select = true } then
@@ -182,7 +183,7 @@ lsp.configure('sumneko_lua', {
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
-        library = { [vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true }
+        library = { [vim.fn.expand('$VIMRUNTIME/lua')] = true,[vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true }
       }
     }
   }
@@ -204,16 +205,52 @@ lsp.configure('solargraph', {
   handlers = {
     ["textDocument/publishDiagnostics"] = vim.lsp.with(
       vim.lsp.diagnostic.on_publish_diagnostics, {
-      -- Disable virtual_text on file load
-      -- Show with vim.lsp.diagnostic.show_line_diagnostics()
-      virtual_text = false
-    }
+        -- Disable virtual_text on file load
+        -- Show with vim.lsp.diagnostic.show_line_diagnostics()
+        virtual_text = false
+      }
     ),
   },
   workspace = {
-    primetrust = { [vim.fn.expand('$HOME/work/prime_trust_api')] = true,
-      [vim.fn.expand('$HOME/work/prime_trust_front_end')] = true }
+    primetrust = {
+      [vim.fn.expand('$HOME/work/prime_trust_api')] = true,
+      [vim.fn.expand('$HOME/work/prime_trust_front_end')] = true
+    }
   },
 })
+
+
+-- local enabled_features = {
+--   "documentHighlights",
+--   "documentSymbols",
+--   "foldingRanges",
+--   "selectionRanges",
+--   "semanticHighlighting",
+--   "formatting",
+--   "codeActions",
+-- }
+--
+-- lsp.configure('ruby_lsp', {
+--   default_config = {
+--     cmd = { "bundle", "exec", "ruby-lsp" },
+--     filetypes = { "ruby" },
+--     root_dir = util.root_pattern("Gemfile", ".git"),
+--     init_options = {
+--       enabledFeatures = enabled_features,
+--     },
+--     settings = {},
+--   },
+--   commands = {
+--     FormatRuby = {
+--       function()
+--         vim.lsp.buf.format({
+--           name = "ruby_lsp",
+--           async = true,
+--         })
+--       end,
+--       description = "Format using ruby-lsp",
+--     },
+--   },
+-- })
 
 lsp.setup()
