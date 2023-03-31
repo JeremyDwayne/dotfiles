@@ -1,5 +1,6 @@
 vim.g.mapleader = " "
 vim.opt.guicursor = ""
+vim.opt.clipboard = "unnamedplus"
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
