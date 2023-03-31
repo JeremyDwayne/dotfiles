@@ -1,7 +1,12 @@
 local status, lsp = pcall(require, "lsp-zero")
 if not status then return end
 
-lsp.preset('recommended')
+lsp.preset({
+  name = 'minimal',
+  set_lsp_keymaps = true,
+  manage_nvim_cmp = true,
+  suggest_lsp_servers = true,
+})
 
 lsp.ensure_installed({
   'tsserver',
@@ -139,23 +144,24 @@ lsp.set_preferences({
 
 lsp.on_attach(function(_, bufnr)
   local opts = { buffer = bufnr, remap = false }
-  vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opts)
-  vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
-  vim.keymap.set('n', 'gr', function() vim.lsp.buf.references() end, opts)
-  vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
-  vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end, opts)
-  vim.keymap.set('n', '<leader>vws', function() vim.lsp.buf.workleader_symbol() end, opts)
-  vim.keymap.set('n', '<leader>vd', function() vim.diagnostic.open_float() end, opts)
-  vim.keymap.set('n', '<C-j>', function() vim.diagnostic.goto_next() end, opts)
-  vim.keymap.set('n', '<C-f>', function() vim.diagnostic.goto_prev() end, opts)
-  vim.keymap.set('n', '<leader>vca', function() vim.lsp.buf.code_action() end, opts)
-  vim.keymap.set('n', '<leader>vtd', function() vim.lsp.buf.type_definition() end, opts)
-  vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end, opts)
-  vim.keymap.set('n', '<leader>wa', function() vim.lsp.buf.add_workleader_folder() end, opts)
-  vim.keymap.set('n', '<leader>wr', function() vim.lsp.buf.remove_workleader_folder() end, opts)
-  vim.keymap.set('n', '<leader>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workleader_folders()))
-  end, opts)
+  lsp.default_keymaps({buffer = bufnr})
+  -- vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opts)
+  -- vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
+  -- vim.keymap.set('n', 'gr', function() vim.lsp.buf.references() end, opts)
+  -- vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
+  -- vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end, opts)
+  -- vim.keymap.set('n', '<leader>vws', function() vim.lsp.buf.workleader_symbol() end, opts)
+  -- vim.keymap.set('n', '<leader>vd', function() vim.diagnostic.open_float() end, opts)
+  -- vim.keymap.set('n', '<C-j>', function() vim.diagnostic.goto_next() end, opts)
+  -- vim.keymap.set('n', '<C-f>', function() vim.diagnostic.goto_prev() end, opts)
+  -- vim.keymap.set('n', '<leader>vca', function() vim.lsp.buf.code_action() end, opts)
+  -- vim.keymap.set('n', '<leader>vtd', function() vim.lsp.buf.type_definition() end, opts)
+  -- vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end, opts)
+  -- vim.keymap.set('n', '<leader>wa', function() vim.lsp.buf.add_workleader_folder() end, opts)
+  -- vim.keymap.set('n', '<leader>wr', function() vim.lsp.buf.remove_workleader_folder() end, opts)
+  -- vim.keymap.set('n', '<leader>wl', function()
+  --   print(vim.inspect(vim.lsp.buf.list_workleader_folders()))
+  -- end, opts)
   vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format({ async = true }) end, opts)
 end)
 

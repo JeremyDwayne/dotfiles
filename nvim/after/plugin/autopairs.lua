@@ -8,7 +8,7 @@ npairs.setup {
         javascript = { "string", "template_string" },
         java = false,
     },
-    disable_filetype = { "TelescopePrompt", "spectre_panel" },
+    disable_filetype = { "TelescopePrompt", "spectre_panel", "guihua", "guihua_rust", "clap_input" },
     fast_wrap = {
         map = "<M-e>",
         chars = { "{", "[", "(", '"', "'" },
@@ -21,6 +21,7 @@ npairs.setup {
         highlight_grey = "LineNr",
     },
 }
+
 
 local cmp_autopairs = require "nvim-autopairs.completion.cmp"
 local cmp_status_ok, cmp = pcall(require, "cmp")

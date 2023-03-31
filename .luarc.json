@@ -4,5 +4,8 @@
     "Lua.workspace.checkThirdParty": false,
     "Lua.workspace.library": [
         "${3rd}/lovr/library"
+    ],
+    "diagnostics.globals": [
+        "vim"
     ]
 }
