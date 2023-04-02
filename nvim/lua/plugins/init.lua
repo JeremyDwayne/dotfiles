@@ -1,13 +1,18 @@
 return {
   -- Packer can manage itself
   'folke/neodev.nvim',
+  -- {
+  --   'Mofiqul/vscode.nvim',
+  --   config = function()
+  --     vim.cmd('colorscheme vscode')
+  --   end
+  -- },
   {
-    'Mofiqul/vscode.nvim',
+    'Mofiqul/dracula.nvim',
     config = function()
-      vim.cmd('colorscheme vscode')
+      vim.cmd('colorscheme dracula')
     end
   },
-
   -- LSP
   {
     'VonHeikemen/lsp-zero.nvim',
@@ -40,7 +45,6 @@ return {
     dependencies = { { 'nvim-lua/plenary.nvim' } }
   },
   'nvim-telescope/telescope-fzy-native.nvim',
-  { 'axkirillov/easypick.nvim', dependencies = 'nvim-telescope/telescope.nvim' },
   'nvim-lua/popup.nvim',
 
   -- Treesitter
@@ -49,9 +53,6 @@ return {
   'lewis6991/impatient.nvim',
   'theprimeagen/harpoon',
   'mbbill/undotree',
-
-  -- GIT
-  'lewis6991/gitsigns.nvim',
 
   -- 'tpope/vim-surround',
   'kylechui/nvim-surround',
@@ -63,7 +64,6 @@ return {
   'mfussenegger/nvim-lint',
 
   'hoob3rt/lualine.nvim',
-  'folke/lsp-colors.nvim',
   'onsails/lspkind-nvim',
   'lukas-reineke/indent-blankline.nvim',
   {
