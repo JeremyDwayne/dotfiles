@@ -1,11 +1,10 @@
-vim.g.mapleader = " "
 vim.keymap.set("n", ":W", vim.cmd.w)
 vim.keymap.set("n", ":Wq", vim.cmd.wq)
 vim.keymap.set("n", ":Q", vim.cmd.q)
 vim.keymap.set("n", "<leader>so", vim.cmd.so)
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-vim.keymap.set("n", "<leader>nt", vim.cmd.NvimTreeToggle)
-vim.keymap.set("n", "<leader>nf", vim.cmd.NvimTreeFindFile)
+-- vim.keymap.set("n", "<leader>nt", vim.cmd.NvimTreeToggle)
+-- vim.keymap.set("n", "<leader>nf", vim.cmd.NvimTreeFindFile)
 
 vim.keymap.set("n", "<leader>bd", '<cmd>bd!<cr>')
 
@@ -56,17 +55,10 @@ vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>
 -- make current file executable (shell scripts)
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
--- vim tabs
+-- bufferline tabs
 vim.keymap.set("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>")
 vim.keymap.set("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>")
-
 vim.keymap.set("n", "<leader>bn", "<cmd>BufferLineMoveNext<CR>")
 vim.keymap.set("n", "<leader>bp", "<cmd>BufferLineMovePrev<CR>")
 
--- Trouble
-vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>", {})
-vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", {})
-vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", {})
-vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", {})
-vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", {})
-vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", {})
+vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)

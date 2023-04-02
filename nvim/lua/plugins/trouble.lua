@@ -1,7 +1,14 @@
-local status, trouble = pcall(require, "trouble")
-if (not status) then return end
-
-trouble.setup {
+return {
+  'folke/trouble.nvim',
+  keys = {
+    { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = 'Trouble Toggle' },
+    { "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = 'Trouble Workspace Diagnostics' },
+    { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", desc = 'Trouble Document Diagnostics' },
+    { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = 'Trouble Quickfix List' },
+    { "<leader>xl", "<cmd>TroubleToggle loclist<cr>", desc = 'Trouble Local List' },
+    { "<leader>xr", "<cmd>TroubleToggle lsp_references<cr>", desc = 'Trouble LSP References' },
+  },
+  config = {
     position = "bottom", -- position of the list can be: bottom, top, left, right
     height = 10, -- height of the trouble list when position is top or bottom
     width = 50, -- width of the list when position is left or right
@@ -47,4 +54,5 @@ trouble.setup {
         other = "﫠"
     },
     use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
+  }
 }
