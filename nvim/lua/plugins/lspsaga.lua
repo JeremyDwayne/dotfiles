@@ -1,31 +1,3 @@
-local status, lspsaga = pcall(require, "lspsaga")
-if not status then return end
-
-lspsaga.setup({
-  ui = {
-    -- This option only works in Neovim 0.9
-    title = true,
-    -- Border type can be single, double, rounded, solid, shadow.
-    border = "single",
-    winblend = 0,
-    expand = "",
-    collapse = "",
-    -- code_action = "💡",
-    code_action = "",
-    incoming = " ",
-    outgoing = " ",
-    hover = ' ',
-    kind = {},
-  },
-  lightbulb = {
-    enable = false,
-    enable_in_insert = false,
-    sign = false,
-    sign_priority = 40,
-    virtual_text = true,
-  },
-})
-
 local keymap = vim.keymap.set
 -- Lsp finder find the symbol definition implement reference
 -- if there is no implement it will hide
@@ -92,5 +64,38 @@ keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
 keymap("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
 keymap("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
 
--- Float terminal (OSX alt-d)
-keymap({ "n", "t" }, "∂", "<cmd>Lspsaga term_toggle<CR>")
+
+return {
+  "glepnir/lspsaga.nvim",
+  event = "LspAttach",
+  keys = {
+    { "∂", "<cmd>Lspsaga term_toggle<CR>", desc = "Float Terminal", mode = {'n','t'} },
+  },
+  dependencies = {
+    { "nvim-tree/nvim-web-devicons" },
+    --Please make sure you install markdown and markdown_inline parser
+    { "nvim-treesitter/nvim-treesitter" }
+  },
+  config = {
+    -- This option only works in Neovim 0.9
+    title = true,
+    -- Border type can be single, double, rounded, solid, shadow.
+    border = "single",
+    winblend = 0,
+    expand = "",
+    collapse = "",
+    -- code_action = "💡",
+    code_action = "",
+    incoming = " ",
+    outgoing = " ",
+    hover = ' ',
+    kind = {},
+  },
+  lightbulb = {
+    enable = false,
+    enable_in_insert = false,
+    sign = false,
+    sign_priority = 40,
+    virtual_text = true,
+  },
+}

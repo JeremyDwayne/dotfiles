@@ -38,7 +38,7 @@ return {
         persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
         -- can also be a table containing 2 custom separators
         -- [focused and unfocused]. eg: { '|', '|' }
-        separator_style = "slope", -- | "thick" | "thin" | "slant" | "padded_slant" | "slope" | { 'any', 'any' },
+        separator_style = "thin", -- | "thick" | "thin" | "slant" | "padded_slant" | "slope" | { 'any', 'any' },
         enforce_regular_tabs = true,
         always_show_bufferline = true,
         hover = { enabled = true, reveal = { 'close' } },

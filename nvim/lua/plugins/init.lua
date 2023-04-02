@@ -33,18 +33,6 @@ return {
       { 'rafamadriz/friendly-snippets' },
     }
   },
-  {
-    "glepnir/lspsaga.nvim",
-    event = "LspAttach",
-    config = function()
-      require("lspsaga").setup({})
-    end,
-    dependencies = {
-      { "nvim-tree/nvim-web-devicons" },
-      --Please make sure you install markdown and markdown_inline parser
-      { "nvim-treesitter/nvim-treesitter" }
-    }
-  },
 
   -- Telescope
   {
@@ -56,7 +44,6 @@ return {
   'nvim-lua/popup.nvim',
 
   -- Treesitter
-  'nvim-treesitter/playground',
   'p00f/nvim-ts-rainbow',
   'JoosepAlviste/nvim-ts-context-commentstring',
   'lewis6991/impatient.nvim',
@@ -64,35 +51,30 @@ return {
   'mbbill/undotree',
 
   -- GIT
-  'APZelos/blamer.nvim',
   'lewis6991/gitsigns.nvim',
-  'rhysd/committia.vim',
 
-  -- THE POPE
-  'tpope/vim-rhubarb',
-  'tpope/vim-surround',
-  'tpope/vim-vinegar',
+  -- 'tpope/vim-surround',
+  'kylechui/nvim-surround',
+
   'windwp/nvim-ts-autotag',
   'danymat/neogen',
   'max397574/better-escape.nvim',
-  'akinsho/toggleterm.nvim',
+
   'mfussenegger/nvim-lint',
-  'pwntester/octo.nvim',
+
   'hoob3rt/lualine.nvim',
   'folke/lsp-colors.nvim',
   'onsails/lspkind-nvim',
   'lukas-reineke/indent-blankline.nvim',
-  'marko-cerovac/material.nvim',
-  'ThePrimeagen/refactoring.nvim',
   {
     "nvim-neotest/neotest",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
-      "antoinemadec/FixCursorHold.nvim"
+      "antoinemadec/FixCursorHold.nvim",
+      'nvim-neotest/neotest-vim-test',
     }
   },
-  'nvim-neotest/neotest-vim-test',
   'olimorris/neotest-rspec',
   'vim-test/vim-test',
   'mfussenegger/nvim-dap',
