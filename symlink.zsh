@@ -9,8 +9,8 @@ done
 
 # Neovim symlinks
 echo >&2 "Symlinking Neovim Configs"
-rm -rf ~/.config/nvim
-ln -s ~/.dotfiles/nvim ~/.config/nvim
+rm -rf ~/.config/nvim/lua/custom
+ln -s ~/.dotfiles/nvim ~/.config/nvim/lua/custom
 
 # Kitty symlinks
 echo >&2 "Symlinking Kitty Configs"
