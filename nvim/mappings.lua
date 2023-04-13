@@ -26,6 +26,17 @@ M.tabufline = {
   },
 }
 
+M.disabled = {
+  n = {
+    ["<Tab>"] = "",
+    ["<S-Tab>"] = "",
+  },
+  i = {
+    ["<Tab>"] = "",
+    ["<S-Tab>"] = "",
+  }
+}
+
 -- more keybinds!
 
 return M
