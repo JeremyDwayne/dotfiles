@@ -5,7 +5,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-export PATH=$HOME/.local/bin:$HOME/go/bin:$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/go/bin:$HOME/.cargo/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -121,8 +121,6 @@ source ~/.aliases.zsh
 source ~/.work_aliases.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source ~/.zdir/z.sh
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init - zsh)"
 alias luamake=/home/jwinterberg/lua-language-server/3rd/luamake/luamake
 
 HEROKU_AC_ZSH_SETUP_PATH=/Users/winterjd/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;

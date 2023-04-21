@@ -2,6 +2,12 @@ local overrides = require("custom.configs.overrides")
 
 ---@type NvPluginSpec[]
 local plugins = {
+	-- Disabled plugins
+	--   set enabled = false
+	{
+		"folke/which-key.nvim",
+		enabled = false,
+	},
 
 	-- Override plugin definition options
 
@@ -46,12 +52,6 @@ local plugins = {
 			require("better_escape").setup()
 		end,
 	},
-
-	-- To make a plugin not be loaded
-	-- {
-	--   "NvChad/nvim-colorizer.lua",
-	--   enabled = false
-	-- },
 	{ "p00f/nvim-ts-rainbow" },
 	{ "JoosepAlviste/nvim-ts-context-commentstring" },
 	{ "lewis6991/impatient.nvim" },
@@ -62,12 +62,16 @@ local plugins = {
 	{ "mfussenegger/nvim-lint" },
 	{
 		"nvim-neotest/neotest",
+		lazy = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
 			"antoinemadec/FixCursorHold.nvim",
 			"nvim-neotest/neotest-vim-test",
 		},
+		config = function()
+			require("custom.configs.neotest") -- just an example path
+		end,
 	},
 	{ "olimorris/neotest-rspec" },
 	{ "vim-test/vim-test" },
@@ -79,12 +83,13 @@ local plugins = {
 		},
 	},
 	{ "xiyaowong/nvim-transparent" },
-	{
-		"ethanholz/nvim-lastplace",
-		config = function()
-			require("nvim-lastplace").setup()
-		end,
-	},
+  {
+    "ethanholz/nvim-lastplace",
+    lazy = false,
+    config = function()
+      require("nvim-lastplace").setup()
+    end,
+  },
 	{
 		"github/copilot.vim",
 		lazy = false,

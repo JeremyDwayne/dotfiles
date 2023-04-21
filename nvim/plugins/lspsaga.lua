@@ -40,10 +40,10 @@ keymap("n", "<c-j>", "<cmd>Lspsaga diagnostic_jump_next<CR>")
 
 -- Diagnostic jump with filter like Only jump to error
 keymap("n", "c-F", function()
-  require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
+	require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
 end)
 keymap("n", "c-J", function()
-  require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
+	require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
 end)
 
 -- Toggle Outline
@@ -64,38 +64,37 @@ keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
 keymap("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
 keymap("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
 
-
 return {
-  "glepnir/lspsaga.nvim",
-  event = "LspAttach",
-  keys = {
-    { "∂", "<cmd>Lspsaga term_toggle<CR>", desc = "Float Terminal", mode = {'n','t'} },
-  },
-  dependencies = {
-    { "nvim-tree/nvim-web-devicons" },
-    --Please make sure you install markdown and markdown_inline parser
-    { "nvim-treesitter/nvim-treesitter" }
-  },
-  config = {
-    -- This option only works in Neovim 0.9
-    title = true,
-    -- Border type can be single, double, rounded, solid, shadow.
-    border = "single",
-    winblend = 0,
-    expand = "",
-    collapse = "",
-    -- code_action = "💡",
-    code_action = "",
-    incoming = " ",
-    outgoing = " ",
-    hover = ' ',
-    kind = {},
-  },
-  lightbulb = {
-    enable = false,
-    enable_in_insert = false,
-    sign = false,
-    sign_priority = 40,
-    virtual_text = true,
-  },
+	"glepnir/lspsaga.nvim",
+	event = "LspAttach",
+	keys = {
+		{ "∂", "<cmd>Lspsaga term_toggle<CR>", desc = "Float Terminal", mode = { "n", "t" } },
+	},
+	dependencies = {
+		{ "nvim-tree/nvim-web-devicons" },
+		--Please make sure you install markdown and markdown_inline parser
+		{ "nvim-treesitter/nvim-treesitter" },
+	},
+	opts = {
+		-- This option only works in Neovim 0.9
+		title = true,
+		-- Border type can be single, double, rounded, solid, shadow.
+		border = "single",
+		winblend = 0,
+		expand = "",
+		collapse = "",
+		-- code_action = "💡",
+		code_action = "",
+		incoming = " ",
+		outgoing = " ",
+		hover = " ",
+		kind = {},
+	},
+	-- lightbulb = {
+	-- 	enable = false,
+	-- 	enable_in_insert = false,
+	-- 	sign = false,
+	-- 	sign_priority = 40,
+	-- 	virtual_text = true,
+	-- },
 }
