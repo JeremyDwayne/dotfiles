@@ -78,6 +78,7 @@ local plugins = {
 	{ "mfussenegger/nvim-dap" },
 	{
 		"tyru/open-browser-github.vim",
+		lazy = false,
 		dependencies = {
 			"tyru/open-browser.vim",
 		},
