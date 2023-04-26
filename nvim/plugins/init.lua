@@ -83,15 +83,19 @@ local plugins = {
 		},
 	},
 	{ "xiyaowong/nvim-transparent" },
-  {
-    "ethanholz/nvim-lastplace",
-    lazy = false,
-    config = function()
-      require("nvim-lastplace").setup()
-    end,
-  },
+	{
+		"ethanholz/nvim-lastplace",
+		lazy = false,
+		config = function()
+			require("nvim-lastplace").setup()
+		end,
+	},
 	{
 		"github/copilot.vim",
+		lazy = false,
+	},
+	{
+		"christoomey/vim-tmux-navigator",
 		lazy = false,
 	},
 }
