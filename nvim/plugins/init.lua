@@ -94,10 +94,18 @@ local plugins = {
 	{
 		"github/copilot.vim",
 		lazy = false,
+		suggestion = { enabled = false },
+		panel = { enabled = false },
 	},
 	{
 		"christoomey/vim-tmux-navigator",
 		lazy = false,
+	},
+	{
+		"zbirenbaum/copilot-cmp",
+		config = function()
+			require("copilot_cmp").setup()
+		end,
 	},
 }
 

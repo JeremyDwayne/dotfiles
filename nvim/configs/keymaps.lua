@@ -6,7 +6,7 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 -- vim.keymap.set("n", "<leader>nt", vim.cmd.NvimTreeToggle)
 -- vim.keymap.set("n", "<leader>nf", vim.cmd.NvimTreeFindFile)
 
-vim.keymap.set("n", "<leader>bd", '<cmd>bd!<cr>')
+vim.keymap.set("n", "<leader>bd", "<cmd>bd!<cr>")
 
 -- option key movement on macos
 vim.keymap.set("n", "∆", ":m .+1<CR>==")
@@ -30,13 +30,13 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- system yank and paste
-vim.keymap.set("x", "<leader>p", "\"_dP")
-vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keymap.set("v", "<leader>y", "\"+y")
-vim.keymap.set("n", "<leader>Y", "\"+Y")
+vim.keymap.set("x", "<leader>p", '"_dP')
+vim.keymap.set("n", "<leader>y", '"+y')
+vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>Y", '"+Y')
 
-vim.keymap.set("n", "<leader>d", "\"_d")
-vim.keymap.set("v", "<leader>d", "\"_d")
+vim.keymap.set("n", "<leader>d", '"_d')
+vim.keymap.set("v", "<leader>d", '"_d')
 
 -- escape vertical edit mode gracefully
 vim.keymap.set("i", "<C-c>", "<Esc>")
@@ -61,4 +61,4 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 -- vim.keymap.set("n", "<leader>bn", "<cmd>BufferLineMoveNext<CR>")
 -- vim.keymap.set("n", "<leader>bp", "<cmd>BufferLineMovePrev<CR>")
 
-vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)

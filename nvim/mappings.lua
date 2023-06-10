@@ -30,10 +30,42 @@ M.tabufline = {
 	},
 }
 
+M.trouble = {
+	n = {
+		["<leader>xx"] = { "<cmd>TroubleToggle<cr>", "Trouble Toggle" },
+		["<leader>xw"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Trouble Workspace Diagnostics" },
+		["<leader>xd"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Trouble Document Diagnostics" },
+		["<leader>xq"] = { "<cmd>TroubleToggle quickfix<cr>", "Trouble Quickfix List" },
+		["<leader>xl"] = { "<cmd>TroubleToggle loclist<cr>", "Trouble Local List" },
+		["<leader>xr"] = { "<cmd>TroubleToggle lsp_references<cr>", "Trouble LSP References" },
+	},
+}
+
+M.telescope = {
+	i = {
+		["<C-q>"] = {
+			function()
+				require("trouble.providers.telescope").open_with_trouble()
+			end,
+			"Open with Trouble",
+		},
+	},
+	n = {
+		["<C-q>"] = {
+			function()
+				require("trouble.providers.telescope").open_with_trouble()
+			end,
+			"Open with Trouble",
+		},
+	},
+}
+
 M.disabled = {
 	n = {
 		["<Tab>"] = "",
 		["<S-Tab>"] = "",
+		["<leader>wK"] = "",
+		["<leader>wk"] = "",
 	},
 	i = {
 		["<Tab>"] = "",

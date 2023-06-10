@@ -4,7 +4,7 @@ local capabilities = require("plugins.configs.lspconfig").capabilities
 local lspconfig = require("lspconfig")
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "solargraph", "lua_ls", "html", "cssls", "tsserver", "clangd" }
+local servers = { "lua_ls", "html", "cssls", "tsserver", "clangd", "solargraph" }
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
@@ -12,3 +12,13 @@ for _, lsp in ipairs(servers) do
 		capabilities = capabilities,
 	})
 end
+
+-- lspkind.lua
+local lspkind = require("lspkind")
+lspkind.init({
+	symbol_map = {
+		Copilot = "",
+	},
+})
+
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })

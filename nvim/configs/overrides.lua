@@ -44,6 +44,7 @@ M.mason = {
 		"deno",
 		"prettier",
 		"rubocop",
+		"solargraph",
 	},
 }
 
