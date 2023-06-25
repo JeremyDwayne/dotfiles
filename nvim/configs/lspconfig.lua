@@ -4,7 +4,7 @@ local capabilities = require("plugins.configs.lspconfig").capabilities
 local lspconfig = require("lspconfig")
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "lua_ls", "html", "cssls", "tsserver", "clangd", "solargraph" }
+local servers = { "tsserver", "lua_ls", "html", "cssls", "clangd", "solargraph" }
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
@@ -12,6 +12,12 @@ for _, lsp in ipairs(servers) do
 		capabilities = capabilities,
 	})
 end
+
+-- lspconfig.tsserver.setup({
+-- 	on_attach = on_attach,
+-- 	filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+-- 	cmd = { "typescript-language-server", "--stdio" },
+-- })
 
 -- lspkind.lua
 local lspkind = require("lspkind")

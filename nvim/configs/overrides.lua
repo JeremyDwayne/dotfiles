@@ -43,6 +43,7 @@ M.mason = {
 		"typescript-language-server",
 		"deno",
 		"prettier",
+    "eslint_d",
 		"rubocop",
 		"solargraph",
 	},
