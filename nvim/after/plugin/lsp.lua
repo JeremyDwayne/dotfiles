@@ -15,7 +15,6 @@ lsp.ensure_installed({
 	"eslint",
 	"lua_ls",
 	"solargraph",
-	"deno",
 	"clangd",
 })
 

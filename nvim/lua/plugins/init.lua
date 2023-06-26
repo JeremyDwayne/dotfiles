@@ -1,16 +1,9 @@
 return {
-  -- Packer can manage itself
   'folke/neodev.nvim',
-  -- {
-  --   'Mofiqul/vscode.nvim',
-  --   config = function()
-  --     vim.cmd('colorscheme vscode')
-  --   end
-  -- },
   {
-    'Mofiqul/dracula.nvim',
+    'Mofiqul/vscode.nvim',
     config = function()
-      vim.cmd('colorscheme dracula')
+      vim.cmd('colorscheme vscode')
     end
   },
   -- LSP
@@ -55,19 +48,37 @@ return {
   'mbbill/undotree',
 
   -- 'tpope/vim-surround',
-  'kylechui/nvim-surround',
-
-  'windwp/nvim-ts-autotag',
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
+  },
   'danymat/neogen',
-  'max397574/better-escape.nvim',
-
+  {
+    'max397574/better-escape.nvim',
+    lazy = false,
+  },
   'mfussenegger/nvim-lint',
-
   'hoob3rt/lualine.nvim',
-  'onsails/lspkind-nvim',
+  {
+    'onsails/lspkind-nvim',
+    config = function()
+      require("lspkind").init({
+        symbol_map = {
+          Copilot = "",
+        },
+      })
+    end
+  },
   'lukas-reineke/indent-blankline.nvim',
   {
     "nvim-neotest/neotest",
+    lazy = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
@@ -79,14 +90,13 @@ return {
   'vim-test/vim-test',
   'mfussenegger/nvim-dap',
   'tpope/vim-dadbod',
-  'kristijanhusak/vim-dadbod-completion',
-  'kristijanhusak/vim-dadbod-ui',
   'norcalli/nvim-colorizer.lua',
   'christoomey/vim-tmux-runner',
   'm-novikov/tree-sitter-sql',
   'nanotee/sqls.nvim',
   {
     'tyru/open-browser-github.vim',
+    lazy = false,
     dependencies = {
       'tyru/open-browser.vim'
     }
@@ -94,8 +104,56 @@ return {
   'xiyaowong/nvim-transparent',
   {
     'ethanholz/nvim-lastplace',
+    lazy = false,
     config = function()
       require('nvim-lastplace').setup()
     end
+  },
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false,
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    lazy = false,
+    config = function()
+      require("copilot").setup()
+    end,
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    lazy = false,
+    after = { "copilot.lua" },
+    config = function()
+      require("copilot_cmp").setup()
+    end,
+  },
+  {
+    "nvim-tree/nvim-tree.lua",
+    opts = {
+      git = {
+        enable = true,
+      },
+      renderer = {
+        highlight_git = true,
+        icons = {
+          show = {
+            git = true,
+          },
+        },
+      },
+    }
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require('gitsigns').setup()
+    end
+  },
+  {
+    "windwp/nvim-autopairs"
+  },
+  {
+    "windwp/nvim-ts-autotag"
   },
 }

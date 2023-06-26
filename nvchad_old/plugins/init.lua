@@ -91,12 +91,14 @@ local plugins = {
 			require("nvim-lastplace").setup()
 		end,
 	},
-	{
-		"github/copilot.vim",
-		lazy = false,
-		suggestion = { enabled = false },
-		panel = { enabled = false },
-	},
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({})
+    end,
+  },
 	{
 		"christoomey/vim-tmux-navigator",
 		lazy = false,

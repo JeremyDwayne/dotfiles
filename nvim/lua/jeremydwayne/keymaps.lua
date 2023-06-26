@@ -3,8 +3,8 @@ vim.keymap.set("n", ":Wq", vim.cmd.wq)
 vim.keymap.set("n", ":Q", vim.cmd.q)
 vim.keymap.set("n", "<leader>so", vim.cmd.so)
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
--- vim.keymap.set("n", "<leader>nt", vim.cmd.NvimTreeToggle)
--- vim.keymap.set("n", "<leader>nf", vim.cmd.NvimTreeFindFile)
+vim.keymap.set("n", "<C-n>", vim.cmd.NvimTreeToggle)
+vim.keymap.set("n", "<leader>e", vim.cmd.NvimTreeFocus)
 
 vim.keymap.set("n", "<leader>bd", "<cmd>bd!<cr>")
 

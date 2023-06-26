@@ -4,17 +4,18 @@ local astatus, actions = pcall(require, "telescope.actions")
 if (not astatus) then return end
 
 -- Maps
-vim.keymap.set('n', ';f', builtin.find_files)
-vim.keymap.set('n', ';p', builtin.git_files)
-vim.keymap.set('n', ';d', ':lua search_dotfiles()<cr>')
-vim.keymap.set('n', ';r', builtin.live_grep)
-vim.keymap.set('n', '\\', builtin.buffers)
-vim.keymap.set('n', ';;', builtin.help_tags)
-vim.keymap.set('n', '//', builtin.current_buffer_fuzzy_find)
-vim.keymap.set('n', '<leader>ps', function()
-    builtin.grep_string({ search = vim.fn.input("Grep > ") });
-end)
+vim.keymap.set('n', '<leader>ff', "<cmd> Telescope find_files <CR>")
+vim.keymap.set('n', '<leader>fa', "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>")
+vim.keymap.set('n', '<leader>fw', "<cmd> Telescope live_grep <CR>")
+vim.keymap.set('n', '<leader>fb', "<cmd> Telescope buffers <CR>")
+vim.keymap.set('n', '<leader>fh', "<cmd> Telescope help_tags <CR>")
+vim.keymap.set('n', '<leader>fo', "<cmd> Telescope oldfiles <CR>")
+vim.keymap.set('n', '<leader>fz', "<cmd> Telescope current_buffer_fuzzy_find <CR>")
+vim.keymap.set('n', '<leader>fd', ':lua search_dotfiles()<cr>')
 vim.keymap.set('n', '<leader>km', builtin.keymaps)
+vim.keymap.set('n', '<leader>cm', "<cmd> Telescope git_commits <CR>")
+vim.keymap.set('n', '<leader>gt', "<cmd> Telescope git_status <CR>")
+vim.keymap.set('n', '<leader>ma', "<cmd> Telescope marks <CR>")
 
 -- Global remapping
 require('telescope').setup {
