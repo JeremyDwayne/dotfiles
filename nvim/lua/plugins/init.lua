@@ -41,6 +41,7 @@ return {
   'nvim-lua/popup.nvim',
 
   -- Treesitter
+  'nvim-treesitter/nvim-treesitter-context',
   'p00f/nvim-ts-rainbow',
   'JoosepAlviste/nvim-ts-context-commentstring',
   'lewis6991/impatient.nvim',
@@ -49,13 +50,10 @@ return {
 
   -- 'tpope/vim-surround',
   {
-    "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    'kylechui/nvim-surround',
     event = "VeryLazy",
     config = function()
-      require("nvim-surround").setup({
-        -- Configuration here, or leave empty to use defaults
-      })
+      require("nvim-surround").setup({})
     end
   },
   'danymat/neogen',
