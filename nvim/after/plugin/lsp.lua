@@ -16,12 +16,13 @@ lsp.ensure_installed({
   "lua_ls",
   "solargraph",
   "clangd",
+  "gopls",
+  "tailwindcss"
 })
 
 lsp.set_preferences({})
 
 local util = require("lspconfig.util")
-local neogen = require("neogen")
 local lspkind = require("lspkind")
 local cmp = require("cmp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -70,6 +71,32 @@ cmp.setup({
     expand = function(args)
       require("luasnip").lsp_expand(args.body)
     end,
+  },
+})
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    underline = true,
+    update_in_insert = false,
+    virtual_text = { spacing = 4, prefix = "●" },
+    severity_sort = true,
+  }
+)
+
+-- Diagnostic symbols in the sign column (gutter)
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+end
+
+vim.diagnostic.config({
+  virtual_text = {
+    prefix = '●'
+  },
+  update_in_insert = true,
+  float = {
+    source = "always", -- Or "if_many"
   },
 })
 
@@ -148,23 +175,6 @@ lsp.set_preferences({
 lsp.on_attach(function(_, bufnr)
   local opts = { buffer = bufnr, remap = false }
   lsp.default_keymaps({ buffer = bufnr })
-  -- vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opts)
-  -- vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
-  -- vim.keymap.set('n', 'gr', function() vim.lsp.buf.references() end, opts)
-  -- vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
-  -- vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end, opts)
-  -- vim.keymap.set('n', '<leader>vws', function() vim.lsp.buf.workleader_symbol() end, opts)
-  -- vim.keymap.set('n', '<leader>vd', function() vim.diagnostic.open_float() end, opts)
-  -- vim.keymap.set('n', '<C-j>', function() vim.diagnostic.goto_next() end, opts)
-  -- vim.keymap.set('n', '<C-f>', function() vim.diagnostic.goto_prev() end, opts)
-  -- vim.keymap.set('n', '<leader>vca', function() vim.lsp.buf.code_action() end, opts)
-  -- vim.keymap.set('n', '<leader>vtd', function() vim.lsp.buf.type_definition() end, opts)
-  -- vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end, opts)
-  -- vim.keymap.set('n', '<leader>wa', function() vim.lsp.buf.add_workleader_folder() end, opts)
-  -- vim.keymap.set('n', '<leader>wr', function() vim.lsp.buf.remove_workleader_folder() end, opts)
-  -- vim.keymap.set('n', '<leader>wl', function()
-  --   print(vim.inspect(vim.lsp.buf.list_workleader_folders()))
-  -- end, opts)
   vim.keymap.set("n", "<leader>fm", function()
     vim.lsp.buf.format({ async = true })
   end, opts)
@@ -233,37 +243,30 @@ lsp.configure("solargraph", {
   },
 })
 
--- local enabled_features = {
---   "documentHighlights",
---   "documentSymbols",
---   "foldingRanges",
---   "selectionRanges",
---   "semanticHighlighting",
---   "formatting",
---   "codeActions",
--- }
---
--- lsp.configure('ruby_lsp', {
---   default_config = {
---     cmd = { "bundle", "exec", "ruby-lsp" },
---     filetypes = { "ruby" },
---     root_dir = util.root_pattern("Gemfile", ".git"),
---     init_options = {
---       enabledFeatures = enabled_features,
---     },
---     settings = {},
---   },
---   commands = {
---     FormatRuby = {
---       function()
---         vim.lsp.buf.format({
---           name = "ruby_lsp",
---           async = true,
---         })
---       end,
---       description = "Format using ruby-lsp",
---     },
---   },
--- })
+lsp.configure("gopls", {
+  cmd = { "gopls" },
+  filetypes = { "go", "gomod", "gowork", "gotmpl" },
+  root_dir = util.root_pattern("go.mod", "go.work", ".git"),
+  settings = {
+    gopls = {
+      completeUnimported = true,
+      usePlaceholders = true,
+      analyses = {
+        unusedparams = true,
+      }
+    }
+  }
+})
+
+lsp.configure("tsserver", {
+  cmd = { "typescript-language-server", "--stdio" },
+  filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+  settings = {
+    preferences = {
+      importModuleSpecifierPreference = 'relative',
+      importModuleSpecifierEnding = 'minimal',
+    }
+  }
+})
 
 lsp.setup()

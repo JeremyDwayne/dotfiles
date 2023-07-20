@@ -1,64 +1,80 @@
-vim.keymap.set("n", ":W", vim.cmd.w)
-vim.keymap.set("n", ":Wq", vim.cmd.wq)
-vim.keymap.set("n", ":Q", vim.cmd.q)
-vim.keymap.set("n", "<leader>so", vim.cmd.so)
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-vim.keymap.set("n", "<C-n>", vim.cmd.NvimTreeToggle)
-vim.keymap.set("n", "<leader>e", vim.cmd.NvimTreeFocus)
+local keymap = vim.keymap.set
 
-vim.keymap.set("n", "<leader>bd", "<cmd>bd!<cr>")
+keymap("n", ":W", vim.cmd.w)
+keymap("n", ":Wq", vim.cmd.wq)
+keymap("n", ":Q", vim.cmd.q)
+keymap("n", "<leader>so", vim.cmd.so)
+keymap("n", "<leader>pv", vim.cmd.Ex)
+keymap("n", "<C-n>", vim.cmd.NvimTreeToggle)
+keymap("n", "<leader>e", vim.cmd.NvimTreeFocus)
+
+keymap("n", "<leader>bd", "<cmd>bd!<cr>")
 
 -- option key movement on macos
-vim.keymap.set("n", "∆", ":m .+1<CR>==")
-vim.keymap.set("n", "˚", ":m .-2<CR>==")
-vim.keymap.set("i", "∆", "<Esc>:m .+1<CR>==gi")
-vim.keymap.set("i", "˚", "<Esc>:m .-2<CR>==gi")
-vim.keymap.set("v", "∆", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "˚", ":m '<-2<CR>gv=gv")
+keymap("n", "∆", ":m .+1<CR>==")
+keymap("n", "˚", ":m .-2<CR>==")
+keymap("i", "∆", "<Esc>:m .+1<CR>==gi")
+keymap("i", "˚", "<Esc>:m .-2<CR>==gi")
+keymap("v", "∆", ":m '>+1<CR>gv=gv")
+keymap("v", "˚", ":m '<-2<CR>gv=gv")
 -- alt key movement
-vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
-vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
-vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi")
-vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
-vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
+keymap("n", "<A-j>", ":m .+1<CR>==")
+keymap("n", "<A-k>", ":m .-2<CR>==")
+keymap("i", "<A-j>", "<Esc>:m .+1<CR>==gi")
+keymap("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
+keymap("v", "<A-j>", ":m '>+1<CR>gv=gv")
+keymap("v", "<A-k>", ":m '<-2<CR>gv=gv")
 
-vim.keymap.set("n", "J", "mzJ`z")
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+keymap("n", "J", "mzJ`z")
+keymap("n", "<C-d>", "<C-d>zz")
+keymap("n", "<C-u>", "<C-u>zz")
+keymap("n", "n", "nzzzv")
+keymap("n", "N", "Nzzzv")
 
 -- system yank and paste
-vim.keymap.set("x", "<leader>p", '"_dP')
-vim.keymap.set("n", "<leader>y", '"+y')
-vim.keymap.set("v", "<leader>y", '"+y')
-vim.keymap.set("n", "<leader>Y", '"+Y')
+keymap("x", "<leader>p", '"_dP')
+keymap("n", "<leader>y", '"+y')
+keymap("v", "<leader>y", '"+y')
+keymap("n", "<leader>Y", '"+Y')
 
-vim.keymap.set("n", "<leader>d", '"_d')
-vim.keymap.set("v", "<leader>d", '"_d')
+keymap("n", "<leader>d", '"_d')
+keymap("v", "<leader>d", '"_d')
 
 -- escape vertical edit mode gracefully
-vim.keymap.set("i", "<C-c>", "<Esc>")
+keymap("i", "<C-c>", "<Esc>")
 
-vim.keymap.set("n", "Q", "<nop>")
-
--- TODO: figure out what these do
--- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
--- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
--- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
--- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+keymap("n", "Q", "<nop>")
 
 -- search for word cursor is on
-vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+keymap("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 
 -- make current file executable (shell scripts)
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+keymap("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- bufferline tabs
-vim.keymap.set("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>")
-vim.keymap.set("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>")
-vim.keymap.set("n", "<leader>bn", "<cmd>BufferLineMoveNext<CR>")
-vim.keymap.set("n", "<leader>bp", "<cmd>BufferLineMovePrev<CR>")
+keymap("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>")
+keymap("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>")
+keymap("n", "<leader>bn", "<cmd>BufferLineMoveNext<CR>")
+keymap("n", "<leader>bp", "<cmd>BufferLineMovePrev<CR>")
 
-vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+keymap("n", "<leader>u", vim.cmd.UndotreeToggle)
+
+-- nvim dap
+keymap("n", "<leader>db", "<cmd> DapToggleBreakpoint <CR>")
+keymap("n", "<leader>dus", function()
+  local widgets = require('dap.ui.widgets');
+  local sidebar = widgets.sidebar(widgets.scopes);
+  sidebar.open();
+end)
+-- dap-go
+keymap("n", "<leader>dgt", function()
+  require("dap-go").debug_test()
+end)
+keymap("n", "<leader>dgl", function()
+  require("dap-go").debug_last()
+end)
+
+-- gopher
+keymap("n", "<leader>gsj", "<cmd> GoTagAdd json<CR>")
+keymap("n", "<leader>ger", "<cmd> GoIfErr<CR>")
+keymap("n", "<leader>gtg", "<cmd> GoTestsAll<CR>")

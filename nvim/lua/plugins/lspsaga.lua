@@ -66,10 +66,11 @@ keymap("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
 
 
 return {
-  "glepnir/lspsaga.nvim",
+  "nvimdev/lspsaga.nvim",
   event = "LspAttach",
+  after = 'nvim-lspconfig',
   keys = {
-    { "∂", "<cmd>Lspsaga term_toggle<CR>", desc = "Float Terminal", mode = {'n','t'} },
+    { "∂", "<cmd>Lspsaga term_toggle<CR>", desc = "Float Terminal", mode = { 'n', 't' } },
   },
   dependencies = {
     { "nvim-tree/nvim-web-devicons" },

@@ -87,6 +87,24 @@ return {
   'olimorris/neotest-rspec',
   'vim-test/vim-test',
   'mfussenegger/nvim-dap',
+  {
+    'leoluz/nvim-dap-go',
+    ft = "go",
+    dependencies = "mfussenegger/nvim-dap",
+    config = function(_, opts)
+      require("dap-go").setup(opts)
+    end,
+  },
+  {
+    "olexsmir/gopher.nvim",
+    ft = "go",
+    config = function(_, opts)
+      require("gopher").setup(opts)
+    end,
+    build = function()
+      vim.cmd [[silent! GoInstallDeps]]
+    end,
+  },
   'tpope/vim-dadbod',
   'norcalli/nvim-colorizer.lua',
   'christoomey/vim-tmux-runner',
@@ -107,28 +125,24 @@ return {
       require('nvim-lastplace').setup()
     end
   },
-  {
-    "christoomey/vim-tmux-navigator",
-    lazy = false,
-  },
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      require("copilot").setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-      })
-    end,
-  },
-  {
-    "zbirenbaum/copilot-cmp",
-    after = { "copilot.lua" },
-    config = function()
-      require("copilot_cmp").setup()
-    end,
-  },
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   cmd = "Copilot",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     require("copilot").setup({
+  --       suggestion = { enabled = false },
+  --       panel = { enabled = false },
+  --     })
+  --   end,
+  -- },
+  -- {
+  --   "zbirenbaum/copilot-cmp",
+  --   after = { "copilot.lua" },
+  --   config = function()
+  --     require("copilot_cmp").setup()
+  --   end,
+  -- },
   {
     "nvim-tree/nvim-tree.lua",
     opts = {
