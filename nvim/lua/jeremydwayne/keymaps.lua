@@ -78,3 +78,11 @@ end)
 keymap("n", "<leader>gsj", "<cmd> GoTagAdd json<CR>")
 keymap("n", "<leader>ger", "<cmd> GoIfErr<CR>")
 keymap("n", "<leader>gtg", "<cmd> GoTestsAll<CR>")
+
+-- harpoon
+keymap('n', '<leader>a', require('harpoon.mark').add_file)
+keymap('n', '<C-e>', require('harpoon.ui').toggle_quick_menu)
+keymap('n', '<leader>1', function() require('harpoon.ui').nav_file(1) end)
+keymap('n', '<leader>2', function() require('harpoon.ui').nav_file(2) end)
+keymap('n', '<leader>3', function() require('harpoon.ui').nav_file(3) end)
+keymap('n', '<leader>4', function() require('harpoon.ui').nav_file(4) end)

@@ -33,10 +33,6 @@ return {
   },
 
   -- Telescope
-  {
-    'nvim-telescope/telescope.nvim',
-    dependencies = { { 'nvim-lua/plenary.nvim' } }
-  },
   'nvim-telescope/telescope-fzy-native.nvim',
   'nvim-lua/popup.nvim',
 
@@ -47,7 +43,6 @@ return {
   'lewis6991/impatient.nvim',
   'theprimeagen/harpoon',
   'mbbill/undotree',
-
   -- 'tpope/vim-surround',
   {
     'kylechui/nvim-surround',
@@ -56,13 +51,11 @@ return {
       require("nvim-surround").setup({})
     end
   },
-  'danymat/neogen',
   {
     'max397574/better-escape.nvim',
     lazy = false,
   },
   'mfussenegger/nvim-lint',
-  'hoob3rt/lualine.nvim',
   {
     'onsails/lspkind-nvim',
     config = function()
@@ -72,17 +65,6 @@ return {
         },
       })
     end
-  },
-  'lukas-reineke/indent-blankline.nvim',
-  {
-    "nvim-neotest/neotest",
-    lazy = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "antoinemadec/FixCursorHold.nvim",
-      'nvim-neotest/neotest-vim-test',
-    }
   },
   'olimorris/neotest-rspec',
   'vim-test/vim-test',
@@ -117,7 +99,6 @@ return {
       'tyru/open-browser.vim'
     }
   },
-  'xiyaowong/nvim-transparent',
   {
     'ethanholz/nvim-lastplace',
     lazy = false,
