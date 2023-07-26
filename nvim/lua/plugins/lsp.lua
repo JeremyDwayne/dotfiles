@@ -201,6 +201,16 @@ return {
         }
       })
 
+      lsp.configure("eslint", {
+        filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+        on_attach = function(_, bufnr)
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            command = "EslintFixAll",
+          })
+        end
+      })
+
       lsp.configure("lua_ls", {
         capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
         settings = {
