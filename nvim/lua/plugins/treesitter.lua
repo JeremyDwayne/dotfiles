@@ -1,5 +1,6 @@
 return {
   'nvim-treesitter/nvim-treesitter',
+  lazy = false,
   build = function()
     local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
     ts_update()
@@ -8,7 +9,6 @@ return {
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
   config = {
-
     -- A list of parser names, or "all"
     ensure_installed = { "ruby", "javascript", "typescript", "c", "lua", "rust", "json", "html", "css", "tsx",
       "markdown", "markdown_inline", "bash", "go" },
