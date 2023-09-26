@@ -5,7 +5,7 @@ keymap("n", ":Wq", vim.cmd.wq)
 keymap("n", ":Q", vim.cmd.q)
 keymap("n", "<leader>so", vim.cmd.so)
 keymap("n", "<leader>pv", vim.cmd.Ex)
-keymap("n", "<C-n>", vim.cmd.NvimTreeToggle)
+keymap("n", "<C-n>", vim.cmd.NvimTreeFindFileToggle)
 keymap("n", "<leader>e", vim.cmd.NvimTreeFocus)
 
 keymap("n", "<leader>bd", "<cmd>bd!<cr>")

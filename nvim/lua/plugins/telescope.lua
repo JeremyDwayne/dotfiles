@@ -26,7 +26,11 @@ return {
       require("telescope.builtin").find_files({
         prompt_title = "Dotfiles",
         cwd = "~/.dotfiles",
-        find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' }
+        find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' },
+        theme = "ivy",
+        layout_config = {
+          height = 0.8,
+        },
       })
     end
 
@@ -121,7 +125,13 @@ return {
           layout_config = {
             height = 0.8,
           },
-        }
+        },
+        oldfiles = {
+          theme = "ivy",
+          layout_config = {
+            height = 0.8,
+          },
+        },
       },
       extensions = {
         fzy_native = {

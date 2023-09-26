@@ -125,22 +125,6 @@ return {
   --   end,
   -- },
   {
-    "nvim-tree/nvim-tree.lua",
-    opts = {
-      git = {
-        enable = true,
-      },
-      renderer = {
-        highlight_git = true,
-        icons = {
-          show = {
-            git = true,
-          },
-        },
-      },
-    }
-  },
-  {
     "lewis6991/gitsigns.nvim",
     config = function()
       require('gitsigns').setup()
