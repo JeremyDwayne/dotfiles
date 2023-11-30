@@ -182,15 +182,17 @@ return {
       -- This is where all the LSP shenanigans will live
 
       local lsp = require('lsp-zero')
-
-      lsp.on_attach(function(_, bufnr)
-        -- see :help lsp-zero-keybindings
-        -- to learn the available actions
-        lsp.default_keymaps({ buffer = bufnr })
-      end)
+      local util = require("lspconfig.util")
+      local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+          lsp.on_attach(function(_, bufnr)
+            -- see :help lsp-zero-keybindings
+            -- to learn the available actions
+            lsp.default_keymaps({ buffer = bufnr })
+          end)
 
       -- (Optional) Configure lua language server for neovim
       lsp.configure("tsserver", {
+        capabilities = capabilities,
         cmd = { "typescript-language-server", "--stdio" },
         filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
         settings = {
@@ -201,18 +203,17 @@ return {
         }
       })
 
-      lsp.configure("eslint", {
-        filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-        on_attach = function(_, bufnr)
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = bufnr,
-            command = "EslintFixAll",
-          })
-        end
-      })
+      -- lsp.configure("eslint", {
+      --   capabilities = capabilities,
+      --   on_attach = function(_, bufnr)
+      --     vim.api.nvim_create_autocmd("BufWritePre", {
+      --       buffer = bufnr,
+      --       command = "EslintFixAll",
+      --     })
+      --   end
+      -- })
 
       lsp.configure("lua_ls", {
-        capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
         settings = {
           Lua = {
             format = {
@@ -243,8 +244,26 @@ return {
         },
       })
 
+      lsp.configure("tailwindcss", {
+        capabilities = capabilities,
+        root_dir = util.root_pattern("tailwind.config.js"),
+      })
+
+      lsp.configure("tsserver", {
+        capabilities = capabilities,
+        root_dir = util.root_pattern("tsconfig.json", "jsconfig.json"),
+        handlers = {
+          -- pick the first response to a go to definition response. that way we go straight to the
+          -- source definition without needing to choose from the type definition .d.ts file
+          ["textDocument/definition"] = function(err, result, ...)
+            result = vim.tbl_islist(result) and result[1] or result
+            vim.lsp.handlers["textDocument/definition"](err, result, ...)
+          end,
+        },
+      })
+
       lsp.configure("solargraph", {
-        capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        capabilities = capabilities,
         cmd = { "solargraph", "stdio" },
         filetypes = { "ruby" },
         -- root_dir = util.root_pattern("Gemfile", ".git"),
