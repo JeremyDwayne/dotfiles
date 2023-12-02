@@ -129,3 +129,5 @@ end)
 keymap.set("n", "<leader>gsj", "<cmd> GoTagAdd json<CR>")
 keymap.set("n", "<leader>ger", "<cmd> GoIfErr<CR>")
 keymap.set("n", "<leader>gtg", "<cmd> GoTestsAll<CR>")
+
+keymap.set("n", "<leader>rn", ":IncRename ")
