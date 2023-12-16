@@ -131,3 +131,32 @@ keymap.set("n", "<leader>ger", "<cmd> GoIfErr<CR>")
 keymap.set("n", "<leader>gtg", "<cmd> GoTestsAll<CR>")
 
 keymap.set("n", "<leader>rn", ":IncRename ")
+
+-- Refactoring
+keymap.set("x", "<leader>re", function()
+  require("refactoring").refactor("Extract Function")
+end)
+keymap.set("x", "<leader>rf", function()
+  require("refactoring").refactor("Extract Function To File")
+end)
+-- Extract function supports only visual mode
+keymap.set("x", "<leader>rv", function()
+  require("refactoring").refactor("Extract Variable")
+end)
+-- Extract variable supports only visual mode
+keymap.set("n", "<leader>rI", function()
+  require("refactoring").refactor("Inline Function")
+end)
+-- Inline func supports only normal
+keymap.set({ "n", "x" }, "<leader>ri", function()
+  require("refactoring").refactor("Inline Variable")
+end)
+-- Inline var supports both normal and visual mode
+
+keymap.set("n", "<leader>rb", function()
+  require("refactoring").refactor("Extract Block")
+end)
+keymap.set("n", "<leader>rbf", function()
+  require("refactoring").refactor("Extract Block To File")
+end)
+-- Extract block supports only normal mode
