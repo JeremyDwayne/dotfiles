@@ -30,7 +30,7 @@ return {
     opts = {
       options = {
         -- globalstatus = false,
-        theme = "vscode",
+        theme = "catppuccin",
       },
     },
   },

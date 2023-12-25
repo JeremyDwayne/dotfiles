@@ -3,6 +3,8 @@ return {
     "williamboman/mason.nvim",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, {
+        "eslint-lsp",
+        "prettierd",
         "stylua",
         "selene",
         "luacheck",
@@ -11,7 +13,7 @@ return {
         "tailwindcss-language-server",
         "typescript-language-server",
         "css-lsp",
-        "solargraph",
+        "rubocop",
         "gopls",
       })
     end,

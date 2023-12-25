@@ -57,8 +57,6 @@ keymap.set("n", ":Q", vim.cmd.q)
 keymap.set("n", "<leader>so", vim.cmd.so)
 keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
-keymap.set("n", "<leader>bd", "<cmd>bd!<cr>")
-
 -- option key movement on macos
 keymap.set("n", "∆", ":m .+1<CR>==")
 keymap.set("n", "˚", ":m .-2<CR>==")
