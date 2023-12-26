@@ -28,6 +28,6 @@ map cmd+shift+r set_tab_title
 
 
 # BEGIN_KITTY_THEME
-# Catppuccin-Mocha
+# Catppuccin-Latte
 include current-theme.conf
 # END_KITTY_THEME
