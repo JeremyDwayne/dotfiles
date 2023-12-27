@@ -158,3 +158,5 @@ keymap.set("n", "<leader>rbf", function()
   require("refactoring").refactor("Extract Block To File")
 end)
 -- Extract block supports only normal mode
+
+keymap.set("n", "<leader>ct", ":CloakToggle<CR>")
