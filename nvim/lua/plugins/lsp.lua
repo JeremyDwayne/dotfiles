@@ -13,7 +13,6 @@ return {
         "tailwindcss-language-server",
         "typescript-language-server",
         "css-lsp",
-        "rubocop",
         "gopls",
       })
     end,

@@ -29,7 +29,7 @@ alias tests="./bin/env_update && RACK_ENV=test rake db:prepare; rspec"
 alias rake="bundle exec rake"
 alias rspec="bundle exec rspec"
 alias rfail="bundle exec rspec --only-failures"
-alias rubocop="bundle exec rubocop"
+alias rc="bundle exec rubocop --disable-pending-cops"
 
 # Docker Aliases
 alias dc-dev-b='docker-compose -f docker/dev/docker-compose.yml build api_dev'

@@ -13,7 +13,7 @@ keymap.set("n", "+", "<C-a")
 keymap.set("n", "-", "<C-x")
 
 -- delete word backwards
-keymap.set("n", "dw", "vb_d")
+keymap.set("n", "dw", "diw")
 
 -- select all
 keymap.set("n", "<C-a>", "gg<S-v>G")
@@ -28,8 +28,8 @@ keymap.set("n", "te", ":tabedit<Return>", opts)
 -- keymap.set("n", "<leader>bd", ":bd<Return>", opts)
 
 -- Split window
-keymap.set("n", "<leader>ss", ":split<Return>", opts)
-keymap.set("n", "<leader>sv", ":vsplit<Return>", opts)
+keymap.set("n", "<leader>s-", ":split<Return>", opts)
+keymap.set("n", "<leader>s|", ":vsplit<Return>", opts)
 
 -- Move window
 keymap.set("n", "<leader>sh", "<C-w>h")

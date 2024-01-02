@@ -11,6 +11,13 @@ return {
       end,
       desc = "Find Plugin File",
     },
+    -- vim.keymap.set('n', '<leader>fo', "<cmd> Telescope oldfiles <CR>")
+    {
+      "<leader>fo",
+      function()
+        require("telescope.builtin").oldfiles()
+      end,
+    },
     {
       ";f",
       function()

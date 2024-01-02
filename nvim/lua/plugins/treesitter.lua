@@ -1,6 +1,9 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      "RRethy/nvim-treesitter-endwise",
+    },
     opts = {
       ensure_installed = {
         "lua",
@@ -28,6 +31,9 @@ return {
         "bash",
         "query",
         "markdown",
+      },
+      endwise = {
+        enable = true,
       },
     },
     config = function(_, opts)
