@@ -11,7 +11,6 @@ return {
       end,
       desc = "Find Plugin File",
     },
-    -- vim.keymap.set('n', '<leader>fo', "<cmd> Telescope oldfiles <CR>")
     {
       "<leader>fo",
       function()
@@ -127,12 +126,12 @@ return {
               vim.cmd("startinsert")
             end,
             ["<C-u>"] = function(prompt_bufnr)
-              for i = 1, 10 do
+              for _ = 1, 10 do
                 actions.move_selection_previous(prompt_bufnr)
               end
             end,
             ["<C-d>"] = function(prompt_bufnr)
-              for i = 1, 10 do
+              for _ = 1, 10 do
                 actions.move_selection_next(prompt_bufnr)
               end
             end,
