@@ -70,6 +70,13 @@ return {
       end,
     },
     {
+      ";k",
+      function()
+        local builtin = require("telescope.builtin")
+        builtin.keymaps()
+      end,
+    },
+    {
       "fb",
       function()
         local telescope = require("telescope")
