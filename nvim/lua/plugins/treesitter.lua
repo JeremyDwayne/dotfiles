@@ -30,7 +30,7 @@ return {
         "jsonc",
         "bash",
         "query",
-        "markdown",
+        -- "markdown",
       },
       endwise = {
         enable = true,
@@ -39,12 +39,12 @@ return {
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
 
-      vim.filetype.add({
-        extension = {
-          mdx = "markdown",
-        },
-      })
-      vim.treesitter.language.register("markdown", "mdx")
+      -- vim.filetype.add({
+      --   extension = {
+      --     mdx = "markdown",
+      --   },
+      -- })
+      -- vim.treesitter.language.register("markdown", "mdx")
     end,
   },
 }

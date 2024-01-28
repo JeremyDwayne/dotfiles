@@ -17,6 +17,14 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- fix conceallevel for markdown files
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "md", "markdown", "mdx" },
+  callback = function()
+    vim.wo.conceallevel = 1
+  end,
+})
+
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*",
   callback = function(args)
