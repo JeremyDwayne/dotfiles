@@ -160,3 +160,9 @@ end)
 -- Extract block supports only normal mode
 
 keymap.set("n", "<leader>ct", ":CloakToggle<CR>")
+
+-- Obsidian Zettelkasten
+keymap.set("n", "<leader>of", ":ObsidianQuickSwitch<CR>")
+
+-- Dismiss Noice Message
+keymap.set("n", "<leader>nd", ":NoiceDismiss<CR>")

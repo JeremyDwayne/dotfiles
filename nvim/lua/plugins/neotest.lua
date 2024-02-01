@@ -111,16 +111,10 @@ return {
       ["<leader>nn"] = function()
         neotest.run.run({ env = get_env() })
       end,
-      ["<leader>nd"] = function()
-        neotest.run.run({ strategy = "dap", env = get_env() })
-      end,
       ["<leader>nl"] = function()
         neotest.run.run_last()
       end,
-      ["<leader>nD"] = function()
-        neotest.run.run_last({ strategy = "dap" })
-      end,
-      ["<leader>na"] = function()
+      ["<leader>nA"] = function()
         neotest.run.attach()
       end,
       ["<leader>no"] = function()

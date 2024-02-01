@@ -3,7 +3,10 @@ return {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
       "RRethy/nvim-treesitter-endwise",
+      "nvim-treesitter/nvim-treesitter-textobjects",
     },
+    build = ":TSUpdate",
+    event = { "BufReadPre", "BufNewFile" },
     opts = {
       ensure_installed = {
         "lua",
@@ -30,10 +33,25 @@ return {
         "jsonc",
         "bash",
         "query",
-        -- "markdown",
+        "markdown",
       },
       endwise = {
         enable = true,
+      },
+      highlight = {
+        enable = true,
+      },
+      indent = {
+        enable = true,
+      },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "<C-space>",
+          node_incremental = "<C-space>",
+          scope_incremental = false,
+          node_decremental = "<bs>",
+        },
       },
     },
     config = function(_, opts)
