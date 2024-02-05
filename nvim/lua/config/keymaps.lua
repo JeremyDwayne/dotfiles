@@ -166,3 +166,10 @@ keymap.set("n", "<leader>of", ":ObsidianQuickSwitch<CR>")
 
 -- Dismiss Noice Message
 keymap.set("n", "<leader>nd", ":NoiceDismiss<CR>")
+
+-- Typescript Tools
+keymap.set("n", "<leader>tai", ":TSToolsAddMissingImports<CR>")
+keymap.set("n", "<leader>toi", ":TSToolsOrganizeImports<CR>")
+
+keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", {})
+keymap.set("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>", {})

@@ -30,6 +30,8 @@ return {
         "taplo",
         "terraform-ls",
         "yaml-language-server",
+        "java-language-server",
+        "java-test",
       }
     end,
   },
