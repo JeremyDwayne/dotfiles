@@ -121,7 +121,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 source ~/.aliases.zsh
-source ~/.work_aliases.zsh
+#source ~/.work_aliases.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source ~/.zdir/z.sh
 alias luamake=/home/jwinterberg/lua-language-server/3rd/luamake/luamake
