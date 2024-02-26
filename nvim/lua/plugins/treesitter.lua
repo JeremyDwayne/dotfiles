@@ -14,7 +14,6 @@ return {
         "cmake",
         "cpp",
         "css",
-        "fish",
         "gitignore",
         "go",
         "graphql",
