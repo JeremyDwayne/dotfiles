@@ -1,0 +1,26 @@
+- name: "ZSH | Copy .zshrc"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/zshrc"
+    dest: "{{ ansible_user_dir }}/.zshrc"
+    state: link
+    force: true
+
+- name: "ZSH | Copy .zprofile"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/zprofile"
+    dest: "{{ ansible_user_dir }}/.zprofile"
+    state: link
+    force: true
+
+- name: "ZSH | Copy custom ZSH config"
+  ansible.builtin.copy:
+    dest: "{{ ansible_user_dir }}/.config/"
+    src: "zsh"
+    mode: "0644"
+    directory_mode: "0755"
+    force: true
+
+- name: "ZSH | Install Autocomplete Plugin"
+  ansible.builtin.git:
+    repo: "https://github.com/marlonrichert/zsh-autocomplete.git"
+    dest: "~/.config/zsh/plugins/zsh-autocomplete"

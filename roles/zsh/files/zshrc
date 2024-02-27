@@ -81,7 +81,7 @@ DELTA_THEME="Dracula"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-syntax-highlighting)
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -112,9 +112,11 @@ export SUDO_EDITOR='nvim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# TODO MOVE ALIASES TO ANSIBLE THING
-source ~/.aliases.zsh
-#source ~/.work_aliases.zsh
+for file in $HOME/.config/zsh/*.zsh; do
+  source "$file"
+done
+
+source $HOME/.config/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source ~/.zdir/z.sh
@@ -150,3 +152,4 @@ esac
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+source ~/powerlevel10k/powerlevel10k.zsh-theme

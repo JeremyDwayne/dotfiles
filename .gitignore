@@ -7,3 +7,4 @@ nvim/pack/*
 env_vars.zsh
 local/share/*
 nvim/plugin
+tmux-client*.log

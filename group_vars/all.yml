@@ -1,0 +1,5 @@
+default_roles:
+  - neovim
+  - kitty
+  - zsh
+  - tmux

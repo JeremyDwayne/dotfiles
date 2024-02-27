@@ -91,10 +91,16 @@ IS_FIRST_RUN="$HOME/.dotfiles_run"
 function mac_setup() {
 	which -s brew
 	if [[ $? != 0 ]]; then
-		_task "Installing Brew"
+		_task "Installing Homebrew"
 		_cmd '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
 		_cmd "$(/opt/homebrew/bin/brew shellenv)"
 		_cmd "brew bundle"
+	fi
+	if ! pip3 list | grep watchdog >/dev/null 2>&1; then
+		_task "Installing Python3 Watchdog"
+		_cmd "python3 -m venv ~/.venv"
+		_cmd "source ~/.venv/bin/activate"
+		_cmd "pip3 install watchdog --break-system-packages"
 	fi
 }
 
@@ -189,14 +195,25 @@ if ! [[ -f "$SSH_DIR/authorized_keys" ]]; then
 	_cmd "cat $SSH_DIR/id_rsa.pub >> $SSH_DIR/authorized_keys"
 fi
 
-_task "$DOTFILES_DIR"
 if ! [[ -d "$DOTFILES_DIR" ]]; then
 	_task "Cloning repository"
 	_cmd "git clone --quiet https://github.com/JeremyDwayne/dotfiles.git $DOTFILES_DIR"
 else
 	_task "Updating repository"
-	_cmd "git -C $DOTFILES_DIR pull --quiet"
+	# TODO: UNCOMMENT
+	# _cmd "git -C $DOTFILES_DIR pull --quiet"
 fi
+
+# .local/bin symlinks
+_task "Symlinking ~/.local/bin Scripts"
+if ! [[ -d ~/.local/bin ]]; then
+	_task "Making ~/.local/bin Folder"
+	_cmd "mkdir -p ~/.local/bin"
+fi
+for f in $(find $DOTFILES_DIR/local/bin -type f); do
+	_cmd 'rm -f ~/.local/bin/"${f##*/}"'
+	_cmd 'ln -s $DOTFILES_DIR/local/bin/"${f##*/}" ~/.local/bin/"${f##*/}"'
+done
 
 pushd "$DOTFILES_DIR" 2>&1 >/dev/null
 update_ansible_galaxy $OSTYPE
