@@ -4,6 +4,7 @@ alias vimrc='vim ~/.config/nvim/init.vim'
 alias zshrc='vim ~/.zshrc'
 alias zshreload='source ~/.zshrc'
 alias fv='vim $(fzf --height 40%)'
+alias la='ls -lah'
 # list TODO/FIX lines from the current project
 alias todos="ag --nogroup '(TODO|FIX(ME)?):'"
 
