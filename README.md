@@ -2,6 +2,23 @@
 
 Here's my collection of dotfiles I use on MacOS.
 
+## vault.secret
+
+The vault.secret file allows you to encrypt values with Ansible vault and store them securely in source control. Create a file located at ~/.config/dotfiles/vault.secret with a secure password in it.
+
+```sh
+vim ~/.ansible-vault/vault.secret
+```
+
+To then encrypt values with your vault password use the following:
+
+```sh
+ansible-vault encrypt_string --vault-password-file $HOME/.ansible-vault/vault.secret "mynewsecret" --name "MY_SECRET_VAR"
+cat myfile.conf | ansible-vault encrypt_string --vault-password-file $HOME/.ansible-vault/vault.secret --stdin-name "myfile"
+```
+
+> NOTE: This file will automatically be detected by the playbook when running dotfiles command to decrypt values. Read more on Ansible Vault here.
+
 ## Usage
 
 ### Install
