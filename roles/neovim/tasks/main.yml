@@ -1,3 +1,18 @@
+- name: "Neovim | Install Tree-sitter"
+  community.general.homebrew:
+    name: tree-sitter
+    state: head
+
+- name: "Neovim | Install Luajit"
+  community.general.homebrew:
+    name: luajit
+    state: head
+
+- name: "Neovim | Install Neovim"
+  community.general.homebrew:
+    name: neovim
+    state: head
+
 - name: "Neovim | Config folder"
   ansible.builtin.file:
     mode: "0755"

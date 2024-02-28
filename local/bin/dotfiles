@@ -94,7 +94,7 @@ function mac_setup() {
 		_task "Installing Homebrew"
 		_cmd '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
 		_cmd "$(/opt/homebrew/bin/brew shellenv)"
-		_cmd "brew bundle"
+		_cmd "brew install coreutils git wget python ansible"
 	fi
 	if ! pip3 list | grep watchdog >/dev/null 2>&1; then
 		_task "Installing Python3 Watchdog"

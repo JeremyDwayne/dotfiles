@@ -22,14 +22,14 @@ return {
         name = "personal",
         path = "~/vaults/personal",
       },
-      {
-        name = "work",
-        path = "~/vaults/work",
-      },
-      {
-        name = "blog",
-        path = "~/vaults/blog",
-      },
+      -- {
+      --   name = "work",
+      --   path = "~/vaults/work",
+      -- },
+      -- {
+      --   name = "blog",
+      --   path = "~/vaults/blog",
+      -- },
     },
     completion = {
       -- Set to false to disable completion.

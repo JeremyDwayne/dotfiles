@@ -37,20 +37,23 @@
   conflictstyle = diff3
 [commit]
   template = ~/.gitmessage
+	gpgsign = True
 [fetch]
-  prune = true
+	prune = True
 [rebase]
   autosquash = true
+	autoStash = True
 [include]
   path = ~/.gitconfig.local:~/.themes.gitconfig
 [user]
   username = JeremyDwayne
   email = jeremy@jeremydwayne.com
-  name = Jeremy Winterberg
+	name = JeremyDwayne
+	signingkey = /Users/jwinterberg/.ssh/id_ed25519.pub
 [diff]
   compactionHeuristic = true
   tool = diffmerge
-  colorMoved = default
+	colorMoved = zebra
 [difftool "diffmerge"]
   cmd = diffmerge \"$LOCAL\" \"$REMOTE\"
 [mergetool "diffmerge"]
@@ -62,7 +65,7 @@
   process = git-lfs filter-process
   required = true
 [pull]
-  rebase = true
+	rebase = True
 [interactive]
   diffFilter = delta --color-only
 [add.interactive]
@@ -71,3 +74,9 @@
   navigate = true    # use n and N to move between diff sections
   light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
   features = dracula
+[gpg]
+	format = ssh
+[tag]
+	gpgsign = True
+[gpg "ssh"]
+	allowedSignersFile = /Users/jwinterberg/.config/git/allowed_signers

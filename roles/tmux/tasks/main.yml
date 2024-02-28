@@ -1,3 +1,8 @@
+- name: "Tmux | Install Tmux"
+  community.general.homebrew:
+    name: tmux
+    state: head
+
 - name: "Tmux | Configure tmux"
   ansible.builtin.copy:
     src: tmux

@@ -1,22 +1,39 @@
 # Dotfiles
-Here's my collection of dotfiles I use on linux/osx environments.
 
-## Install
-`./install.zsh` will run a script that checks if all the necessary programs are 
-installed. Once the dependencies are installed, it will run any third party installations
+Here's my collection of dotfiles I use on MacOS.
 
-I'm in the process of moving the `install.zsh` script to ansible. After installing dependencies
-you can symlink the configs using `./stow-run`.
+## Usage
 
-ZSH and Oh-My-Zsh must be installed:
-- http://ohmyz.sh/
+### Install
 
-**Git**
-Make sure to edit the gitconfig and add your credentials instead of mine
+```sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/JeremyDwayne/dotfiles/main/local/bin/dotfiles)"
+```
 
-**VIM Installation Tips**
-I use neovim and vim-plug. So if you're using regular vim you might want to
-remove the neovim specific plugins from my vimrc. Also, you might need to run
-:PlugClean to remove the plugin directories then run :PlugInstall to reinstall
-them.
-`vim +PlugInstall +qall > /dev/null`
+### Update
+
+This repository is continuously updated with new features and settings which become available to you when updating.
+
+To update your environment run the dotfiles command in your shell:
+
+```sh
+dotfiles
+```
+
+This will handle the following tasks:
+
+- Verify Ansible is up-to-date
+- Generate SSH keys and add to ~/.ssh/authorized_keys
+- Clone this repository locally to ~/.dotfiles
+- Verify any ansible-galaxy plugins are updated
+- Run this playbook with the values in ~/.config/dotfiles/group_vars/all.yaml
+
+This dotfiles command is available to you after the first use of this repo, as it adds this repo's bin directory to your path, allowing you to call dotfiles from anywhere.
+
+Any flags or arguments you pass to the dotfiles command are passed as-is to the ansible-playbook command.
+
+For Example: Running the tmux tag with verbosity
+
+```sh
+dotfiles -t tmux -vvv
+```

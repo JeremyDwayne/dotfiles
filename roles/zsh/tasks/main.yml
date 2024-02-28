@@ -1,3 +1,48 @@
+- name: "ZSH | Install ZSH"
+  community.general.homebrew:
+    name: zsh
+    state: head
+
+- name: "ZSH | Install Ripgrep"
+  community.general.homebrew:
+    name: ripgrep
+    state: present
+
+- name: "ZSH | Install The Silver Searcher"
+  community.general.homebrew:
+    name: the_silver_searcher
+    state: present
+
+- name: "ZSH | Install ZSH Syntax Highlighting"
+  community.general.homebrew:
+    name: zsh-syntax-highlighting
+    state: present
+
+- name: "ZSH | Install JQ"
+  community.general.homebrew:
+    name: jq
+    state: present
+
+- name: "ZSH | Install ASDF"
+  community.general.homebrew:
+    name: asdf
+    state: present
+
+- name: "ZSH | Install Nodejs"
+  community.general.homebrew:
+    name: nodejs
+    state: present
+
+- name: "ZSH | Install Go"
+  community.general.homebrew:
+    name: go
+    state: present
+
+- name: "ZSH | Install Ninja"
+  community.general.homebrew:
+    name: ninja
+    state: present
+
 - name: "ZSH | Copy .zshrc"
   ansible.builtin.file:
     src: "{{ role_path }}/files/zshrc"
