@@ -1,0 +1,43 @@
+- name: "Ruby | Rubocop Configuration"
+  block:
+    - name: "Ruby | Rubocop Config folder"
+      ansible.builtin.file:
+        mode: "0755"
+        path: "{{ ansible_user_dir }}/.config/rubocop"
+        state: directory
+
+    - name: "Ruby | Copy rubocop.yml"
+      ansible.builtin.file:
+        src: "{{ role_path }}/files/rubocop.yml"
+        dest: "{{ ansible_user_dir }}/.config/rubocop/rubocop.yml"
+        state: link
+        force: true
+
+- name: "Ruby | Rspec Configuration"
+  block:
+    - name: "Ruby | Rspec Config folder"
+      ansible.builtin.file:
+        mode: "0755"
+        path: "{{ ansible_user_dir }}/.config/rspec"
+        state: directory
+
+    - name: "Ruby | Copy rspec options"
+      ansible.builtin.file:
+        src: "{{ role_path }}/files/rspec"
+        dest: "{{ ansible_user_dir }}/.config/rspec/options"
+        state: link
+        force: true
+
+- name: "Ruby | Copy gemrc"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/gemrc"
+    dest: "{{ ansible_user_dir }}/.gemrc"
+    state: link
+    force: true
+
+- name: "Ruby | Copy solargraph.yml"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/solargraph.yml"
+    dest: "{{ ansible_user_dir }}/.solargraph.yml"
+    state: link
+    force: true

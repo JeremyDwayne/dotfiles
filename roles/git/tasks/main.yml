@@ -51,6 +51,42 @@
     scope: global
     value: "{{ git_user_name }}"
 
+- name: "Git | Set Git Aliases"
+  community.general.git_config:
+    name: "alias.{{ item.key }}"
+    scope: global
+    value: "{{ item.value }}"
+  loop: "{{ aliases | dict2items }}"
+  vars:
+    aliases:
+      aa: add --all
+      ap: add --patch
+      branches: "for-each-ref --sort=-committerdate --format='%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)' refs/remotes"
+      ca: commit --amend -v
+      cam: commit -am
+      cm: commit -m
+      co: checkout
+      commend: commit --amend --no-edit'
+      conflicts: "!$EDITOR $(git diff --name-only --diff-filter=U)"
+      cundo: reset --soft HEAD^
+      cv: commit -v
+      rh: fetch --all; reset --head origin/main
+      shorty: status --short --branch
+      st: status
+      sync: git fetch && git merge main --ff
+
+- name: "Git | Move ~/.config/git/gitmessage"
+  ansible.builtin.copy:
+    src: gitmessage
+    dest: "{{ ansible_user_dir }}/.config/git/gitmessage"
+    mode: "0600"
+
+- name: "Git | Set commit.template"
+  community.general.git_config:
+    name: commit.template
+    scope: global
+    value: "{{ ansible_user_dir }}/.config/git/gitmessage"
+
 - name: "Git | Set user.signingkey"
   community.general.git_config:
     name: user.signingkey

@@ -3,44 +3,34 @@
     name: zsh
     state: head
 
-- name: "ZSH | Install Ripgrep"
-  community.general.homebrew:
-    name: ripgrep
-    state: present
+- name: "ZSH | Detect oh-my-zsh"
+  ansible.builtin.stat:
+    path: "{{ ansible_user_dir }}/.oh-my-zsh"
+  register: ohmyzsh
 
-- name: "ZSH | Install The Silver Searcher"
-  community.general.homebrew:
-    name: the_silver_searcher
-    state: present
+- name: "ZSH | Register oh-my-zsh state"
+  ansible.builtin.set_fact:
+    ohmyzsh_is_installed: "{{ ohmyzsh.stat.exists }}"
 
-- name: "ZSH | Install ZSH Syntax Highlighting"
-  community.general.homebrew:
-    name: zsh-syntax-highlighting
-    state: present
+- name: "ZSH | Install oh-my-zsh"
+  when: not ohmyzsh_is_installed
+  block:
+    - name: "ZSH | Download oh-my-zsh Install Script"
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+        dest: /{{ ansible_user_dir }}/oh-my-zsh.install.sh
+        force: true
+        mode: "0755"
+      notify:
+        - "ZSH | Cleanup oh-my-zsh install script"
 
-- name: "ZSH | Install JQ"
-  community.general.homebrew:
-    name: jq
-    state: present
+    - name: "ZSH | Run the install script"
+      ansible.builtin.script:
+        cmd: /{{ ansible_user_dir }}/oh-my-zsh.install.sh
 
-- name: "ZSH | Install ASDF"
+- name: "ZSH | Install Dependencies"
   community.general.homebrew:
-    name: asdf
-    state: present
-
-- name: "ZSH | Install Nodejs"
-  community.general.homebrew:
-    name: nodejs
-    state: present
-
-- name: "ZSH | Install Go"
-  community.general.homebrew:
-    name: go
-    state: present
-
-- name: "ZSH | Install Ninja"
-  community.general.homebrew:
-    name: ninja
+    name: "{{ dependencies }}"
     state: present
 
 - name: "ZSH | Copy .zshrc"

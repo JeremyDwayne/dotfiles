@@ -1,5 +1,5 @@
-######## Subject 50 characters ###################
 
+######## Subject 50 characters ###################
 #<type>(<scope>): <subject>
 # !         a breaking change is in this commit, list details in footer
 # build     npm/composer related, adding external dependencies
@@ -11,13 +11,13 @@
 # perf      code that improves performance
 # style     code that is related to styling
 # test      a new test or modified existing test
-######## Body 72 characters ############################################
 
+######## Body 72 characters ############################################
 # * Why was this change necessary?
 # * How does it address the problem?
 # * Are there any side effects?
-######## Optional Footers 72 characters ################################
 
+######## Optional Footers 72 characters ################################
 # Key: Value
 # BREAKING CHANGE: use JavaScript features not available in Node 6.
 # Reviewed-by: Z

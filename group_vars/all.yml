@@ -1,11 +1,22 @@
 default_roles:
-  - neovim
-  - kitty
   - zsh
-  - tmux
   - ssh
   - git
+  - kitty
+  - neovim
+  - tmux
   - fzf
+  - ruby
+
+dependencies:
+  - ripgrep
+  - the_silver_searcher
+  - zsh-syntax-highlighting
+  - jq
+  - asdf
+  - nodejs
+  - go
+  - ninja
 
 git_user_name: JeremyDwayne
 git_user_email: !vault |
