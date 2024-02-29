@@ -200,8 +200,7 @@ if ! [[ -d "$DOTFILES_DIR" ]]; then
 	_cmd "git clone --quiet https://github.com/JeremyDwayne/dotfiles.git $DOTFILES_DIR"
 else
 	_task "Updating repository"
-	# TODO: UNCOMMENT
-	# _cmd "git -C $DOTFILES_DIR pull --quiet"
+	_cmd "git -C $DOTFILES_DIR pull --quiet"
 fi
 
 # .local/bin symlinks
