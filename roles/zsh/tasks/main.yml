@@ -3,31 +3,6 @@
     name: zsh
     state: head
 
-- name: "ZSH | Detect oh-my-zsh"
-  ansible.builtin.stat:
-    path: "{{ ansible_user_dir }}/.oh-my-zsh"
-  register: ohmyzsh
-
-- name: "ZSH | Register oh-my-zsh state"
-  ansible.builtin.set_fact:
-    ohmyzsh_is_installed: "{{ ohmyzsh.stat.exists }}"
-
-- name: "ZSH | Install oh-my-zsh"
-  when: not ohmyzsh_is_installed
-  block:
-    - name: "ZSH | Download oh-my-zsh Install Script"
-      ansible.builtin.get_url:
-        url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-        dest: /{{ ansible_user_dir }}/oh-my-zsh.install.sh
-        force: true
-        mode: "0755"
-      notify:
-        - "ZSH | Cleanup oh-my-zsh install script"
-
-    - name: "ZSH | Run the install script"
-      ansible.builtin.script:
-        cmd: /{{ ansible_user_dir }}/oh-my-zsh.install.sh
-
 - name: "ZSH | Install Dependencies"
   community.general.homebrew:
     name: "{{ dependencies }}"
