@@ -75,6 +75,12 @@
       st: status
       sync: git fetch && git merge main --ff
 
+- name: "Git | Create Git Config Directory"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/git"
+    mode: "0755"
+    state: directory
+
 - name: "Git | Move ~/.config/git/gitmessage"
   ansible.builtin.copy:
     src: gitmessage
