@@ -13,6 +13,11 @@
     name: neovim
     state: head
 
+- name: "Neovim | Install Silicon"
+  community.general.homebrew:
+    name: silicon
+    state: present
+
 - name: "Neovim | Config folder"
   ansible.builtin.file:
     mode: "0755"
