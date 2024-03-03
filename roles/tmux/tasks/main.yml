@@ -3,12 +3,11 @@
     name: tmux
     state: head
 
-- name: "Tmux | Configure tmux"
-  ansible.builtin.copy:
-    src: tmux
-    dest: "{{ ansible_user_dir }}/.config/"
-    mode: "0644"
-    directory_mode: "0755"
+- name: "Tmux | Copy tmux files"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/tmux"
+    dest: "{{ ansible_user_dir }}/.config/tmux"
+    state: link
     force: true
 
 - name: "TMUX | Install TPM Plugin Manager"

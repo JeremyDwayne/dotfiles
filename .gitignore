@@ -10,3 +10,4 @@ local/share/*
 nvim/plugin
 tmux-client*.log
 __pycache__
+roles/tmux/files/tmux/plugins

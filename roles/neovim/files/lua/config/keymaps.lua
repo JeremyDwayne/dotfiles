@@ -32,10 +32,10 @@ keymap.set("n", "<leader>s-", ":split<Return>", opts)
 keymap.set("n", "<leader>s|", ":vsplit<Return>", opts)
 
 -- Move window
-keymap.set("n", "<leader>sh", "<C-w>h")
-keymap.set("n", "<leader>sk", "<C-w>k")
-keymap.set("n", "<leader>sj", "<C-w>j")
-keymap.set("n", "<leader>sl", "<C-w>l")
+-- keymap.set("n", "<leader>sh", "<C-w>h")
+-- keymap.set("n", "<leader>sk", "<C-w>k")
+-- keymap.set("n", "<leader>sj", "<C-w>j")
+-- keymap.set("n", "<leader>sl", "<C-w>l")
 
 -- Resize window
 keymap.set("n", "<C-w><left>", "<C-w><")
@@ -57,7 +57,7 @@ keymap.set("n", ":Q", vim.cmd.q)
 keymap.set("n", "<leader>so", vim.cmd.so)
 keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
--- option key movement on macos
+-- option key move lines on macos
 keymap.set("n", "∆", ":m .+1<CR>==")
 keymap.set("n", "˚", ":m .-2<CR>==")
 keymap.set("i", "∆", "<Esc>:m .+1<CR>==gi")
@@ -72,6 +72,7 @@ keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
 keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
 keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
 
+-- Navigate, staying centered when possible
 keymap.set("n", "J", "mzJ`z")
 keymap.set("n", "<C-d>", "<C-d>zz")
 keymap.set("n", "<C-u>", "<C-u>zz")
