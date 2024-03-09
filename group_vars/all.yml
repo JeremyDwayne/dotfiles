@@ -7,6 +7,7 @@ default_roles:
   - tmux
   - fzf
   - ruby
+  - go
 
 dependencies:
   - ripgrep
@@ -15,7 +16,8 @@ dependencies:
   - jq
   - asdf
   - nodejs
-  - go
+  - deno
+  - tailwindcss
   - ninja
 
 git_user_name: JeremyDwayne

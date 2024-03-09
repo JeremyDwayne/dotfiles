@@ -35,6 +35,9 @@ return {
         "yaml-language-server",
         "java-language-server",
         "java-test",
+        "html-lsp",
+        "htmx-lsp",
+        "templ",
       }
     end,
   },

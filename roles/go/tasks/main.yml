@@ -1,0 +1,12 @@
+- name: "Go | Install Go"
+  community.general.homebrew:
+    name: go
+    state: latest
+
+- name: "Go | Install Air"
+  command: "go install github.com/cosmtrek/air@latest"
+  changed_when: false
+
+- name: "Go | Install Templ"
+  command: "go install github.com/a-h/templ/cmd/templ@latest"
+  changed_when: false

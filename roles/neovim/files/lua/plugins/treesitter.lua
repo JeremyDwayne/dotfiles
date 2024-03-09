@@ -33,6 +33,8 @@ return {
         "bash",
         "query",
         "markdown",
+        "html",
+        "templ",
       },
       endwise = {
         enable = true,
@@ -56,11 +58,12 @@ return {
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
 
-      -- vim.filetype.add({
-      --   extension = {
-      --     mdx = "markdown",
-      --   },
-      -- })
+      vim.filetype.add({
+        extension = {
+          templ = "templ",
+          -- mdx = "markdown",
+        },
+      })
       -- vim.treesitter.language.register("markdown", "mdx")
     end,
   },
