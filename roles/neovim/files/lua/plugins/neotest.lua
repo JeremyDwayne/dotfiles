@@ -164,15 +164,7 @@ return {
       adapters = {
         require("neotest-rspec"),
         require("neotest-go"),
-        require("neotest-minitest")({
-          test_cmd = function()
-            return vim.tbl_flatten({
-              "bundle",
-              "exec",
-              "ruby",
-            })
-          end,
-        }),
+        require("neotest-minitest"),
       },
     })
   end,

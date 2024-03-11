@@ -19,6 +19,7 @@ dependencies:
   - deno
   - tailwindcss
   - ninja
+  - postgresql
 
 git_user_name: JeremyDwayne
 git_user_email: !vault |
