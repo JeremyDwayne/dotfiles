@@ -20,6 +20,9 @@ dependencies:
   - tailwindcss
   - ninja
   - postgresql
+  - htop
+  - mas
+  - ata
 
 git_user_name: JeremyDwayne
 git_user_email: !vault |
