@@ -8,6 +8,7 @@ return {
     "olimorris/neotest-rspec",
     "nvim-neotest/neotest-go",
     "zidhuss/neotest-minitest",
+    "nvim-neotest/nvim-nio",
   },
   -- keys = {
   --   {
