@@ -1,0 +1,11 @@
+- name: "Postgres | Install"
+  community.general.homebrew:
+    name: postgresql@16
+    state: present
+
+- name: "Postgres | Copy custom config"
+  ansible.builtin.copy:
+    dest: "{{ ansible_user_dir }}/.psqlrc"
+    src: "psqlrc"
+    mode: "0644"
+    force: true
