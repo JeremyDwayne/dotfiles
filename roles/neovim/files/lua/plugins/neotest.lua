@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 return {
   "nvim-neotest/neotest",
   lazy = false,
@@ -9,6 +10,7 @@ return {
     "nvim-neotest/neotest-go",
     "zidhuss/neotest-minitest",
     "nvim-neotest/nvim-nio",
+    "nvim-neotest/neotest-jest",
   },
   -- keys = {
   --   {
@@ -94,7 +96,7 @@ return {
 
     local mappings = {
       ["<leader>nr"] = function()
-        neotest.run.run({ vim.fn.expand("%:p"), env = get_env() })
+        neotest.run.run({ suite = false, vim.fn.expand("%:p"), env = get_env() })
       end,
       ["<leader>ns"] = function()
         for _, adapter_id in ipairs(neotest.state.adapter_ids()) do
@@ -103,14 +105,14 @@ return {
       end,
       ["<leader>nw"] = function()
         for _, adapter_id in ipairs(neotest.state.adapter_ids()) do
-          neotest.watch.run({ suite = true, adapter = adapter_id, env = get_env() })
+          neotest.watch.watch({ suite = true, adapter = adapter_id, env = get_env() })
         end
       end,
       ["<leader>nx"] = function()
         neotest.run.stop()
       end,
       ["<leader>nn"] = function()
-        neotest.run.run({ env = get_env() })
+        neotest.run.run({ suite = false, env = get_env() })
       end,
       ["<leader>nl"] = function()
         neotest.run.run_last()
@@ -142,18 +144,21 @@ return {
       ["]n"] = function()
         neotest.jump.next({ status = "failed" })
       end,
+      ["<leader>jw"] = function()
+        neotest.run.run({ jestCommand = "jest --watch " })
+      end,
     }
 
     for keys, mapping in pairs(mappings) do
       vim.api.nvim_set_keymap("n", keys, "", { callback = mapping, noremap = true })
     end
     neotest.setup({
-      log_level = vim.log.levels.WARN,
       status = {
         enabled = true,
         virtual_text = true,
         signs = true,
       },
+      log_level = vim.log.levels.WARN,
       icons = {
         running_animated = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
       },
@@ -166,6 +171,9 @@ return {
         require("neotest-rspec"),
         require("neotest-go"),
         require("neotest-minitest"),
+        require("neotest-jest")({
+          jestCommand = require("neotest-jest.jest-util").getJestCommand(vim.fn.expand("%:p:h")) .. " --watch",
+        }),
       },
     })
   end,
