@@ -4,8 +4,8 @@
     state: present
 
 - name: "Postgres | Copy custom config"
-  ansible.builtin.copy:
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/psqlrc"
     dest: "{{ ansible_user_dir }}/.psqlrc"
-    src: "psqlrc"
-    mode: "0644"
+    state: link
     force: true
