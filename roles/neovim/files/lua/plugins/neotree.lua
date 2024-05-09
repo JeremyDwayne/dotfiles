@@ -1,6 +1,6 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
-  config = {
+  opts = {
     window = {
       position = "right",
     },
