@@ -1,10 +1,14 @@
 {
   "extras": [
-    "lazyvim.plugins.extras.coding.luasnip"
+    "lazyvim.plugins.extras.coding.luasnip",
+    "lazyvim.plugins.extras.editor.inc-rename",
+    "lazyvim.plugins.extras.lang.ansible",
+    "lazyvim.plugins.extras.lang.markdown",
+    "lazyvim.plugins.extras.lang.ruby"
   ],
   "news": {
     "NEWS.md": "6077",
-    "doc/news.txt": "25244"
+    "doc/news.txt": "4037"
   },
   "version": 6
 }
