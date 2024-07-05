@@ -72,7 +72,8 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-rust \
     zsh-users/zsh-autosuggestions \
     zdharma-continuum/fast-syntax-highlighting \
-    zdharma-continuum/history-search-multi-word
+    zdharma-continuum/history-search-multi-word \
+    clarketm/zsh-completions
 
 ### End of Zinit's installer chunk
 
@@ -83,3 +84,4 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"

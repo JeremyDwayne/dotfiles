@@ -28,7 +28,7 @@ return {
         "ruff-lsp",
         -- "solargraph",
         -- "rubocop",
-        -- "standardrb",
+        "standardrb",
         "ruby-lsp",
         "taplo",
         "terraform-ls",
