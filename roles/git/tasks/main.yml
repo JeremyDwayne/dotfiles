@@ -73,7 +73,8 @@
       rh: fetch --all; reset --head origin/main
       shorty: status --short --branch
       st: status
-      sync: git fetch && git merge main --ff
+      sync: fetch && git merge main --ff
+      parent: show-branch | sed "s/].*//" | grep "\*" | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -n1 | sed "s/^.*\[//"
 
 - name: "Git | Create Git Config Directory"
   ansible.builtin.file:

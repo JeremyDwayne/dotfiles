@@ -174,3 +174,5 @@ keymap.set("n", "<leader>toi", ":TSToolsOrganizeImports<CR>")
 
 keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", {})
 keymap.set("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>", {})
+
+keymap.set("n", ";g", ":Easypick changed_files<CR>", {})

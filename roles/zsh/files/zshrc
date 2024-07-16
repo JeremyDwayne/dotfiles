@@ -30,6 +30,7 @@ export SUDO_EDITOR='nvim'
 for file in $HOME/.config/zsh/*.zsh; do
   source "$file"
 done
+source ~/.workalias.zsh
 
 source ~/.zdir/z.sh
 
@@ -73,7 +74,7 @@ zinit light-mode for \
     zsh-users/zsh-autosuggestions \
     zdharma-continuum/fast-syntax-highlighting \
     zdharma-continuum/history-search-multi-word \
-    clarketm/zsh-completions
+    marlonrichert/zsh-autocomplete
 
 ### End of Zinit's installer chunk
 
