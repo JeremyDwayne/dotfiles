@@ -95,6 +95,23 @@ return {
         })
       end,
     },
+    {
+      "gw",
+      function()
+        local telescope = require("telescope")
+        telescope.extensions.git_worktree.git_worktrees()
+        -- <Enter> - switches to that worktree
+        -- <c-d> - deletes that worktree
+        -- <c-f> - toggles forcing of the next deletion
+      end,
+    },
+    {
+      "gwc",
+      function()
+        local telescope = require("telescope")
+        telescope.extensions.git_worktree.create_git_worktree()
+      end,
+    },
   },
   config = function(_, opts)
     local telescope = require("telescope")
@@ -151,6 +168,7 @@ return {
     telescope.setup(opts)
     require("telescope").load_extension("fzf")
     require("telescope").load_extension("file_browser")
+    require("telescope").load_extension("git_worktree")
     -- require("telescope").load_extension("noice")
   end,
 }
