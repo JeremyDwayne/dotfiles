@@ -16,6 +16,7 @@ dependencies:
   - ripgrep
   - the_silver_searcher
   - zsh-syntax-highlighting
+  - zsh-autosuggestions
   - jq
   - asdf
   - nodejs
