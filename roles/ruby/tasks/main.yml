@@ -1,3 +1,9 @@
+- name: "ASDF | Add Ruby"
+  command: asdf plugin add ruby
+
+- name: "ASDF | Install Latest Ruby"
+  command: asdf install ruby latest
+
 - name: "Ruby | Rubocop Configuration"
   block:
     - name: "Ruby | Rubocop Config folder"

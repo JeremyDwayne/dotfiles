@@ -1,0 +1,11 @@
+- name: "Wezterm | Install Wezterm"
+  community.general.homebrew_cask:
+    name: wezterm
+    state: latest
+
+- name: "Wezterm | Create symlink to config files"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_user_dir }}/.config/wezterm"
+    state: link
+    force: true

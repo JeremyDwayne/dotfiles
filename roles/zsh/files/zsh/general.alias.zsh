@@ -1,6 +1,6 @@
 # System / Environment
 alias vim=nvim
-alias vimrc='vim ~/.config/nvim/init.vim'
+alias vimrc='vim ~/.config/nvim'
 alias zshrc='vim ~/.zshrc'
 alias zshreload='source ~/.zshrc'
 alias fv='vim $(fzf --height 40%)'

@@ -1,0 +1,11 @@
+- name: "Starship | Install Starship"
+  community.general.homebrew:
+    name: starship
+    state: latest
+
+- name: "Starship | Create symlink to config files"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_user_dir }}/.config/starship"
+    state: link
+    force: true

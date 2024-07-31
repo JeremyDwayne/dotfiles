@@ -4,7 +4,7 @@
     state: latest
 
 - name: "Go | Install Air"
-  command: "go install github.com/cosmtrek/air@latest"
+  command: "go install github.com/air-verse/air@latest"
   changed_when: false
 
 - name: "Go | Install Templ"

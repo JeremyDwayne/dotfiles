@@ -1,5 +1,7 @@
 default_roles:
   - zsh
+  - starship
+  - wezterm
   - ssh
   - git
   - kitty
@@ -23,6 +25,8 @@ dependencies:
   - htop
   - mas
   - ata
+  - fzf
+  - zoxide
 
 git_user_name: JeremyDwayne
 git_user_email: !vault |

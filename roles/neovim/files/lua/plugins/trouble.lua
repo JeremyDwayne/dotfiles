@@ -4,7 +4,7 @@ return {
     {
       "<leader>tt",
       function()
-        require("trouble").toggle()
+        require("trouble").toggle("diagnostics")
       end,
       desc = "Toggle Trouble",
     },
@@ -16,7 +16,7 @@ return {
       desc = "Toggle Next",
     },
     {
-      "<leader>tn",
+      "<leader>tp",
       function()
         require("trouble").previous({ skip_groups = true, jump = true })
       end,
