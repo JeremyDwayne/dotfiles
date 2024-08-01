@@ -3,7 +3,6 @@ return {
     "williamboman/mason.nvim",
     opts = function(_, opts)
       opts.ensure_installed = {
-        "eslint-lsp",
         "stylua",
         "selene",
         "shellcheck",
@@ -22,12 +21,8 @@ return {
         "json-lsp",
         "lua-language-server",
         "luacheck",
-        "prettier",
-        "prettierd",
         "pyright",
         "ruff-lsp",
-        -- "solargraph",
-        -- "rubocop",
         "standardrb",
         "ruby-lsp",
         "taplo",

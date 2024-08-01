@@ -8,3 +8,8 @@ vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
 -- Keep cursor in the middle of the screen
 vim.opt.scrolloff = 999
+
+-- LSP Server to use for Ruby.
+-- Set to "solargraph" to use solargraph instead of ruby_lsp.
+vim.g.lazyvim_ruby_lsp = "ruby_lsp"
+vim.g.lazyvim_ruby_formatter = "standardrb"
