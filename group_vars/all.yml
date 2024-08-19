@@ -28,6 +28,7 @@ dependencies:
   - ata
   - fzf
   - zoxide
+  - font-monaspace
 
 git_user_name: JeremyDwayne
 git_user_email: !vault |

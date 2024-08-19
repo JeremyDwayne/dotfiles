@@ -3,8 +3,9 @@ local act = wezterm.action
 
 local config = {}
 
-local default_font_family = "DankMono Nerd Font"
-local default_font_size = 18.0
+-- local default_font_family = "DankMono Nerd Font"
+local default_font_family = "Monaspace Neon"
+local default_font_size = 16.0
 local tab_text_color = "#f0f0f0"
 
 config.color_scheme = "Catppuccin Mocha" -- or Macchiato, Frappe, Latte
@@ -12,6 +13,21 @@ config.font = wezterm.font(default_font_family)
 config.font_size = default_font_size
 config.scrollback_lines = 3500
 config.show_new_tab_button_in_tab_bar = false
+
+-- Enable all ligatures
+config.harfbuzz_features = {
+	"calt=1",
+	"ss01=1",
+	"ss02=1",
+	"ss03=1",
+	"ss04=1",
+	"ss05=1",
+	"ss06=1",
+	"ss07=1",
+	"ss08=1",
+	"ss09=1",
+	"liga=1",
+}
 
 wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _max_width)
 	-- Return the explicitly set title, if one has been set
