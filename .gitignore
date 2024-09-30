@@ -12,3 +12,6 @@ tmux-client*.log
 __pycache__
 roles/tmux/files/tmux/plugins
 roles/neovim/files/lazy-lock.json
+
+# environment variables
+roles/zsh/files/zsh/env.zsh
