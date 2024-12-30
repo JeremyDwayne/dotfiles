@@ -13,5 +13,8 @@ alias fjson='pbpaste | python3 -m json.tool | pbcopy'
 # Hugo
 alias hnp='f(){ hugo new posts/"$1".md;  unset -f f; }; f'
 
+# Go Migrate
+alias cmigrate='f(){ migrate create -ext sql -dir db/migrations -seq "$1" }; f'
+
 # Alias Directory loading
 # for f in ~/.aliases.d/*; do source $f; done
