@@ -107,8 +107,6 @@ keymap.set("n", "<leader>bp", "<cmd>BufferLineMovePrev<CR>")
 
 keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
-keymap.set("n", "<C-n>", "<cmd>Neotree toggle reveal<CR>")
-
 -- nvim dap
 keymap.set("n", "<leader>db", "<cmd> DapToggleBreakpoint <CR>")
 keymap.set("n", "<leader>dus", function()
@@ -176,3 +174,6 @@ keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", {})
 keymap.set("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>", {})
 
 keymap.set("n", ";g", ":Easypick changed_files<CR>", {})
+
+-- keymap.set("n", "<C-n>", "<cmd>Neotree toggle reveal<CR>")
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
