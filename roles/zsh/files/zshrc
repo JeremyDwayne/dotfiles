@@ -47,3 +47,6 @@ case ":$PATH:" in
 esac
 # pnpm end
 source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+
+# Added by Windsurf
+export PATH="/Users/jwinterberg/.codeium/windsurf/bin:$PATH"

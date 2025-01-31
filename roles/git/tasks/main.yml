@@ -74,7 +74,19 @@
       shorty: status --short --branch
       st: status
       sync: fetch && git merge main --ff
-      parent: show-branch | sed "s/].*//" | grep "\*" | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -n1 | sed "s/^.*\[//"
+      parent: "!git show-branch | sed 's/].*//' | grep '\\*' | grep -v \"$(git rev-parse --abbrev-ref HEAD)\" | head -n1 | sed 's/^.*\\[//'"
+
+- name: "Git | Set push.autoSetupRemote"
+  community.general.git_config:
+    name: push.autoSetupRemote
+    scope: global
+    value: true
+
+- name: "Git | Set push.default"
+  community.general.git_config:
+    name: push.default
+    scope: global
+    value: current
 
 - name: "Git | Create Git Config Directory"
   ansible.builtin.file:
