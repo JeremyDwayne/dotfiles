@@ -13,3 +13,16 @@ vim.opt.scrolloff = 999
 -- Set to "solargraph" to use solargraph instead of ruby_lsp.
 vim.g.lazyvim_ruby_lsp = "ruby_lsp"
 vim.g.lazyvim_ruby_formatter = "standardrb"
+
+local function augroup(name)
+  return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
+end
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  group = augroup("autoupdate"),
+  callback = function()
+    if require("lazy.status").has_updates then
+      require("lazy").update({ show = false })
+    end
+  end,
+})
