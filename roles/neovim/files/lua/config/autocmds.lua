@@ -31,3 +31,10 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     require("conform").format({ bufnr = args.buf })
   end,
 })
+
+vim.api.nvim_create_autocmd("BufRead", {
+  pattern = { "*/.env", "*/.env.*" },
+  callback = function()
+    vim.diagnostic.disable()
+  end,
+})
