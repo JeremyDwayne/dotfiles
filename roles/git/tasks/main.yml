@@ -8,6 +8,36 @@
     name: gpg
     state: present
 
+- name: "Git | Set core.pager"
+  community.general.git_config:
+    name: core.pager
+    scope: global
+    value: delta
+
+- name: "Git | Set interactive.diffFilter"
+  community.general.git_config:
+    name: interactive.diffFilter
+    scope: global
+    value: delta --color-only
+
+- name: "Git | Set delta.navigate"
+  community.general.git_config:
+    name: delta.navigate
+    scope: global
+    value: true
+
+- name: "Git | Set delta.dark"
+  community.general.git_config:
+    name: delta.dark
+    scope: global
+    value: true
+
+- name: "Git | Set merge.conflictstyle"
+  community.general.git_config:
+    name: merge.conflictstyle
+    scope: global
+    value: zdiff3
+
 - name: "Git | Set diff.colorMoved"
   community.general.git_config:
     name: diff.colorMoved

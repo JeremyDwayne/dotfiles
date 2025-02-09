@@ -85,8 +85,6 @@ except:
     from collections import Sequence
 from numbers import Number
 from os.path import basename, isdir
-from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler, EVENT_TYPE_CREATED
 
 _symbol = {
     "success": to_text("✔"),
@@ -286,7 +284,7 @@ def dictsum(totals, values):
             totals[key] += value
 
 
-class CallbackModule(CallbackBase, FileSystemEventHandler):
+class CallbackModule(CallbackBase):
     """The Callback plugin class to produce clean outputs.
 
     This class handles all Ansible callbacks that generate text on the output.

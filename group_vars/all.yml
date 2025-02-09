@@ -29,6 +29,8 @@ dependencies:
   - fzf
   - zoxide
   - font-monaspace
+  - git-delta
+  - bat
 
 git_user_name: JeremyDwayne
 git_user_email: !vault |
