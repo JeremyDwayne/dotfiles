@@ -51,5 +51,6 @@ source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 # Added by Windsurf
 export PATH="/Users/jwinterberg/.codeium/windsurf/bin:$PATH"
 
-# Added by Windsurf
-export PATH="/Users/jwinterberg/.codeium/windsurf/bin:$PATH"
+# AI Tools
+export PROVIDER="ollama"
+export MODEL="mistral"
