@@ -18,3 +18,5 @@ alias cmigrate='f(){ migrate create -ext sql -dir db/migrations -seq "$1" }; f'
 
 # Alias Directory loading
 # for f in ~/.aliases.d/*; do source $f; done
+#
+alias glp='git log --pretty=format:"%C(yellow)%h%Creset - %C(green)%an%Creset, %ar : %s"'
