@@ -28,9 +28,6 @@ export NVM_DIR="$HOME/.nvm"
   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-# ASDF Installs
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
-
 # bun completions
 [ -s "/Users/jwinterberg/.bun/_bun" ] && source "/Users/jwinterberg/.bun/_bun"
 
