@@ -29,6 +29,19 @@ config.harfbuzz_features = {
 	"liga=1",
 }
 
+config.window_frame = {
+	inactive_titlebar_bg = "#353535",
+	active_titlebar_bg = "#2b2042",
+	inactive_titlebar_fg = "#cccccc",
+	active_titlebar_fg = "#ffffff",
+	inactive_titlebar_border_bottom = "#2b2042",
+	active_titlebar_border_bottom = "#2b2042",
+	button_fg = "#cccccc",
+	button_bg = "#2b2042",
+	button_hover_fg = "#ffffff",
+	button_hover_bg = "#3b3052",
+}
+
 wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _max_width)
 	-- Return the explicitly set title, if one has been set
 	if tab.tab_title and #tab.tab_title > 0 then

@@ -44,6 +44,8 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+. $(brew --prefix)/opt/asdf/libexec/asdf.sh
+
 # Added by Windsurf
 export PATH="/Users/jwinterberg/.codeium/windsurf/bin:$PATH"
 
