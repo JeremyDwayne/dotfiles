@@ -52,3 +52,5 @@ export PATH="/Users/jwinterberg/.codeium/windsurf/bin:$PATH"
 # AI Tools
 export PROVIDER="ollama"
 export MODEL="mistral"
+export PATH="/Users/jwinterberg/.config/herd-lite/bin:$PATH"
+export PHP_INI_SCAN_DIR="/Users/jwinterberg/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
