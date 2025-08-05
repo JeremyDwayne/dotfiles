@@ -79,3 +79,4 @@ keybind = ctrl+a>z=toggle_split_zoom
 
 # Configuration reload
 keybind = cmd+shift+comma=reload_config
+keybind = shift+enter=text:\n
