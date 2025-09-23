@@ -54,3 +54,8 @@ export PROVIDER="ollama"
 export MODEL="mistral"
 export PATH="/Users/jwinterberg/.config/herd-lite/bin:$PATH"
 export PHP_INI_SCAN_DIR="/Users/jwinterberg/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+
+# Task Master aliases added on 8/12/2025
+alias tm='task-master'
+alias taskmaster='task-master'
