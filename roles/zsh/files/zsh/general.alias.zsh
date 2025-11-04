@@ -24,5 +24,6 @@ alias glp='git log --pretty=format:"%C(yellow)%h%Creset - %C(green)%an%Creset, %
 alias gs='git status'
 alias ga='git add -A'
 alias gc='git commit -m'
+alias commit='claude "stage and commit all changes"'
 alias gp='git push'
 alias gpl='git pull'
