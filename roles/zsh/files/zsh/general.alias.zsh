@@ -27,3 +27,11 @@ alias gc='git commit -m'
 alias commit='claude "stage and commit all changes"'
 alias gp='git push'
 alias gpl='git pull'
+
+
+# claude
+alias claude="/Users/jwinterberg/.claude/local/claude"
+
+# Task Master aliases added on 9/7/2025
+alias tm='task-master'
+alias taskmaster='task-master'
