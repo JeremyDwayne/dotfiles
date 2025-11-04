@@ -4,10 +4,10 @@
   connection: local
 
   pre_tasks:
-    - name: Install ASDF
+    - name: Install mise
       community.general.homebrew:
-        name: asdf
-        state: present
+        name: mise
+        state: latest
       tags:
         - always
   #
@@ -37,7 +37,7 @@
   tasks:
     - name: Set roles
       ansible.builtin.set_fact:
-        run_roles: "{{ ansible_run_tags != ['all'] and ansible_run_tags or default_roles | difference(exclude_roles | default([])) }}"
+        run_roles: "{{ (ansible_run_tags != ['all'] and 'all' not in ansible_run_tags) | ternary(ansible_run_tags, default_roles | difference(exclude_roles | default([]))) }}"
       tags:
         - always
 

@@ -1,12 +1,12 @@
 - name: "Git | Install Git"
   community.general.homebrew:
     name: git
-    state: present
+    state: latest
 
 - name: "Git | Install GPG"
   community.general.homebrew:
     name: gpg
-    state: present
+    state: latest
 
 - name: "Git | Set core.pager"
   community.general.git_config:

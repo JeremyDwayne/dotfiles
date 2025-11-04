@@ -16,7 +16,7 @@
 - name: "Neovim | Install Silicon"
   community.general.homebrew:
     name: silicon
-    state: present
+    state: latest
 
 - name: "Neovim | Config folder"
   ansible.builtin.file:

@@ -7,7 +7,7 @@
 - name: "ZSH | Install Dependencies"
   community.general.homebrew:
     name: "{{ dependencies }}"
-    state: present
+    state: latest
 
 - name: "ZSH | Copy .zshrc"
   ansible.builtin.file:

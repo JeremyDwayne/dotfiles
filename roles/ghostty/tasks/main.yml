@@ -1,7 +1,7 @@
 - name: "Ghostty | Install Ghostty"
   community.general.homebrew_cask:
     name: ghostty
-    state: present
+    state: latest
 
 - name: "Ghostty | Config folder"
   ansible.builtin.file:

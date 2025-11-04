@@ -1,8 +1,6 @@
-- name: "ASDF | Add Ruby"
-  command: asdf plugin add ruby
-
-- name: "ASDF | Install Latest Ruby"
-  command: asdf install ruby latest
+- name: "mise | Add Ruby"
+  command: mise use -g ruby@latest
+  changed_when: false
 
 - name: "Ruby | Rubocop Configuration"
   block:

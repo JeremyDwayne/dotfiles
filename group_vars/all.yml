@@ -19,7 +19,7 @@ dependencies:
   - zsh-syntax-highlighting
   - zsh-autosuggestions
   - jq
-  - asdf
+  - mise
   - nodejs
   - deno
   - tailwindcss

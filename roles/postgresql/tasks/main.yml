@@ -1,7 +1,7 @@
 - name: "Postgres | Install"
   community.general.homebrew:
     name: postgresql@16
-    state: present
+    state: latest
 
 - name: "Postgres | Copy custom config"
   ansible.builtin.file:
