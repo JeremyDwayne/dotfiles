@@ -6,7 +6,7 @@ font-family = "Monaspace Neon"
 font-size = 16
 
 # Color scheme (Catppuccin Mocha equivalent)
-theme = "catppuccin-mocha.conf"
+theme = Catppuccin Mocha
 
 # Window appearance
 window-decoration = true
