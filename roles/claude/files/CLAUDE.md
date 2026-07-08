@@ -29,7 +29,9 @@ verification step.
 ## Feature flow
 
 Every feature follows the same five skills, in this order — one flow, every time,
-in every repo. Each is a slash command I invoke; don't auto-run them.
+in every repo. Each is a slash command; drive the flow yourself, invoking each in
+turn as the work is ready for it — you don't need me to type them. Still stop at the
+flow's own decision gates (design approval, review findings that need my judgement).
 
 1. **Design** — `/grill-with-docs` for a bounded design: a relentless interview
    that sharpens the plan and lays down ADRs + glossary as it goes. Use
@@ -47,10 +49,9 @@ in every repo. Each is a slash command I invoke; don't auto-run them.
    full suite at the end, then runs `/code-review` and commits. Run each ticket's
    `/implement` in its own git worktree so several agents can build in parallel
    without disturbing each other or the main checkout — one worktree per
-   independent ticket, branched off the tracker's blocking edges. For simple fixes you can build off the current branch or main instead of a worktree.
+   independent ticket, branched off the tracker's blocking edges.
 5. **Review** — `/code-review` gives a two-axis read of the diff (Standards + Spec)
-   in parallel sub-agents. `/implement` invokes it, and I also run it standalone to
-   review a branch or PR.
+   in parallel sub-agents. `/implement` invokes it. Fix anything benign you find automatically, ask me for anything that requires closer judgement.
 
 ## Coding
 
@@ -125,6 +126,20 @@ in every repo. Each is a slash command I invoke; don't auto-run them.
   on cheaper models (sonnet/haiku) and spend the main context on judgment and
   integration.
 - Once work is delegated, don't also do it yourself — wait for the result.
+
+## Workspace isolation
+
+- Assume other Claude sessions may be working in this repo at the same time.
+  Before touching code for any feature or bugfix, use the `EnterWorktree` tool to
+  create a dedicated worktree and **switch this session into it** — then work and
+  commit only there, never in the shared main checkout. Entering (not just
+  `git worktree add`) moves the session's cwd into the worktree, so the statusline,
+  memory, and every relative path reflect the branch you're actually on. It branches
+  off an up-to-date `origin/<default>` by default. Call `ExitWorktree` only when I ask
+  (or accept the keep/remove prompt at session end).
+- Skip the worktree only for changes that intentionally land on the main checkout —
+  small docs/spec/plan edits I've said can go straight to main, or one-off inspection
+  with no code edits.
 
 ## Git
 

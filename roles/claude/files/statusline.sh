@@ -74,6 +74,18 @@ fi
 
 # 2. Location — repo name (falling back to the cwd basename), and the worktree
 #    name when inside one, so parallel worktrees are never confused.
+#    Current Claude Code versions don't send a worktree field, so when it's
+#    absent, derive it from git: a linked worktree's per-worktree git dir differs
+#    from the shared common dir, and its name is the checkout's directory
+#    basename. This reflects the SESSION's cwd — it shows a worktree only when the
+#    session actually runs inside one, not when work is done there via abs paths.
+if [ -z "$worktree" ] && [ -n "$cwd" ] && command -v git >/dev/null 2>&1; then
+  gitdir=$(git -C "$cwd" --no-optional-locks rev-parse --git-dir 2>/dev/null)
+  commondir=$(git -C "$cwd" --no-optional-locks rev-parse --git-common-dir 2>/dev/null)
+  if [ -n "$gitdir" ] && [ "$gitdir" != "$commondir" ]; then
+    worktree=$(basename "$(git -C "$cwd" --no-optional-locks rev-parse --show-toplevel 2>/dev/null)")
+  fi
+fi
 loc="$repo"
 [ -z "$loc" ] && [ -n "$cwd" ] && loc=$(basename "$cwd")
 if [ -n "$loc" ]; then
