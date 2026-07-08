@@ -44,14 +44,13 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-eval "$(mise activate zsh)"
-
-# Added by Windsurf
-export PATH="/Users/jwinterberg/.codeium/windsurf/bin:$PATH"
-
 # AI Tools
 export PROVIDER="ollama"
 export MODEL="mistral"
 export PATH="/Users/jwinterberg/.config/herd-lite/bin:$PATH"
 export PHP_INI_SCAN_DIR="/Users/jwinterberg/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+
+eval "$(mise activate zsh)"
+
+. "$HOME/.turso/env"

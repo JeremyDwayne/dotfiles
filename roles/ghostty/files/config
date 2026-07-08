@@ -13,7 +13,7 @@ window-decoration = true
 window-title-font-family = "Monaspace Neon"
 
 # Scrollback
-scrollback-limit = 3500
+scrollback-limit = 10000
 
 # Disable new tab button equivalent (if supported)
 # Note: Ghostty may handle this differently

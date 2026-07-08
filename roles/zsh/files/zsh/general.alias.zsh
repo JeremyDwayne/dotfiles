@@ -30,7 +30,7 @@ alias gpl='git pull'
 
 
 # claude
-alias claude="/Users/jwinterberg/.claude/local/claude"
+alias claude="/Users/jwinterberg/.local/bin/claude"
 
 # Task Master aliases added on 9/7/2025
 alias tm='task-master'
