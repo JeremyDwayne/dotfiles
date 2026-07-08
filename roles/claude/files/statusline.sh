@@ -48,6 +48,14 @@ usage_color() {
   fi
 }
 
+# Round a percentage to at most one decimal place, dropping a trailing ".0" so
+# whole numbers stay clean (e.g. 7.000000000000001 -> 7, 6.5 -> 6.5, 84 -> 84).
+fmt_pct() {
+  local v
+  v=$(printf '%.1f' "$1" 2>/dev/null) || { printf '%s' "$1"; return; }
+  printf '%s' "${v%.0}"
+}
+
 segments=()
 
 # 1. Model — compact "(1M context)" to a dim "1M", flag fast mode and off
@@ -97,12 +105,14 @@ fi
 
 # 5. Rate limits — 5-hour and 7-day windows, each colored by its own urgency.
 if [ -n "$rate5" ]; then
-  color=$(usage_color "$rate5" "$DIM")
-  segments+=("${color}5h ${rate5}%${RESET}")
+  r5=$(fmt_pct "$rate5")
+  color=$(usage_color "${r5%.*}" "$DIM")
+  segments+=("${color}5h ${r5}%${RESET}")
 fi
 if [ -n "$rate7" ]; then
-  color=$(usage_color "$rate7" "$DIM")
-  segments+=("${color}7d ${rate7}%${RESET}")
+  r7=$(fmt_pct "$rate7")
+  color=$(usage_color "${r7%.*}" "$DIM")
+  segments+=("${color}7d ${r7}%${RESET}")
 fi
 
 # 6. Session cost — whole dollars once past $10, otherwise two decimals.
