@@ -4,7 +4,7 @@ Here's my collection of dotfiles I use on MacOS.
 
 ## vault.secret
 
-The vault.secret file allows you to encrypt values with Ansible vault and store them securely in source control. Create a file located at ~/.config/dotfiles/vault.secret with a secure password in it.
+The vault.secret file allows you to encrypt values with Ansible vault and store them securely in source control. Create a file located at ~/.ansible-vault/vault.secret with a secure password in it.
 
 ```sh
 vim ~/.ansible-vault/vault.secret
@@ -43,7 +43,7 @@ This will handle the following tasks:
 - Generate SSH keys and add to ~/.ssh/authorized_keys
 - Clone this repository locally to ~/.dotfiles
 - Verify any ansible-galaxy plugins are updated
-- Run this playbook with the values in ~/.config/dotfiles/group_vars/all.yaml
+- Run this playbook with the values in ~/.dotfiles/group_vars/all.yml
 
 This dotfiles command is available to you after the first use of this repo, as it adds this repo's bin directory to your path, allowing you to call dotfiles from anywhere.
 

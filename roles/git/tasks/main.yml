@@ -96,11 +96,11 @@
       cam: commit -am
       cm: commit -m
       co: checkout
-      commend: commit --amend --no-edit'
+      commend: commit --amend --no-edit
       conflicts: "!$EDITOR $(git diff --name-only --diff-filter=U)"
       cundo: reset --soft HEAD^
       cv: commit -v
-      rh: fetch --all; reset --head origin/main
+      rh: fetch --all; reset --hard origin/main
       shorty: status --short --branch
       st: status
       sync: fetch && git merge main --ff
@@ -159,12 +159,6 @@
     name: tag.gpgsign
     scope: global
     value: true
-
-- name: "Git | Ensure ~/.config/git/allowed_signers exists"
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config/git"
-    state: directory
-    mode: "0755"
 
 - name: "Git | Configure ~/.config/git/allowed_signers"
   ansible.builtin.copy:
