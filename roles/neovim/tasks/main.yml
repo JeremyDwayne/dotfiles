@@ -1,17 +1,17 @@
 - name: "Neovim | Install Tree-sitter"
   community.general.homebrew:
     name: tree-sitter
-    state: head
+    state: latest
 
 - name: "Neovim | Install Luajit"
   community.general.homebrew:
     name: luajit
-    state: head
+    state: latest
 
 - name: "Neovim | Install Neovim"
   community.general.homebrew:
     name: neovim
-    state: head
+    state: latest
 
 - name: "Neovim | Install Silicon"
   community.general.homebrew:

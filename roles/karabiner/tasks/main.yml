@@ -1,0 +1,17 @@
+- name: "Karabiner | Install Karabiner-Elements"
+  community.general.homebrew_cask:
+    name: karabiner-elements
+    state: latest
+
+- name: "Karabiner | Config folder"
+  ansible.builtin.file:
+    mode: "0755"
+    path: "{{ ansible_user_dir }}/.config/karabiner"
+    state: directory
+
+- name: "Karabiner | Create symlink to config file"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/karabiner.json"
+    dest: "{{ ansible_user_dir }}/.config/karabiner/karabiner.json"
+    state: link
+    force: true

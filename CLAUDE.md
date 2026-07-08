@@ -33,22 +33,25 @@ Each role in `roles/` follows Ansible structure:
 - **`tasks/main.yml`**: Installation and configuration tasks
 - **`files/`**: Static configuration files copied to target locations
 
-### Default Roles (from group_vars/all.yml:1-13)
+### Default Roles (from group_vars/all.yml:1-16)
 - zsh (shell configuration)
 - starship (prompt)
 - wezterm (terminal emulator)
+- ghostty (terminal emulator)
 - ssh (SSH configuration)
 - git (Git configuration)
 - kitty (alternative terminal)
+- karabiner (keyboard customization)
 - neovim (text editor with LazyVim)
 - tmux (terminal multiplexer)
 - fzf (fuzzy finder)
 - ruby (Ruby development tools)
 - go (Go development tools)
 - postgresql (database)
+- claude (global Claude Code config + skills)
 
 ### Key Dependencies
-The system automatically installs core tools including ripgrep, zsh enhancements, jq, asdf version manager, Node.js, and various CLI utilities.
+The system automatically installs core tools including ripgrep, zsh enhancements, jq, the mise version manager, Node.js, and various CLI utilities (fd, gh, lazygit, just, zoxide, bat, git-delta, and more).
 
 ### Secrets Management
 Uses Ansible Vault for encrypted values (git email, SSH keys). Vault password file location: `~/.ansible-vault/vault.secret`
@@ -60,13 +63,16 @@ Uses Ansible Vault for encrypted values (git email, SSH keys). Vault password fi
 - Recent additions include snacks.nvim for LazyGit integration
 
 ### Terminal Setup
-- Primary terminal: WezTerm with Lua configuration
-- Alternative: Kitty with theme support
+- Terminals: WezTerm (Lua config), Ghostty, and Kitty (theme support)
 - Shell: Zsh with custom aliases, plugins, and environment setup
 - Prompt: Starship with TOML configuration
 
 ### Version Management
-Uses ASDF for managing multiple runtime versions (Node.js, Ruby, Go, etc.)
+Uses mise for runtime versions (installed in `main.yml` pre_tasks, activated in the zsh config; Ruby pinned via `mise use -g`). Node.js and Go are installed via Homebrew.
+
+### Claude Code Configuration
+- The `claude` role symlinks global Claude Code config into `~/.claude/` (CLAUDE.md, settings.json, statusline.sh, claude-app-preferences.md)
+- Custom skills live in `roles/claude/files/skills/` (each folder symlinked into `~/.claude/skills/`); third-party skill packs are installed and updated via the `skills` CLI (`npx skills add mattpocock/skills`, `npx skills update`)
 
 ## File Locations
 - Dotfiles repo: `~/.dotfiles`

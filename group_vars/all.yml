@@ -6,6 +6,7 @@ default_roles:
   - ssh
   - git
   - kitty
+  - karabiner
   - neovim
   - tmux
   - fzf
@@ -20,7 +21,6 @@ dependencies:
   - zsh-syntax-highlighting
   - zsh-autosuggestions
   - jq
-  - mise
   - nodejs
   - deno
   - tailwindcss
@@ -28,11 +28,14 @@ dependencies:
   - htop
   - mas
   - ata
-  - fzf
   - zoxide
   - font-monaspace
   - git-delta
   - bat
+  - gh
+  - fd
+  - lazygit
+  - just
 
 git_user_name: JeremyDwayne
 git_user_email: !vault |

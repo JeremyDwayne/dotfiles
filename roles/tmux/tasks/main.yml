@@ -1,7 +1,12 @@
 - name: "Tmux | Install Tmux"
   community.general.homebrew:
     name: tmux
-    state: head
+    state: latest
+
+- name: "Tmux | Install reattach-to-user-namespace (macOS clipboard)"
+  community.general.homebrew:
+    name: reattach-to-user-namespace
+    state: latest
 
 - name: "Tmux | Copy tmux files"
   ansible.builtin.file:

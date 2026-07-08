@@ -1,9 +1,3 @@
-# ZSH installed by default on mac
-# - name: "ZSH | Install ZSH"
-#   community.general.homebrew:
-#     name: zsh
-#     state: head
-
 - name: "ZSH | Install Dependencies"
   community.general.homebrew:
     name: "{{ dependencies }}"
