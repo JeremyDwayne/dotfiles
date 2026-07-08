@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash /Users/jwinterberg/.claude/statusline.sh"
+  },
+  "enabledPlugins": {
+    "commit-commands@claude-code-plugins": true,
+    "hookify@claude-code-plugins": false,
+    "typescript-lsp@claude-plugins-official": false,
+    "frontend-design@claude-plugins-official": false,
+    "superpowers@claude-plugins-official": true,
+    "context7@claude-plugins-official": false,
+    "code-review@claude-plugins-official": false,
+    "code-simplifier@claude-plugins-official": false,
+    "feature-dev@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": false,
+    "claude-md-management@claude-plugins-official": false,
+    "security-guidance@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": false,
+    "stripe@claude-plugins-official": false,
+    "ruby-lsp@claude-plugins-official": false,
+    "swift-lsp@claude-plugins-official": false,
+    "vercel@claude-plugins-official": false,
+    "sentry@claude-plugins-official": false,
+    "expo@claude-plugins-official": false,
+    "legalzoom@claude-plugins-official": false,
+    "neon@claude-plugins-official": false,
+    "posthog@claude-plugins-official": false,
+    "ralph-loop@claude-plugins-official": true
+  },
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "high",
+  "tui": "fullscreen",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
+  "theme": "dark-daltonized",
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true,
+  "voiceEnabled": true,
+  "feedbackSurveyState": {
+    "lastShownTime": 1754088478023
+  }
+}

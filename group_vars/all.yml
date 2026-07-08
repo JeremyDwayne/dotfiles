@@ -12,6 +12,7 @@ default_roles:
   - ruby
   - go
   - postgresql
+  - claude
 
 dependencies:
   - ripgrep
