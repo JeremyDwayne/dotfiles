@@ -46,10 +46,7 @@ flow's own decision gates (design approval, review findings that need my judgeme
    implementable, single-context-sized pieces, never one mega PR.
 4. **Implement** — `/implement` builds the spec/tickets, using `/tdd` at the
    pre-agreed seams, typechecking and running single test files as it goes and the
-   full suite at the end, then runs `/code-review` and commits. Run each ticket's
-   `/implement` in its own git worktree so several agents can build in parallel
-   without disturbing each other or the main checkout — one worktree per
-   independent ticket, branched off the tracker's blocking edges.
+   full suite at the end, then runs `/code-review` and commits.
 5. **Review** — `/code-review` gives a two-axis read of the diff (Standards + Spec)
    in parallel sub-agents. `/implement` invokes it. Fix anything benign you find automatically, ask me for anything that requires closer judgement.
 
@@ -126,20 +123,6 @@ flow's own decision gates (design approval, review findings that need my judgeme
   on cheaper models (sonnet/haiku) and spend the main context on judgment and
   integration.
 - Once work is delegated, don't also do it yourself — wait for the result.
-
-## Workspace isolation
-
-- Assume other Claude sessions may be working in this repo at the same time.
-  Before touching code for any feature or bugfix, use the `EnterWorktree` tool to
-  create a dedicated worktree and **switch this session into it** — then work and
-  commit only there, never in the shared main checkout. Entering (not just
-  `git worktree add`) moves the session's cwd into the worktree, so the statusline,
-  memory, and every relative path reflect the branch you're actually on. It branches
-  off an up-to-date `origin/<default>` by default. Call `ExitWorktree` only when I ask
-  (or accept the keep/remove prompt at session end).
-- Skip the worktree only for changes that intentionally land on the main checkout —
-  small docs/spec/plan edits I've said can go straight to main, or one-off inspection
-  with no code edits.
 
 ## Git
 

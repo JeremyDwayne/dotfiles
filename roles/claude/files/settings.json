@@ -4,6 +4,9 @@
   "permissions": {
     "defaultMode": "auto"
   },
+  "worktree": {
+    "baseRef": "fresh"
+  },
   "statusLine": {
     "type": "command",
     "command": "bash /Users/jwinterberg/.claude/statusline.sh"
@@ -35,6 +38,7 @@
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
+  "askUserQuestionTimeout": "5m",
   "tui": "fullscreen",
   "voice": {
     "enabled": true,
@@ -42,11 +46,15 @@
   },
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
-  "theme": "dark-daltonized",
+  "theme": "auto",
+  "editorMode": "vim",
+  "autoCompactEnabled": true,
+  "inputNeededNotifEnabled": false,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
   "voiceEnabled": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754088478023
-  }
+  },
+  "remoteControlAtStartup": true
 }
