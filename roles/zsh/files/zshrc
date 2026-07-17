@@ -54,3 +54,21 @@ export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
 eval "$(mise activate zsh)"
 
 . "$HOME/.turso/env"
+
+# claudex — Claude Code on GPT-5.6 (Sol/Terra/Luna) via local CLIProxyAPI (Codex OAuth).
+# Starts in a new git worktree by default; run plain `claude` to skip the proxy/worktree.
+claudex() {
+  if ! nc -z 127.0.0.1 8317 2>/dev/null; then
+    echo "claudex: starting cliproxyapi service..." >&2
+    brew services start cliproxyapi >/dev/null
+    sleep 2
+  fi
+  ANTHROPIC_BASE_URL="http://127.0.0.1:8317" \
+  ANTHROPIC_AUTH_TOKEN="$(<"$HOME/.cli-proxy-api/client.key")" \
+  ANTHROPIC_MODEL="gpt-5.6-sol" \
+  ANTHROPIC_DEFAULT_OPUS_MODEL="gpt-5.6-sol" \
+  ANTHROPIC_DEFAULT_SONNET_MODEL="gpt-5.6-terra" \
+  ANTHROPIC_DEFAULT_HAIKU_MODEL="gpt-5.6-luna" \
+  ANTHROPIC_SMALL_FAST_MODEL="gpt-5.6-luna" \
+  claude "$@" --worktree
+}

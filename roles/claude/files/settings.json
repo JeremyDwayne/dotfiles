@@ -4,6 +4,7 @@
   "permissions": {
     "defaultMode": "auto"
   },
+  "model": "opus[1m]",
   "worktree": {
     "baseRef": "fresh"
   },
@@ -37,7 +38,7 @@
     "ralph-loop@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
+  "effortLevel": "medium",
   "askUserQuestionTimeout": "5m",
   "tui": "fullscreen",
   "voice": {
@@ -49,12 +50,12 @@
   "theme": "auto",
   "editorMode": "vim",
   "autoCompactEnabled": true,
+  "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": false,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
   "voiceEnabled": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754088478023
-  },
-  "remoteControlAtStartup": true
+  }
 }

@@ -21,17 +21,24 @@ alias cmigrate='f(){ migrate create -ext sql -dir db/migrations -seq "$1" }; f'
 
 # Git
 alias glp='git log --pretty=format:"%C(yellow)%h%Creset - %C(green)%an%Creset, %ar : %s"'
-alias gs='git status'
+alias gs='git status --short'
 alias ga='git add -A'
 alias gc='git commit -m'
 alias commit='claude "stage and commit all changes"'
 alias gp='git push'
 alias gpl='git pull'
 
-
-# claude
-alias claude="/Users/jwinterberg/.local/bin/claude"
-
-# Task Master aliases added on 9/7/2025
-alias tm='task-master'
-alias taskmaster='task-master'
+# Commit staged changes with a generated message (haiku, no review step).
+# Lockfiles are excluded from the prompt (still committed); diff capped at 60KB.
+gcai() {
+  git diff --cached --quiet && { echo "nothing staged" >&2; return 1 }
+  local msg
+  msg=$(git diff --cached -- ':!*.lock' ':!package-lock.json' ':!yarn.lock' ':!pnpm-lock.yaml' \
+    | head -c 60000 | claude -p --model haiku \
+    "Write a git commit message for this staged diff.
+First line: imperative mood, <=72 chars, no trailing period.
+Add a short body (wrapped at 72) only if the change genuinely needs explanation.
+Output only the raw commit message - no quotes, no markdown, no preamble.") || return 1
+  [[ -z "$msg" ]] && { echo "empty message from claude, aborting" >&2; return 1 }
+  git commit -m "$msg"
+}
