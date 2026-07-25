@@ -5,7 +5,7 @@ commands and standards and wins on any conflict.
 
 ## Orchestrating subagents
 
-Use subagents when a task has multiple concrete, independent workstreams and
+Use workflows and subagents when a task has multiple concrete, independent workstreams and
 delegation materially improves speed, context management, or confidence. Not for
 simple or tightly sequential work, and not when I ask you to work directly.
 
@@ -33,6 +33,10 @@ Working rules:
   a concise summary of edits, tests, and remaining concerns.
 - Never edit areas owned by an active subagent or redo delegated work. You own
   architecture, integration, integrated verification, and the final response.
+- Subagents never run the full test suite — every spawn prompt names the specific
+  test files it may run. The one full-suite run (when warranted) belongs to the
+  orchestrator or CI, after integration.
+- always start a todo list for multi step plans so its easy to track the approval and how you are progressing through it.
 
 ## Long autonomous runs
 
@@ -119,6 +123,9 @@ flow's decision gates (design approval, review findings needing my judgement).
   onboarding, pricing, collateral) follows the business-copy skill
   (`~/.claude/skills/business-copy/SKILL.md`) — invoke it before writing or
   reviewing such copy.
+- Never use em dashes in any prose you write for me (copy, emails, docs,
+  messages). They read as machine-written. Restructure the sentence, or use a
+  comma, period, colon, or parentheses instead.
 
 ## Running things
 
@@ -126,11 +133,6 @@ flow's decision gates (design approval, review findings needing my judgement).
   none is up, and shut down any server you started when you're done.
 - Env vars load from `.env` via the framework, not the shell: source `.env` or
   pass inline per command. Never paste secret values into files or committed code.
-
-## graphify
-
-- When I type `/graphify`, or a task means exploring a codebase's structure, use
-  the graphify skill (`~/.claude/skills/graphify/SKILL.md`) before anything else.
 
 ## Instruction files
 
