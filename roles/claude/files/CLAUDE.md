@@ -81,14 +81,43 @@ flow's decision gates (design approval, review findings needing my judgement).
 - Smallest change that solves the problem properly; no drive-by refactors or
   style fixes outside the task.
 - Edit files one at a time — no sed/awk or scripted find-and-replace.
+- Default to zero comments, regardless of how commented the surrounding code
+  is. Existing comment-heavy files are not a style to match. Write a comment
+  only when the logic is genuinely confusing and can't be made self-evident:
+  a non-obvious constraint, a workaround, a "why" the code can't express.
+  Never narrate what the next line does, restate the diff, or justify the
+  change to a reviewer.
 - Never query inside a loop: a route's query count must not grow with the rows
   it renders — batch with one `IN (…)` / `JOIN` / `GROUP BY` and key results in
   memory. Extend a list's existing query rather than adding a per-row call.
 
+## Performance
+
+Performance is correctness, not polish: an N+1, a blocking call on an async
+event loop, or an unindexed hot filter is a bug you fix in-footprint (or flag
+explicitly in your summary if out of footprint) — never silently ship.
+
+- Work per request must not scale with data volume: batch queries, keep the
+  response proportional to what changed, and render hidden/expandable content
+  lazily (fetch-on-open) once it grows with the data behind it.
+- In an async server, blocking work (DB, file I/O, hashing, rendering) never
+  runs on the event loop — sync handler or explicit offload, whichever the
+  framework's idiom is. One blocking call stalls every concurrent user.
+- A column used in WHERE/JOIN/ORDER BY on a growing table gets its index in
+  the same change that introduces the query — not when it's slow in prod.
+- Expensive work the user doesn't wait on goes to a background job or cache;
+  anything that can run minutes goes on a queue that can't stall quick jobs.
+- Optimize from evidence: read the traces/APM/EXPLAIN before changing code,
+  and prefer a mechanical guard (a test that fails on the anti-pattern) over
+  a convention note when the failure class is detectable.
+
 ## Tests
 
-- Write tests for new features and bugfixes unless I say otherwise; happy path
-  plus edge cases.
+- Write tests for new features and bugfixes unless I say otherwise, sized to the
+  change: happy path plus the edge cases that can realistically break, not an
+  exhaustive input matrix. A small change gets a handful of focused tests;
+  extend an existing test file before adding a new one. Never re-test framework
+  behavior, trivial getters, or the same logic through multiple layers.
 - For a bugfix, write the failing test first and watch it fail.
 - All tests pass before committing — including after a refactor.
 - Never change a test just to make it pass. Fix the code under test; only edit a

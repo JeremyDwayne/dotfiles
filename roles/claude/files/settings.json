@@ -1,13 +1,13 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "630000"
+  },
   "includeCoAuthoredBy": false,
   "permissions": {
     "defaultMode": "auto"
   },
-  "model": "opus[1m]",
-  "env": {
-    "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "630000"
-  },
+  "model": "fable",
   "worktree": {
     "baseRef": "fresh"
   },
@@ -60,5 +60,30 @@
   "voiceEnabled": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754088478023
+  },
+  "skillOverrides": {
+    "ask-matt": "off",
+    "claude-handoff": "off",
+    "edit-article": "off",
+    "git-guardrails-claude-code": "off",
+    "loop-me": "off",
+    "migrate-to-shoehorn": "off",
+    "obsidian-vault": "off",
+    "qa": "off",
+    "request-refactor-plan": "off",
+    "scaffold-exercises": "off",
+    "setup-pre-commit": "off",
+    "teach": "off",
+    "triage": "off",
+    "ubiquitous-language": "off",
+    "wizard": "off",
+    "writing-beats": "off",
+    "writing-fragments": "off",
+    "writing-great-skills": "off",
+    "writing-shape": "off",
+    "grill-me": "off",
+    "handoff": "off",
+    "use-spark": "off",
+    "setup-matt-pocock-skills": "off"
   }
 }
