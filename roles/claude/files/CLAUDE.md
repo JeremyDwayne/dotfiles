@@ -1,171 +1,40 @@
 # Global preferences (all projects)
 
-Personal defaults for every repo. A project's own CLAUDE.md owns its stack-specific
-commands and standards and wins on any conflict.
+Personal defaults for every repo. A project's own CLAUDE.md / AGENTS.md wins on stack-specific commands.
 
-## Orchestrating subagents
+## Orchestrating
 
-Use workflows and subagents when a task has multiple concrete, independent workstreams and
-delegation materially improves speed, context management, or confidence. Not for
-simple or tightly sequential work, and not when I ask you to work directly.
+Use subagents only for parallel, independent workstreams. Keep orchestrator on session model; delegate by size — small→haiku/light, default→sonnet/medium, hard→opus/heavy — escalate when verification fails. ≤3 subagents unless clearly beneficial; each owns non-overlapping files and returns a short summary. Subagents never run the full suite; name their test files, full suite belongs to orchestrator/CI. Always start a todo list for multi-step plans.
 
-Routing — keep the orchestrator on the user-selected model; route each subagent:
+Harness note: Muse Code delegates on Muse Spark routing internally — don't apply Claude's `haiku/sonnet/opus/fable` ladder to it (Muse Spark picks by task; never force `fable`). Claude Code uses that ladder (never `fable` unless you ask). Codex uses its own.
 
-- Every spawn — Agent tool calls and workflow-script `agent()` calls alike — must
-  pass an explicit model. Omitting it silently inherits the session model; never
-  omit, even where tool docs say inheriting is fine.
-- Pick the least expensive model likely to succeed: haiku for clear, repeatable,
-  or high-volume tasks; sonnet for routine investigation and implementation (the
-  default when unsure); opus only when you can name why sonnet would fail —
-  genuine ambiguity, a high-risk cross-cutting change, adversarial verification
-  of a hard finding. Opus is the top of the routing ladder: never route a
-  subagent to fable unless I ask for it by name, even when the session itself
-  runs on fable.
-- Same principle for reasoning effort: lowest level likely to succeed (low →
-  medium → high). Escalate model or effort when verification fails.
+## Long runs
 
-Working rules:
-
-- Default to ≤3 subagents unless the task clearly benefits from more (no cap on
-  long autonomous runs).
-- Implementation agents get explicit, non-overlapping ownership of files or
-  behavior, plus the expected result and verification requirements; each returns
-  a concise summary of edits, tests, and remaining concerns.
-- Never edit areas owned by an active subagent or redo delegated work. You own
-  architecture, integration, integrated verification, and the final response.
-- Subagents never run the full test suite — every spawn prompt names the specific
-  test files it may run. The one full-suite run (when warranted) belongs to the
-  orchestrator or CI, after integration.
-- always start a todo list for multi step plans so its easy to track the approval and how you are progressing through it.
-
-## Long autonomous runs
-
-On long unattended runs (overnight builds, multi-ticket sweeps, sessions spanning
-many tasks), the orchestrator's context is the scarce resource:
-
-- Coordinate only: delegate substantive reading, implementation, and test runs.
-  Never pull large files, full diffs, or test logs into your own context — ask an
-  agent for the specific fact you need.
-- Agents return small structured summaries (files changed, verification run,
-  remaining concerns) — never transcripts or code listings. In workflow scripts,
-  use the `schema` option to force compact returns.
-- Model routing above applies with full force here: set `opts.model` (and
-  `opts.effort`) on every workflow `agent()` call — a long run of
-  inherited-session-model agents is this mode's most expensive failure.
-- One subagent per ticket/slice; prefer many fresh sessions (scheduled/cloud
-  agents, a per-slice loop) over one marathon window.
-- Persist progress outside the conversation (tracker tickets, commits, a handoff
-  file) so a compaction or restart loses nothing.
-
-## Feature flow
-
-Every feature follows the same five skills, in order — one flow, every time, in
-every repo. Drive the flow yourself, invoking each in turn; still stop at the
-flow's decision gates (design approval, review findings needing my judgement).
-
-1. **Design** — `/wayfinder` for the design: route-finding interview that
-   sharpens the plan before any code.
-2. **Spec** — `/to-spec` synthesizes the conversation into a spec, published to
-   the tracker with the `ready-for-agent` label. No fresh interview.
-3. **Tickets** — `/to-tickets` breaks the spec into tracer-bullet vertical
-   slices with declared blocking edges — single-context-sized, never one mega PR.
-4. **Implement** — `/implement` builds the tickets, `/tdd` at pre-agreed seams,
-   full suite at the end, then `/code-review` and commit.
-5. **Review** — `/code-review` reads the diff on two axes (Standards + Spec) in
-   parallel sub-agents. Fix benign findings automatically; bring me the rest.
+Orchestrator coordinates; agents do reading, implementation, tests. Never pull large diffs/logs into orchestrator — ask for the fact. Return compact summaries (`schema` on workflow `agent()` calls). One subagent per ticket, many fresh sessions over one marathon window. Persist progress outside conversation (commits/handoff).
 
 ## Coding
 
-- Bugs: reproduce first, diagnose until you can explain *why*, then fix the root
-  cause. If you can't reproduce it, report that instead of fixing blind.
-- Smallest change that solves the problem properly; no drive-by refactors or
-  style fixes outside the task.
-- Edit files one at a time — no sed/awk or scripted find-and-replace.
-- Default to zero comments, regardless of how commented the surrounding code
-  is. Existing comment-heavy files are not a style to match. Write a comment
-  only when the logic is genuinely confusing and can't be made self-evident:
-  a non-obvious constraint, a workaround, a "why" the code can't express.
-  Never narrate what the next line does, restate the diff, or justify the
-  change to a reviewer.
-- Never query inside a loop: a route's query count must not grow with the rows
-  it renders — batch with one `IN (…)` / `JOIN` / `GROUP BY` and key results in
-  memory. Extend a list's existing query rather than adding a per-row call.
+- Bugs: reproduce first, explain why, then fix root. If not reproducible, report.
+- Smallest change that solves it; one file at a time, no sed/awk mass edits.
+- Zero comments by default; comment only a non-obvious constraint/workaround/why.
+- Never query in a loop — batch with `IN/JOIN/GROUP BY`.
 
 ## Performance
 
-Performance is correctness, not polish: an N+1, a blocking call on an async
-event loop, or an unindexed hot filter is a bug you fix in-footprint (or flag
-explicitly in your summary if out of footprint) — never silently ship.
+Performance is correctness: fix N+1, blocking on async loops, and unindexed hot filters in-footprint or flag explicitly. Keep responses proportional to what changed; lazy-load hidden content; background queues for expensive work; add the index with the query.
 
-- Work per request must not scale with data volume: batch queries, keep the
-  response proportional to what changed, and render hidden/expandable content
-  lazily (fetch-on-open) once it grows with the data behind it.
-- In an async server, blocking work (DB, file I/O, hashing, rendering) never
-  runs on the event loop — sync handler or explicit offload, whichever the
-  framework's idiom is. One blocking call stalls every concurrent user.
-- A column used in WHERE/JOIN/ORDER BY on a growing table gets its index in
-  the same change that introduces the query — not when it's slow in prod.
-- Expensive work the user doesn't wait on goes to a background job or cache;
-  anything that can run minutes goes on a queue that can't stall quick jobs.
-- Optimize from evidence: read the traces/APM/EXPLAIN before changing code,
-  and prefer a mechanical guard (a test that fails on the anti-pattern) over
-  a convention note when the failure class is detectable.
+## Tests & verification
 
-## Tests
+- Tests: happy path + realistic edges, extend existing file, never re-test framework, never edit a test to pass.
+- All tests pass before commit.
+- Run the project's actual gate (e.g. `just django-test`); don't invent checks. Exercise runtime surface once (CLI/endpoint) when tests alone aren't proof. Push back on wrong review feedback with evidence.
 
-- Write tests for new features and bugfixes unless I say otherwise, sized to the
-  change: happy path plus the edge cases that can realistically break, not an
-  exhaustive input matrix. A small change gets a handful of focused tests;
-  extend an existing test file before adding a new one. Never re-test framework
-  behavior, trivial getters, or the same logic through multiple layers.
-- For a bugfix, write the failing test first and watch it fail.
-- All tests pass before committing — including after a refactor.
-- Never change a test just to make it pass. Fix the code under test; only edit a
-  test when I explicitly ask.
+## Git & UI
 
-## Verification and self-review
-
-- Run the checks the project actually defines (test command, plus lint/type-check
-  only if configured). Don't invent commands a project doesn't have.
-- Tests alone aren't proof for a change with a runtime surface: exercise the
-  affected code path at least once (run the CLI, hit the endpoint, drive the flow).
-- When I give review feedback, verify it's technically right before implementing.
-  If it's wrong, push back with evidence.
-
-## Git
-
-- Stage with `git add -A` after a quick `git status` confirms nothing unintended.
-- A logical change is one clean commit: if I ask for changes after you commit,
-  amend the unpushed commit rather than stacking "fix" commits.
-
-## UI changes
-
-- In-app copy for AI-backed features never says "AI" (or names a model/vendor):
-  describe the help and its source ("Generate from datasheet"), not the
-  mechanism. Marketing and legal pages may name it. Applies to any string a user
-  can see, including stored errors surfaced in tooltips.
-- Designs must stay legible with red-green color deficiency.
-
-## Business copy
-
-- Any user-facing business copy (landing/marketing, lifecycle or sales emails,
-  onboarding, pricing, collateral) follows the business-copy skill
-  (`~/.claude/skills/business-copy/SKILL.md`) — invoke it before writing or
-  reviewing such copy.
-- Never use em dashes in any prose you write for me (copy, emails, docs,
-  messages). They read as machine-written. Restructure the sentence, or use a
-  comma, period, colon, or parentheses instead.
+- `git add -A` after `git status`; one clean commit per logical change (amend unpushed fix).
+- In-app AI copy never says "AI"; keep designs legible for red-green deficiency.
+- Business copy → `business-copy` skill; never use em dashes — use comma/period/colon/parentheses.
 
 ## Running things
 
-- Check for an already-running dev server and use it; only start your own when
-  none is up, and shut down any server you started when you're done.
-- Env vars load from `.env` via the framework, not the shell: source `.env` or
-  pass inline per command. Never paste secret values into files or committed code.
-
-## Instruction files
-
-- When editing any CLAUDE.md: keep it lean — only high-signal facts that would
-  cause a mistake if removed; hard "every time" gates belong in hooks, not prose.
-- This file stays stack-agnostic: stack-specific commands and conventions live in
-  project files (~50 repos: mostly Next/TS, Ruby, Go).
+Reuse a running dev server; env via framework from `.env`, never paste secrets. Instruction files stay lean — high-signal facts only; hard gates belong in hooks, not prose. Stack-specific commands live in project `AGENTS.md`/`CLAUDE.md`.
