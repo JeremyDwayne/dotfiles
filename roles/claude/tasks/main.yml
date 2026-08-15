@@ -39,11 +39,6 @@
   loop_control:
     label: "{{ item.path | basename }}"
 
-- name: "Claude | Install Matt Pocock skills"
-  ansible.builtin.command: npx --yes skills add mattpocock/skills --global --skill '*' --agent claude-code --yes
-  register: claude_skills_add
-  changed_when: "'Installed' in claude_skills_add.stdout or 'installed' in claude_skills_add.stdout"
-
 - name: "Claude | Update installed skills"
   ansible.builtin.command: npx --yes skills update --global --yes
   register: claude_skills_update
