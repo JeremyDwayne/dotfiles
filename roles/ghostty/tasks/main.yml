@@ -6,12 +6,12 @@
 - name: "Ghostty | Config folder"
   ansible.builtin.file:
     mode: "0755"
-    path: "{{ ansible_user_dir }}/.config/ghostty"
+    path: "{{ ansible_facts['user_dir'] }}/.config/ghostty"
     state: directory
 
 - name: "Ghostty | Create symlink to config file"
   ansible.builtin.file:
     src: "{{ role_path }}/files/config"
-    dest: "{{ ansible_user_dir }}/.config/ghostty/config"
+    dest: "{{ ansible_facts['user_dir'] }}/.config/ghostty/config"
     state: link
     force: true

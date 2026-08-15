@@ -11,7 +11,7 @@
 - name: "Tmux | Copy tmux files"
   ansible.builtin.file:
     src: "{{ role_path }}/files/tmux"
-    dest: "{{ ansible_user_dir }}/.config/tmux"
+    dest: "{{ ansible_facts['user_dir'] }}/.config/tmux"
     state: link
     force: true
 

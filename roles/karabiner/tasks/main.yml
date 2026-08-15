@@ -6,12 +6,12 @@
 - name: "Karabiner | Config folder"
   ansible.builtin.file:
     mode: "0755"
-    path: "{{ ansible_user_dir }}/.config/karabiner"
+    path: "{{ ansible_facts['user_dir'] }}/.config/karabiner"
     state: directory
 
 - name: "Karabiner | Create symlink to config file"
   ansible.builtin.file:
     src: "{{ role_path }}/files/karabiner.json"
-    dest: "{{ ansible_user_dir }}/.config/karabiner/karabiner.json"
+    dest: "{{ ansible_facts['user_dir'] }}/.config/karabiner/karabiner.json"
     state: link
     force: true

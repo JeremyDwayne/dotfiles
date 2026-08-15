@@ -6,20 +6,20 @@
 - name: "ZSH | Copy .zshrc"
   ansible.builtin.file:
     src: "{{ role_path }}/files/zshrc"
-    dest: "{{ ansible_user_dir }}/.zshrc"
+    dest: "{{ ansible_facts['user_dir'] }}/.zshrc"
     state: link
     force: true
 
 - name: "ZSH | Copy .zprofile"
   ansible.builtin.file:
     src: "{{ role_path }}/files/zprofile"
-    dest: "{{ ansible_user_dir }}/.zprofile"
+    dest: "{{ ansible_facts['user_dir'] }}/.zprofile"
     state: link
     force: true
 
 - name: "ZSH | Create symlink to config files"
   ansible.builtin.file:
     src: "{{ role_path }}/files/zsh"
-    dest: "{{ ansible_user_dir }}/.config/zsh"
+    dest: "{{ ansible_facts['user_dir'] }}/.config/zsh"
     state: link
     force: true

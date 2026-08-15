@@ -6,6 +6,6 @@
 - name: "Postgres | Copy custom config"
   ansible.builtin.file:
     src: "{{ role_path }}/files/psqlrc"
-    dest: "{{ ansible_user_dir }}/.psqlrc"
+    dest: "{{ ansible_facts['user_dir'] }}/.psqlrc"
     state: link
     force: true
