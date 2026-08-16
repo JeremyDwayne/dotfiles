@@ -17,6 +17,8 @@ Only act on checks and comments newer than the latest push. Verify every bot fin
 
 Keep an eye on changes to `main` and rebase when needed. If an overlapping PR makes this one obsolete, stop monitoring, report it to the user, and ask before closing the PR unless closure was explicitly authorized.
 
+Put poll loops in a script file and run it, so worktree-isolated sessions don't trip the command guard.
+
 If a review bot leaves feedback you believe is not worth addressing, reply and resolve the comment. Format comments left on Jeremy's behalf as:
 
 ```md

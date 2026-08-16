@@ -21,7 +21,7 @@ Do not use it for HTML that ships as part of a product.
 Create one self-contained HTML file, capped at 512 KB.
 
 - Write it like a spec, not a landing page: dense, scannable, no hero, decorative chrome, marketing voice, or em dashes.
-- Default to true black (`#000`), white primary text, and dark gray only for secondary surfaces or accents.
+- Match the design patterns of the application, otherwise default to true black (`#000`), white primary text, and dark gray only for secondary surfaces or accents.
 - Make it mobile-readable with a responsive viewport and no fixed-width layout.
 - Use semantic HTML, inline CSS, inline SVG, and HTTPS or data-URL images.
 - Use an inline classic script only when interactivity materially helps. Keep scripted pages useful without JavaScript; the sandbox blocks storage, fetch, workers, frames, forms, and popups.

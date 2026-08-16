@@ -49,6 +49,20 @@
     "setup-matt-pocock-skills": "off"
   },
   "disableBundledSkills": true,
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/jwinterberg/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
   "worktree": {
     "baseRef": "fresh"
   },
@@ -82,7 +96,7 @@
     "ralph-loop@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
-  "effortLevel": "medium",
+  "effortLevel": "high",
   "askUserQuestionTimeout": "5m",
   "tui": "fullscreen",
   "voice": {
@@ -98,11 +112,13 @@
   "inputNeededNotifEnabled": false,
   "agentPushNotifEnabled": false,
   "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true,
-  "feedbackSurveyState": {
-    "lastShownTime": 1754088478023
-  },
   "autoMode": {
+    "soft_deny": [
+      "$defaults",
+      "Bash(kamal deploy:*) in ~/apps/SubmittalKit — production deploy via Kamal, scope to explicit confirmation",
+      "Bash(psql * prod*) — production database reads/writes via psql in this project",
+      "make prod-db-console / db-destroy / db-drop / db-reset targets in this project's Makefile — destructive or production-scoped database operations"
+    ],
     "environment": [
       "### Org-wide",
       "**Organization**: None configured",
@@ -128,12 +144,10 @@
       "**Trusted repo**: JeremyDwayne/submittalkit (private) and its origin remote — confidential material (e.g. non-secret business data) is fine to commit/push here; secrets and other sensitive data are never cleared into it by visibility alone",
       "**Org-specific CLIs**: uv (263×), kamal (6×), psql (3×) — routine in this project",
       "routine under submittalkit/ prefix: Django app code, templates, and migrations for this project"
-    ],
-    "soft_deny": [
-      "$defaults",
-      "Bash(kamal deploy:*) in ~/apps/SubmittalKit — production deploy via Kamal, scope to explicit confirmation",
-      "Bash(psql * prod*) — production database reads/writes via psql in this project",
-      "make prod-db-console / db-destroy / db-drop / db-reset targets in this project's Makefile — destructive or production-scoped database operations"
     ]
+  },
+  "voiceEnabled": true,
+  "feedbackSurveyState": {
+    "lastShownTime": 1754088478023
   }
 }
