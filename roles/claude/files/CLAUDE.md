@@ -12,16 +12,35 @@ I wanted to share some of my preferences here so we can be more aligned as we wo
 - Don't be scare to propose bold ideas if they can meaningfully benefit our work.
 - Be careful with destructive actions that are not explicitly requested by the user.
 - Tests are good! Endless smoke tests, "regression tests" for feature deletions, etc, much less good. Tests should be focused, not slop.
-- Comments are a great way to clarify functionality and how code is used. Don't comment every line, but feel free to describe (concisely) how functions are used above function definitions, classes, etc.
-- Keep comments up to date! When making changes, it's important to keep things in sync.
+- Comments are a great way to clarify functionality and how code is used. They should not be used for historical context or used to document decisions. Don't comment every line, but feel free to describe (very concisely) how functions are used above function definitions, classes, etc. These should be simple docstrings, not paragraphs of text.
+- Keep comments up to date! When making changes, it's important to keep things in sync and not stale. Comments can be deleted as well if no longer relevant.
 
 ## Coding preferences (Typescript focused)
 - `any` is the enemy. Inferred types are our friend. Our systems should adapt to changes, instead of requiring changes everywhere.
 - If your TS code looks like a Python dev wrote it, it is bad TS code.
 - Avoid one-line functions that are just casting wrappers.
-- Write Typescrypt in ways that Matt Pocock and Theo would be proud of.
+- Write Typescript in ways that Matt Pocock and Theo would be proud of.
 - If not already specified in project, I generally like to use the following tech: Tailwind, React, Vite, pnpm.
 - When building more complex web and react native apps, I like to pull in Zustand, React Query, Tanstack Start, Clerk (or better-auth if selfhosting), and ArkType (or zod if perf isn't an issue)
+
+## How we work
+- Each stage of a feature starts in a fresh session (`/clear`) from a file on disk. Spec, plan, implement, ship. The `spec` and `plan` skills write `.scratch/<branch>/spec.md` and `plan.md`; those files are gitignored and die with the branch. Only read the current branch's folder. The PR description is the permanent record.
+- Small changes skip spec and plan. Medium changes get a plan. Fuzzy or large changes get grilled first, then a spec, then a plan.
+- Implement from the plan with tests at the seams the spec named. Run the type check and the tests for the files you touched as you go.
+- Review with `deep-review` before filing a PR. It fixes what it confirms.
+
+## Done means verified
+- Before reporting a task done, run the repo's type check, lint, and test targets and paste the result. If you could not run one, say which and why. "Should pass" is not a result.
+- A bug fix starts with a failing test that reproduces it. When `.scratch/lock-tests` exists, test files are locked; fix the code, and if the test itself is wrong, say so and stop.
+- UI work is done when the result matches the mock that was picked, not when it renders.
+
+## Leave it better than you found it
+- While you are in a file, improve it: dedupe, drop dead code, fix an obvious perf problem, simplify logic you had to read twice. Bounded to the files the task already touches.
+- Put each refactor in its own commit labeled `refactor:` so review can see it apart from the feature. Only do it when it deletes code or fixes something measurable. Do not rename or restructure for taste.
+- Improvements you notice outside the touched files go in the report as follow-ups, not in the branch.
+
+## Lessons
+- When I correct the same class of mistake twice, or a review bot flags the same class twice, propose a one-line addition to the repo's CLAUDE.md or AGENTS.md in your report. I decide whether it lands.
 
 ## Questions are read-only
 - A question is a request for an answer, not for changes. If the message opens with "how hard would it be", "can X do Y", or otherwise asks rather than instructs: answer it, and do not edit files.

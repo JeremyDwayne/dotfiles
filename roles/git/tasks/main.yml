@@ -130,6 +130,12 @@
     dest: "{{ ansible_facts['user_dir'] }}/.config/git/gitmessage"
     mode: "0600"
 
+- name: "Git | Global ignore (~/.config/git/ignore)"
+  ansible.builtin.copy:
+    src: ignore
+    dest: "{{ ansible_facts['user_dir'] }}/.config/git/ignore"
+    mode: "0644"
+
 - name: "Git | Set commit.template"
   community.general.git_config:
     name: commit.template

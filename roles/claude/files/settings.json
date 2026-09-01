@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "env": {
-    "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "630000"
+    "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "200000"
   },
   "includeCoAuthoredBy": false,
   "permissions": {
@@ -46,7 +46,11 @@
     "grill-me": "off",
     "handoff": "off",
     "use-spark": "off",
-    "setup-matt-pocock-skills": "off"
+    "setup-matt-pocock-skills": "off",
+    "to-spec": "off",
+    "to-tickets": "off",
+    "implement": "off",
+    "code-review": "off"
   },
   "disableBundledSkills": true,
   "hooks": {
@@ -58,6 +62,35 @@
             "type": "command",
             "command": "bash '/Users/jwinterberg/.claude/hooks/herdr-agent-state.sh' session",
             "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/jwinterberg/.claude/hooks/protect-secrets.sh'",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "bash '/Users/jwinterberg/.claude/hooks/lock-tests.sh'",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/jwinterberg/.claude/hooks/format-on-edit.sh'",
+            "timeout": 30
           }
         ]
       }
@@ -97,12 +130,24 @@
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
+  "modelSettings": {
+    "claude-opus-5": {
+      "effortLevel": "high"
+    },
+    "claude-fable-5": {
+      "effortLevel": "medium"
+    },
+    "claude-fable-5-1": {
+      "effortLevel": "medium"
+    }
+  },
   "askUserQuestionTimeout": "5m",
   "tui": "fullscreen",
   "voice": {
     "enabled": true,
     "mode": "hold"
   },
+  "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
   "theme": "auto",

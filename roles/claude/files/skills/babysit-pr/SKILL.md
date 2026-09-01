@@ -27,6 +27,8 @@ If a review bot leaves feedback you believe is not worth addressing, reply and r
 [actual reply]
 ```
 
+If a bot finding is real and is the same class of mistake you have seen before on this repo, propose a one-line addition to the repo's CLAUDE.md or AGENTS.md in your report. Do not add it yourself.
+
 Do not let review feedback expand the PR beyond the user's original goal. Address real shortcomings, but avoid scope creep.
 
 If nothing has changed, stay quiet rather than posting filler comments. Stop when the review bots and required checks are green on the latest commit. Merge only when the user explicitly requested it; otherwise report that the PR is ready.

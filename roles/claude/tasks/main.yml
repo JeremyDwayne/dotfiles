@@ -39,6 +39,28 @@
   loop_control:
     label: "{{ item.path | basename }}"
 
+- name: "Claude | Hooks folder"
+  ansible.builtin.file:
+    mode: "0755"
+    path: "{{ ansible_facts['user_dir'] }}/.claude/hooks"
+    state: directory
+
+- name: "Claude | Find hook scripts"
+  ansible.builtin.find:
+    paths: "{{ role_path }}/files/hooks"
+    patterns: "*.sh"
+  register: claude_hooks
+
+- name: "Claude | Symlink each hook script"
+  ansible.builtin.file:
+    src: "{{ item.path }}"
+    dest: "{{ ansible_facts['user_dir'] }}/.claude/hooks/{{ item.path | basename }}"
+    state: link
+    force: true
+  loop: "{{ claude_hooks.files }}"
+  loop_control:
+    label: "{{ item.path | basename }}"
+
 - name: "Claude | Update installed skills"
   ansible.builtin.command: npx --yes skills update --global --yes
   register: claude_skills_update
