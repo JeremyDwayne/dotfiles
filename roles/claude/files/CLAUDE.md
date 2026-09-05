@@ -51,7 +51,7 @@ I wanted to share some of my preferences here so we can be more aligned as we wo
 - When several agents do work in parallel, state file ownership up front so they do not collide.
 
 ## Visual and design work
-- Do not edit real components first. For any non-trivial UI, layout, or copy change, build several distinct static mocks, publish them with the `html-communication` skill, report the URL, and stop. Wait for a pick before implementing.
+- Do not edit real components first. For any non-trivial UI, layout, or copy change, build several distinct static mocks, publish them with the built-in Artifact tool, report the URL, and stop. Label variants A, B, C and lay them out for direct comparison. The `html-communication` skill is for reports, not mocks. Wait for a pick before implementing.
 - Standing constraints:
   - I do have slight color vision deficiencies so above all else color vision accessibility is highly valued. 
     - Avoid bad color pairs: do no rely on red-and-green, green-and-brown, blue-and-purple, or light-green-and-yellow combinations.
@@ -59,6 +59,9 @@ I wanted to share some of my preferences here so we can be more aligned as we wo
     - Add secondary cues: Use text, line styles (dashed vs solid), or icons next to colored status dots. 
   - Information-dense, no decorative card/pill chrome, no light-gray subtitle lines above sections. Minimal copy. No em dashes ever.
   - Avoid continuously repainting CSS animations (pulse, shimmer, blur, spinners); they peg the GPU on high-refresh displays.
+
+## Worktree sessions
+- Write commit messages and multi-line scripts to the scratchpad and run them by path; the worktree guard refuses heredocs and chains that name git.
 
 ## Blast radius
 - Never touch production, live databases, or daily-driver build/preview channels unless explicitly told to. When a task is adjacent to any of them, name what you are about to touch before touching it.

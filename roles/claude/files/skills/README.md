@@ -1,6 +1,6 @@
 # Custom Claude skills
 
-Drop your own skill folders here — one directory per skill, each containing a
+Drop your own skill folders here, one directory per skill, each containing a
 `SKILL.md` (plus any supporting files). The `claude` role symlinks every
 top-level folder in here into `~/.claude/skills/<folder-name>`, so anything you
 add is picked up on the next `dotfiles` run.
@@ -17,7 +17,7 @@ Stage by stage, with the skill that runs it and the file it leaves behind:
 |---|---|---|
 | Spec | `grilling` (Matt Pocock), then `/spec` | `.scratch/<branch>/spec.md` |
 | Plan | `/plan` | `.scratch/<branch>/plan.md` |
-| Implement | `tdd` (Matt Pocock), `html-communication` for mocks | commits on the branch |
+| Implement | `tdd` (Matt Pocock), Artifact tool for mocks | commits on the branch |
 | Ship | `deep-review`, `/file-pr`, `/babysit-pr` | fix commits, PR |
 
 `.scratch/` is in the global gitignore (see the git role). Hooks live in `../hooks/`

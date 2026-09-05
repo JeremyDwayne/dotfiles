@@ -1,4 +1,4 @@
---- 
+---
 name: postplan-read
 description: Use when the user provides a postplan.dev URL to read.
 metadata:

@@ -126,7 +126,7 @@
     "legalzoom@claude-plugins-official": false,
     "neon@claude-plugins-official": false,
     "posthog@claude-plugins-official": false,
-    "ralph-loop@claude-plugins-official": true
+    "ralph-loop@claude-plugins-official": false
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
@@ -138,7 +138,7 @@
       "effortLevel": "medium"
     },
     "claude-fable-5-1": {
-      "effortLevel": "medium"
+      "effortLevel": "xhigh"
     }
   },
   "askUserQuestionTimeout": "5m",
