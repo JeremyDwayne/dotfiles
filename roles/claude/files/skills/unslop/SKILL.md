@@ -1,6 +1,6 @@
 ---
 name: unslop
-description: Cut AI tells from any writing. Must always apply.
+description: Cut AI tells from a piece of writing. Use when the user asks to unslop, de-AI, or humanize text, or before shipping prose longer than a paragraph.
 ---
 
 # Unslop

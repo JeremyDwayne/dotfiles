@@ -60,6 +60,17 @@ I wanted to share some of my preferences here so we can be more aligned as we wo
   - Information-dense, no decorative card/pill chrome, no light-gray subtitle lines above sections. Minimal copy. No em dashes ever.
   - Avoid continuously repainting CSS animations (pulse, shimmer, blur, spinners); they peg the GPU on high-refresh displays.
 
+## Writing
+Applies to every message, commit, PR body, comment, and doc. The `unslop` skill is the full pass for longer prose.
+- No em dashes. No parentheticals as asides. End the sentence or use a comma.
+- Sentence case headings. No decorative emoji.
+- No bold-label-colon bullets that restate the line.
+- No chatbot phrases or sycophancy. Respond directly.
+- Plain words: use, help, many, if. Not delve, leverage, robust, crucial, utilize.
+- Say what it does, not how it feels. Name the mechanism or the number.
+- Active voice, one idea per sentence.
+- Cut filler: "in order to", "it is important to note", "as mentioned".
+
 ## Worktree sessions
 - Write commit messages and multi-line scripts to the scratchpad and run them by path; the worktree guard refuses heredocs and chains that name git.
 
