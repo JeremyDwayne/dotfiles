@@ -16,6 +16,8 @@ Edit text to remove AI patterns and add human voice.
 
 ## Adding soul
 
+For essays, posts, and other prose written to be read for its own sake. Skip this section for commits, PR bodies, specs, plans, and docs; those stay plain.
+
 Removing patterns is half the job. Sterile, voiceless writing is just as obvious.
 
 - **Have opinions.** React to facts instead of neutrally listing pros and cons.

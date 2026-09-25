@@ -21,7 +21,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "fable",
+  "model": "opus",
   "disableClaudeAiConnectors": true,
   "skillOverrides": {
     "ask-matt": "off",
@@ -52,7 +52,7 @@
     "implement": "off",
     "code-review": "off"
   },
-  "disableBundledSkills": true,
+  "disableBundledSkills": false,
   "hooks": {
     "SessionStart": [
       {
@@ -126,7 +126,16 @@
     "legalzoom@claude-plugins-official": false,
     "neon@claude-plugins-official": false,
     "posthog@claude-plugins-official": false,
-    "ralph-loop@claude-plugins-official": false
+    "ralph-loop@claude-plugins-official": false,
+    "typesafe@typesafe-ai": true
+  },
+  "extraKnownMarketplaces": {
+    "typesafe-ai": {
+      "source": {
+        "source": "github",
+        "repo": "typesafe-ai/skills"
+      }
+    }
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
@@ -138,7 +147,10 @@
       "effortLevel": "medium"
     },
     "claude-fable-5-1": {
-      "effortLevel": "xhigh"
+      "effortLevel": "high"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "high"
     }
   },
   "askUserQuestionTimeout": "5m",

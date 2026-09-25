@@ -9,7 +9,7 @@ metadata:
 
 # File PR
 
-Before filing, check whether a PR for this branch already exists. Review the diff locally against `origin/main` to make sure its contents match the goal.
+Before filing, check whether a PR for this branch already exists. Rebase onto latest `origin/main`; stale branches conflict and waste a review round. Then review the diff locally against `origin/main` to make sure its contents match the goal.
 
 PR titles usually become commit messages, so follow the repository's title conventions. Look at recently merged PRs and Git history for examples. Prefer a concise human readable title that explains why the change matters.
 
@@ -27,6 +27,6 @@ BAD
 GOOD
 > My "new worktree" default was ignored when starting new threads on existing worktrees. Super unintuitive. Now your preferences always apply.
 
-Open a real PR rather than a draft so review bots run. If the user also asked to babysit it, continue with the `babysit-pr` skill.
+Open a real PR rather than a draft; drafts do not get review-bot coverage. If the user also asked to babysit it, continue with the `babysit-pr` skill.
 
 Add a blurb to the end of the PR description about what model and harness is making the changes.

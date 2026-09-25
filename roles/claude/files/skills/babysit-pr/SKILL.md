@@ -17,7 +17,7 @@ Only act on checks and comments newer than the latest push. Verify every bot fin
 
 Keep an eye on changes to `main` and rebase when needed. If an overlapping PR makes this one obsolete, stop monitoring, report it to the user, and ask before closing the PR unless closure was explicitly authorized.
 
-Put poll loops in a script file and run it, so worktree-isolated sessions don't trip the command guard.
+Put poll loops in a script file and run it, so worktree-isolated sessions don't trip the command guard. Put status notes in the same message as the next poll; a message with no tool call ends the turn and stops monitoring.
 
 If a review bot leaves feedback you believe is not worth addressing, reply and resolve the comment. Format comments left on Jeremy's behalf as:
 
@@ -26,8 +26,6 @@ If a review bot leaves feedback you believe is not worth addressing, reply and r
 -----
 [actual reply]
 ```
-
-If a bot finding is real and is the same class of mistake you have seen before on this repo, propose a one-line addition to the repo's CLAUDE.md or AGENTS.md in your report. Do not add it yourself.
 
 Do not let review feedback expand the PR beyond the user's original goal. Address real shortcomings, but avoid scope creep.
 

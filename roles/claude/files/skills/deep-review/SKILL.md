@@ -180,12 +180,6 @@ Severity levels:
 A review with zero findings after a full trace is a good review. Say so plainly; the
 Verified section carries the weight.
 
-## Lessons
-
-If a finding is the second occurrence of the same class of mistake on this repo, propose a
-one-line addition to the repo's `CLAUDE.md` or `AGENTS.md` in the report. The user decides
-whether it lands.
-
 ## When the user pushes back
 
 Re-open the code and re-check rather than defending from memory. If they are right,
