@@ -8,65 +8,29 @@
     name: gpg
     state: latest
 
-- name: "Git | Set core.pager"
-  community.general.git_config:
-    name: core.pager
-    scope: global
-    value: delta
+- name: "Git | Create Git Config Directory"
+  ansible.builtin.file:
+    path: "{{ ansible_facts['user_dir'] }}/.config/git"
+    mode: "0755"
+    state: directory
 
-- name: "Git | Set interactive.diffFilter"
-  community.general.git_config:
-    name: interactive.diffFilter
-    scope: global
-    value: delta --color-only
+- name: "Git | Move ~/.config/git/gitmessage"
+  ansible.builtin.copy:
+    src: gitmessage
+    dest: "{{ ansible_facts['user_dir'] }}/.config/git/gitmessage"
+    mode: "0600"
 
-- name: "Git | Set delta.navigate"
-  community.general.git_config:
-    name: delta.navigate
-    scope: global
-    value: true
+- name: "Git | Global ignore (~/.config/git/ignore)"
+  ansible.builtin.copy:
+    src: ignore
+    dest: "{{ ansible_facts['user_dir'] }}/.config/git/ignore"
+    mode: "0644"
 
-- name: "Git | Set delta.dark"
-  community.general.git_config:
-    name: delta.dark
-    scope: global
-    value: true
-
-- name: "Git | Set merge.conflictstyle"
-  community.general.git_config:
-    name: merge.conflictstyle
-    scope: global
-    value: zdiff3
-
-- name: "Git | Set diff.colorMoved"
-  community.general.git_config:
-    name: diff.colorMoved
-    scope: global
-    value: zebra
-
-- name: "Git | Set fetch.prune"
-  community.general.git_config:
-    name: fetch.prune
-    scope: global
-    value: true
-
-- name: "Git | Set init.defaultBranch"
-  community.general.git_config:
-    name: init.defaultBranch
-    scope: global
-    value: main
-
-- name: "Git | Set pull.rebase"
-  community.general.git_config:
-    name: pull.rebase
-    scope: global
-    value: true
-
-- name: "Git | Set rebase.autoStash"
-  community.general.git_config:
-    name: rebase.autoStash
-    scope: global
-    value: true
+- name: "Git | Configure ~/.config/git/allowed_signers"
+  ansible.builtin.copy:
+    src: allowed_signers
+    dest: "{{ ansible_facts['user_dir'] }}/.config/git/allowed_signers"
+    mode: "0600"
 
 - name: "Git | Set user.email"
   community.general.git_config:
@@ -75,11 +39,33 @@
     value: "{{ git_user_email }}"
   no_log: true
 
-- name: "Git | Set user.name"
+- name: "Git | Set global config"
   community.general.git_config:
-    name: user.name
+    name: "{{ item.key }}"
     scope: global
-    value: "{{ git_user_name }}"
+    value: "{{ item.value }}"
+  loop: "{{ settings | dict2items }}"
+  vars:
+    settings:
+      core.pager: delta
+      interactive.diffFilter: delta --color-only
+      delta.navigate: true
+      delta.dark: true
+      merge.conflictstyle: zdiff3
+      diff.colorMoved: zebra
+      fetch.prune: true
+      init.defaultBranch: main
+      pull.rebase: true
+      rebase.autoStash: true
+      push.autoSetupRemote: true
+      push.default: current
+      user.name: "{{ git_user_name }}"
+      commit.template: "{{ ansible_facts['user_dir'] }}/.config/git/gitmessage"
+      user.signingkey: "{{ ansible_facts['user_dir'] }}/.ssh/id_ed25519.pub"
+      gpg.format: ssh
+      commit.gpgsign: true
+      tag.gpgsign: true
+      gpg.ssh.allowedSignersFile: "{{ ansible_facts['user_dir'] }}/.config/git/allowed_signers"
 
 - name: "Git | Set Git Aliases"
   community.general.git_config:
@@ -105,75 +91,3 @@
       st: status
       sync: "!git fetch && git merge main --ff"
       parent: "!git show-branch | sed 's/].*//' | grep '\\*' | grep -v \"$(git rev-parse --abbrev-ref HEAD)\" | head -n1 | sed 's/^.*\\[//'"
-
-- name: "Git | Set push.autoSetupRemote"
-  community.general.git_config:
-    name: push.autoSetupRemote
-    scope: global
-    value: true
-
-- name: "Git | Set push.default"
-  community.general.git_config:
-    name: push.default
-    scope: global
-    value: current
-
-- name: "Git | Create Git Config Directory"
-  ansible.builtin.file:
-    path: "{{ ansible_facts['user_dir'] }}/.config/git"
-    mode: "0755"
-    state: directory
-
-- name: "Git | Move ~/.config/git/gitmessage"
-  ansible.builtin.copy:
-    src: gitmessage
-    dest: "{{ ansible_facts['user_dir'] }}/.config/git/gitmessage"
-    mode: "0600"
-
-- name: "Git | Global ignore (~/.config/git/ignore)"
-  ansible.builtin.copy:
-    src: ignore
-    dest: "{{ ansible_facts['user_dir'] }}/.config/git/ignore"
-    mode: "0644"
-
-- name: "Git | Set commit.template"
-  community.general.git_config:
-    name: commit.template
-    scope: global
-    value: "{{ ansible_facts['user_dir'] }}/.config/git/gitmessage"
-
-- name: "Git | Set user.signingkey"
-  community.general.git_config:
-    name: user.signingkey
-    scope: global
-    value: "{{ ansible_facts['user_dir'] }}/.ssh/id_ed25519.pub"
-
-- name: "Git | Set gpg.format"
-  community.general.git_config:
-    name: gpg.format
-    scope: global
-    value: ssh
-
-- name: "Git | Set commit.gpgsign"
-  community.general.git_config:
-    name: commit.gpgsign
-    scope: global
-    value: true
-
-- name: "Git | Set tag.gpgsign"
-  community.general.git_config:
-    name: tag.gpgsign
-    scope: global
-    value: true
-
-- name: "Git | Configure ~/.config/git/allowed_signers"
-  ansible.builtin.copy:
-    src: allowed_signers
-    dest: "{{ ansible_facts['user_dir'] }}/.config/git/allowed_signers"
-    mode: "0600"
-
-- name: "Git | Set gpg.ssh.allowedSignersFile"
-  community.general.git_config:
-    name: gpg.ssh.allowedSignersFile
-    scope: global
-    value: "{{ ansible_facts['user_dir'] }}/.config/git/allowed_signers"
