@@ -17,7 +17,7 @@ This is a macOS dotfiles repository using Ansible for automated configuration ma
 ### Development Commands
 - **Run playbook directly**: `ansible-playbook main.yml` (from repository root)
 - **Run with vault**: `ansible-playbook --vault-password-file ~/.ansible-vault/vault.secret main.yml`
-- **Update Galaxy dependencies**: `ansible-galaxy install -r requirements/common.yml`
+- **Update Galaxy dependencies**: `ansible-galaxy collection install --upgrade -r requirements/common.yml`
 
 ## Architecture
 

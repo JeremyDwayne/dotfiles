@@ -11,6 +11,14 @@
       tags:
         - always
 
+    - name: Create ~/.config
+      ansible.builtin.file:
+        path: "{{ ansible_facts['user_dir'] }}/.config"
+        state: directory
+        mode: "0755"
+      tags:
+        - always
+
   tasks:
     - name: Set roles
       ansible.builtin.set_fact:

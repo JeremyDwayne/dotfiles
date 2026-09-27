@@ -1,3 +1,9 @@
+- name: "SSH | Create ~/.ssh"
+  ansible.builtin.file:
+    path: "{{ ansible_facts['user_dir'] }}/.ssh"
+    state: directory
+    mode: "0700"
+
 - name: "SSH | Copy SSH keys"
   copy:
     dest: "{{ ansible_facts['user_dir'] }}/.ssh/{{ ssh_key_item.key }}"

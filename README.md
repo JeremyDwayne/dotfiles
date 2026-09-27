@@ -39,10 +39,9 @@ dotfiles
 
 This will handle the following tasks:
 
-- Verify Ansible is up-to-date
-- Generate SSH keys and add to ~/.ssh/authorized_keys
+- Install Homebrew and Ansible if missing
 - Clone this repository locally to ~/.dotfiles
-- Verify any ansible-galaxy plugins are updated
+- Update the Ansible Galaxy collections
 - Run this playbook with the values in ~/.dotfiles/group_vars/all.yml
 
 This dotfiles command is available to you after the first use of this repo, as it adds this repo's bin directory to your path, allowing you to call dotfiles from anywhere.
