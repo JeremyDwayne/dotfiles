@@ -2,7 +2,6 @@
 
 # color codes
 NC='\033[0m'
-RED='\033[00;31m'
 GREEN='\033[00;32m'
 CYAN='\033[00;36m'
 SEA="\\033[38;5;49m"
@@ -30,14 +29,8 @@ function _task {
 
 # _cmd performs commands with error checking
 function _cmd {
-  #create log if it doesn't exist
-  if ! [[ -f $DOTFILES_LOG ]]; then
-    touch $DOTFILES_LOG
-  fi
-  # empty conduro.log
-  >$DOTFILES_LOG
   # hide stdout, on error we print and exit
-  if eval "$1" 1>/dev/null 2>$DOTFILES_LOG; then
+  if eval "$1" 1>/dev/null 2>"$DOTFILES_LOG"; then
     return 0 # success
   fi
   # read error from log and add spacing
@@ -102,16 +95,9 @@ fi
 
 # .local/bin symlinks
 _task "Symlinking ~/.local/bin Scripts"
-if ! [[ -d ~/.local/bin ]]; then
-  _task "Making ~/.local/bin Folder"
-  _cmd "mkdir -p ~/.local/bin"
-fi
-for f in $(find $DOTFILES_DIR/local/bin -type f); do
-  _cmd 'rm -f ~/.local/bin/"${f##*/}"'
-  _cmd 'ln -s $DOTFILES_DIR/local/bin/"${f##*/}" ~/.local/bin/"${f##*/}"'
-done
+_cmd 'mkdir -p ~/.local/bin && ln -sf "$DOTFILES_DIR"/local/bin/* ~/.local/bin/'
 
-pushd "$DOTFILES_DIR" 2>&1 >/dev/null
+pushd "$DOTFILES_DIR" >/dev/null 2>&1
 _task "Updating Ansible Galaxy collections"
 _cmd "ansible-galaxy collection install --upgrade -r $DOTFILES_DIR/requirements/common.yml"
 
@@ -123,7 +109,7 @@ else
   ansible-playbook "$DOTFILES_DIR/main.yml" "$@"
 fi
 
-popd 2>&1 >/dev/null
+popd >/dev/null 2>&1
 
 if ! [[ -f "$IS_FIRST_RUN" ]]; then
   echo -e "${CHECK_MARK} ${GREEN}First run complete!${NC}"
