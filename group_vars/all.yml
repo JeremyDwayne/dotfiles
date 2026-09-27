@@ -1,14 +1,11 @@
 default_roles:
   - zsh
   - starship
-  - wezterm
   - ghostty
   - ssh
   - git
-  - kitty
   - karabiner
   - neovim
-  - tmux
   - fzf
   - ruby
   - go
@@ -30,8 +27,6 @@ dependencies:
   - ata
   - zoxide
   - font-monaspace
-  - git-delta
-  - bat
   - gh
   - fd
   - lazygit

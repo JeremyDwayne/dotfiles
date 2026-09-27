@@ -3,11 +3,6 @@
     name: tree-sitter
     state: latest
 
-- name: "Neovim | Install Luajit"
-  community.general.homebrew:
-    name: luajit
-    state: latest
-
 - name: "Neovim | Install Neovim"
   community.general.homebrew:
     name: neovim
@@ -17,12 +12,6 @@
   community.general.homebrew:
     name: silicon
     state: latest
-
-- name: "Neovim | Config folder"
-  ansible.builtin.file:
-    mode: "0755"
-    path: "{{ ansible_facts['user_dir'] }}/.config/nvim"
-    state: directory
 
 - name: "Neovim | Create symlink to role files directory"
   ansible.builtin.file:

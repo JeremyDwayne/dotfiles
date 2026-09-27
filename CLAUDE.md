@@ -11,13 +11,13 @@ This is a macOS dotfiles repository using Ansible for automated configuration ma
 ### Installation and Updates
 - **Initial install**: `bash -c "$(curl -fsSL https://raw.githubusercontent.com/JeremyDwayne/dotfiles/main/local/bin/dotfiles)"`
 - **Update environment**: `dotfiles` (runs full playbook)
-- **Run specific role**: `dotfiles -t <role_name>` (e.g., `dotfiles -t tmux`)
+- **Run specific role**: `dotfiles -t <role_name>` (e.g., `dotfiles -t zsh`)
 - **Verbose output**: `dotfiles -vvv`
 
 ### Development Commands
 - **Run playbook directly**: `ansible-playbook main.yml` (from repository root)
 - **Run with vault**: `ansible-playbook --vault-password-file ~/.ansible-vault/vault.secret main.yml`
-- **Update Galaxy dependencies**: `ansible-galaxy install -r requirements/common.yml`
+- **Update Galaxy dependencies**: `ansible-galaxy collection install --upgrade -r requirements/common.yml`
 
 ## Architecture
 

@@ -1,37 +1,18 @@
 #!/bin/bash
 
 # color codes
-RESTORE='\033[0m'
 NC='\033[0m'
-BLACK='\033[00;30m'
-RED='\033[00;31m'
 GREEN='\033[00;32m'
-YELLOW='\033[00;33m'
-BLUE='\033[00;34m'
-PURPLE='\033[00;35m'
 CYAN='\033[00;36m'
 SEA="\\033[38;5;49m"
-LIGHTGRAY='\033[00;37m'
 LBLACK='\033[01;30m'
 LRED='\033[01;31m'
 LGREEN='\033[01;32m'
-LYELLOW='\033[01;33m'
-LBLUE='\033[01;34m'
-LPURPLE='\033[01;35m'
-LCYAN='\033[01;36m'
-WHITE='\033[01;37m'
 OVERWRITE='\e[1A\e[K'
 
 #emoji codes
 CHECK_MARK="${GREEN}\xE2\x9C\x94${NC}"
-X_MARK="${RED}\xE2\x9C\x96${NC}"
-PIN="${RED}\xF0\x9F\x93\x8C${NC}"
-CLOCK="${GREEN}\xE2\x8C\x9B${NC}"
 ARROW="${SEA}\xE2\x96\xB6${NC}"
-BOOK="${RED}\xF0\x9F\x93\x8B${NC}"
-HOT="${ORANGE}\xF0\x9F\x94\xA5${NC}"
-WARNING="${RED}\xF0\x9F\x9A\xA8${NC}"
-RIGHT_ANGLE="${GREEN}\xE2\x88\x9F${NC}"
 
 DOTFILES_LOG="$HOME/.dotfiles.log"
 
@@ -48,14 +29,8 @@ function _task {
 
 # _cmd performs commands with error checking
 function _cmd {
-  #create log if it doesn't exist
-  if ! [[ -f $DOTFILES_LOG ]]; then
-    touch $DOTFILES_LOG
-  fi
-  # empty conduro.log
-  >$DOTFILES_LOG
   # hide stdout, on error we print and exit
-  if eval "$1" 1>/dev/null 2>$DOTFILES_LOG; then
+  if eval "$1" 1>/dev/null 2>"$DOTFILES_LOG"; then
     return 0 # success
   fi
   # read error from log and add spacing
@@ -82,78 +57,21 @@ function _task_done {
 set -e
 
 # Paths
-CONFIG_DIR="$HOME/.config/dotfiles"
 VAULT_SECRET="$HOME/.ansible-vault/vault.secret"
 DOTFILES_DIR="$HOME/.dotfiles"
-SSH_DIR="$HOME/.ssh"
 IS_FIRST_RUN="$HOME/.dotfiles_run"
 
 function mac_setup() {
-  which -s brew
-  if [[ $? != 0 ]]; then
+  if ! [[ -x /opt/homebrew/bin/brew ]]; then
     _task "Installing Homebrew"
-    _cmd '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
-    _cmd "$(/opt/homebrew/bin/brew shellenv)"
-    _cmd "brew install coreutils git wget python3 ansible"
+    # Runs in the foreground: the installer asks for sudo and a keypress.
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
-}
-
-function ubuntu_setup() {
-  if ! dpkg -s ansible >/dev/null 2>&1; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  if ! command -v ansible >/dev/null; then
     _task "Installing Ansible"
-    _cmd "sudo apt-get update"
-    _cmd "sudo apt-get install -y software-properties-common"
-    _cmd "sudo apt-add-repository -y ppa:ansible/ansible"
-    _cmd "sudo apt-get update"
-    _cmd "sudo apt-get install -y ansible"
-    _cmd "sudo apt-get install python3-argcomplete"
-    _cmd "sudo activate-global-python-argcomplete3"
+    _cmd "brew install ansible"
   fi
-  if ! dpkg -s python3 >/dev/null 2>&1; then
-    _task "Installing Python3"
-    _cmd "sudo apt-get install -y python3"
-  fi
-  if ! dpkg -s python3-pip >/dev/null 2>&1; then
-    _task "Installing Python3 Pip"
-    _cmd "sudo apt-get install -y python3-pip"
-  fi
-}
-
-function arch_setup() {
-  if ! [ -x "$(command -v ansible)" ]; then
-    _task "Installing Ansible"
-    _cmd "sudo pacman -Sy --noconfirm"
-    _cmd "sudo pacman -S --noconfirm ansible"
-    _cmd "sudo pacman -S --noconfirm python-argcomplete"
-    # _cmd "sudo activate-global-python-argcomplete3"
-  fi
-  if ! pacman -Q python3 >/dev/null 2>&1; then
-    _task "Installing Python3"
-    _cmd "sudo pacman -S --noconfirm python3"
-  fi
-  if ! pacman -Q python-pip >/dev/null 2>&1; then
-    _task "Installing Python3 Pip"
-    _cmd "sudo pacman -S --noconfirm python-pip"
-  fi
-
-  if ! pacman -Q openssh >/dev/null 2>&1; then
-    _task "Installing OpenSSH"
-    _cmd "sudo pacman -S --noconfirm openssh"
-  fi
-
-  _task "Setting Locale"
-  _cmd "sudo localectl set-locale LANG=en_US.UTF-8"
-}
-
-update_ansible_galaxy() {
-  local os=$1
-  local os_requirements=""
-  _task "Updating Ansible Galaxy"
-  if [ -f "$DOTFILES_DIR/requirements/$os.yml" ]; then
-    _task "${OVERWRITE}Updating Ansible Galaxy with OS Config: $os"
-    os_requirements="$DOTFILES_DIR/requirements/$os.yml"
-  fi
-  _cmd "ansible-galaxy install -r $DOTFILES_DIR/requirements/common.yml $os_requirements"
 }
 
 _task "Loading Setup for detected OS: $OSTYPE"
@@ -161,25 +79,11 @@ case $OSTYPE in
 darwin*)
   mac_setup
   ;;
-ubuntu)
-  ubuntu_setup
-  ;;
-arch)
-  arch_setup
-  ;;
 *)
-  _task "Unsupported OS"
-  _cmd "echo 'Unsupported OS'"
+  printf "${OVERWRITE}${LRED} [X]  Unsupported OS: $OSTYPE${NC}\n"
+  exit 1
   ;;
 esac
-
-if ! [[ -f "$SSH_DIR/authorized_keys" ]]; then
-  _task "Generating SSH keys"
-  _cmd "mkdir -p $SSH_DIR"
-  _cmd "chmod 700 $SSH_DIR"
-  _cmd "ssh-keygen -b 4096 -t rsa -f $SSH_DIR/id_rsa -N '' -C $USER@$HOSTNAME"
-  _cmd "cat $SSH_DIR/id_rsa.pub >> $SSH_DIR/authorized_keys"
-fi
 
 if ! [[ -d "$DOTFILES_DIR" ]]; then
   _task "Cloning repository"
@@ -191,17 +95,11 @@ fi
 
 # .local/bin symlinks
 _task "Symlinking ~/.local/bin Scripts"
-if ! [[ -d ~/.local/bin ]]; then
-  _task "Making ~/.local/bin Folder"
-  _cmd "mkdir -p ~/.local/bin"
-fi
-for f in $(find $DOTFILES_DIR/local/bin -type f); do
-  _cmd 'rm -f ~/.local/bin/"${f##*/}"'
-  _cmd 'ln -s $DOTFILES_DIR/local/bin/"${f##*/}" ~/.local/bin/"${f##*/}"'
-done
+_cmd 'mkdir -p ~/.local/bin && ln -sf "$DOTFILES_DIR"/local/bin/* ~/.local/bin/'
 
-pushd "$DOTFILES_DIR" 2>&1 >/dev/null
-update_ansible_galaxy $OSTYPE
+pushd "$DOTFILES_DIR" >/dev/null 2>&1
+_task "Updating Ansible Galaxy collections"
+_cmd "ansible-galaxy collection install --upgrade -r $DOTFILES_DIR/requirements/common.yml"
 
 _task "Running playbook"
 _task_done
@@ -211,7 +109,7 @@ else
   ansible-playbook "$DOTFILES_DIR/main.yml" "$@"
 fi
 
-popd 2>&1 >/dev/null
+popd >/dev/null 2>&1
 
 if ! [[ -f "$IS_FIRST_RUN" ]]; then
   echo -e "${CHECK_MARK} ${GREEN}First run complete!${NC}"

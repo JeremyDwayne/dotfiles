@@ -1,6 +1,6 @@
 # Ruby App aliases
-alias pru="brew services start postgresql && brew services start redis"
-alias prd="brew services stop postgresql && brew services stop redis"
+alias pru="brew services start postgresql@18 && brew services start redis"
+alias prd="brew services stop postgresql@18 && brew services stop redis"
 
 alias startapi="bundle exec puma -v -C config/puma.rb config.ru -p 7777"
 alias startsidekiq="bundle exec sidekiq -r ./config/environment.rb -C ./config/sidekiq.yml"

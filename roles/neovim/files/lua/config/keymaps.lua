@@ -3,18 +3,9 @@
 -- Add any additional keymaps here
 
 local keymap = vim.keymap
-local opts = { noremap = true, silent = true }
 
--- delete word backwards
+-- dw deletes the whole word under the cursor
 keymap.set("n", "dw", "diw")
-
--- Diagnostics
-keymap.set("n", "<C-j>", function()
-  vim.diagnostic.goto_next()
-end, opts)
-keymap.set("n", "<C-f>", function()
-  vim.diagnostic.goto_prev()
-end, opts)
 
 -- Secret Tunnel
 keymap.set("n", "<leader>ct", ":CloakToggle<CR>")

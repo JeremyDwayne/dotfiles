@@ -1,11 +1,10 @@
 # Ghostty Configuration
-# Equivalent to WezTerm configuration at roles/wezterm/files/wezterm.lua
 
 # Font Configuration
 font-family = "Monaspace Neon"
 font-size = 16
 
-# Color scheme (Catppuccin Mocha equivalent)
+# Color scheme
 theme = Catppuccin Mocha
 
 # Window appearance
@@ -15,10 +14,7 @@ window-title-font-family = "Monaspace Neon"
 # Scrollback
 scrollback-limit = 10000
 
-# Disable new tab button equivalent (if supported)
-# Note: Ghostty may handle this differently
-
-# Font features for ligatures (equivalent to harfbuzz_features)
+# Font features for ligatures
 font-feature = "calt"
 font-feature = "ss01"
 font-feature = "ss02"
@@ -31,8 +27,7 @@ font-feature = "ss08"
 font-feature = "ss09"
 font-feature = "liga"
 
-# Key bindings - tmux-like with Ctrl+A leader
-# Based on working Ghostty examples
+# Key bindings with a Ctrl+A leader
 
 # Send literal Ctrl+A when pressing Ctrl+A twice
 keybind = ctrl+a>ctrl+a=text:\x01
@@ -74,8 +69,6 @@ keybind = ctrl+a>x=close_surface
 # Zoom/focus pane
 keybind = ctrl+a>o=toggle_split_zoom
 keybind = ctrl+a>z=toggle_split_zoom
-
-# Tab rename - removed as prompt:rename_tab may not be a valid action
 
 # Configuration reload
 keybind = cmd+shift+comma=reload_config
