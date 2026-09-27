@@ -48,8 +48,8 @@ This dotfiles command is available to you after the first use of this repo, as i
 
 Any flags or arguments you pass to the dotfiles command are passed as-is to the ansible-playbook command.
 
-For Example: Running the tmux tag with verbosity
+For Example: Running the zsh tag with verbosity
 
 ```sh
-dotfiles -t tmux -vvv
+dotfiles -t zsh -vvv
 ```

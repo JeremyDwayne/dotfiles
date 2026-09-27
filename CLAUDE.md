@@ -11,7 +11,7 @@ This is a macOS dotfiles repository using Ansible for automated configuration ma
 ### Installation and Updates
 - **Initial install**: `bash -c "$(curl -fsSL https://raw.githubusercontent.com/JeremyDwayne/dotfiles/main/local/bin/dotfiles)"`
 - **Update environment**: `dotfiles` (runs full playbook)
-- **Run specific role**: `dotfiles -t <role_name>` (e.g., `dotfiles -t tmux`)
+- **Run specific role**: `dotfiles -t <role_name>` (e.g., `dotfiles -t zsh`)
 - **Verbose output**: `dotfiles -vvv`
 
 ### Development Commands

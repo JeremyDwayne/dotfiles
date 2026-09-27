@@ -8,7 +8,6 @@ default_roles:
   - kitty
   - karabiner
   - neovim
-  - tmux
   - fzf
   - ruby
   - go
