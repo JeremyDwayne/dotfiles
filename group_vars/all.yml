@@ -1,11 +1,9 @@
 default_roles:
   - zsh
   - starship
-  - wezterm
   - ghostty
   - ssh
   - git
-  - kitty
   - karabiner
   - neovim
   - fzf
