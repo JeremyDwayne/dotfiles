@@ -1,17 +1,40 @@
+- name: "Karabiner | Check for installed app"
+  ansible.builtin.stat:
+    path: /Applications/Karabiner-Elements.app
+  register: karabiner_app
+
+# The cask is a .pkg that calls sudo, which has no TTY under Ansible. After install the app updates itself.
 - name: "Karabiner | Install Karabiner-Elements"
-  community.general.homebrew_cask:
-    name: karabiner-elements
-    state: latest
+  when: not karabiner_app.stat.exists
+  block:
+    - name: "Karabiner | Ask for sudo password"
+      ansible.builtin.pause:
+        prompt: "sudo password for the Karabiner-Elements installer"
+        echo: false
+      register: karabiner_sudo
 
-- name: "Karabiner | Config folder"
-  ansible.builtin.file:
-    mode: "0755"
+    - name: "Karabiner | Install cask"
+      community.general.homebrew_cask:
+        name: karabiner-elements
+        state: present
+        sudo_password: "{{ karabiner_sudo.user_input }}"
+      no_log: true
+
+- name: "Karabiner | Check config path"
+  ansible.builtin.stat:
     path: "{{ ansible_facts['user_dir'] }}/.config/karabiner"
-    state: directory
+  register: karabiner_config
 
-- name: "Karabiner | Create symlink to config file"
+# Karabiner ignores edits to a symlinked karabiner.json, so the whole folder is linked instead.
+- name: "Karabiner | Move existing config folder aside"
+  ansible.builtin.command:
+    argv: [mv, "{{ karabiner_config.stat.path }}", "{{ karabiner_config.stat.path }}.bak"]
+    creates: "{{ karabiner_config.stat.path }}.bak"
+  when: karabiner_config.stat.isdir | default(false)
+
+- name: "Karabiner | Symlink config folder"
   ansible.builtin.file:
-    src: "{{ role_path }}/files/karabiner.json"
-    dest: "{{ ansible_facts['user_dir'] }}/.config/karabiner/karabiner.json"
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_facts['user_dir'] }}/.config/karabiner"
     state: link
     force: true
