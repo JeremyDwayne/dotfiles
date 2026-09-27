@@ -1,6 +1,6 @@
 - name: "Postgres | Install"
   community.general.homebrew:
-    name: postgresql@16
+    name: postgresql@18
     state: latest
 
 - name: "Postgres | Copy custom config"
