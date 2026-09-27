@@ -29,8 +29,6 @@ dependencies:
   - ata
   - zoxide
   - font-monaspace
-  - git-delta
-  - bat
   - gh
   - fd
   - lazygit

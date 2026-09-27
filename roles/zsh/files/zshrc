@@ -1,8 +1,3 @@
-# ZSH_THEME="robbyrussell"
-# ZSH_THEME="powerlevel10k/powerlevel10k"
-BAT_THEME="Dracula"
-DELTA_THEME="Dracula"
-
 export EDITOR='nvim'
 export SUDO_EDITOR='nvim'
 
