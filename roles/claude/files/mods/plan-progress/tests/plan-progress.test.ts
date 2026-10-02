@@ -12,6 +12,7 @@ const PLAN = `# Plan: BOM importer
 1. [x] Parse vendor column aliases (a1c3f2e)
 2. [x] Match rows by CSI section (7be019d, 91d2c0e)
 3. [ ] Show unmatched rows in review
+   1. nested detail, not a step
 4. Bulk-assign spec section
 
 ## Risks

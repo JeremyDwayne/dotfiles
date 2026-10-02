@@ -1,6 +1,6 @@
 import type { Step } from '../types'
 
-const STEP = /^\s*(\d+)\.\s+(?:\[([ xX])\]\s+)?(.+?)\s*$/
+const STEP = /^(\d+)\.\s+(?:\[([ xX])\]\s+)?(.+?)\s*$/
 const SHAS = /\s*\(([0-9a-f]{7,40}(?:\s*,\s*[0-9a-f]{7,40})*)\)$/
 
 /** Reads the numbered steps under the plan's "## Order of work" heading. */
