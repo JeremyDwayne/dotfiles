@@ -1,0 +1,9 @@
+{
+  "name": "worktrees",
+  "version": "0.1.0",
+  "description": "Pane listing git worktrees by state: prune the ones whose folder is gone, remove merged ones with no changes",
+  "author": {
+    "name": "Jeremy Winterberg"
+  },
+  "types": "./types/index.d.ts"
+}
