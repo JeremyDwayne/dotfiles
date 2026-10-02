@@ -31,6 +31,8 @@ type Held = {
 
 // The call being held, or null. One at a time: a second risky call waits for the first.
 let held: Held | null = null
+// A headless session (`claude -p`, the SDK) has nobody to press a button.
+let isInteractive = true
 
 /** Runs a command, answering its trimmed stdout and stderr, or null when it fails. */
 const run = async ($: EngineInterface, argv: string[], cwd: string, timeoutMs = 15_000) => {
@@ -79,12 +81,23 @@ const shipsLine = (ship: Ship) => {
   return `Ships ${count}, live ${ship.live} to ${ship.branch} ${ship.head}`
 }
 
-const why = { cancel: 'the user pressed Cancel', timeout: 'no answer within 10 minutes', interrupted: 'the turn was interrupted' }
+const why = {
+  cancel: 'the user pressed Cancel',
+  timeout: 'no answer within 10 minutes',
+  interrupted: 'the turn was interrupted',
+  headless: 'nobody is at this session to confirm it',
+}
 
 export const register: Register = on => {
+  on('session.start', async ($, e, next) => {
+    isInteractive = e.isInteractive
+    return next(e)
+  })
+
   on('tool.call', { tool: 'Bash' }, async ($, e, next) => {
     const risk = classify(e.command)
     if (risk === null) return next(e)
+    if (!isInteractive) return { deny: `prod-guard did not run ${risk.label}: ${why.headless}. Ask the user to run it.` }
 
     while (held !== null) {
       if (next.signal.aborted) return { deny: `prod-guard held this command: ${why.interrupted}. Do not retry it unless the user asks you to.` }

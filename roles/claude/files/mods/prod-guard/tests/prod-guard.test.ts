@@ -91,6 +91,17 @@ describe('prod-guard', () => {
     expect(ran).toEqual([])
   })
 
+  test('refuses at once in a headless session', async ($, on) => {
+    const ran = repo(on)
+    on('session.start', ($, e) => ({ cwd: e.cwd }))
+
+    await $.session.start({ surface: 'terminal', isInteractive: false, cwd: '/work' })
+    const result = await $.tool.call({ tool: 'Bash', command: 'kamal deploy' })
+
+    expect(result.deny).toContain('nobody is at this session')
+    expect(ran).toEqual([])
+  })
+
   test('shows what the deploy ships, and Deploy runs it', async ($, on) => {
     const ran = repo(on)
 
