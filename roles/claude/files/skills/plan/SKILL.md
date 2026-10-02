@@ -39,9 +39,9 @@ One line per file: path, then what changes in it. New files marked (new). Includ
 tests and migrations. Keep the list honest; deep-review flags anything outside it.
 
 ## Order of work
-Numbered steps in the order they should land, each one a vertical slice that leaves
-the tests green: test at the seam, then the code that passes it. Say which step
-touches the riskiest file so it goes early.
+Numbered checkbox steps (`1. [ ] step`) in the order they should land, each one a
+vertical slice that leaves the tests green: test at the seam, then the code that
+passes it. Say which step touches the riskiest file so it goes early.
 
 ## Reuse
 Existing code this builds on, and what it needed to be changed or extracted.

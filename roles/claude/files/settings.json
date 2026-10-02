@@ -1,7 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "env": {
-    "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "500000"
+    "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "500000",
+    "CLAUDE_CODE_PLUGIN_DIRS": "~/.dotfiles/roles/claude/files/mods/plan-progress:~/.dotfiles/roles/claude/files/mods/verify-status:~/.dotfiles/roles/claude/files/mods/prod-guard:~/.dotfiles/roles/claude/files/mods/diff-colors:~/.dotfiles/roles/claude/files/mods/worktrees"
   },
   "includeCoAuthoredBy": false,
   "permissions": {
