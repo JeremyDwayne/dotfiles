@@ -52,10 +52,10 @@ describe('diff-colors', () => {
     )
   })
 
-  test('leaves errors, new files and other tools to the engine', async ($, on) => {
+  test('leaves errors, new files, empty hunks and other tools to the engine', async ($, on) => {
     on('ui.render', () => ({ type: 'Text', children: ['engine'] }))
 
-    for (const input of [result('Edit', [HUNK], true), result('Write', []), result('Bash', [HUNK])]) {
+    for (const input of [result('Edit', [HUNK], true), result('Write', []), result('Bash', [HUNK]), result('Edit', [{ ...HUNK, lines: ['\\ No newline at end of file'] }])]) {
       expect(linesOf(await $.ui.render(input))).toBe('engine\n')
     }
   })

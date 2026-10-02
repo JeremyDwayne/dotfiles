@@ -32,10 +32,10 @@ const plural = (count: number) => `${count} line${count === 1 ? '' : 's'}`
 export const register: Register = on => {
   on('ui.render', { component: 'ToolResult' }, ($, e, next) => {
     const hunks = e.props.tool === 'Edit' || e.props.tool === 'Write' ? hunksOf(e.props.output) : null
-    if (e.props.isErrored || hunks === null) return next(e)
+    const rows = hunks === null ? [] : rowsOf(hunks)
+    if (e.props.isErrored || rows.length === 0) return next(e)
 
     const { Box, Text } = $.ui.resolve(e)
-    const rows = rowsOf(hunks)
     const added = rows.filter(row => row.marker === '+').length
     const removed = rows.filter(row => row.marker === '−').length
     const width = String(Math.max(...rows.map(row => row.number))).length
