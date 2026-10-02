@@ -71,6 +71,7 @@ describe('prod-guard', () => {
   test('holds deploys, prod psql and destructive make targets, nothing else', () => {
     expect(classify('kamal deploy')).toEqual({ kind: 'ship', label: 'kamal deploy', kamal: 'kamal' })
     expect(classify('cd app && bin/kamal redeploy -d prod')).toEqual({ kind: 'ship', label: 'kamal redeploy', kamal: 'bin/kamal' })
+    expect(classify(`ssh deploy@box "kamal deploy"`)?.label).toBe('kamal deploy')
     expect(classify('psql "$(bin/prod-secret DATABASE_URL)" -c "select 1"')?.label).toBe('psql on production')
     expect(classify('make db-reset')?.label).toBe('make db-reset')
     expect(classify('kamal app logs')).toBeNull()

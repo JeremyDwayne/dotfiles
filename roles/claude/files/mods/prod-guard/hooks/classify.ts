@@ -1,7 +1,7 @@
 /** A held command: `ship` deploys HEAD and gets a report of what ships, `run` shows the command alone. */
 export type Risk = { kind: 'ship'; label: string; kamal: string } | { kind: 'run'; label: string }
 
-const SHIP = /(?:^|[\s;&|(])((?:\S*\/)?kamal)\s+(deploy|redeploy)\b/
+const SHIP = /(?:^|[\s;&|("'`])((?:[^\s"'`]*\/)?kamal)\s+(deploy|redeploy)\b/
 const ROLLBACK = /\bkamal\s+rollback\b/
 const PROD = /\bprod(uction)?\b/
 const MAKE = /\bmake\b[^|;&]*?\b(prod-db-console|db-destroy|db-drop|db-reset)\b/
