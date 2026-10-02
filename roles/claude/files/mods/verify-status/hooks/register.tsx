@@ -5,6 +5,8 @@ const edited = atom({ plugin: 'verify-status', key: 'edited' } as const, [])
 
 const TEST_RUN =
   /\b(pytest|vitest|jest|rspec|go test|cargo test|mix test|(pnpm|npm|yarn|bun)( run)? test|manage\.py test|rails test|make (test|check))\b/
+// A pipe like `pytest | tail` exits 0 on failure, so the output is read too.
+const FAILED = /\b[1-9]\d* (failed|failures?|errors?)\b|^FAIL(ED)?\b/m
 
 /** Where statusline.sh reads this session's untested edit count. */
 const segmentPath = async ($: EngineInterface) =>
@@ -30,7 +32,11 @@ export const register: Register = on => {
 
   on('tool.call', { tool: 'Bash' }, async ($, e, next) => {
     const ran = await next(e)
-    const hasPassed = ran.deny === undefined && !ran.isError && !e.run_in_background
+    const hasPassed =
+      ran.deny === undefined &&
+      !ran.isError &&
+      !e.run_in_background &&
+      !FAILED.test(`${ran.result.stdout}\n${ran.result.stderr}`)
     if (hasPassed && TEST_RUN.test(e.command) && (await read($, edited)).length > 0) {
       await update($, edited, () => [])
       await publish($)

@@ -15,7 +15,9 @@ const session = (on: On) => {
   on('tool.call', ($, e) =>
     e.tool === 'Bash' && String(Reflect.get(e, 'command')).includes('fail')
       ? { result: { stdout: '', stderr: 'failed' }, isError: true }
-      : { result: {} },
+      : e.tool === 'Bash' && String(Reflect.get(e, 'command')).includes('tail')
+        ? { result: { stdout: '2 failed, 40 passed in 1.2s', stderr: '' } }
+        : { result: { stdout: '41 passed', stderr: '' } },
   )
   return writes
 }
@@ -34,11 +36,13 @@ describe('verify-status', () => {
     expect(writes).toEqual(['1', '2', '2'])
   })
 
-  test('a passing test run clears the count, a failing one keeps it', async ($, on) => {
+  test('a passing test run clears the count, a failing one keeps it, even through a pipe', async ($, on) => {
     const writes = session(on)
 
     await $.tool.call(edit('/work/a.py'))
     await $.tool.call({ tool: 'Bash', command: 'uv run pytest bom/ && echo fail' })
+    await $.tool.call({ tool: 'Bash', command: 'uv run pytest bom/ | tail -3' })
+    expect(writes).toEqual(['1'])
     await $.tool.call({ tool: 'Bash', command: 'uv run pytest bom/' })
 
     expect(writes).toEqual(['1', ''])
