@@ -9,6 +9,8 @@ export type Worktree = {
   isMerged: boolean
   changes: number
   isCurrent: boolean
+  /** The folder changed in the last 15 minutes, so another session may have just made it. */
+  isRecent: boolean
 }
 
 export type Scan = { repo: string; root: string; gone: number; worktrees: Worktree[] }

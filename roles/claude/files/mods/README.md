@@ -10,7 +10,7 @@ and an edit to one reloads it live.
 | `verify-status` | Counts files edited since the last passing test run and shows `! N edits untested` in the status line. |
 | `prod-guard` | Holds `kamal deploy`, prod `psql` and destructive `make` targets in a dialog that shows what would ship. |
 | `diff-colors` | Draws Edit and Write diffs in blue (added) and orange (removed), each line marked `+` or `−`. |
-| `worktrees` | `/worktrees` pane: prune worktrees whose folder is gone, remove merged ones with no changes. |
+| `worktrees` | `/worktrees` pane: prune worktrees whose folder is gone, remove merged ones with no changes. Skips any changed in the last 15 minutes. |
 
 ## Working on a mod
 

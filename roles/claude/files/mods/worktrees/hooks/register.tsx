@@ -7,6 +7,7 @@ import { fromOf, parseWorktrees, shortAge } from './parse'
 const PANE = 'worktrees'
 const scan = atom({ plugin: 'worktrees', key: 'scan' } as const, null)
 const busy = atom({ plugin: 'worktrees', key: 'busy' } as const, null)
+const RECENT_MS = 15 * 60 * 1000
 
 /** Runs git, answering its exit code and trimmed stdout. */
 const git = async ($: EngineInterface, argv: string[], cwd?: string) => {
@@ -30,12 +31,14 @@ const scanRepo = async ($: EngineInterface): Promise<Scan | null> => {
   const [main, ...linked] = parseWorktrees(list.stdout)
   const into = base.exitCode === 0 ? base.stdout : 'main'
   const live = linked.filter(tree => !tree.isGone)
+  const now = await $.clock.now()
   const worktrees = await Promise.all(
     live.map(async (tree): Promise<Worktree> => {
-      const [status, log, merged] = await Promise.all([
+      const [status, log, merged, folder] = await Promise.all([
         git($, ['status', '--porcelain'], tree.path),
         git($, ['log', '-1', '--format=%ct %cr'], tree.path),
         git($, ['merge-base', '--is-ancestor', tree.head, into]),
+        $.fs.stat(tree.path).catch(() => null),
       ])
       const [stamp = '0', ...relative] = log.stdout.split(' ')
       return {
@@ -47,6 +50,7 @@ const scanRepo = async ($: EngineInterface): Promise<Scan | null> => {
         isMerged: merged.exitCode === 0,
         changes: status.stdout === '' ? 0 : status.stdout.split('\n').length,
         isCurrent: tree.path === current.stdout,
+        isRecent: folder === null || now - folder.mtimeMs < RECENT_MS,
       }
     }),
   )
@@ -60,9 +64,14 @@ const refresh = async ($: EngineInterface) => {
   await update($, scan, () => next)
 }
 
-/** Removes each merged worktree with no changes, one at a time so git's lock is free. */
-const removeClean = async ($: EngineInterface, current: Scan) => {
-  const targets = current.worktrees.filter(tree => tree.isMerged && tree.changes === 0 && !tree.isCurrent)
+const isRemovable = (tree: Worktree) => tree.isMerged && tree.changes === 0 && !tree.isCurrent && !tree.isRecent
+
+/** Rescans, then removes each merged worktree that is clean and not recent, one at a time so git's lock is free. */
+const removeClean = async ($: EngineInterface) => {
+  await refresh($)
+  const current = await read($, scan)
+  if (current === null) return
+  const targets = current.worktrees.filter(isRemovable)
   await update($, busy, () => `Removing ${targets.length} worktrees...`)
   let removed = 0
   for (const tree of targets) {
@@ -115,7 +124,15 @@ export const register: Register = on => {
       <Text key={tree.path}>
         {'  '}
         {fit(tree.branch, branchWidth)} <Text dimColor>{fit(tree.from, 7)} {fit(tree.age, 9)}</Text>{' '}
-        {tree.isCurrent ? <Text dimColor>this session</Text> : tree.changes > 0 ? <Text color="warning">{tree.changes} changes</Text> : 'clean'}
+        {tree.isCurrent ? (
+          <Text dimColor>this session</Text>
+        ) : tree.changes > 0 ? (
+          <Text color="warning">{tree.changes} changes</Text>
+        ) : tree.isRecent ? (
+          <Text dimColor>new, kept</Text>
+        ) : (
+          'clean'
+        )}
       </Text>
     )
 
@@ -132,8 +149,8 @@ export const register: Register = on => {
         </Box>
         <Box gap={1}>
           <Text color="suggestion">✓ merged          {String(merged.length).padStart(3)}</Text>
-          {merged.some(tree => tree.changes === 0 && !tree.isCurrent) && working === null && (
-            <Button key="remove" label="Remove clean ones" hotkey="r" plain onPress={() => void removeClean($, current)} />
+          {merged.some(isRemovable) && working === null && (
+            <Button key="remove" label="Remove clean ones" hotkey="r" plain onPress={() => void removeClean($)} />
           )}
         </Box>
         <Text bold>▸ open            {String(open.length).padStart(3)}</Text>

@@ -20,6 +20,10 @@ worktree /w/.claude/worktrees/agent-1
 HEAD ddddddd4
 detached
 
+worktree /w/.claude/worktrees/agent-2
+HEAD fffffff6
+detached
+
 worktree /gone/x
 HEAD eeeeeee5
 branch refs/heads/gone
@@ -33,6 +37,8 @@ const PANE: RenderInput<'Pane'> = {
   viewport: { columns: 160, rows: 40 },
   props: { title: 'Worktrees', isFocused: true, bodyColumns: 60, placement: 'dock', scroll: { offset: 0, bodyRows: 30 }, view: {} },
 }
+
+const NOW = 1_800_000_000_000
 
 const COMMAND = { command: 'worktrees', args: '', origin: { kind: 'composer' }, presentation: { isFullscreen: true, columns: 160 } } as const
 
@@ -52,7 +58,10 @@ const repo = (on: On) => {
     [/is-ancestor/, ''],
     [/worktree (remove|prune)/, ''],
   ]
-  mock.clock(on)
+  mock.clock(on, { now: NOW })
+  on('fs.stat', ($, e) => ({
+    value: { kind: 'dir', size: 0, isLink: false, mtimeMs: e.path.endsWith('agent-2') ? NOW - 60_000 : NOW - 86_400_000 },
+  }))
   on('session.start', ($, e) => ({ cwd: e.cwd }))
   on('command.register', ($, e) => ({ value: { command: e.name } }))
   on('ui.open', () => ({ value: { isPlaced: true } }))
@@ -89,6 +98,7 @@ describe('worktrees', () => {
       ['codex/old', false],
       ['t3code/search', false],
       ['ddddddd', false],
+      ['fffffff', false],
       ['gone', true],
     ])
   })
@@ -98,17 +108,18 @@ describe('worktrees', () => {
     await opened($)
 
     const drawn = textOf(await $.ui.render(PANE))
-    expect(drawn).toContain('Worktrees  work · 4')
+    expect(drawn).toContain('Worktrees  work · 5')
     expect(drawn).toContain('○ folder gone       1')
-    expect(drawn).toContain('✓ merged            2')
+    expect(drawn).toContain('✓ merged            3')
     expect(drawn).toContain('▸ open              1')
     expect(drawn.indexOf('t3code/search')).toBeLessThan(drawn.indexOf('codex/old'))
     expect(drawn.indexOf('codex/old')).toBeLessThan(drawn.indexOf('ddddddd'))
     expect(drawn).toMatch(/t3code\/search +t3 +2 weeks +3 changes/)
     expect(drawn).toMatch(/ddddddd +claude +6 days +this session/)
+    expect(drawn).toMatch(/fffffff +claude +new, kept/)
   })
 
-  test('removes only merged worktrees with no changes, never the session own', async ($, on) => {
+  test('removes only merged worktrees with no changes, never the session own or one changed in the last 15 minutes', async ($, on) => {
     const runs = repo(on)
     await opened($)
     await $.ui.render(PANE)
