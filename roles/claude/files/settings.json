@@ -116,13 +116,20 @@
     "neon@claude-plugins-official": false,
     "posthog@claude-plugins-official": false,
     "ralph-loop@claude-plugins-official": false,
-    "typesafe@typesafe-ai": true
+    "typesafe@typesafe-ai": true,
+    "posthog@posthog": true
   },
   "extraKnownMarketplaces": {
     "typesafe-ai": {
       "source": {
         "source": "github",
         "repo": "typesafe-ai/skills"
+      }
+    },
+    "posthog": {
+      "source": {
+        "source": "github",
+        "repo": "PostHog/ai-plugin"
       }
     }
   },

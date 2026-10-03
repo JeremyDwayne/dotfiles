@@ -29,6 +29,11 @@ I wanted to share some of my preferences here so we can be more aligned as we wo
 - Implement from the plan with tests at the seams the spec named. Run the type check and the tests for the files you touched as you go.
 - When a plan step lands, tick its box in plan.md and add its short SHAs: `2. [x] Match rows by CSI section (7be019d, 91d2c0e)`.
 - Review with `deep-review` before filing a PR. It fixes what it confirms.
+- One plan, one branch, one PR. Its parts or steps are the order of work, not separate PRs.
+
+## Commits
+- Commit when a plan step is done and green: the code, its tests, and its docs together. A plan step lands as one to three commits, and a whole PR as a handful.
+- A test, lint, or follow-up fix to work already on the branch joins the next step's commit or amends the last one.
 
 ## Done means verified
 - Before reporting a task done, run the repo's type check, lint, and test targets and paste the result. If you could not run one, say which and why. "Should pass" is not a result.
@@ -38,7 +43,7 @@ I wanted to share some of my preferences here so we can be more aligned as we wo
 
 ## Leave it better than you found it
 - While you are in a file, improve it: dedupe, drop dead code, fix an obvious perf problem, simplify logic you had to read twice. Bounded to the files the task already touches.
-- Put each refactor in its own commit labeled `refactor:` so review can see it apart from the feature and drop it without losing the feature. Only do it when it deletes code or fixes something measurable. Do not rename or restructure for taste.
+- Put a step's refactors together in one commit labeled `refactor:` so review can see them apart from the feature and drop them without losing the feature. Only do it when it deletes code or fixes something measurable. Do not rename or restructure for taste.
 - Improvements you notice outside the touched files go in the report as follow-ups, not in the branch.
 
 ## Lessons
