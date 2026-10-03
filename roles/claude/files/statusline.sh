@@ -6,7 +6,7 @@
 #   1. Place  — repo, worktree, branch, dirt, ahead/behind. Answers "where am I
 #      and is it clean?", which is the question that actually bites when several
 #      worktrees of the same repo are open in split panes.
-#   2. Session — model, effort, context, rate limits, cost.
+#   2. Session — model, effort, context, rate limits, untested edits, cost.
 #
 # Two fixed lines (rather than one long one) means a narrow pane truncates the
 # tail of each half instead of hiding the second half entirely. Every field is
@@ -43,6 +43,7 @@ eval "$(printf '%s' "$input" | jq -r '
   @sh "fast=\(.fast_mode == true)",
   @sh "thinking=\(.thinking.enabled != false)",
   @sh "cwd=\(.cwd // "")",
+  @sh "session_id=\(.session_id // "")",
   @sh "repo=\(.workspace.repo.name // "")",
   @sh "worktree=\(.worktree.name // .workspace.git_worktree // "")",
   @sh "cost=\(.cost.total_cost_usd // 0)",
@@ -252,6 +253,10 @@ ctx_int=""
 r5=""; [ -n "$rate5" ] && r5=$(fmt_pct "$rate5")
 r7=""; [ -n "$rate7" ] && r7=$(fmt_pct "$rate7")
 
+# Files edited since the last passing test run, written by the verify-status mod.
+untested=""
+[ -n "$session_id" ] && untested=$(cat "$HOME/.claude/state/verify-status/$session_id" 2>/dev/null)
+
 # Build the session line at a given level of detail. Higher level = tighter.
 # Model, effort, and both rate-limit windows survive to the last level; the
 # labels, the 1M marker, the reset countdowns, and cost are what get shed.
@@ -312,6 +317,17 @@ build_session() {
       color=$(usage_color "$pct" "$DIM")
       p+=("$seg_p"); c+=("${color}${seg_p}${RESET}")
     done
+  fi
+
+  if [ "${untested:-0}" -gt 0 ] 2>/dev/null; then
+    if [ "$level" -ge 3 ]; then
+      seg_p="! ${untested}"
+    elif [ "$untested" -eq 1 ]; then
+      seg_p="! 1 edit untested"
+    else
+      seg_p="! ${untested} edits untested"
+    fi
+    p+=("$seg_p"); c+=("${YELLOW}${seg_p}${RESET}")
   fi
 
   if [ "$level" -lt 1 ] && [ -n "$cost_display" ]; then

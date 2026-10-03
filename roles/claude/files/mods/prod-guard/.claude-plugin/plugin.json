@@ -1,0 +1,8 @@
+{
+  "name": "prod-guard",
+  "version": "0.1.0",
+  "description": "Holds production deploys and database commands in a dialog that shows what would ship",
+  "author": {
+    "name": "Jeremy Winterberg"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "plan-progress",
+  "version": "0.1.0",
+  "description": "Pane showing what's left in .scratch/<branch>/plan.md and the live task list",
+  "author": {
+    "name": "Jeremy Winterberg"
+  },
+  "types": "./types/index.d.ts"
+}
