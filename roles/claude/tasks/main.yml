@@ -61,6 +61,20 @@
   loop_control:
     label: "{{ item.path | basename }}"
 
+- name: "Claude | Register user-scoped MCP servers"
+  ansible.builtin.shell: >-
+    {{ claude_bin }} mcp get {{ item.name }} >/dev/null 2>&1 && echo present ||
+    {{ claude_bin }} mcp add --scope user --transport http {{ item.name }} {{ item.url }}
+  vars:
+    claude_bin: "{{ ansible_facts['user_dir'] }}/.local/bin/claude"
+  register: claude_mcp_add
+  changed_when: "'present' not in claude_mcp_add.stdout"
+  loop:
+    - { name: submittalkit, url: "https://submittalkit.com/mcp" }
+    - { name: submittalkit-admin, url: "https://submittalkit.com/mcp/internal" }
+  loop_control:
+    label: "{{ item.name }}"
+
 - name: "Claude | Update installed skills"
   ansible.builtin.command: npx --yes skills update --global --yes
   register: claude_skills_update
