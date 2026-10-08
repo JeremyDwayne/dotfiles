@@ -94,7 +94,7 @@
   "enabledPlugins": {
     "commit-commands@claude-code-plugins": true,
     "hookify@claude-code-plugins": false,
-    "typescript-lsp@claude-plugins-official": false,
+    "typescript-lsp@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": false,
     "superpowers@claude-plugins-official": false,
     "context7@claude-plugins-official": false,
@@ -103,10 +103,10 @@
     "feature-dev@claude-plugins-official": false,
     "skill-creator@claude-plugins-official": false,
     "claude-md-management@claude-plugins-official": false,
-    "security-guidance@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": false,
     "claude-code-setup@claude-plugins-official": false,
     "stripe@claude-plugins-official": false,
-    "ruby-lsp@claude-plugins-official": false,
+    "ruby-lsp@claude-plugins-official": true,
     "swift-lsp@claude-plugins-official": false,
     "vercel@claude-plugins-official": false,
     "sentry@claude-plugins-official": false,
@@ -116,7 +116,8 @@
     "posthog@claude-plugins-official": false,
     "ralph-loop@claude-plugins-official": false,
     "typesafe@typesafe-ai": true,
-    "posthog@posthog": true
+    "posthog@posthog": true,
+    "cc-plugin-you-should-know@builtin": false
   },
   "extraKnownMarketplaces": {
     "typesafe-ai": {
