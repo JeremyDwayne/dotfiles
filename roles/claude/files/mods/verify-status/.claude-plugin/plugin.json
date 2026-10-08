@@ -1,9 +1,0 @@
-{
-  "name": "verify-status",
-  "version": "0.1.0",
-  "description": "Counts files edited since the last passing test run for the status line",
-  "author": {
-    "name": "Jeremy Winterberg"
-  },
-  "types": "./types/index.d.ts"
-}

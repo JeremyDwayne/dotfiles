@@ -17,4 +17,3 @@ roles/zsh/files/zsh/env.zsh
 # Karabiner writes backups and assets next to karabiner.json
 roles/karabiner/files/*
 !roles/karabiner/files/karabiner.json
-roles/claude/files/mods/*/.claude-plugin/types/

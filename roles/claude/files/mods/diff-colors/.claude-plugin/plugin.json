@@ -1,8 +1,0 @@
-{
-  "name": "diff-colors",
-  "version": "0.1.0",
-  "description": "Draws Edit and Write diffs blue for added lines and orange for removed, each marked + or −",
-  "author": {
-    "name": "Jeremy Winterberg"
-  }
-}
