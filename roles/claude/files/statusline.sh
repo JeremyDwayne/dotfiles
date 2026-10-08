@@ -1,21 +1,12 @@
 #!/usr/bin/env bash
-# Claude Code statusLine script.
+# Claude Code statusLine script. Reads the status JSON on stdin and prints two
+# lines, each shed of detail until it fits the pane:
 #
-# Reads the status JSON payload from stdin and prints TWO lines:
+#   1. Place: repo, worktree, branch, dirt, ahead/behind.
+#   2. Session: model, effort, context until auto-compact, rate limits, cache.
 #
-#   1. Place  — repo, worktree, branch, dirt, ahead/behind. Answers "where am I
-#      and is it clean?", which is the question that actually bites when several
-#      worktrees of the same repo are open in split panes.
-#   2. Session — model, effort, context, rate limits, untested edits, cost.
-#
-# Two fixed lines (rather than one long one) means a narrow pane truncates the
-# tail of each half instead of hiding the second half entirely. Every field is
-# optional: missing data is omitted so the line degrades gracefully across
-# Claude Code versions and non-git directories.
-#
-# Colors avoid a red/green pairing for the ok/alert axis — normal is dim/neutral
-# and escalation runs yellow -> red, which stays legible with red-green color
-# deficiency.
+# Missing fields are omitted. Normal values are dim and alerts run yellow then
+# red, never against green.
 
 DIM='\033[2m'
 BOLD='\033[1m'
@@ -36,7 +27,7 @@ input=$(cat)
 eval "$(printf '%s' "$input" | jq -r '
   @sh "model=\(.model.display_name // "")",
   @sh "ctx_size=\(.context_window.context_window_size // 0)",
-  @sh "ctx_pct=\(.context_window.used_percentage // "")",
+  @sh "ctx_tokens=\(.context_window.total_input_tokens // 0)",
   @sh "effort=\(.effort.level // "")",
   # jq: `false // x` yields x, so these two booleans must be tested explicitly
   # rather than defaulted with `//`.
@@ -46,7 +37,7 @@ eval "$(printf '%s' "$input" | jq -r '
   @sh "session_id=\(.session_id // "")",
   @sh "repo=\(.workspace.repo.name // "")",
   @sh "worktree=\(.worktree.name // .workspace.git_worktree // "")",
-  @sh "cost=\(.cost.total_cost_usd // 0)",
+  @sh "cache_cold=\(.prompt_cache.caching_observed == true and .prompt_cache.warm == false)",
   @sh "rate5=\(.rate_limits.five_hour.used_percentage // "")",
   @sh "reset5=\(.rate_limits.five_hour.resets_at // "")",
   @sh "rate7=\(.rate_limits.seven_day.used_percentage // "")",
@@ -100,9 +91,17 @@ until_short() {
   fi
 }
 
-# Truncate a string that would blow the line budget. Branch names tend to differ
-# at both ends ("feat/billing-v2" vs "feat/billing-v3"), so cut from the middle
-# and keep the tail — unless the budget is too small for that to say anything.
+# Compact token count: 420k, 1M, 1.5M.
+fmt_tokens() {
+  if [ "$1" -ge 1000000 ]; then
+    awk -v n="$1" 'BEGIN { s = sprintf("%.1f", n / 1000000); sub(/\.0$/, "", s); printf "%sM", s }'
+  else
+    printf '%dk' "$(($1 / 1000))"
+  fi
+}
+
+# Truncate a string to max chars, cutting from the middle so the tail survives
+# ("feat/billing-v2" vs "feat/billing-v3"). Very small budgets keep the head.
 shorten() {
   local s="$1" max="$2"
   [ "$max" -lt 4 ] && max=4
@@ -152,22 +151,10 @@ if [ -n "$cwd" ] && command -v git >/dev/null 2>&1; then
     esac
   done < <(git -C "$cwd" --no-optional-locks status --porcelain=v2 --branch 2>/dev/null)
   [ "$branch" = "(detached)" ] && branch=""
-
-  # Claude Code doesn't send a worktree field, so derive it: a linked worktree's
-  # per-worktree git dir differs from the shared common dir, and its name is the
-  # checkout directory's basename. This reflects the SESSION's cwd, so it shows
-  # a worktree only when the session actually runs inside one.
-  if [ -z "$worktree" ]; then
-    gitdir=$(git -C "$cwd" --no-optional-locks rev-parse --git-dir 2>/dev/null)
-    commondir=$(git -C "$cwd" --no-optional-locks rev-parse --git-common-dir 2>/dev/null)
-    if [ -n "$gitdir" ] && [ -n "$commondir" ] && [ "$gitdir" != "$commondir" ]; then
-      worktree=$(basename "$(git -C "$cwd" --no-optional-locks rev-parse --show-toplevel 2>/dev/null)")
-    fi
-  fi
 fi
 
 # ---------------------------------------------------------------------------
-# Line 1 — place.
+# Line 1: place.
 # ---------------------------------------------------------------------------
 loc="$repo"
 [ -z "$loc" ] && [ -n "$cwd" ] && loc=$(basename "$cwd")
@@ -179,7 +166,7 @@ sync=""
 
 # Build the place line at a given level of detail, producing the colored string
 # and a plain twin for measurement. The ⧉ marker means "this is a linked
-# worktree, not the main checkout" — it collapses onto the branch when the
+# worktree, not the main checkout". It collapses onto the branch when the
 # worktree directory adds nothing over the branch name.
 build_place() {
   local repo_max=$1 show_wt=$2 branch_max=$3
@@ -228,7 +215,7 @@ for attempt in "24 1 40" "24 1 28" "20 1 18" "18 0 24" "14 0 16" "10 0 10" "0 0 
 done
 
 # ---------------------------------------------------------------------------
-# Line 2 — session.
+# Line 2: session.
 # ---------------------------------------------------------------------------
 # Effort as a single compact token: L M H XH MAX.
 case "$effort" in
@@ -238,28 +225,25 @@ case "$effort" in
   *) effort_short=$(printf '%s' "$effort" | tr '[:lower:]' '[:upper:]') ;;
 esac
 
-# Session cost, formatted once: whole dollars past $10, cents below it.
-cost_display=""
-if [ -n "$cost" ] && [ "$cost" != "0" ]; then
-  if awk "BEGIN{exit !($cost >= 10)}" 2>/dev/null; then
-    cost_display=$(printf '$%.0f' "$cost" 2>/dev/null)
-  else
-    cost_display=$(printf '$%.2f' "$cost" 2>/dev/null)
-  fi
+# Context is measured against the auto-compact window when one is set below the
+# model's window, since that is where the session actually compacts.
+ctx_limit=${ctx_size:-0}
+compact_window=${CLAUDE_CODE_AUTO_COMPACT_WINDOW:-}
+if [[ "$compact_window" =~ ^[0-9]+$ ]] && [ "$compact_window" -gt 0 ] && \
+   { [ "$ctx_limit" -eq 0 ] || [ "$compact_window" -lt "$ctx_limit" ]; }; then
+  ctx_limit=$compact_window
 fi
-
-ctx_int=""
-[ -n "$ctx_pct" ] && ctx_int=$(fmt_pct "$ctx_pct")
+ctx_int=""; ctx_used=""
+if [ "${ctx_tokens:-0}" -gt 0 ] 2>/dev/null && [ "$ctx_limit" -gt 0 ]; then
+  ctx_int=$((ctx_tokens * 100 / ctx_limit))
+  ctx_used="$(fmt_tokens "$ctx_tokens")/$(fmt_tokens "$ctx_limit")"
+fi
 r5=""; [ -n "$rate5" ] && r5=$(fmt_pct "$rate5")
 r7=""; [ -n "$rate7" ] && r7=$(fmt_pct "$rate7")
 
-# Files edited since the last passing test run, written by the verify-status mod.
-untested=""
-[ -n "$session_id" ] && untested=$(cat "$HOME/.claude/state/verify-status/$session_id" 2>/dev/null)
-
 # Build the session line at a given level of detail. Higher level = tighter.
-# Model, effort, and both rate-limit windows survive to the last level; the
-# labels, the 1M marker, the reset countdowns, and cost are what get shed.
+# Model, effort, context, and both rate-limit windows survive to the last level;
+# labels, token counts, the 1M marker, and reset countdowns are what get shed.
 build_session() {
   local level=$1
   local p=() c=() seg_p seg_c color
@@ -291,8 +275,16 @@ build_session() {
 
   if [ -n "$ctx_int" ]; then
     color=$(usage_color "$ctx_int" "$DIM")
-    if [ "$level" -ge 2 ]; then seg_p="${ctx_int}%"; else seg_p="ctx ${ctx_int}%"; fi
+    if [ "$level" -ge 2 ]; then seg_p="${ctx_int}%"
+    elif [ "$level" -ge 1 ]; then seg_p="ctx ${ctx_int}%"
+    else seg_p="ctx ${ctx_used}"; fi
     p+=("$seg_p"); c+=("${color}${seg_p}${RESET}")
+  fi
+
+  # A cold cache means the next message re-caches the whole context.
+  if [ "$cache_cold" = "true" ]; then
+    if [ "$level" -ge 2 ]; then seg_p="cold"; else seg_p="cache cold"; fi
+    p+=("$seg_p"); c+=("${YELLOW}${seg_p}${RESET}")
   fi
 
   if [ "$level" -ge 4 ]; then
@@ -317,21 +309,6 @@ build_session() {
       color=$(usage_color "$pct" "$DIM")
       p+=("$seg_p"); c+=("${color}${seg_p}${RESET}")
     done
-  fi
-
-  if [ "${untested:-0}" -gt 0 ] 2>/dev/null; then
-    if [ "$level" -ge 3 ]; then
-      seg_p="! ${untested}"
-    elif [ "$untested" -eq 1 ]; then
-      seg_p="! 1 edit untested"
-    else
-      seg_p="! ${untested} edits untested"
-    fi
-    p+=("$seg_p"); c+=("${YELLOW}${seg_p}${RESET}")
-  fi
-
-  if [ "$level" -lt 1 ] && [ -n "$cost_display" ]; then
-    p+=("$cost_display"); c+=("${DIM}${cost_display}${RESET}")
   fi
 
   SESSION_PLAIN=$(join_plain "${p[@]}")
