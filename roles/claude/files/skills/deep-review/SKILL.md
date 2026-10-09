@@ -100,9 +100,10 @@ Without a plan or spec, compare against the claim from step 1 and say so in the 
 Read `references/bug-classes.md` and walk it against the change. For each category, try
 to break the change rather than confirm it looks fine.
 
-Then read the stack file that matches the repo: `references/django-stack.md` or
-`references/rails-stack.md`. Skip both if the repo is neither. If it uses Stripe with any
-framework, read the Stripe section of whichever file is closer.
+Then read every stack file the changed files match: `references/django-stack.md`,
+`references/rails-stack.md`, `references/typescript-react-stack.md`. A Django API with a
+React frontend reads both. If the repo uses Stripe with any framework, read the Stripe
+section of whichever file is closer.
 
 ### 6. Execute what you can
 
