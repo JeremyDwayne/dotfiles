@@ -25,7 +25,7 @@ I wanted to share some of my preferences here so we can be more aligned as we wo
 
 ## How we work
 - Each stage of a feature starts in a fresh session (`/clear`) from a file on disk. Spec, plan, implement, ship. The `spec` and `plan` skills write `.scratch/<branch>/spec.md` and `plan.md`; those files are gitignored and die with the branch. Only read the current branch's folder. The PR description is the permanent record.
-- Small changes skip spec and plan. Medium changes get a plan. Fuzzy or large changes get grilled first, then a spec, then a plan.
+- Small changes skip spec and plan. Medium changes get a plan. Fuzzy or large changes get a spec, then a plan. The spec decides what it can and asks one round about the rest; `grilling` runs only when I ask for it.
 - Implement from the plan with tests at the seams the spec named. Run the type check and the tests for the files you touched as you go.
 - When a plan step lands, tick its box in plan.md and add its short SHAs: `2. [x] Match rows by CSI section (7be019d, 91d2c0e)`.
 - Review with `deep-review` before filing a PR. It fixes what it confirms.
@@ -39,6 +39,7 @@ I wanted to share some of my preferences here so we can be more aligned as we wo
 - Before reporting a task done, run the repo's type check, lint, and test targets and paste the result. If you could not run one, say which and why. "Should pass" is not a result.
 - A bug fix starts with a failing test that reproduces it. When `.scratch/lock-tests` exists, test files are locked; fix the code, and if the test itself is wrong, say so and stop.
 - UI work is done when the result matches the mock that was picked, not when it renders.
+- If the repo has a `.claude/skills/verify-*` skill, user-facing work is done when the changed feature was driven through it; report the evidence path. A repo with a UI or CLI and no verify skill gets `/verify-setup` suggested once.
 - A message with no tool call ends your turn and the work stops. End a turn only when the task is done, a stop named in this file or a skill is reached, you are blocked on me, or a risky action needs my confirmation. When you name the next step, take it in the same message. Status notes and recommendations ride along with the next tool call.
 
 ## Leave it better than you found it
@@ -88,8 +89,5 @@ Applies to every message, commit, PR body, comment, and doc. The `unslop` skill 
 - Never touch production, live databases, or daily-driver build/preview channels unless explicitly told to. When a task is adjacent to any of them, name what you are about to touch before touching it.
 
 ## Pull request
-- Make sure titles follow conventions from the repo. They should be simple and easy to understand. Conventional commit styles in projects that use them, i.e. "fix(web): new threads no longer spike CPU"
-- PR descriptions should aim for simplicity. Open with a minimal, clear description of the problem. Follow up with how you solved it.
-- Rebase onto latest `main` before opening. Stale branches conflict and waste a review round.
-- The `file-pr` skill owns the rest of filing. The `babysit-pr` skill owns monitoring.
+- The `file-pr` skill owns filing: rebase, title, and description. The `babysit-pr` skill owns monitoring.
 - Merge only per the disposition given in the request (merge when green, or stop and report). If none was given, report and ask.
