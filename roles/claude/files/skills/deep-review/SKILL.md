@@ -36,6 +36,11 @@ description and commits. Every later step compares the code against that claim.
 Read the repo's `CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `REVIEW.md`, and lint config
 where they exist. Reviewers who know the house rules find violations generic reviewers miss.
 
+Size the review. A small diff is under about 150 changed lines with no migration, schema,
+public API, auth, or config change. For a small diff, skip steps 2 and 5: find references
+with `rg` and trace only the symbols whose signature or behavior changed. Everything else
+gets the full workflow. Name the size you picked in the summary.
+
 ### 2. Build the change map
 
 Run `scripts/change_map.py <base-ref>` from the repo root (or `--diff <file>` for a diff
@@ -84,6 +89,9 @@ With the plan and spec open, record each mismatch as a finding:
 - **Wrong.** Requirements that look implemented but do not match the spec's wording.
   Quote the spec line next to the code.
 - **Proof.** Each proof the plan names (tests, screenshots, commands). Run the ones you can.
+- **Feature map.** If the repo has a `.claude/skills/verify-*` skill, a change to how a
+  user reaches or sees a feature needs its feature file updated in the diff. A stale or
+  missing feature file is a MINOR finding; fix it.
 
 Without a plan or spec, compare against the claim from step 1 and say so in the report.
 
@@ -100,6 +108,9 @@ framework, read the Stripe section of whichever file is closer.
 
 - Run the tests touching changed files, the type checker, and the linter. Report the
   actual result.
+- If the repo has a `.claude/skills/verify-*` skill and the change is user-facing, drive
+  each changed feature through it and report the evidence path. A failed drive is a
+  finding.
 - Reproduce any runtime claim (raises on nil, N+1 query, regex backtracks) in a console,
   scratch script, or targeted test before reporting it.
 - If you cannot run anything, say so and mark runtime-dependent findings as unverified.

@@ -39,6 +39,7 @@ I wanted to share some of my preferences here so we can be more aligned as we wo
 - Before reporting a task done, run the repo's type check, lint, and test targets and paste the result. If you could not run one, say which and why. "Should pass" is not a result.
 - A bug fix starts with a failing test that reproduces it. When `.scratch/lock-tests` exists, test files are locked; fix the code, and if the test itself is wrong, say so and stop.
 - UI work is done when the result matches the mock that was picked, not when it renders.
+- If the repo has a `.claude/skills/verify-*` skill, user-facing work is done when the changed feature was driven through it; report the evidence path. A repo with a UI or CLI and no verify skill gets `/verify-setup` suggested once.
 - A message with no tool call ends your turn and the work stops. End a turn only when the task is done, a stop named in this file or a skill is reached, you are blocked on me, or a risky action needs my confirmation. When you name the next step, take it in the same message. Status notes and recommendations ride along with the next tool call.
 
 ## Leave it better than you found it

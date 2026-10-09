@@ -1,6 +1,6 @@
 ---
-name: create-verification-skill
-description: "Generate a project-local verification skill that drives your app the way a user does, in any language, framework, or platform. Use for /pstack:create-verification-skill, \"make a control skill for this repo\", or when a project has no scripted way to prove UI/CLI/service behavior."
+name: verify-setup
+description: Generate a project-local verify-<app> skill that drives the app the way a user does and captures evidence. Use once per repo, when a project has no scripted way to prove UI, CLI, or service behavior.
 disable-model-invocation: true
 ---
 
@@ -28,7 +28,7 @@ Write `.claude/skills/verify-<app>/SKILL.md` with YAML frontmatter (`name: verif
 - **Doctor:** one read-only check that answers "is this instance worth driving?" It covers process up, right version/build, port owned by us, auth valid. An agent runs this first whenever anything looks off.
 - **Drive:** the harness recipe with real selectors/commands from this repo, not examples. Prefer stable handles (ARIA labels, data attributes, prompt strings, route paths) over coordinates and tab order.
 - **Evidence:** what to capture for a proof and where it goes. State the proof standards: exercise the real user path, not internal setters or test-only endpoints; capture the action and the resulting state, not just the final screen; verify side effects (files written, rows inserted, messages sent) alongside what's visible; mocks only where a production boundary already isolates the external system. When the safe path is a dry-run or test mode, verify what it actually skips by observing (files, network, git refs) rather than trusting its name: some dry-runs still touch the network or open a browser.
-- **Cleanup:** how to tear down instances the run created. Never kill by process name; kill what you started. Cleanup removes instances and scratch state, never the evidence: proof artifacts survive the teardown, in a location the skill names.
+- **Cleanup:** how to tear down instances the run created. Never kill by process name; kill what you started. Cleanup removes instances and scratch state, never the evidence: proof artifacts survive the teardown, under `.scratch/<branch>/verify-<app>/` so they die with the branch like the spec and plan.
 - **Helpers:** any script the skill ships is executable and its invocation is shown in the skill body. A helper the reader has to reverse-engineer is not a helper.
 
 ## 3. Seed the feature map
@@ -39,6 +39,6 @@ Create `.claude/skills/verify-<app>/features/README.md` plus one file per user-f
 
 Run its own instructions end to end once: launch, doctor, drive ONE mapped feature (one is enough; the map exists so later runs can cover the rest), capture evidence, clean up. After cleanup, confirm the evidence still exists at the named location. A cleanup that eats the proof fails this step. Fix what fails, and run the generated cleanup after every failed iteration too, so broken attempts don't strand processes and ports. A generated skill that was never executed is a draft, not a deliverable.
 
-## 5. Offer the maintenance loop
+## 5. Keep the map current
 
-Point the user at `/pstack:maintain-verification-skill` for keeping the map honest as the app changes. Suggest a cadence only if they ask.
+There is no separate audit pass. A branch that changes how a user reaches or sees a feature updates that feature's file in the same commit, and adds a file for a new user-facing feature. `deep-review` reports a stale feature file as a plan mismatch. Say this in the report so the user knows the map's upkeep rides along with feature work.

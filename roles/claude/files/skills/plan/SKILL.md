@@ -53,6 +53,8 @@ deploy, data written before the change, and callers outside the diff belong here
 ## Proof
 What "done" looks like, as commands and artifacts: the test target and the tests that
 must pass, the type check, and for UI work the screenshot or mock the result must match.
+If the repo has a `.claude/skills/verify-*` skill, name the feature file to drive and
+the end state it must show, plus any feature file this branch must update or add.
 ```
 
 ## Size
