@@ -1,3 +1,7 @@
+# Default is 500ms; slow cold starts (e.g. `python --version` right after a
+# git pull) blow past it and print a WARN above the prompt
+command_timeout = 1000
+
 # Sets user-defined palette
 palette = "catppuccin_mocha"
 
@@ -14,6 +18,10 @@ style = "bold lavender"
 
 [git_branch]
 truncation_length = 8
+
+[python]
+# Prefer python3 so a stale /usr/local/bin/python (old Intel/python.org install) isn't probed first
+python_binary = ["python3", "python"]
 
 [docker_context]
 disabled = true
