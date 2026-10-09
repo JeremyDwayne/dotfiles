@@ -5,6 +5,10 @@
   },
   "includeCoAuthoredBy": false,
   "permissions": {
+    "allow": [
+      "mcp__submittalkit",
+      "mcp__submittalkit-admin"
+    ],
     "deny": [
       "EnterPlanMode",
       "ExitPlanMode",
@@ -21,7 +25,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "opus",
+  "model": "opus[1m]",
   "disableClaudeAiConnectors": true,
   "skillOverrides": {
     "ask-matt": "off",
