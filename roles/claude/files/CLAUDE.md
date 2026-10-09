@@ -89,8 +89,5 @@ Applies to every message, commit, PR body, comment, and doc. The `unslop` skill 
 - Never touch production, live databases, or daily-driver build/preview channels unless explicitly told to. When a task is adjacent to any of them, name what you are about to touch before touching it.
 
 ## Pull request
-- Make sure titles follow conventions from the repo. They should be simple and easy to understand. Conventional commit styles in projects that use them, i.e. "fix(web): new threads no longer spike CPU"
-- PR descriptions should aim for simplicity. Open with a minimal, clear description of the problem. Follow up with how you solved it.
-- Rebase onto latest `main` before opening. Stale branches conflict and waste a review round.
-- The `file-pr` skill owns the rest of filing. The `babysit-pr` skill owns monitoring.
+- The `file-pr` skill owns filing: rebase, title, and description. The `babysit-pr` skill owns monitoring.
 - Merge only per the disposition given in the request (merge when green, or stop and report). If none was given, report and ask.

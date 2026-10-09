@@ -9,7 +9,7 @@ metadata:
 
 # File PR
 
-Before filing, check whether a PR for this branch already exists. Rebase onto latest `origin/main`; stale branches conflict and waste a review round. Then review the diff locally against `origin/main` to make sure its contents match the goal.
+Before filing, check whether a PR for this branch already exists. Rebase onto latest `origin/main`; stale branches conflict and waste a review round. Do not re-review the diff; `deep-review` owns that. If you cannot tell that it ran on this branch, say so in your report.
 
 PR titles usually become commit messages, so follow the repository's title conventions. Look at recently merged PRs and Git history for examples. Prefer a concise human readable title that explains why the change matters.
 
