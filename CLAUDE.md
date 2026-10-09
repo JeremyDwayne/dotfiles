@@ -33,6 +33,7 @@ Uses mise for runtime versions (installed in `main.yml` pre_tasks, activated in 
 ### Claude Code Configuration
 - The `claude` role symlinks global Claude Code config into `~/.claude/` (CLAUDE.md, settings.json, statusline.sh, claude-app-preferences.md); it also registers user-scoped MCP servers with `claude mcp add` since `~/.claude.json` holds secrets and runtime state and is not tracked
 - Custom skills live in `roles/claude/files/skills/` (each folder symlinked into `~/.claude/skills/`); third-party skill packs are installed and updated via the `skills` CLI (`npx skills add mattpocock/skills`, `npx skills update`)
+- Plugins live in `roles/claude/files/plugins/`, a local marketplace named `dotfiles` declared in settings.json (`extraKnownMarketplaces`, `enabledPlugins`); plugins load in place, so edits apply after `/reload-plugins`
 - Hook scripts live in `roles/claude/files/hooks/` (each symlinked into `~/.claude/hooks/`, wired up in settings.json); `roles/claude/files/templates/REVIEW.md` is the CI review policy to copy into a repo
 - The engineering loop (spec, plan, implement, ship) is documented in `roles/claude/files/skills/README.md`; `.scratch/` is gitignored globally via the git role
 

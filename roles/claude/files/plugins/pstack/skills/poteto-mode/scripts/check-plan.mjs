@@ -17,7 +17,7 @@ const SUB_BLOCKS = [
 	"Merge.",
 ];
 const PROGRAM_H3 = ["Arm the program", "Spawn owners", "PR mechanics", "Verdict and merge", "Boot recipe"];
-const PROGRAM_MARKERS = ["git show origin/main:", "/loop 1h", "status message"];
+const PROGRAM_MARKERS = ["skills/poteto-mode/playbooks/", "/loop 1h", "status message"];
 const HOW_TO_READ_MARKERS = [
 	"One box is one unit of work",
 	"names the evidence",
@@ -87,11 +87,11 @@ const program = find("Program checklist");
 if (!program) fail(1, 'no "## Program checklist" section');
 else {
 	const h3s = program.body.filter((l) => !l.code && l.text.startsWith("### ")).map((l) => l.text.slice(4).trim());
-	let cursor = 0;
+	let from = 0;
 	for (const name of PROGRAM_H3) {
-		const at = h3s.findIndex((t, i) => i >= cursor && t.startsWith(name));
+		const at = h3s.findIndex((t, i) => i >= from && t.startsWith(name));
 		if (at === -1) fail(program.n, `Program checklist lacks "### ${name}" in order`);
-		else cursor = at + 1;
+		else from = at + 1;
 	}
 	for (const marker of PROGRAM_MARKERS) {
 		if (!bodyText(program).includes(marker)) fail(program.n, `Program checklist lacks "${marker}"`);

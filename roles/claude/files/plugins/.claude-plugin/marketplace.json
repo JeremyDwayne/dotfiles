@@ -1,0 +1,14 @@
+{
+  "name": "dotfiles",
+  "description": "Claude Code plugins kept in Jeremy's dotfiles",
+  "owner": {
+    "name": "JeremyDwayne"
+  },
+  "plugins": [
+    {
+      "name": "pstack",
+      "description": "poteto's pstack ported to Claude Code",
+      "source": "./pstack"
+    }
+  ]
+}

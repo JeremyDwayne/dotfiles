@@ -117,7 +117,8 @@
     "ralph-loop@claude-plugins-official": false,
     "typesafe@typesafe-ai": true,
     "posthog@posthog": true,
-    "cc-plugin-you-should-know@builtin": false
+    "cc-plugin-you-should-know@builtin": false,
+    "pstack@dotfiles": true
   },
   "extraKnownMarketplaces": {
     "typesafe-ai": {
@@ -130,6 +131,12 @@
       "source": {
         "source": "github",
         "repo": "PostHog/ai-plugin"
+      }
+    },
+    "dotfiles": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/jwinterberg/.dotfiles/roles/claude/files/plugins"
       }
     }
   },
