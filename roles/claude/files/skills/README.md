@@ -15,7 +15,7 @@ Stage by stage, with the skill that runs it and the file it leaves behind:
 
 | Stage | Skill | Output |
 |---|---|---|
-| Spec | `grilling` (Matt Pocock), then `/spec` | `.scratch/<branch>/spec.md` |
+| Spec | `/spec` (`grilling` from Matt Pocock only on request) | `.scratch/<branch>/spec.md` |
 | Plan | `/plan` | `.scratch/<branch>/plan.md` |
 | Implement | `tdd` (Matt Pocock), Artifact tool for mocks | commits on the branch |
 | Ship | `deep-review`, `/file-pr`, `/babysit-pr` | fix commits, PR |

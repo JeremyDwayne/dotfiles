@@ -25,7 +25,7 @@ I wanted to share some of my preferences here so we can be more aligned as we wo
 
 ## How we work
 - Each stage of a feature starts in a fresh session (`/clear`) from a file on disk. Spec, plan, implement, ship. The `spec` and `plan` skills write `.scratch/<branch>/spec.md` and `plan.md`; those files are gitignored and die with the branch. Only read the current branch's folder. The PR description is the permanent record.
-- Small changes skip spec and plan. Medium changes get a plan. Fuzzy or large changes get grilled first, then a spec, then a plan.
+- Small changes skip spec and plan. Medium changes get a plan. Fuzzy or large changes get a spec, then a plan. The spec decides what it can and asks one round about the rest; `grilling` runs only when I ask for it.
 - Implement from the plan with tests at the seams the spec named. Run the type check and the tests for the files you touched as you go.
 - When a plan step lands, tick its box in plan.md and add its short SHAs: `2. [x] Match rows by CSI section (7be019d, 91d2c0e)`.
 - Review with `deep-review` before filing a PR. It fixes what it confirms.
