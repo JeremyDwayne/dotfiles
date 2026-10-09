@@ -10,6 +10,7 @@ local/share/*
 nvim/plugin
 __pycache__
 roles/neovim/files/lazy-lock.json
+.claude/worktrees
 
 # environment variables
 roles/zsh/files/zsh/env.zsh
