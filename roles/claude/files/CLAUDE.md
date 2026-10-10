@@ -17,9 +17,7 @@ I wanted to share some of my preferences here so we can be more aligned as we wo
 
 ## Coding preferences (Typescript focused)
 - `any` is the enemy. Inferred types are our friend. Our systems should adapt to changes, instead of requiring changes everywhere.
-- If your TS code looks like a Python dev wrote it, it is bad TS code.
 - Avoid one-line functions that are just casting wrappers.
-- Write Typescript in ways that Matt Pocock and Theo would be proud of.
 - If not already specified in project, I generally like to use the following tech: Tailwind, React, Vite, pnpm.
 - When building more complex web and react native apps, I like to pull in Zustand, React Query, Tanstack Start, Clerk (or better-auth if selfhosting), and ArkType (or zod if perf isn't an issue)
 
@@ -53,10 +51,6 @@ I wanted to share some of my preferences here so we can be more aligned as we wo
 ## Questions are read-only
 - A question is a request for an answer, not for changes. If the message opens with "how hard would it be", "can X do Y", or otherwise asks rather than instructs: answer it, and do not edit files.
 - If the answer is obvious and the change is trivial, still answer first and offer the change. Ask before making it.
-
-## Match ceremony to the task
-- Do not spawn subagents or a multi-agent panel for work a single agent finishes in one pass. Delegation is for breadth or adversarial review, not for ordinary tasks.
-- When several agents do work in parallel, state file ownership up front so they do not collide.
 
 ## Visual and design work
 - Do not edit real components first. For any non-trivial UI, layout, or copy change, build several distinct static mocks, publish them with the built-in Artifact tool, report the URL, and stop. Label variants A, B, C and lay them out for direct comparison. The `html-communication` skill is for reports, not mocks. Wait for a pick before implementing.

@@ -12,9 +12,7 @@
     "deny": [
       "EnterPlanMode",
       "ExitPlanMode",
-      "DesignSync",
       "NotebookEdit",
-      "SendMessage",
       "PushNotification",
       "RemoteTrigger",
       "ReportFindings",
@@ -56,7 +54,6 @@
     "implement": "off",
     "code-review": "off"
   },
-  "disableBundledSkills": false,
   "hooks": {
     "PreToolUse": [
       {
@@ -97,18 +94,16 @@
   },
   "enabledPlugins": {
     "commit-commands@claude-code-plugins": true,
-    "hookify@claude-code-plugins": false,
+    "hookify@claude-code-plugins": true,
     "typescript-lsp@claude-plugins-official": true,
-    "frontend-design@claude-plugins-official": false,
+    "frontend-design@claude-plugins-official": true,
     "superpowers@claude-plugins-official": false,
     "context7@claude-plugins-official": false,
     "code-review@claude-plugins-official": false,
-    "code-simplifier@claude-plugins-official": false,
-    "feature-dev@claude-plugins-official": false,
-    "skill-creator@claude-plugins-official": false,
-    "claude-md-management@claude-plugins-official": false,
-    "security-guidance@claude-plugins-official": false,
-    "claude-code-setup@claude-plugins-official": false,
+    "code-simplifier@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
     "stripe@claude-plugins-official": false,
     "ruby-lsp@claude-plugins-official": true,
     "swift-lsp@claude-plugins-official": false,
@@ -121,7 +116,8 @@
     "ralph-loop@claude-plugins-official": false,
     "typesafe@typesafe-ai": true,
     "posthog@posthog": true,
-    "cc-plugin-you-should-know@builtin": false
+    "cc-plugin-you-should-know@builtin": false,
+    "cowork-plugin-management@synced": false
   },
   "extraKnownMarketplaces": {
     "typesafe-ai": {
@@ -202,9 +198,5 @@
       "**Org-specific CLIs**: uv (263×), kamal (6×), psql (3×) — routine in this project",
       "routine under submittalkit/ prefix: Django app code, templates, and migrations for this project"
     ]
-  },
-  "voiceEnabled": true,
-  "feedbackSurveyState": {
-    "lastShownTime": 1754088478023
   }
 }
