@@ -1,7 +1,6 @@
 ---
 name: spec
-description: Write the branch's spec.md from the current conversation. Decides what it can, asks one round of questions about the rest.
-disable-model-invocation: true
+description: Write the branch's spec.md from the current conversation. Decides what it can, asks one round of questions about the rest. Use when the user asks for a spec, or a fuzzy or large change needs one before planning.
 ---
 
 # Spec
