@@ -29,4 +29,4 @@ GOOD
 
 Open a real PR rather than a draft; drafts do not get review-bot coverage. If the user also asked to babysit it, continue with the `babysit-pr` skill.
 
-Add a blurb to the end of the PR description about what model and harness is making the changes.
+The description ends with its own content: no model or harness blurb, session link, or co-author line.
