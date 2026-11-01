@@ -1,4 +1,4 @@
-# Django, DRF, Celery, Postgres/SQLite, Stripe traps
+# Django, DRF, Celery, Postgres/SQLite traps
 
 Read this when the repo is Django. Each item is a thing that has actually shipped and
 broken; check the change against it.
@@ -116,34 +116,6 @@ broken; check the change against it.
   wrapping an external call blocks every other write; check `timeout` and WAL settings
   in `DATABASES["OPTIONS"]`; DB file must live on the persistent volume and be covered
   by backups.
-
-## Stripe
-
-- Webhook signature verification: `stripe.Webhook.construct_event` with the endpoint
-  secret and the raw request body (`request.body`), not parsed JSON. `@csrf_exempt` on
-  that view only. Verify before parsing.
-- Idempotency: webhooks are delivered at least once and can arrive out of order.
-  Handlers must be safe to run twice, and must not assume `checkout.session.completed`
-  arrives before `invoice.paid` or `customer.subscription.updated`.
-- Idempotency keys on write calls (`stripe.Customer.create`, `PaymentIntent.create`)
-  when the caller may retry.
-- Amounts in the smallest currency unit (cents), integer. Any float, any division, any
-  `int()` on a rounded value is a finding.
-- Test vs live keys: config that could send live keys to a non-production environment
-  or the reverse. Keys or webhook secrets committed anywhere, including fixtures and
-  recorded cassettes.
-- Subscription state machine: `active`, `trialing`, `past_due`, `unpaid`, `canceled`,
-  `incomplete`, `incomplete_expired`, `paused`. Does the new code handle every one it
-  can receive, and does it fail closed (deny access) on unknown?
-- Coupons/promotion codes: `duration` (once/repeating/forever), `max_redemptions`,
-  `redeem_by` all applied? A "first N customers" coupon needs `max_redemptions` on the
-  Stripe side, not just a counter in the app.
-- Checkout / Customer Portal `success_url`/`return_url` built from params (open
-  redirect).
-- API version pinning: `stripe.api_version` set, and any change to it reviewed against
-  the changelog for the objects the app reads.
-- Prices vs plans; `unit_amount` is None for tiered/metered prices.
-- Stripe calls inside `atomic()`: on rollback the charge still happened.
 
 ## Python general
 

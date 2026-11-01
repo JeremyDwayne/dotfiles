@@ -44,10 +44,6 @@ DEF_PATTERNS = [
     re.compile(r"(?:import\.meta\.env|process\.env)(?:\.|\[['\"])([A-Z][A-Z0-9_]+)"),
 ]
 
-DEF_LINE_HINT = re.compile(
-    r"^\s*(?:def|class|module|function|fn|func|struct|enum|interface|type|trait|impl|scope|has_many|has_one|belongs_to|attr_|validates?|before_|after_|add_|remove_|rename_|create_table|drop_table|change_column|get |post |put |patch |delete |resources?|namespace|export|const|let|var|public|private|protected|static|async)"
-)
-
 SIGNATURE_LINE = re.compile(
     r"^\s*(?:export\s+(?:default\s+)?)?(?:async\s+)?"
     r"(?:(?:def|function|fn|func)\s+(?P<fn>[A-Za-z_$][\w$.:]*)"

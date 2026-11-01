@@ -102,8 +102,7 @@ to break the change rather than confirm it looks fine.
 
 Then read every stack file the changed files match: `references/django-stack.md`,
 `references/rails-stack.md`, `references/typescript-react-stack.md`. A Django API with a
-React frontend reads both. If the repo uses Stripe with any framework, read the Stripe
-section of whichever file is closer.
+React frontend reads both. A change that touches Stripe also reads `references/stripe.md`.
 
 ### 6. Execute what you can
 

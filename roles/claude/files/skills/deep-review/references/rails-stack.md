@@ -1,4 +1,4 @@
-# Rails, Hotwire, SQLite, Stripe traps
+# Rails, Hotwire, SQLite traps
 
 Read this when the repo is Rails or uses any of these. Each item is a thing that has
 actually shipped and broken; check the change against it.
@@ -85,32 +85,6 @@ actually shipped and broken; check the change against it.
 - Non-idempotent job that will be retried.
 - Recurring job schedule changes: timezone of the schedule, overlap with the previous
   run.
-
-## Stripe
-
-- Webhook signature verification: `Stripe::Webhook.construct_event` with the endpoint
-  secret, and the raw body (not parsed params). A new webhook route must be excluded
-  from CSRF and must verify.
-- Idempotency: webhooks are delivered at least once and can arrive out of order.
-  Handlers must be safe to run twice, and must not assume `checkout.session.completed`
-  arrives before `invoice.paid`.
-- Idempotency keys on write calls (`Stripe::Customer.create`, `PaymentIntent.create`)
-  when the caller may retry.
-- Amounts in the smallest currency unit (cents), integer. Any float, any division, any
-  `to_i` on a rounded value is a finding.
-- Test vs live keys: config that could send live keys to a non-production environment or
-  the reverse. Keys or webhook secrets committed anywhere, including fixtures and VCR
-  cassettes.
-- Subscription state machine: `active`, `trialing`, `past_due`, `unpaid`, `canceled`,
-  `incomplete`, `incomplete_expired`, `paused`. Does the new code handle every one it can
-  receive, and does it fail closed (deny access) on unknown?
-- Coupons/promotion codes: `duration` (once/repeating/forever), `max_redemptions`,
-  `redeem_by` all applied? A "first N customers" coupon needs `max_redemptions` on the
-  Stripe side, not just a counter in the app.
-- Customer portal and Checkout return URLs built from params (open redirect).
-- API version pinning: `Stripe.api_version` set, and any change to it reviewed against
-  the changelog for the objects the app reads.
-- Prices vs plans; `unit_amount` nil for tiered/metered prices.
 
 ## Rails general
 
