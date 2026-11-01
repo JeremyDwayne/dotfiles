@@ -134,7 +134,6 @@ STOPWORDS = {
     "append",
     "err",
     "ctx",
-    "cancel",
 }
 
 
