@@ -21,6 +21,11 @@ I wanted to share some of my preferences here so we can be more aligned as we wo
 - If not already specified in project, I generally like to use the following tech: Tailwind, React, Vite, pnpm.
 - When building more complex web and react native apps, I like to pull in Zustand, React Query, Tanstack Start, Clerk (or better-auth if selfhosting), and ArkType (or zod if perf isn't an issue)
 
+## Coding preferences (Go focused)
+- Typed structs cross every boundary: request and response bodies, job args, template data. `any` and `map[string]any` are the TypeScript `any`.
+- Wrap errors with `%w` and the operation that failed. Pass `ctx` from the request or job down to every call that takes one.
+- Reach for the standard library first. If not already specified in project, I like chi, pgx, sqlc, and River for backends.
+
 ## How we work
 - Each stage of a feature starts in a fresh session (`/clear`) from a file on disk. Spec, plan, implement, ship. The `spec` and `plan` skills write `.scratch/<branch>/spec.md` and `plan.md`; those files are gitignored and die with the branch. Only read the current branch's folder. The PR description is the permanent record.
 - Small changes skip spec and plan. Medium changes get a plan. Fuzzy or large changes get a spec, then a plan. The spec decides what it can and asks one round about the rest; `grilling` runs only when I ask for it.
