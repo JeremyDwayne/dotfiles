@@ -20,6 +20,7 @@ import sys
 from collections import defaultdict
 
 DEF_PATTERNS = [
+    re.compile(r"^\s*func\s+\([^)]*\)\s+([A-Za-z_][A-Za-z0-9_]*)"),
     re.compile(
         r"^\s*(?:export\s+(?:default\s+)?)?(?:declare\s+)?(?:abstract\s+)?(?:async\s+)?(?:def|class|module|function|fn|func|struct|enum|interface|type|trait|impl)\s+(?:self\.)?([A-Za-z_][A-Za-z0-9_:.]*)"
     ),
@@ -42,11 +43,13 @@ DEF_PATTERNS = [
     re.compile(r"^\s*([A-Z][A-Z0-9_]{2,})\s*="),
     re.compile(r"ENV(?:\.fetch|\[)\s*\(?['\"]([A-Z][A-Z0-9_]+)['\"]"),
     re.compile(r"(?:import\.meta\.env|process\.env)(?:\.|\[['\"])([A-Z][A-Z0-9_]+)"),
+    re.compile(r"json:\"([A-Za-z_][A-Za-z0-9_]*)"),
 ]
 
 SIGNATURE_LINE = re.compile(
     r"^\s*(?:export\s+(?:default\s+)?)?(?:async\s+)?"
-    r"(?:(?:def|function|fn|func)\s+(?P<fn>[A-Za-z_$][\w$.:]*)"
+    r"(?:func\s+\(\s*(?:\w+\s+)?\*?(?P<recv>\w+)[^)]*\)\s+(?P<method>\w+)"
+    r"|(?:def|function|fn|func)\s+(?P<fn>[A-Za-z_$][\w$.:]*)"
     r"|(?:const|let|var)\s+(?P<arrow>[A-Za-z_$][\w$]*)\s*(?::[^=]+)?=\s*(?:async\s*)?(?:<[^>]*>\s*)?\()"
 )
 
@@ -125,6 +128,13 @@ STOPWORDS = {
     "results",
     "Route",
     "Props",
+    "func",
+    "len",
+    "make",
+    "append",
+    "err",
+    "ctx",
+    "cancel",
 }
 
 
@@ -222,7 +232,10 @@ def signature_changed(file_info):
         for l in lines:
             m = SIGNATURE_LINE.match(l)
             if m:
-                out.append((m.group("fn") or m.group("arrow"), l.strip()))
+                name = m.group("fn") or m.group("arrow")
+                if m.group("method"):
+                    name = f"{m.group('recv')}.{m.group('method')}"
+                out.append((name, l.strip()))
         return out
 
     added_sigs = sigs(file_info["added"])

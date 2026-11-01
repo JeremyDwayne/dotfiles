@@ -33,8 +33,8 @@ Look for `.scratch/<branch>/spec.md` and `plan.md`. If they exist, they are the 
 code is measured against. If not, write the claim in one or two sentences from the PR
 description and commits. Every later step compares the code against that claim.
 
-Read the repo's `CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `REVIEW.md`, and lint config
-where they exist. Reviewers who know the house rules find violations generic reviewers miss.
+Read the repo's `CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `REVIEW.md`, `.claude/rules/`,
+and lint config where they exist. Reviewers who know the house rules find violations generic reviewers miss.
 
 Size the review. A small diff is under about 150 changed lines with no migration, schema,
 public API, auth, or config change. For a small diff, skip steps 2 and 5: find references
@@ -101,13 +101,14 @@ Read `references/bug-classes.md` and walk it against the change. For each catego
 to break the change rather than confirm it looks fine.
 
 Then read every stack file the changed files match: `references/django-stack.md`,
-`references/rails-stack.md`, `references/typescript-react-stack.md`. A Django API with a
-React frontend reads both. A change that touches Stripe also reads `references/stripe.md`.
+`references/rails-stack.md`, `references/go-stack.md`,
+`references/typescript-react-stack.md`. A Go API with a React frontend reads both. A change that touches Stripe also reads `references/stripe.md`.
 
 ### 6. Execute what you can
 
 - Run the tests touching changed files, the type checker, and the linter. Report the
-  actual result.
+  actual result. A test file behind a build tag or test profile runs only under that
+  tag; a test that never compiled did not pass.
 - If the repo has a `.claude/skills/verify-*` skill and the change is user-facing, drive
   each changed feature through it and report the evidence path. A failed drive is a
   finding.
