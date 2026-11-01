@@ -47,7 +47,8 @@ broken; check the change against it.
   there. A list query does not return it.
 - Inside a transaction function, a query that uses the pool instead of the `tx`: it runs
   outside the transaction, sees uncommitted state differently, and survives a rollback.
-- `SELECT ... FOR UPDATE` outside a transaction locks nothing.
+- `SELECT ... FOR UPDATE` outside a transaction releases its lock when the statement
+  ends, before the write it was meant to guard.
 - SQL built with `fmt.Sprintf` from any value that is not a fixed identifier.
 - Every tenant query carries the tenant predicate, including the `UPDATE` and `DELETE`
   that follow a scoped `SELECT`.
@@ -83,7 +84,8 @@ broken; check the change against it.
 - Outbound calls: the default `http.Client` has no timeout; `resp.Body` not closed;
   requests built without the caller's `ctx` (noctx).
 - Redirects and fetched URLs built from user input (open redirect, SSRF).
-- Headers or status written after the body has started are silently ignored.
+- Headers set or a status written after the body has started are ignored; the client
+  gets the first status.
 
 ## Templates (html/template)
 
