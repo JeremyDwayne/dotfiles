@@ -138,6 +138,12 @@
         "source": "github",
         "repo": "anthropics/skills"
       }
+    },
+    "jeremydwayne-dotfiles": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/JeremyDwayne/dotfiles.git"
+      }
     }
   },
   "alwaysThinkingEnabled": true,
