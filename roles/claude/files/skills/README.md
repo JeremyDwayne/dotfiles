@@ -18,7 +18,7 @@ Stage by stage, with the skill that runs it and the file it leaves behind:
 | Spec | `/spec` (`grilling` from Matt Pocock only on request) | `.scratch/<branch>/spec.md` |
 | Plan | `/plan` | `.scratch/<branch>/plan.md` |
 | Implement | `tdd` (Matt Pocock), Artifact tool for mocks | commits on the branch |
-| Verify | the repo's `verify-<app>` skill, made once with `/verify-setup` | `.scratch/<branch>/verify-<app>/` |
+| Verify | the repo's `verify-<app>` skill, where one exists | `.scratch/<branch>/verify-<app>/` |
 | Review | `deep-review` | local fix commits, `.scratch/<branch>/review.md` |
 | Ship | `/file-pr`, `/babysit-pr` | PR |
 
