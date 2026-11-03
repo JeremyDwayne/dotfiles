@@ -1,0 +1,15 @@
+{
+  "name": "jeremydwayne-dotfiles",
+  "description": "Jeremy's custom Claude skills, for the desktop app's chat and Cowork modes.",
+  "owner": {
+    "name": "JeremyDwayne",
+    "url": "https://github.com/JeremyDwayne"
+  },
+  "plugins": [
+    {
+      "name": "dotfiles",
+      "description": "Custom skills from roles/claude/files/skills.",
+      "source": "./roles/claude/files"
+    }
+  ]
+}
