@@ -118,7 +118,8 @@
     "posthog@posthog": true,
     "document-skills@anthropic-agent-skills": true,
     "cc-plugin-you-should-know@builtin": false,
-    "cowork-plugin-management@synced": false
+    "cowork-plugin-management@synced": false,
+    "dotfiles@synced": false
   },
   "extraKnownMarketplaces": {
     "typesafe-ai": {
