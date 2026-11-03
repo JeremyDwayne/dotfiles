@@ -1,7 +1,6 @@
 ---
 name: plan
-description: Write the branch's plan.md from its spec, then stop for sign-off.
-disable-model-invocation: true
+description: Write the branch's plan.md from its spec, then stop for sign-off. Use when the user asks for a plan, or a medium or large change needs one before implementation.
 ---
 
 # Plan
