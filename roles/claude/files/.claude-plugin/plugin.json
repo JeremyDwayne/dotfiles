@@ -1,0 +1,9 @@
+{
+  "name": "dotfiles",
+  "description": "Custom skills from roles/claude/files/skills.",
+  "author": {
+    "name": "JeremyDwayne",
+    "url": "https://github.com/JeremyDwayne"
+  },
+  "repository": "https://github.com/JeremyDwayne/dotfiles"
+}
