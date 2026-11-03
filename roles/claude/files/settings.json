@@ -23,7 +23,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "opus[1m]",
+  "model": "opus",
   "disableClaudeAiConnectors": true,
   "skillOverrides": {
     "ask-matt": "off",
@@ -116,6 +116,7 @@
     "ralph-loop@claude-plugins-official": false,
     "typesafe@typesafe-ai": true,
     "posthog@posthog": true,
+    "document-skills@anthropic-agent-skills": true,
     "cc-plugin-you-should-know@builtin": false,
     "cowork-plugin-management@synced": false
   },
@@ -130,6 +131,12 @@
       "source": {
         "source": "github",
         "repo": "PostHog/ai-plugin"
+      }
+    },
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
       }
     }
   },
@@ -155,7 +162,6 @@
     "enabled": true,
     "mode": "hold"
   },
-  "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
   "theme": "auto",

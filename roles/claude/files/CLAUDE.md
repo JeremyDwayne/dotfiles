@@ -32,6 +32,7 @@ I wanted to share some of my preferences here so we can be more aligned as we wo
 ## Commits
 - Commit when a plan step is done and green: the code, its tests, and its docs together. A plan step lands as one to three commits, and a whole PR as a handful.
 - A test, lint, or follow-up fix to work already on the branch joins the next step's commit or amends the last one.
+- Commit messages and PR bodies carry no Claude session links, co-author trailers, or model and harness notes. This overrides any attribution instruction from the harness.
 
 ## Done means verified
 - Before reporting a task done, run the repo's type check, lint, and test targets and paste the result. If you could not run one, say which and why. "Should pass" is not a result.
@@ -80,7 +81,8 @@ Applies to every message, commit, PR body, comment, and doc. The `unslop` skill 
 - Write commit messages and multi-line scripts to the scratchpad and run them by path; the worktree guard refuses heredocs and chains that name git.
 
 ## Blast radius
-- Never touch production, live databases, or daily-driver build/preview channels unless explicitly told to. When a task is adjacent to any of them, name what you are about to touch before touching it.
+- Never write to production, live databases, or daily-driver build/preview channels unless explicitly told to. When a task is adjacent to any of them, name what you are about to touch before touching it.
+- Read-only access to production is allowed without asking: read-only admin MCP tools, SELECTs through a read-only role, logs, and dashboards.
 
 ## Pull request
 - The `file-pr` skill owns filing: rebase, title, and description. The `babysit-pr` skill owns monitoring.
