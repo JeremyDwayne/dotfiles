@@ -19,9 +19,12 @@ Stage by stage, with the skill that runs it and the file it leaves behind:
 | Plan | `/plan` | `.scratch/<branch>/plan.md` |
 | Implement | `tdd` (Matt Pocock), Artifact tool for mocks | commits on the branch |
 | Verify | the repo's `verify-<app>` skill, made once with `/verify-setup` | `.scratch/<branch>/verify-<app>/` |
-| Ship | `deep-review`, `/file-pr`, `/babysit-pr` | fix commits, PR |
+| Review | `deep-review` | local fix commits, `.scratch/<branch>/review.md` |
+| Ship | `/file-pr`, `/babysit-pr` | PR |
 
-Verification runs during implement and again in `deep-review`. A branch that changes a
+Review runs locally before anything is pushed. Its ledger records the reviewed SHA and
+each finding's status, so a re-run skips dismissed findings and `/file-pr` can tell
+whether `HEAD` was reviewed. Verification runs during implement and again in `deep-review`. A branch that changes a
 user path updates that feature's file in the verify skill's `features/` in the same commit.
 
 `.scratch/` is in the global gitignore (see the git role). Hooks live in `../hooks/`
