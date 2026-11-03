@@ -13,6 +13,10 @@ the routine that runs after the value it needs is used in the same scan, the exi
 will still be messaging the same arrays on cutover day. This skill traces that reach, then fixes
 what it confirms, so the program leaves review ready for import and FAT.
 
+The bar is the program a senior controls engineer would sign and a technician could troubleshoot
+at 3 a.m.: correct first, then concise, then documented well enough that the alarm on the SCADA
+screen leads to the rung that set it without a phone call.
+
 Four rules:
 
 1. **Verify every finding in the program.** Open the routine, quote the rung, follow the tag to
@@ -40,8 +44,7 @@ Four rules:
 
 - Get the program as text. An L5X full-project export is required for real tracing; an .ACD is
   binary, so ask for an L5X (File > Save As > .L5X) or a program/routine export. Get the previous
-  issue too: most of the value in reviewing a revision is in the diff. If the program is produced
-  by a generator, the generator source is the thing to fix, so get it and its last output.
+  issue too: most of the value in reviewing a revision is in the diff.
 - Look for `.scratch/<job-or-branch>/spec.md` and `plan.md`. If they exist, they are the claim the
   program is measured against. If not, write the claim in one or two sentences from the request,
   the revision notes and the narrative. Every later step compares the logic against that claim.
@@ -65,19 +68,30 @@ Four rules:
 
 ### 2. Build the investigation map
 
-Run `scripts/l5x_review.py` (beside this file). If it is missing, do the same work with an XML
-parser and grep.
+Run `python3 scripts/l5x_review.py` (beside this file, standard library only). It reads the L5X
+and never writes it. Long lists stop at 15 entries; add `--all` before trusting a count of zero
+in a list you need whole.
 
-- `map PROGRAM.L5X`: tasks, programs, routine call tree and sizes, routines never called and JSRs
-  to missing routines, AOIs defined vs used, MSG tags with paths and lengths and where each MSG
-  executes, analog module channel configuration, whether the input map does math, the alarm-block
-  census (trigger kinds, reset tags, latch-triggered alarms), local tags never referenced /
-  written but never read / read but never written, duplicate OTE coils, import hazards.
-- `diff OLD.L5X NEW.L5X` for a revision: rung changes by category, routines and tags
-  added/removed, every alarm instance compared (trigger, reset, delay, output bit), MSG changes.
-- `xchg MASTER.L5X REMOTE.L5X [LINK]` for every PLC-to-PLC link: element by element, what one end
-  packs against what the other unpacks, and anything beyond the MSG length.
-- `routine FILE NAME` and `xref FILE TAG` while tracing.
+- `map PROGRAM.L5X`: tasks and unscheduled programs; the JSR call tree in execution order with
+  conditional calls marked, routines never called, JSRs to missing routines, routine sizes; AOIs
+  with call counts and protection; every MSG with its path and length and the rung and task that
+  run it; each I/O module with its channel configuration and L5K/decorated disagreements; module
+  addresses used outside the map routines and math inside them; the alarm census (trigger,
+  trigger kind, reset source, delays, output bit, lockout-triggered and zero-delay alarms); duplicate
+  OTE coils and tags written from more than one routine; tags never referenced, written but never
+  read, read but never written; documentation coverage and dense rungs; import hazards.
+- `diff OLD.L5X NEW.L5X` for a revision: changed rungs by category (alarm, comms, io, timer, math,
+  structure, logic, comment), routines, tags and AOIs added or removed, every alarm instance
+  compared, MSG parameter changes, module configuration changes.
+- `xchg MASTER.L5X REMOTE.L5X [LINK]` for every PLC-to-PLC link: for each CIP data table MSG, what
+  the sending end packs into each word and bit against what the receiving end unpacks, anything
+  beyond the requested length, REALs moved by MOVE at one end and bit-copied at the other, and
+  receiver reads with no comm-loss guard.
+- `routine FILE NAME` prints a routine with its comments and callers; `xref FILE TAG` lists every
+  writer and reader of a tag, member, element or bit, with the AOI parameter or FBD pin.
+
+The script's lists are leads, not findings. A tag "read, never written" may be a SCADA setpoint or
+an I/O point nobody mapped; open it and decide.
 
 Run `map` on an owner example program too. Its routine-size and structure numbers are the baseline
 the owner's technicians are used to, and they turn organization findings from opinion into numbers.
@@ -146,7 +160,7 @@ useful to the person than agreement.
 
 There is usually no controller. Say what was and was not run.
 
-- Static checks: `map`, `diff`, `xchg`, and any generator validator the project has.
+- Static checks: `map`, `diff` and `xchg`.
 - Import and verify: the person imports the L5X into Studio 5000, runs Verify Controller and
   reports errors back. List known import findings from earlier runs.
 - Emulation, if available (Studio 5000 Logix Emulate, FactoryTalk Logix Echo).
@@ -173,8 +187,10 @@ marked unverified with its field check.
 Then filter what survives:
 
 - **Confirmed?** Routine, rung number and rung text, or a tag's complete writer/reader list.
-- **Notable?** Each finding names a defect, its trigger, and its consequence in process terms. Rung
-  comment wording, "consider adding" with no trigger, and "verify that X" with no defect behind it
+- **Notable?** Each finding names a defect, its trigger, and its consequence in process terms. For a
+  documentation finding the consequence is the technician who cannot find the cause: a comment
+  that contradicts its rung, an alarm with no description, a routine nobody can place. Comment
+  wording taste, "consider adding" with no trigger, and "verify that X" with no defect behind it
   fail that test and stay out. A question about whether a tag is written elsewhere gets settled
   with `xref`, not reported.
 - **Authority named?** Which document, and does another one say otherwise?
@@ -192,8 +208,8 @@ list does not explain the scenarios, return to step 3 for the signals with the w
 
 Work the confirmed list from highest severity down. For each fix:
 
-- Make the smallest change that resolves it, in the source of truth: the generator if the program
-  is generated, otherwise the L5X or a routine export.
+- Make the smallest change that resolves it, in the L5X or a routine export, and update the rung
+  comment and tag descriptions it touches so the documentation still matches the logic.
 - Keep it separately identifiable: its own git commit naming the finding (`fix: alarm reset not
   linked to device reset (review)`) when the source is under version control, otherwise its own
   entry in the revision notes.
@@ -354,12 +370,28 @@ again.
 - Commands written by SCADA are momentary or maintained as intended; the PLC clears momentary ones.
 - Existing screens: tags they reference still resolve after the change.
 
-**Program organization and maintainability**
+**Organization, documentation and troubleshooting**
 - Structure versus the owner's documents: tasks and programs, process routine to device routine to
   alarm/speed/scaling subroutines, routine naming and loop-number prefixes, unique prefixes.
-- Routine size versus the owner's example programs. A technician has to find a fault at 3 a.m.
-- AOIs: only approved ones; source not protected; behavior known to the owner.
-- Comments on rungs a technician would need; no misleading comments; no dead logic.
+- Routine size versus the owner's example programs. One routine does one job a technician can name.
+- The troubleshooting path: from the SCADA alarm text, the alarm instance name and its loop prefix
+  lead to the routine and the rung that triggers it. Walk it for a few alarms; every extra hop or
+  guess is a finding.
+- Routine headers: what the routine does, its inputs and outputs, and its change history, in the
+  form the spec or owner standard asks for.
+- Rung comments say why on any rung whose intent is not obvious from the tags: interlocks,
+  permissives, timers, sequence steps, scaling, anything a field change would touch. A comment that
+  restates the instructions is noise; a comment that contradicts the rung is a MAJOR finding,
+  because the technician will trust it.
+- Tag descriptions on every I/O point (with the instrument tag and signal), alarm, setpoint (with
+  units and range) and SCADA array element. A description that names the wrong device is a finding.
+- Constants a technician might need to change (delays, limits, ranges) are named setpoints or carry
+  units in the comment; a bare literal in a compare or preset is a lead to check.
+- Dense rungs: more than about two dozen instructions or nested branches get split so each rung
+  reads as one condition and one action.
+- AOIs: only approved ones; source not protected unless the owner accepts it; behavior known to the
+  owner.
+- No dead logic, no unused tags, no commented-out rungs left behind.
 
 **Existing systems and cutover**
 - Existing panels left in service: what they expect from the new system and what they will still
