@@ -7,7 +7,7 @@ I love to build. I focus on building complex things as simple as possible. I lov
 I wanted to share some of my preferences here so we can be more aligned as we work together.
 
 ## Coding preferences - general
-- Keep things simple. Channel "yagni" energy unless told otherwise.
+- Keep things extremely simple. Channel "yagni" energy unless told otherwise. The less code written the better so its easy to troubleshoot and understand.
 - Typesafety is useful, take advantage of it.
 - Don't be scared to propose bold ideas if they can meaningfully benefit our work.
 - Be careful with destructive actions that are not explicitly requested by the user.
@@ -22,7 +22,7 @@ I wanted to share some of my preferences here so we can be more aligned as we wo
 - When building more complex web and react native apps, I like to pull in Zustand, React Query, Tanstack Start, Clerk (or better-auth if selfhosting), and ArkType (or zod if perf isn't an issue)
 
 ## How we work
-- Each stage of a feature starts in a fresh session (`/clear`) from a file on disk. Spec, plan, implement, ship. The `spec` and `plan` skills write `.scratch/<branch>/spec.md` and `plan.md`; those files are gitignored and die with the branch. Only read the current branch's folder. The PR description is the permanent record.
+- Each stage of a feature starts with a spec, plan, implement, ship. The `spec` and `plan` skills write `.scratch/<branch>/spec.md` and `plan.md`; those files are gitignored and die with the branch. Only read the current branch's folder. The PR description is the permanent record.
 - Small changes skip spec and plan. Medium changes get a plan. Fuzzy or large changes get a spec, then a plan. The spec decides what it can and asks one round about the rest; `grilling` runs only when I ask for it.
 - Implement from the plan with tests at the seams the spec named. Run the type check and the tests for the files you touched as you go.
 - When a plan step lands, tick its box in plan.md and add its short SHAs: `2. [x] Match rows by CSI section (7be019d, 91d2c0e)`.
@@ -38,13 +38,11 @@ I wanted to share some of my preferences here so we can be more aligned as we wo
 - Before reporting a task done, run the repo's type check, lint, and test targets and paste the result. If you could not run one, say which and why. "Should pass" is not a result.
 - A bug fix starts with a failing test that reproduces it. When `.scratch/lock-tests` exists, test files are locked; fix the code, and if the test itself is wrong, say so and stop.
 - UI work is done when the result matches the mock that was picked, not when it renders.
-- If the repo has a `.claude/skills/verify-*` skill, user-facing work is done when the changed feature was driven through it; report the evidence path.
 - A message with no tool call ends your turn and the work stops. End a turn only when the task is done, a stop named in this file or a skill is reached, you are blocked on me, or a risky action needs my confirmation. When you name the next step, take it in the same message. Status notes and recommendations ride along with the next tool call.
 
 ## Leave it better than you found it
-- While you are in a file, improve it: dedupe, drop dead code, fix an obvious perf problem, simplify logic you had to read twice. Bounded to the files the task already touches.
+- While you are in a file, improve it: refactor, dedupe, drop dead code, fix an obvious perf problem, simplify logic you had to read twice. Bounded to the files the task already touches.
 - Put a step's refactors together in one commit labeled `refactor:` so review can see them apart from the feature and drop them without losing the feature. Only do it when it deletes code or fixes something measurable. Do not rename or restructure for taste.
-- Improvements you notice outside the touched files go in the report as follow-ups, not in the branch.
 
 ## Lessons
 - When I correct the same class of mistake twice, or a review bot flags the same class twice, propose a one-line addition to the repo's CLAUDE.md or AGENTS.md in your report. I decide whether it lands.
@@ -61,7 +59,7 @@ I wanted to share some of my preferences here so we can be more aligned as we wo
     - Use high contrast: Pair light colors with very dark colors instead of matching medium tones.
     - Add secondary cues: Use text, line styles (dashed vs solid), or icons next to colored status dots. 
   - Information-dense, no decorative card/pill chrome, no light-gray subtitle lines above sections. Minimal copy. No em dashes ever.
-  - Skip the default AI styles: cream or off-white backgrounds, italic accent words in headlines, numbered "01/02/03" section labels, monospace labels, pill-shaped buttons.
+  - Skip the default AI styles: cream or off-white backgrounds, italic accent words in headlines, numbered "01/02/03" section labels, monospace labels, pill-shaped buttons, tacky gradients.
   - Avoid continuously repainting CSS animations (pulse, shimmer, blur, spinners); they peg the GPU on high-refresh displays.
 
 ## Writing
@@ -80,10 +78,6 @@ Applies to every message, commit, PR body, comment, and doc. The `unslop` skill 
 ## Worktree sessions
 - Write commit messages and multi-line scripts to the scratchpad and run them by path; the worktree guard refuses heredocs and chains that name git.
 
-## Blast radius
-- Never write to production, live databases, or daily-driver build/preview channels unless explicitly told to. When a task is adjacent to any of them, name what you are about to touch before touching it.
-- Read-only access to production is allowed without asking: read-only admin MCP tools, SELECTs through a read-only role, logs, and dashboards.
-
 ## Pull request
-- The `file-pr` skill owns filing: rebase, title, and description. The `babysit-pr` skill owns monitoring.
+- The `file-pr` skill owns filing: rebase, title, and description.
 - Merge only per the disposition given in the request (merge when green, or stop and report). If none was given, report and ask.

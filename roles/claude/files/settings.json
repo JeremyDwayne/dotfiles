@@ -211,5 +211,6 @@
       "**Org-specific CLIs**: uv (263×), kamal (6×), psql (3×) — routine in this project",
       "routine under submittalkit/ prefix: Django app code, templates, and migrations for this project"
     ]
-  }
+  },
+  "outputStyle": "Concise"
 }
