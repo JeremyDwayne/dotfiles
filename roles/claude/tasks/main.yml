@@ -14,7 +14,6 @@
     - CLAUDE.md
     - settings.json
     - statusline.sh
-    - claude-app-preferences.md
 
 - name: "Claude | Skills folder"
   ansible.builtin.file:
