@@ -21,6 +21,7 @@
 --     fake.ribbon()                  -- the client builds the ribbon's content layer
 --     fake.button("Options")         -- presses a PrettyUI button, such as the one the ribbon shows
 --     fake.press("Done")             -- clicks the plugin's own hit area under a label
+--     fake.checkbox("hideCastBar")   -- toggles a choice on the shown PrettyUI checkbox
 --     fake.confirm("cancel")         -- answers an open PrettyUI confirm
 --     fake.key("ESCAPE")
 --     fake.shutdown()
@@ -324,9 +325,10 @@ end })
 -- PrettyUI ---------------------------------------------------------------------------------------------
 
 -- Stand-in for the PrettyUI dependency, built from fake layers so its writes count like the real library's.
--- Window, Tabs, FancyButton and Confirm carry the methods plugins call: a window shows, closes and destroys
--- and hosts AddTabs and AddFancyButton; tabs activate a page and hand out pages with a content layer; a
--- confirm answers through fake.confirm. Each keeps its options and its root layer.
+-- Window, Tabs, FancyButton, CheckboxButton and Confirm carry the methods plugins call: a window shows,
+-- closes and destroys and hosts AddTabs and AddFancyButton; tabs activate a page and hand out pages with a
+-- content layer; a checkbox ticks its choices through fake.checkbox; a confirm answers through fake.confirm.
+-- Each keeps its options and its root layer.
 local pretty = { made = {} }
 _G.prettyui = pretty
 
@@ -389,6 +391,34 @@ function pretty.FancyButton.new(parent, text, action, options)
   return b
 end
 
+pretty.CheckboxButton = {}
+-- Ticks each choice in options.selectedValues or marked selected. SetSelected runs onChange(box, ticked
+-- values, value, selected) on a change unless notify is false, as PrettyUI's does.
+function pretty.CheckboxButton.new(parent, choices, options)
+  local box = make("CheckboxButton", parent, options)
+  box.choices, box.ticked = choices, {}
+  for _, choice in ipairs(choices) do
+    for _, value in ipairs(box.options.selectedValues or {}) do
+      box.ticked[choice.value] = box.ticked[choice.value] or value == choice.value
+    end
+    box.ticked[choice.value] = box.ticked[choice.value] or choice.selected == true
+  end
+  function box.SetSelected(self, value, selected, notify)
+    if self.ticked[value] == selected then return true end
+    self.ticked[value] = selected
+    if notify ~= false and self.options.onChange then
+      local values = {}
+      for _, choice in ipairs(self.choices) do
+        if self.ticked[choice.value] then values[#values + 1] = choice.value end
+      end
+      self.options.onChange(self, values, value, selected)
+    end
+    return true
+  end
+  function box.IsSelected(self, value) return self.ticked[value] == true end
+  return box
+end
+
 pretty.Confirm = {}
 function pretty.Confirm.new(parent, options)
   local dialog = make("Confirm", parent, options)
@@ -412,6 +442,17 @@ function fake.button(text)
   return fake.measure("button " .. text, function() b.action(b) end)
 end
 
+-- Toggles the choice of value, or the first choice, on the shown CheckboxButton that match accepts, as the
+-- player would. Measured.
+function fake.checkbox(value, match)
+  local box = fake.pretty("CheckboxButton", match)
+  assert(box, "no shown PrettyUI checkbox")
+  local choice = value or box.choices[1].value
+  return fake.measure("checkbox " .. tostring(choice), function()
+    box:SetSelected(choice, not box:IsSelected(choice))
+  end)
+end
+
 -- Answers the open Confirm with "confirm" or "cancel". Measured.
 function fake.confirm(answer)
   local dialog = fake.pretty("Confirm")
@@ -432,11 +473,17 @@ end
 
 -- Adds a game component at { interface, static[, category, dynamic] } with fields such as content,
 -- spriteID or alpha, and returns it. Pass parent to make it a dynamic child for IterateDynamicComponents.
+-- A dynamic component reads its categoryID and dynamicID as the client's do, unless fields set them.
 function fake.component(ids, fields, parent)
   local c = newComponent("game", parent, fields)
   local key = componentKey(ids[1], ids[2], ids[3], ids[4])
   gameComponents[key] = c
-  dataOf[c].key, dataOf[c].before = key, {}
+  local data = dataOf[c]
+  data.key, data.before = key, {}
+  if ids[3] ~= nil then
+    if data.categoryID == nil then data.categoryID = ids[3] end
+    if data.dynamicID == nil then data.dynamicID = ids[4] end
+  end
   return c
 end
 

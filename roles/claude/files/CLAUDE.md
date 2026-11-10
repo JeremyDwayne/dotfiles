@@ -28,6 +28,7 @@ I wanted to share some of my preferences here so we can be more aligned as we wo
 - When a plan step lands, tick its box in plan.md and add its short SHAs: `2. [x] Match rows by CSI section (7be019d, 91d2c0e)`.
 - Review with `deep-review` before filing a PR. It fixes what it confirms.
 - One plan, one branch, one PR. Its parts or steps are the order of work, not separate PRs.
+- Subagents default to Opus, set in settings.json. A cheaper model is fine for simple work. Never run one on Fable, because that burns through my usage: do not pass `model: fable`, and on a Fable session start a fresh subagent instead of a fork, since a fork inherits the session model.
 
 ## Commits
 - Commit when a plan step is done and green: the code, its tests, and its docs together. A plan step lands as one to three commits, and a whole PR as a handful.

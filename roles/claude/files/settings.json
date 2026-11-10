@@ -1,9 +1,10 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "env": {
-    "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "500000"
+    "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "500000",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "opus"
   },
-  "includeCoAuthoredBy": false,
+  "attribution": false,
   "permissions": {
     "allow": [
       "mcp__submittalkit",
@@ -23,31 +24,23 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "opus",
+  "model": "fable",
   "disableClaudeAiConnectors": true,
+  "syncClaudeAiPlugins": false,
   "skillOverrides": {
     "ask-matt": "off",
     "claude-handoff": "off",
     "edit-article": "off",
-    "git-guardrails-claude-code": "off",
     "loop-me": "off",
-    "migrate-to-shoehorn": "off",
-    "obsidian-vault": "off",
-    "qa": "off",
-    "request-refactor-plan": "off",
-    "scaffold-exercises": "off",
-    "setup-pre-commit": "off",
     "teach": "off",
     "triage": "off",
     "ubiquitous-language": "off",
-    "wizard": "off",
     "writing-beats": "off",
     "writing-fragments": "off",
     "writing-great-skills": "off",
     "writing-shape": "off",
     "grill-me": "off",
     "handoff": "off",
-    "use-spark": "off",
     "setup-matt-pocock-skills": "off",
     "to-spec": "off",
     "to-tickets": "off",
@@ -94,7 +87,6 @@
   },
   "enabledPlugins": {
     "commit-commands@claude-code-plugins": true,
-    "hookify@claude-code-plugins": true,
     "typescript-lsp@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
     "superpowers@claude-plugins-official": false,
@@ -117,9 +109,7 @@
     "typesafe@typesafe-ai": true,
     "posthog@posthog": true,
     "document-skills@anthropic-agent-skills": true,
-    "cc-plugin-you-should-know@builtin": false,
-    "cowork-plugin-management@synced": false,
-    "dotfiles@synced": false
+    "cc-plugin-you-should-know@builtin": false
   },
   "extraKnownMarketplaces": {
     "typesafe-ai": {
@@ -147,22 +137,18 @@
       }
     }
   },
+  "outputStyle": "Concise",
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
   "modelSettings": {
-    "claude-opus-5": {
-      "effortLevel": "high"
-    },
-    "claude-fable-5": {
-      "effortLevel": "medium"
-    },
-    "claude-fable-5-1": {
-      "effortLevel": "high"
-    },
     "claude-opus-5-5": {
+      "effortLevel": "high"
+    },
+    "claude-fable-5-2": {
       "effortLevel": "high"
     }
   },
+  "advisorModel": "fable",
   "askUserQuestionTimeout": "5m",
   "tui": "fullscreen",
   "voice": {
@@ -181,36 +167,35 @@
   "autoMode": {
     "soft_deny": [
       "$defaults",
-      "Bash(kamal deploy:*) in ~/apps/SubmittalKit — production deploy via Kamal, scope to explicit confirmation",
-      "Bash(psql * prod*) — production database reads/writes via psql in this project",
-      "make prod-db-console / db-destroy / db-drop / db-reset targets in this project's Makefile — destructive or production-scoped database operations"
+      "Bash(kamal deploy:*) in ~/apps/SubmittalKit: production deploy via Kamal, scope to explicit confirmation",
+      "Bash(psql * prod*) in any repo: production database reads or writes via psql",
+      "make prod-db-console, db-destroy, db-drop and db-reset targets in any repo's Makefile: destructive or production-scoped database operations"
     ],
     "environment": [
       "### Org-wide",
-      "**Organization**: None configured",
-      "**Cloud provider(s)**: Cloudflare R2 (object storage, per .env.example: R2_ACCOUNT_ID/R2_ACCESS_KEY_ID/R2_BUCKET)",
-      "**Repository visibility**: Private — JeremyDwayne/submittalkit (confirmed via gh)",
+      "**Organization**: None configured. Solo developer; every repo under github.com/JeremyDwayne is the user's own",
+      "**Cloud provider(s)**: Cloudflare R2, object storage for SubmittalKit",
+      "**Repository visibility**: Mixed. JeremyDwayne/submittalkit is private. JeremyDwayne/dotfiles and JeremyDwayne/RuneUI are public. For any other repo, check `gh repo view --json visibility` before treating it as private",
       "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
-      "**Secrets management**: .kamal/secrets and bin/prod-secret (local/deploy secret files); .env / .env.live kept out of git via .gitignore",
-      "**Default / protected branches**: main (default). No rulesets or protected-branch rules listed via gh — treat as unprotected unless told otherwise",
-      "**CI/CD deploy targets**: Kamal (kamal CLI used 6× in this project; Makefile has a `deploy` target and `prod-db-console`, `env-unlive` targets)",
+      "**Secrets management**: SubmittalKit keeps deploy secrets in .kamal/secrets and bin/prod-secret. The dotfiles repo uses Ansible Vault. Other repos: none configured",
+      "**Default / protected branches**: main in SubmittalKit and dotfiles, with no rulesets or protected-branch rules. Treat any repo as unprotected unless told otherwise",
+      "**CI/CD deploy targets**: SubmittalKit deploys with Kamal (Makefile `deploy`, `prod-db-console` and `env-unlive` targets). Other repos: none configured",
       "**Network posture**: None configured",
-      "**Source control**: The trusted repo (JeremyDwayne/submittalkit) and its origin remote only (github.com:JeremyDwayne/submittalkit.git) — no additional orgs configured",
-      "**Trusted internal domains**: submittalkit.com (30× contacted in this project's transcripts)",
+      "**Source control**: Any repo whose origin remote is under github.com/JeremyDwayne, pushed to that origin only. No other orgs configured",
+      "**Trusted internal domains**: submittalkit.com",
       "**Trusted cloud buckets**: None configured",
       "**Key internal services**: None configured",
       "**Internal package registry**: None configured",
-      "**Sensitive data locations & audiences**: .env, .env.example, .env.live, .env.live.example, .kamal/secrets, bin/prod-secret, prod-slow-queries.txt — credentials and production data; share only with audiences cleared at the [named+specifics] bar",
+      "**Sensitive data locations & audiences**: In any repo: .env, .env.*, *.pem, *.key. In SubmittalKit also .kamal/secrets, bin/prod-secret and prod-slow-queries.txt. These hold credentials and production data; share only with audiences cleared at the [named+specifics] bar",
       "**Data retention / declassification**: None configured",
       "**Sensitive remote targets**: prod-slow-queries (k8s namespace flag seen 1×), prod-db-console (Makefile target), any namespace/host/container with `prod`/`production` as a whole word or name segment",
       "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
       "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment",
       "### User-specific",
-      "**Primary use of Claude Code**: software development (Django/Python web app — Submittal Kit)",
-      "**Trusted repo**: JeremyDwayne/submittalkit (private) and its origin remote — confidential material (e.g. non-secret business data) is fine to commit/push here; secrets and other sensitive data are never cleared into it by visibility alone",
-      "**Org-specific CLIs**: uv (263×), kamal (6×), psql (3×) — routine in this project",
-      "routine under submittalkit/ prefix: Django app code, templates, and migrations for this project"
+      "**Primary use of Claude Code**: software development across the user's own repos. The main product is SubmittalKit, a Django/Python web app in ~/apps/SubmittalKit",
+      "**Trusted repos**: the user's own repos under github.com/JeremyDwayne and their origin remotes. Confidential non-secret business data is fine to commit and push to the private ones only; public repos get nothing confidential. Secrets and other sensitive data are never cleared into any repo by visibility alone",
+      "**Org-specific CLIs**: uv, kamal and psql are routine in SubmittalKit",
+      "Routine in SubmittalKit under the submittalkit/ prefix: Django app code, templates, and migrations"
     ]
-  },
-  "outputStyle": "Concise"
+  }
 }
