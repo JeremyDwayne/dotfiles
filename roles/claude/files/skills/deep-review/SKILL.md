@@ -115,8 +115,9 @@ Read `references/bug-classes.md` and walk it against the change. For each catego
 to break the change rather than confirm it looks fine.
 
 Then read every stack file the changed files match: `references/django-stack.md`,
-`references/rails-stack.md`, `references/typescript-react-stack.md`. A Django API with a
-React frontend reads both. If the repo uses Stripe with any framework, read the Stripe
+`references/rails-stack.md`, `references/go-stack.md`,
+`references/typescript-react-stack.md`. A Go or Django API with a React frontend reads
+both. If the repo uses Stripe with any framework, read the Stripe
 section of whichever file is closer.
 
 ### 6. Execute what you can

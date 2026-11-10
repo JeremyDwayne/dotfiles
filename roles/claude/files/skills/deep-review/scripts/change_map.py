@@ -21,7 +21,7 @@ from collections import defaultdict
 
 DEF_PATTERNS = [
     re.compile(
-        r"^\s*(?:export\s+(?:default\s+)?)?(?:declare\s+)?(?:abstract\s+)?(?:async\s+)?(?:def|class|module|function|fn|func|struct|enum|interface|type|trait|impl)\s+(?:self\.)?([A-Za-z_][A-Za-z0-9_:.]*)"
+        r"^\s*(?:export\s+(?:default\s+)?)?(?:declare\s+)?(?:abstract\s+)?(?:async\s+)?(?:def|class|module|function|fn|func|struct|enum|interface|type|trait|impl)\s+(?:\([^)]*\)\s*)?(?:self\.)?([A-Za-z_][A-Za-z0-9_:.]*)"
     ),
     re.compile(
         r"^\s*(?:public|private|protected|static|final|abstract|export|default|\s)*\s*(?:[A-Za-z_<>\[\],\s]+\s+)?([A-Za-z_][A-Za-z0-9_]*)\s*\([^;]*\)\s*(?:\{|=>|:)?\s*$"
@@ -42,6 +42,7 @@ DEF_PATTERNS = [
     re.compile(r"^\s*([A-Z][A-Z0-9_]{2,})\s*="),
     re.compile(r"ENV(?:\.fetch|\[)\s*\(?['\"]([A-Z][A-Z0-9_]+)['\"]"),
     re.compile(r"(?:import\.meta\.env|process\.env)(?:\.|\[['\"])([A-Z][A-Z0-9_]+)"),
+    re.compile(r"os\.(?:Getenv|LookupEnv)\(\"([A-Z][A-Z0-9_]+)\""),
 ]
 
 DEF_LINE_HINT = re.compile(
@@ -50,7 +51,7 @@ DEF_LINE_HINT = re.compile(
 
 SIGNATURE_LINE = re.compile(
     r"^\s*(?:export\s+(?:default\s+)?)?(?:async\s+)?"
-    r"(?:(?:def|function|fn|func)\s+(?P<fn>[A-Za-z_$][\w$.:]*)"
+    r"(?:(?:def|function|fn|func)\s+(?:\([^)]*\)\s*)?(?P<fn>[A-Za-z_$][\w$.:]*)"
     r"|(?:const|let|var)\s+(?P<arrow>[A-Za-z_$][\w$]*)\s*(?::[^=]+)?=\s*(?:async\s*)?(?:<[^>]*>\s*)?\()"
 )
 
@@ -129,6 +130,24 @@ STOPWORDS = {
     "results",
     "Route",
     "Props",
+    "Error",
+    "String",
+    "Scan",
+    "Close",
+    "Read",
+    "Write",
+    "Handle",
+    "ServeHTTP",
+    "Open",
+    "Create",
+    "Delete",
+    "Update",
+    "Get",
+    "Set",
+    "List",
+    "Query",
+    "QueryRow",
+    "Exec",
 }
 
 
@@ -223,10 +242,10 @@ def extract_hunk_context_symbols(hunks):
 def signature_changed(file_info):
     def sigs(lines):
         out = []
-        for l in lines:
-            m = SIGNATURE_LINE.match(l)
+        for line in lines:
+            m = SIGNATURE_LINE.match(line)
             if m:
-                out.append((m.group("fn") or m.group("arrow"), l.strip()))
+                out.append((m.group("fn") or m.group("arrow"), line.strip()))
         return out
 
     added_sigs = sigs(file_info["added"])
@@ -273,7 +292,13 @@ def classify_ref(path):
         r"(^|/)(spec|test|tests|__tests__)/|_spec\.|_test\.|\.test\.|\.spec\.", p
     ):
         return "test"
-    if "/jobs/" in p or "/workers/" in p or "/tasks/" in p or p.endswith(".rake"):
+    if (
+        "/jobs/" in p
+        or "/workers/" in p
+        or "/worker/" in p
+        or "/tasks/" in p
+        or p.endswith(".rake")
+    ):
         return "job/task"
     if re.search(r"(^|/)(db/migrate|migrations|drizzle)/", p):
         return "migration"
