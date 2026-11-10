@@ -27,6 +27,8 @@ BAD
 GOOD
 > My "new worktree" default was ignored when starting new threads on existing worktrees. Super unintuitive. Now your preferences always apply.
 
+When the diff changes what a user sees, close the description with a `## Screenshots` section that shows the result. Take after shots only, unless the user asked for a before. Use the PNGs the repo's `verify-*` skill left for `HEAD` in its evidence folder; if there are none, run that skill first. Pick the few that show the change, on desktop, and on mobile where the layout differs. Reference each by its path in the body, `![Register page with the new filter](.scratch/verify/runs/<run>/03-filter.png)`, and pass the same path to `gh pr create --attach`. gh uploads the file and rewrites the reference to the uploaded URL, so no image is committed. If an upload fails, gh still creates the PR and exits non-zero; run `gh pr edit --body-file <body> --attach <path>` with the same body and paths. In a repo with no way to drive the UI, write one line saying no screenshots were taken.
+
 Open a real PR rather than a draft; drafts do not get review-bot coverage. If the user also asked to babysit it, continue with the `babysit-pr` skill.
 
 The description ends with its own content: no model or harness blurb, session link, or co-author line.

@@ -27,6 +27,8 @@ If a review bot leaves feedback you believe is not worth addressing, reply and r
 [actual reply]
 ```
 
+When a fix you push changes what the PR's Screenshots section shows, retake those shots and replace them. Rewrite the body to reference the new files and run `gh pr edit --body-file <body> --attach <path>`, so stale images do not pile up under the new ones.
+
 Do not let review feedback expand the PR beyond the user's original goal. Address real shortcomings, but avoid scope creep.
 
 If nothing has changed, stay quiet rather than posting filler comments. Stop when the review bots and required checks are green on the latest commit. Merge only when the user explicitly requested it; otherwise report that the PR is ready.
