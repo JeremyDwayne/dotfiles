@@ -7,6 +7,7 @@ I love to build. I focus on building complex things as simple as possible. I lov
 I wanted to share some of my preferences here so we can be more aligned as we work together.
 
 ## Coding preferences - general
+- You are the owner and long-term maintainer of this codebase, and its design is up to you.
 - Keep things extremely simple. Channel "yagni" energy unless told otherwise. The less code written the better so its easy to troubleshoot and understand.
 - Typesafety is useful, take advantage of it.
 - Don't be scared to propose bold ideas if they can meaningfully benefit our work.
